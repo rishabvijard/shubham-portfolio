@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=13.0" />
+  <link rel="stylesheet" href="css/style.css?v=14.0" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
 </head>
 <body>
@@ -101,7 +101,7 @@
       </div>
     </section>
 
-    <!-- 2. ABOUT ME SECTION -->
+    <!-- 2. ABOUT ME SECTION WITH GLOWING TECH BADGES -->
     <section id="about" class="section about-section">
       <div class="container">
         <div class="section-header">
@@ -165,14 +165,19 @@
 
               <div class="about-highlights">
                 <div class="highlight-item">
-                  <div class="highlight-icon">⚡</div>
+                  <div class="highlight-icon-box glow-bolt">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                  </div>
                   <div>
                     <h4 class="highlight-title">Fast &amp; Responsive</h4>
                     <p class="highlight-desc">Mobile-first layouts ensuring cross-device compatibility.</p>
                   </div>
                 </div>
+
                 <div class="highlight-item">
-                  <div class="highlight-icon">🎨</div>
+                  <div class="highlight-icon-box glow-palette">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"></path></svg>
+                  </div>
                   <div>
                     <h4 class="highlight-title">Modern Aesthetics</h4>
                     <p class="highlight-desc">Clean dark UI, subtle glassmorphism, and sleek motion.</p>
@@ -182,10 +187,12 @@
             </div>
           </div>
 
-          <!-- Stats Column -->
+          <!-- Stats Column with Glowing Vector Tech Boxes -->
           <div class="about-stats-column">
             <div class="card stat-box spotlight-card">
-              <div class="stat-icon-wrapper">🚀</div>
+              <div class="stat-icon-wrapper stat-glow-purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="stat-svg"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+              </div>
               <div class="stat-info">
                 <span class="stat-big-number">100%</span>
                 <h4 class="stat-heading">Dedicated Learning</h4>
@@ -194,7 +201,9 @@
             </div>
 
             <div class="card stat-box spotlight-card">
-              <div class="stat-icon-wrapper">💼</div>
+              <div class="stat-icon-wrapper stat-glow-cyan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="stat-svg"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+              </div>
               <div class="stat-info">
                 <span class="stat-big-number">3+</span>
                 <h4 class="stat-heading">Featured Projects</h4>
@@ -203,7 +212,9 @@
             </div>
 
             <div class="card stat-box spotlight-card">
-              <div class="stat-icon-wrapper">📍</div>
+              <div class="stat-icon-wrapper stat-glow-green">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="stat-svg"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
               <div class="stat-info">
                 <span class="stat-big-number">Ready</span>
                 <h4 class="stat-heading">Available for Opportunities</h4>
@@ -705,7 +716,7 @@
     </div>
   </footer>
 
-  <script src="js/projects-data.js?v=13.0"></script>
-  <script src="js/main.js?v=13.0"></script>
+  <script src="js/projects-data.js?v=14.0"></script>
+  <script src="js/main.js?v=14.0"></script>
 </body>
 </html>

@@ -427,11 +427,10 @@ body {
   box-shadow: 0 12px 36px rgba(170, 66, 255, 0.18);
 }
 
-/* 2. ABOUT SECTION (CIRCULAR BADGE & TECH LOGOS ROW) */
+/* 2. ABOUT SECTION */
 .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; align-items: start; }
 .about-header-flex { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.5rem; }
 
-/* 100% Perfect Circular Badge */
 .avatar-badge {
   font-family: var(--font-hero);
   width: 56px;
@@ -456,7 +455,7 @@ body {
 .about-card-subtitle { font-family: var(--font-hero); color: var(--accent-purple); font-size: 0.95rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
 .about-text { color: var(--text-dim); margin-bottom: 1rem; font-size: 1rem; }
 
-/* Tech Stack Logo Row in About */
+/* Tech Stack Logo Row */
 .about-tech-stack-row {
   margin: 1.5rem 0;
   padding: 1rem;
@@ -474,12 +473,7 @@ body {
   display: block;
   margin-bottom: 0.75rem;
 }
-.tech-stack-icons-flex {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
+.tech-stack-icons-flex { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
 .mini-tech-icon {
   width: 38px;
   height: 38px;
@@ -500,15 +494,48 @@ body {
 }
 .mini-tech-icon img, .mini-tech-icon svg { width: 100%; height: 100%; object-fit: contain; }
 
-.about-highlights { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
-.highlight-item { display: flex; gap: 1rem; align-items: flex-start; }
-.highlight-icon { font-size: 1.4rem; line-height: 1; }
-.highlight-title { font-family: var(--font-hero); font-size: 1.05rem; font-weight: 700; text-transform: uppercase; color: #fff; margin-bottom: 0.2rem; }
+/* Highlights with Glowing Badges */
+.about-highlights { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.highlight-item { display: flex; gap: 1.1rem; align-items: center; }
+.highlight-icon-box {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.highlight-icon-box svg { width: 22px; height: 22px; }
+.glow-bolt { background: rgba(170, 66, 255, 0.15); color: var(--accent-purple); border-color: rgba(170, 66, 255, 0.3); }
+.glow-palette { background: rgba(251, 141, 255, 0.15); color: var(--accent-pink); border-color: rgba(251, 141, 255, 0.3); }
+.highlight-title { font-family: var(--font-hero); font-size: 1.05rem; font-weight: 700; text-transform: uppercase; color: #fff; margin-bottom: 0.15rem; }
 .highlight-desc { color: var(--text-muted); font-size: 0.88rem; }
 
+/* Stat Cards with Glowing Vector Boxes */
 .about-stats-column { display: flex; flex-direction: column; gap: 1.25rem; }
 .stat-box { display: flex; gap: 1.25rem; align-items: center; }
-.stat-icon-wrapper { font-size: 2rem; line-height: 1; }
+.stat-icon-wrapper {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.stat-svg { width: 26px; height: 26px; }
+.stat-glow-purple { background: rgba(170, 66, 255, 0.12); color: var(--accent-purple); border-color: rgba(170, 66, 255, 0.35); box-shadow: 0 0 16px rgba(170, 66, 255, 0.2); }
+.stat-glow-cyan { background: rgba(76, 225, 255, 0.12); color: var(--accent-cyan); border-color: rgba(76, 225, 255, 0.35); box-shadow: 0 0 16px rgba(76, 225, 255, 0.2); }
+.stat-glow-green { background: rgba(0, 255, 136, 0.12); color: #00ff88; border-color: rgba(0, 255, 136, 0.35); box-shadow: 0 0 16px rgba(0, 255, 136, 0.2); }
+
+.stat-box:hover .stat-icon-wrapper { transform: scale(1.1) rotate(4deg); }
 .stat-big-number { font-family: var(--font-hero); font-size: 2rem; font-weight: 900; color: var(--accent-purple); line-height: 1; }
 .stat-heading { font-family: var(--font-hero); font-size: 1.05rem; font-weight: 700; text-transform: uppercase; color: #fff; margin: 0.2rem 0; }
 .stat-subtext { font-size: 0.85rem; color: var(--text-muted); }
@@ -783,7 +810,7 @@ body {
 }
 .back-to-top:hover { background: var(--accent-glow); color: #fff; }
 
-/* 📱 RESPONSIVE BREAKPOINTS 📱 */
+/* 📱 RESPONSIVE PHONE FIXES 📱 */
 @media (max-width: 992px) {
   .about-grid, .contact-grid, .footer-container { grid-template-columns: 1fr; }
   .nav-menu { display: none; }
