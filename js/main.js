@@ -1,22 +1,24 @@
 /**
- * ShubWeb - MoncyDev Inspired Interactive JavaScript
- * Modern kinetic animations, canvas particles, cyber card expanders,
- * project modals, and live FormSubmit AJAX server integration.
+ * Shubham Portfolio - Enhanced Interactive JavaScript
+ * Modern animations, canvas particles, 3D tilt, spotlight, and micro-interactions
  */
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize all interactive modules
   initParticleCanvas();
   initCustomCursor();
-  initKineticRoleSlider();
-  initWhatIDoCards();
-  initNavbarScroll();
-  initMobileMenu();
   initCardSpotlight();
+  init3DTilt();
+  initScrollReveal();
+  initTypewriter();
+  initNavbar();
+  initMobileMenu();
+  initSkillFilters();
   initProjectModals();
   initCopyActions();
   initContactForm();
   initBackToTop();
-  initScrollReveal();
+  initTerminalCopy();
 });
 
 /* --------------------------------------------------------------------------
@@ -29,10 +31,10 @@ function initParticleCanvas() {
   const ctx = canvas.getContext("2d");
   let width, height;
   let particles = [];
-  const particleCount = window.innerWidth < 768 ? 25 : 45;
+  const particleCount = window.innerWidth < 768 ? 25 : 55;
   const maxDistance = 140;
 
-  let mouse = { x: null, y: null, radius: 140 };
+  let mouse = { x: null, y: null, radius: 150 };
 
   function resize() {
     width = canvas.width = window.innerWidth;
@@ -47,7 +49,7 @@ function initParticleCanvas() {
     mouse.y = e.clientY;
   });
 
-  window.addEventListener("mouseleave", () => {
+  window.addEventListener("mouseout", () => {
     mouse.x = null;
     mouse.y = null;
   });
@@ -58,27 +60,28 @@ function initParticleCanvas() {
       this.y = Math.random() * height;
       this.vx = (Math.random() - 0.5) * 0.6;
       this.vy = (Math.random() - 0.5) * 0.6;
-      this.radius = Math.random() * 1.6 + 0.8;
-      this.baseColor = Math.random() > 0.4 ? "rgba(194, 164, 255, " : "rgba(251, 141, 255, ";
+      this.radius = Math.random() * 2 + 1;
+      this.color = Math.random() > 0.5 ? "rgba(139, 92, 246, " : "rgba(6, 182, 212, ";
+      this.alpha = Math.random() * 0.5 + 0.2;
     }
 
     update() {
       this.x += this.vx;
       this.y += this.vy;
 
-      if (this.x < 0 || this.x > width) this.vx *= -1;
-      if (this.y < 0 || this.y > height) this.vy *= -1;
+      if (this.x < 0 || this.x > width) this.vx = -this.vx;
+      if (this.y < 0 || this.y > height) this.vy = -this.vy;
 
+      // Mouse interactive push
       if (mouse.x !== null && mouse.y !== null) {
         const dx = mouse.x - this.x;
         const dy = mouse.y - this.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-
         if (dist < mouse.radius) {
-          const force = (mouse.radius - dist) / mouse.radius;
           const angle = Math.atan2(dy, dx);
-          this.x -= Math.cos(angle) * force * 2.5;
-          this.y -= Math.sin(angle) * force * 2.5;
+          const force = (mouse.radius - dist) / mouse.radius;
+          this.x -= Math.cos(angle) * force * 2;
+          this.y -= Math.sin(angle) * force * 2;
         }
       }
     }
@@ -86,7 +89,7 @@ function initParticleCanvas() {
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.baseColor + "0.65)";
+      ctx.fillStyle = this.color + this.alpha + ")";
       ctx.fill();
     }
   }
@@ -108,9 +111,9 @@ function initParticleCanvas() {
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < maxDistance) {
-          const opacity = (1 - dist / maxDistance) * 0.22;
+          const opacity = (1 - dist / maxDistance) * 0.25;
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(170, 66, 255, ${opacity})`;
+          ctx.strokeStyle = `rgba(139, 92, 246, ${opacity})`;
           ctx.lineWidth = 0.75;
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
@@ -130,141 +133,44 @@ function initParticleCanvas() {
    -------------------------------------------------------------------------- */
 function initCustomCursor() {
   const cursor = document.getElementById("custom-cursor");
-  const dot = document.getElementById("custom-cursor-dot");
-  if (!cursor || !dot || window.innerWidth < 1024) return;
+  const cursorDot = document.getElementById("custom-cursor-dot");
+  if (!cursor || !cursorDot) return;
 
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let cursorX = mouseX;
-  let cursorY = mouseY;
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
 
   window.addEventListener("mousemove", (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    dot.style.left = `${mouseX}px`;
-    dot.style.top = `${mouseY}px`;
+    cursorDot.style.left = `${mouseX}px`;
+    cursorDot.style.top = `${mouseY}px`;
   });
 
+  // Smooth lerp for outer ring
   function renderCursor() {
-    cursorX += (mouseX - cursorX) * 0.15;
-    cursorY += (mouseY - cursorY) * 0.15;
+    cursorX += (mouseX - cursorX) * 0.18;
+    cursorY += (mouseY - cursorY) * 0.18;
     cursor.style.left = `${cursorX}px`;
     cursor.style.top = `${cursorY}px`;
     requestAnimationFrame(renderCursor);
   }
   renderCursor();
 
-  const interactiveElements = document.querySelectorAll("a, button, .card, .what-cyber-card, .btn");
-  interactiveElements.forEach((el) => {
-    el.addEventListener("mouseenter", () => cursor.classList.add("cursor-hover"));
-    el.addEventListener("mouseleave", () => cursor.classList.remove("cursor-hover"));
+  // Hover state on links & interactive elements
+  const hoverTargets = document.querySelectorAll("a, button, .card, .spotlight-card, input, textarea");
+  hoverTargets.forEach((el) => {
+    el.addEventListener("mouseenter", () => cursor.classList.add("hovered"));
+    el.addEventListener("mouseleave", () => cursor.classList.remove("hovered"));
   });
 }
 
 /* --------------------------------------------------------------------------
-   3. Kinetic Role Slider (Moncy Signature: DEVELOPER <-> DESIGNER)
-   -------------------------------------------------------------------------- */
-function initKineticRoleSlider() {
-  const role1 = document.getElementById("kinetic-role-1");
-  const role2 = document.getElementById("kinetic-role-2");
-  if (!role1 || !role2) return;
-
-  let current = 0;
-  setInterval(() => {
-    if (current === 0) {
-      role1.classList.remove("active");
-      role2.classList.add("active");
-      current = 1;
-    } else {
-      role2.classList.remove("active");
-      role1.classList.add("active");
-      current = 0;
-    }
-  }, 2800);
-}
-
-/* --------------------------------------------------------------------------
-   4. WHAT I DO Cyber Cards Interactivity
-   -------------------------------------------------------------------------- */
-function initWhatIDoCards() {
-  const cards = document.querySelectorAll(".what-cyber-card");
-  if (!cards.length) return;
-
-  cards.forEach((card) => {
-    card.addEventListener("mouseenter", () => {
-      cards.forEach((c) => c.classList.remove("active-cyber-card"));
-      card.classList.add("active-cyber-card");
-    });
-  });
-}
-
-/* --------------------------------------------------------------------------
-   5. Navbar Scroll & Active Section Tracking
-   -------------------------------------------------------------------------- */
-function initNavbarScroll() {
-  const header = document.querySelector(".header");
-  const navLinks = document.querySelectorAll(".nav-link-item");
-  const sections = document.querySelectorAll("section[id]");
-
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 40) {
-      header?.classList.add("scrolled");
-    } else {
-      header?.classList.remove("scrolled");
-    }
-
-    let current = "";
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop - 120;
-      const sectionHeight = section.offsetHeight;
-      if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-        current = section.getAttribute("id");
-      }
-    });
-
-    navLinks.forEach((link) => {
-      link.classList.remove("active");
-      if (link.getAttribute("href") === `#${current}`) {
-        link.classList.add("active");
-      }
-    });
-  });
-}
-
-/* --------------------------------------------------------------------------
-   6. Mobile Drawer Menu
-   -------------------------------------------------------------------------- */
-function initMobileMenu() {
-  const toggleBtn = document.getElementById("menu-toggle");
-  const mobileMenu = document.getElementById("mobile-menu");
-  const mobileLinks = document.querySelectorAll(".mobile-nav-link");
-
-  if (!toggleBtn || !mobileMenu) return;
-
-  function toggle() {
-    const isOpen = mobileMenu.classList.toggle("open");
-    toggleBtn.setAttribute("aria-expanded", String(isOpen));
-    document.body.style.overflow = isOpen ? "hidden" : "";
-  }
-
-  toggleBtn.addEventListener("click", toggle);
-
-  mobileLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      mobileMenu.classList.remove("open");
-      toggleBtn.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
-    });
-  });
-}
-
-/* --------------------------------------------------------------------------
-   7. Card Spotlight Hover Effect
+   3. Aceternity-Style Spotlight Card Effect
    -------------------------------------------------------------------------- */
 function initCardSpotlight() {
-  const cards = document.querySelectorAll(".spotlight-card");
+  const spotlightCards = document.querySelectorAll(".spotlight-card");
 
-  cards.forEach((card) => {
+  spotlightCards.forEach((card) => {
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -277,139 +183,400 @@ function initCardSpotlight() {
 }
 
 /* --------------------------------------------------------------------------
-   8. Scroll Reveal Animations
+   4. 3D Card Tilt Physics
    -------------------------------------------------------------------------- */
-function initScrollReveal() {
-  const revealElements = document.querySelectorAll(".reveal-on-scroll");
+function init3DTilt() {
+  const tiltElements = document.querySelectorAll(".tilt-element");
 
-  const observer = new IntersectionObserver(
-    (entries, observerInstance) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = "1";
-          entry.target.style.transform = "translateY(0)";
-          observerInstance.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12 }
-  );
+  tiltElements.forEach((element) => {
+    element.addEventListener("mousemove", (e) => {
+      const rect = element.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
-  revealElements.forEach((el) => {
-    el.style.opacity = "0";
-    el.style.transform = "translateY(28px)";
-    el.style.transition = "opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)";
-    observer.observe(el);
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -7;
+      const rotateY = ((x - centerX) / centerX) * 7;
+
+      element.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+    });
+
+    element.addEventListener("mouseleave", () => {
+      element.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+    });
   });
 }
 
 /* --------------------------------------------------------------------------
-   9. Featured Project Modals
+   5. Scroll Reveal IntersectionObserver
    -------------------------------------------------------------------------- */
-function initProjectModals() {
-  const modal = document.getElementById("project-modal");
-  const modalBackdrop = document.getElementById("modal-backdrop");
-  const modalCloseBtn = document.getElementById("modal-close-btn");
-  const modalCloseAction = document.getElementById("modal-close-action");
-  const modalTitle = document.getElementById("modal-title");
-  const modalCategory = document.getElementById("modal-category");
-  const modalBody = document.getElementById("modal-body");
-  const modalGithubLink = document.getElementById("modal-github-link");
-  const viewButtons = document.querySelectorAll(".view-project-btn");
+function initScrollReveal() {
+  const reveals = document.querySelectorAll(".reveal-on-scroll");
 
-  if (!modal) return;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: "0px 0px -50px 0px"
+    }
+  );
 
-  function openModal(projectId) {
-    const data = typeof projectsData !== "undefined" ? projectsData[projectId] : null;
-    if (!data) return;
+  reveals.forEach((el) => observer.observe(el));
+}
 
-    modalTitle.textContent = data.title;
-    modalCategory.textContent = data.category;
-    modalGithubLink.href = data.github || "https://github.com/rishabvijard";
+/* --------------------------------------------------------------------------
+   6. Dynamic Typewriter Effect for Hero
+   -------------------------------------------------------------------------- */
+function initTypewriter() {
+  const targetElement = document.getElementById("role-dynamic");
+  if (!targetElement) return;
 
-    let featuresHtml = data.features.map((f) => `<li>✓ ${f}</li>`).join("");
-    let techHtml = data.technologies.map((t) => `<span class="what-tag">${t}</span>`).join(" ");
+  const phrases = [
+    "modern web experiences",
+    "responsive UI interfaces",
+    "clean & modular code",
+    "WordPress & Elementor sites",
+    "interactive web apps"
+  ];
 
-    modalBody.innerHTML = `
-      <p style="margin-bottom: 1.25rem; font-size: 1.05rem; color: #ffffff;">${data.description}</p>
-      <h4 style="color: #c2a4ff; margin-bottom: 0.5rem; font-size: 0.95rem; text-transform: uppercase;">Key Architectural Highlights:</h4>
-      <ul style="list-style: none; margin-bottom: 1.5rem; line-height: 1.8; color: #9f96a6;">
-        ${featuresHtml}
-      </ul>
-      <h4 style="color: #c2a4ff; margin-bottom: 0.75rem; font-size: 0.95rem; text-transform: uppercase;">Core Tech Stack:</h4>
-      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-        ${techHtml}
-      </div>
-    `;
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typingSpeed = 80;
 
-    modal.classList.add("open");
+  function type() {
+    const currentPhrase = phrases[phraseIndex];
+
+    if (isDeleting) {
+      targetElement.textContent = currentPhrase.substring(0, charIndex - 1);
+      charIndex--;
+      typingSpeed = 40;
+    } else {
+      targetElement.textContent = currentPhrase.substring(0, charIndex + 1);
+      charIndex++;
+      typingSpeed = 80;
+    }
+
+    if (!isDeleting && charIndex === currentPhrase.length) {
+      typingSpeed = 1800;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      typingSpeed = 400;
+    }
+
+    setTimeout(type, typingSpeed);
+  }
+
+  type();
+}
+
+/* --------------------------------------------------------------------------
+   7. Sticky Navbar & Active Section Tracking
+   -------------------------------------------------------------------------- */
+function initNavbar() {
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  function onScroll() {
+    const scrollY = window.scrollY;
+
+    sections.forEach((current) => {
+      const sectionHeight = current.offsetHeight;
+      const sectionTop = current.offsetTop - 130;
+      const sectionId = current.getAttribute("id");
+
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${sectionId}`) {
+            link.classList.add("active");
+          }
+        });
+      }
+    });
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+}
+
+/* --------------------------------------------------------------------------
+   8. Mobile Drawer Navigation Menu
+   -------------------------------------------------------------------------- */
+function initMobileMenu() {
+  const menuToggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+
+  if (!menuToggle || !mobileMenu) return;
+
+  function toggleMenu() {
+    const isOpen = mobileMenu.classList.contains("open");
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }
+
+  function openMenu() {
+    menuToggle.classList.add("active");
+    menuToggle.setAttribute("aria-expanded", "true");
+    mobileMenu.classList.add("open");
     document.body.style.overflow = "hidden";
   }
 
-  function closeModal() {
-    modal.classList.remove("open");
+  function closeMenu() {
+    menuToggle.classList.remove("active");
+    menuToggle.setAttribute("aria-expanded", "false");
+    mobileMenu.classList.remove("open");
     document.body.style.overflow = "";
   }
 
-  viewButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const pid = btn.getAttribute("data-project");
-      openModal(pid);
-    });
+  menuToggle.addEventListener("click", toggleMenu);
+
+  mobileNavLinks.forEach((link) => {
+    link.addEventListener("click", closeMenu);
   });
 
-  [modalBackdrop, modalCloseBtn, modalCloseAction].forEach((el) => {
-    el?.addEventListener("click", closeModal);
-  });
-
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("open")) {
-      closeModal();
+  document.addEventListener("click", (e) => {
+    if (
+      mobileMenu.classList.contains("open") &&
+      !mobileMenu.contains(e.target) &&
+      !menuToggle.contains(e.target)
+    ) {
+      closeMenu();
     }
   });
 }
 
 /* --------------------------------------------------------------------------
-   10. Toast Notification System & 1-Click Clipboard Copy
+   9. Technical Skills Filter Tabs
    -------------------------------------------------------------------------- */
-function showToast(message, type = "info") {
-  const container = document.getElementById("toast-container");
-  if (!container) return;
+function initSkillFilters() {
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const skillCards = document.querySelectorAll(".skill-card");
 
-  const toast = document.createElement("div");
-  toast.className = `toast toast-${type}`;
-  toast.textContent = message;
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
 
-  container.appendChild(toast);
+      const category = btn.getAttribute("data-category");
 
-  setTimeout(() => {
-    toast.style.opacity = "0";
-    toast.style.transform = "translateY(10px)";
-    toast.style.transition = "all 0.3s ease";
-    setTimeout(() => toast.remove(), 300);
-  }, 3200);
-}
-
-function initCopyActions() {
-  const copyButtons = document.querySelectorAll(".copy-btn");
-
-  copyButtons.forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      const text = btn.getAttribute("data-copy");
-      if (!text) return;
-
-      try {
-        await navigator.clipboard.writeText(text);
-        showToast(`Copied "${text}" to clipboard!`, "success");
-      } catch (err) {
-        showToast(`Copied to clipboard: ${text}`, "success");
-      }
+      skillCards.forEach((card) => {
+        const cardCategory = card.getAttribute("data-category");
+        if (category === "all" || cardCategory === category) {
+          card.style.display = "flex";
+          card.style.opacity = "0";
+          setTimeout(() => {
+            card.style.opacity = "1";
+          }, 40);
+        } else {
+          card.style.display = "none";
+        }
+      });
     });
   });
 }
 
 /* --------------------------------------------------------------------------
-   11. Live Contact Form AJAX Server Integration (FormSubmit)
+   10. Interactive Project Preview Modal
+   -------------------------------------------------------------------------- */
+function initProjectModals() {
+  const modal = document.getElementById("project-modal");
+  const backdrop = document.getElementById("modal-backdrop");
+  const closeBtn = document.getElementById("modal-close-btn");
+  const closeActionBtn = document.getElementById("modal-close-action");
+  const viewBtns = document.querySelectorAll(".view-project-btn");
+
+  const modalTitle = document.getElementById("modal-title");
+  const modalCategory = document.getElementById("modal-category");
+  const modalBody = document.getElementById("modal-body");
+
+  if (!modal || !modalBody) return;
+
+  function openProject(projectId) {
+    const data = typeof projectsData !== "undefined" ? projectsData[projectId] : null;
+    if (!data) return;
+
+    modalTitle.textContent = data.title;
+    modalCategory.textContent = data.category;
+
+    let tagsHtml = data.tags
+      .map((t) => `<span class="tech-tag">${t}</span>`)
+      .join("");
+
+    let featuresHtml = data.keyFeatures
+      .map((f) => `<li>${f}</li>`)
+      .join("");
+
+    modalBody.innerHTML = `
+      <div class="project-tech-tags" style="margin-bottom: 1.25rem;">
+        ${tagsHtml}
+      </div>
+
+      <h4 class="modal-section-title">Project Overview</h4>
+      <p>${data.overview}</p>
+
+      <h4 class="modal-section-title">Core Architecture &amp; Features</h4>
+      <ul class="modal-list">
+        ${featuresHtml}
+      </ul>
+
+      <h4 class="modal-section-title">Implementation Strategy</h4>
+      <p>${data.techDetails}</p>
+
+      <h4 class="modal-section-title">Code Implementation Snippet</h4>
+      <pre class="modal-code-preview"><code>${escapeHtml(data.codeSnippet)}</code></pre>
+    `;
+
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  viewBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const projectId = btn.getAttribute("data-project");
+      openProject(projectId);
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
+  if (closeActionBtn) closeActionBtn.addEventListener("click", closeModal);
+  if (backdrop) backdrop.addEventListener("click", closeModal);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("active")) {
+      closeModal();
+    }
+  });
+}
+
+function escapeHtml(string) {
+  return String(string)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+/* --------------------------------------------------------------------------
+   11. Copy to Clipboard Actions & Toast Alerts
+   -------------------------------------------------------------------------- */
+function initCopyActions() {
+  const copyButtons = document.querySelectorAll(".copy-btn");
+
+  copyButtons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const textToCopy = btn.getAttribute("data-copy");
+      if (!textToCopy) return;
+
+      copyTextToClipboard(textToCopy, `Copied "${textToCopy}" to clipboard!`);
+    });
+  });
+}
+
+function copyTextToClipboard(text, successMessage) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast(successMessage, "success");
+    }).catch(() => {
+      fallbackCopy(text, successMessage);
+    });
+  } else {
+    fallbackCopy(text, successMessage);
+  }
+}
+
+function fallbackCopy(text, successMessage) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.style.position = "fixed";
+  textArea.style.left = "-999999px";
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    document.execCommand("copy");
+    showToast(successMessage, "success");
+  } catch (err) {
+    showToast("Failed to copy. Please copy manually.", "error");
+  }
+
+  document.body.removeChild(textArea);
+}
+
+function showToast(message, type = "success") {
+  const container = document.getElementById("toast-container");
+  if (!container) return;
+
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type}`;
+  toast.innerHTML = `
+    <span class="toast-icon">${type === "success" ? "✓" : "ℹ"}</span>
+    <span>${message}</span>
+  `;
+
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.style.transform = "translateX(50px)";
+    toast.style.transition = "all 0.3s ease";
+    setTimeout(() => {
+      if (toast.parentNode) {
+        toast.parentNode.removeChild(toast);
+      }
+    }, 300);
+  }, 3200);
+}
+
+/* --------------------------------------------------------------------------
+   12. Terminal Copy Button
+   -------------------------------------------------------------------------- */
+function initTerminalCopy() {
+  const terminalCopyBtn = document.getElementById("terminal-copy-btn");
+  if (!terminalCopyBtn) return;
+
+  terminalCopyBtn.addEventListener("click", () => {
+    const codeContent = `const developer = {
+  name: "Shubham",
+  role: "Aspiring Frontend Developer",
+  skills: ["HTML5", "CSS3", "JavaScript", "React", "WordPress", "Elementor", "REST APIs", "PHP"],
+  passion: "Building responsive & interactive web apps",
+  currentFocus: "Refining frontend skills & shipping projects",
+  status: "Open for opportunities 🚀"
+};
+
+export default developer;`;
+
+    copyTextToClipboard(codeContent, "Developer profile code copied to clipboard!");
+  });
+}
+
+/* --------------------------------------------------------------------------
+   13. Contact Form Client-Side Validation & Submission
    -------------------------------------------------------------------------- */
 function initContactForm() {
   const form = document.getElementById("contact-form");
@@ -493,9 +660,9 @@ function initContactForm() {
     const formData = {
       name: nameInput.value.trim(),
       email: emailInput.value.trim(),
-      subject: subjectInput ? subjectInput.value.trim() || "New Message from ShubWeb Portfolio" : "New Message from ShubWeb Portfolio",
+      subject: subjectInput ? subjectInput.value.trim() || "New Message from Shubham's Portfolio" : "New Message from Shubham's Portfolio",
       message: messageInput.value.trim(),
-      _subject: "New Message from ShubWeb Portfolio — " + nameInput.value.trim()
+      _subject: "New Message from Shubham's Portfolio — " + nameInput.value.trim()
     };
 
     try {
@@ -518,6 +685,7 @@ function initContactForm() {
       }
     } catch (err) {
       console.warn("Server submission warning, using mailto fallback:", err);
+      // Friendly fallback if offline or CORS blocked
       showToast("Opening email client to send message...", "info");
       const mailtoUrl = `mailto:sd9906830@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent("From: " + formData.name + " (" + formData.email + ")\n\n" + formData.message)}`;
       window.open(mailtoUrl, "_blank");
@@ -529,7 +697,7 @@ function initContactForm() {
 }
 
 /* --------------------------------------------------------------------------
-   12. Back to Top Button
+   14. Back to Top Button
    -------------------------------------------------------------------------- */
 function initBackToTop() {
   const backToTopBtn = document.getElementById("back-to-top");
@@ -542,3 +710,4 @@ function initBackToTop() {
     });
   });
 }
+
