@@ -8,9 +8,9 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=11.0" />
+  <link rel="stylesheet" href="css/style.css?v=12.0" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
 </head>
 <body>
@@ -24,6 +24,16 @@
   <div class="grid-overlay"></div>
 
   <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- Mobile Nav Drawer -->
+  <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+    <a href="#hero" class="mobile-nav-link">Home</a>
+    <a href="#about" class="mobile-nav-link">About</a>
+    <a href="#skills" class="mobile-nav-link">Skills</a>
+    <a href="#projects" class="mobile-nav-link">Projects</a>
+    <a href="#journey" class="mobile-nav-link">Journey</a>
+    <a href="#contact" class="mobile-nav-link">Contact</a>
+  </div>
 
   <!-- Navbar -->
   <header class="navbar-wrapper">
@@ -47,11 +57,11 @@
           </svg>
         </a>
         <a href="#contact" class="btn btn-primary btn-sm">
-          <span>Let's Connect</span>
-          <svg class="btn-arrow" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
+          <span>Connect</span>
         </a>
+        <button id="nav-hamburger" class="nav-hamburger" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </nav>
   </header>
@@ -190,7 +200,7 @@
       </div>
     </section>
 
-    <!-- 3. TECHNICAL SKILLS SECTION (WITHOUT GIT/GITHUB) -->
+    <!-- 3. TECHNICAL SKILLS SECTION -->
     <section id="skills" class="section skills-section">
       <div class="container">
         <div class="section-header">
@@ -680,7 +690,7 @@
     </div>
   </footer>
 
-  <script src="js/projects-data.js?v=11.0"></script>
-  <script src="js/main.js?v=11.0"></script>
+  <script src="js/projects-data.js?v=12.0"></script>
+  <script src="js/main.js?v=12.0"></script>
 </body>
 </html>

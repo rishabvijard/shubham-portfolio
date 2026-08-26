@@ -1,13 +1,34 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  // Custom Cursor
+  // Custom Cursor for Desktop
   const cursor = document.getElementById("custom-cursor");
   const cursorDot = document.getElementById("custom-cursor-dot");
-  if (cursor && cursorDot) {
+  if (cursor && cursorDot && window.matchMedia("(hover: hover)").matches) {
     window.addEventListener("mousemove", (e) => {
       cursor.style.left = `${e.clientX}px`;
       cursor.style.top = `${e.clientY}px`;
       cursorDot.style.left = `${e.clientX}px`;
       cursorDot.style.top = `${e.clientY}px`;
+    });
+  }
+
+  // Mobile Hamburger Toggle
+  const hamburger = document.getElementById("nav-hamburger");
+  const drawer = document.getElementById("mobile-nav-drawer");
+  const drawerLinks = document.querySelectorAll(".mobile-nav-link");
+
+  if (hamburger && drawer) {
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("is-active");
+      drawer.classList.toggle("is-open");
+      document.body.style.overflow = drawer.classList.contains("is-open") ? "hidden" : "auto";
+    });
+
+    drawerLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        hamburger.classList.remove("is-active");
+        drawer.classList.remove("is-open");
+        document.body.style.overflow = "auto";
+      });
     });
   }
 
@@ -32,7 +53,8 @@
     resize();
     window.addEventListener("resize", resize);
 
-    for (let i = 0; i < 40; i++) {
+    const count = window.innerWidth < 768 ? 20 : 40;
+    for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -61,9 +83,9 @@
     animate();
   }
 
-  // 3D Magnetic Portrait Effect
+  // 3D Magnetic Portrait Effect on Desktop Only
   const portrait = document.getElementById("portrait-wrapper");
-  if (portrait) {
+  if (portrait && window.innerWidth > 768) {
     window.addEventListener("mousemove", (e) => {
       const rect = portrait.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
@@ -132,7 +154,7 @@
     modalCategory.textContent = data.category;
     modalBody.innerHTML = `
       <p style="margin-bottom: 1rem;">${data.desc}</p>
-      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Key Features:</h4>
+      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem; font-family: var(--font-hero); text-transform: uppercase;">Key Features:</h4>
       <ul style="list-style: disc; padding-left: 1.25rem; margin-bottom: 1.25rem;">
         ${data.features.map((f) => `<li>${f}</li>`).join("")}
       </ul>
