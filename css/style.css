@@ -572,16 +572,31 @@ img, svg {
 .nav-brand {
   display: flex;
   align-items: center;
-  font-family: var(--font-mono);
+  gap: 0.5rem;
+  font-family: var(--font-sans);
   font-weight: 800;
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   color: #ffffff;
   letter-spacing: -0.5px;
+  text-decoration: none;
 }
 
-.brand-bracket { color: var(--accent-primary); }
-.brand-slash { color: var(--accent-secondary); }
-.brand-name { margin: 0 2px; }
+.brand-logo-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  font-size: 0.95rem;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
+}
+
+.brand-name {
+  font-weight: 800;
+}
 
 .nav-menu {
   display: flex;
@@ -1949,12 +1964,15 @@ img, svg {
 }
 
 .footer-logo {
-  font-family: var(--font-mono);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
   font-size: 1.4rem;
   font-weight: 800;
   color: #ffffff;
-  display: inline-block;
   margin-bottom: 0.85rem;
+  text-decoration: none;
 }
 
 .footer-bio {
