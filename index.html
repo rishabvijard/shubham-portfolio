@@ -8,9 +8,9 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=7.0" />
+  <link rel="stylesheet" href="css/style.css?v=8.0" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
 </head>
 <body>
@@ -57,7 +57,7 @@
   </header>
 
   <main>
-    <!-- 1. HERO FRONT PAGE WITH 3D FACE -->
+    <!-- 1. HERO FRONT PAGE WITH PERFECT TITLE SIZE & 3D FACE -->
     <section id="hero" class="hero-front-section">
       <div class="container hero-container-flex">
         <div class="hero-top-wrap">
@@ -276,7 +276,7 @@
       </div>
     </section>
 
-    <!-- 4. FEATURED PROJECTS SECTION -->
+    <!-- 4. FEATURED PROJECTS WITH CODE-SNIPPET CARDS -->
     <section id="projects" class="section projects-section">
       <div class="container">
         <div class="section-header">
@@ -286,22 +286,22 @@
         </div>
 
         <div class="projects-grid">
-          <!-- Project 1 -->
+          <!-- Project 1: Login Page with Code Block -->
           <article class="card project-card spotlight-card" data-project-id="login">
             <div class="project-preview-box">
               <div class="project-mockup-bar">
                 <span class="mockup-dot dot-r"></span>
                 <span class="mockup-dot dot-y"></span>
                 <span class="mockup-dot dot-g"></span>
-                <span class="mockup-url">auth-portal.app</span>
+                <span class="mockup-url">auth-portal.app/auth.js</span>
               </div>
-              <div class="project-mockup-inner">
-                <div class="mini-login-card">
-                  <div class="mini-avatar">👤</div>
-                  <div class="mini-line w-70"></div>
-                  <div class="mini-line w-50"></div>
-                  <div class="mini-btn">Sign In</div>
-                </div>
+              <div class="project-code-snippet">
+                <span class="code-kw">const</span> <span class="code-var">authPortal</span> = {<br/>
+                &nbsp;&nbsp;<span class="code-prop">theme</span>: <span class="code-str">'dark-glassmorphism'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">features</span>: [<span class="code-str">'Slider'</span>, <span class="code-str">'Regex'</span>, <span class="code-str">'Reveal'</span>],<br/>
+                &nbsp;&nbsp;<span class="code-prop">status</span>: <span class="code-str">'200 OK'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">responsive</span>: <span class="code-bool">true</span><br/>
+                };
               </div>
             </div>
 
@@ -333,20 +333,22 @@
             </div>
           </article>
 
-          <!-- Project 2 -->
+          <!-- Project 2: Gym Website with Code Block -->
           <article class="card project-card spotlight-card" data-project-id="gym">
             <div class="project-preview-box">
               <div class="project-mockup-bar">
                 <span class="mockup-dot dot-r"></span>
                 <span class="mockup-dot dot-y"></span>
                 <span class="mockup-dot dot-g"></span>
-                <span class="mockup-url">iron-fit-hub.com</span>
+                <span class="mockup-url">iron-fit-hub.com/config.js</span>
               </div>
-              <div class="project-mockup-inner">
-                <div class="mini-gym-banner">
-                  <span class="gym-badge">FITNESS HUB</span>
-                  <h4>FORGE YOUR STRENGTH</h4>
-                </div>
+              <div class="project-code-snippet">
+                <span class="code-kw">const</span> <span class="code-var">fitnessHub</span> = {<br/>
+                &nbsp;&nbsp;<span class="code-prop">layout</span>: <span class="code-str">'CSS Grid + Flexbox'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">modules</span>: [<span class="code-str">'Programs'</span>, <span class="code-str">'Schedules'</span>, <span class="code-str">'Pricing'</span>],<br/>
+                &nbsp;&nbsp;<span class="code-prop">performance</span>: <span class="code-str">'60fps UI'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">mobileFirst</span>: <span class="code-bool">true</span><br/>
+                };
               </div>
             </div>
 
@@ -378,20 +380,22 @@
             </div>
           </article>
 
-          <!-- Project 3 -->
+          <!-- Project 3: WordPress Customization with Code Block -->
           <article class="card project-card spotlight-card" data-project-id="wp">
             <div class="project-preview-box">
               <div class="project-mockup-bar">
                 <span class="mockup-dot dot-r"></span>
                 <span class="mockup-dot dot-y"></span>
                 <span class="mockup-dot dot-g"></span>
-                <span class="mockup-url">custom-wp-site.com</span>
+                <span class="mockup-url">custom-wp.com/theme.php</span>
               </div>
-              <div class="project-mockup-inner">
-                <div class="mini-wp-banner">
-                  <span class="wp-badge">ELEMENTOR PRO</span>
-                  <h4>CUSTOM THEME ENGINE</h4>
-                </div>
+              <div class="project-code-snippet">
+                <span class="code-kw">const</span> <span class="code-var">wpCustom</span> = {<br/>
+                &nbsp;&nbsp;<span class="code-prop">builder</span>: <span class="code-str">'Elementor Pro'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">engine</span>: <span class="code-str">'PHP + Custom CSS'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">forms</span>: <span class="code-str">'AJAX FormSubmit'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">deployed</span>: <span class="code-bool">true</span><br/>
+                };
               </div>
             </div>
 
@@ -426,7 +430,7 @@
       </div>
     </section>
 
-    <!-- 5. JOURNEY ROADMAP -->
+    <!-- 5. JOURNEY ROADMAP (PERFECTLY CENTERED TIMELINE) -->
     <section id="journey" class="section journey-section">
       <div class="container">
         <div class="section-header">
@@ -487,7 +491,7 @@
       </div>
     </section>
 
-    <!-- 6. CONTACT SECTION (LIVE FORM) -->
+    <!-- 6. CONTACT SECTION (LIVE AJAX FORM) -->
     <section id="contact" class="section contact-section">
       <div class="container">
         <div class="section-header">
@@ -632,7 +636,7 @@
     </div>
   </footer>
 
-  <script src="js/projects-data.js?v=7.0"></script>
-  <script src="js/main.js?v=7.0"></script>
+  <script src="js/projects-data.js?v=8.0"></script>
+  <script src="js/main.js?v=8.0"></script>
 </body>
 </html>
