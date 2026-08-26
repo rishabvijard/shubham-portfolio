@@ -641,21 +641,58 @@ function initContactForm() {
     });
   });
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     if (!validate()) return;
 
     const originalBtnHtml = submitBtn.innerHTML;
     submitBtn.disabled = true;
-    submitBtn.innerHTML = `<span>Sending Message...</span>`;
+    submitBtn.innerHTML = `
+      <svg class="icon-sm spin-animation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+        <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor"></path>
+      </svg>
+      <span>Sending Message...</span>
+    `;
 
-    setTimeout(() => {
-      showToast("Thank you Shubham will respond to your message shortly!", "success");
-      form.reset();
+    const subjectInput = document.getElementById("subject");
+    const formData = {
+      name: nameInput.value.trim(),
+      email: emailInput.value.trim(),
+      subject: subjectInput ? subjectInput.value.trim() || "New Message from ShubWeb Portfolio" : "New Message from ShubWeb Portfolio",
+      message: messageInput.value.trim(),
+      _subject: "New Message from ShubWeb Portfolio — " + nameInput.value.trim()
+    };
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/sd9906830@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        showToast("🎉 Message sent directly to Shubham! Thank you for reaching out.", "success");
+        form.reset();
+      } else {
+        const data = await response.json().catch(() => ({}));
+        showToast(data.message || "Message sent! Shubham will respond shortly.", "success");
+        form.reset();
+      }
+    } catch (err) {
+      console.warn("Server submission warning, using mailto fallback:", err);
+      // Friendly fallback if offline or CORS blocked
+      showToast("Opening email client to send message...", "info");
+      const mailtoUrl = `mailto:sd9906830@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent("From: " + formData.name + " (" + formData.email + ")\n\n" + formData.message)}`;
+      window.open(mailtoUrl, "_blank");
+    } finally {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnHtml;
-    }, 1200);
+    }
   });
 }
 

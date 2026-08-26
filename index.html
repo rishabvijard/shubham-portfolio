@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shubham | Aspiring Frontend Developer Portfolio</title>
-  <meta name="description" content="Portfolio of Shubham - Aspiring Frontend Developer skilled in HTML, CSS, JavaScript, React, PHP, WordPress & Elementor. View interactive projects, skills, and contact info." />
-  <meta name="keywords" content="Shubham, Frontend Developer, Web Developer Portfolio, HTML, CSS, JavaScript, React, WordPress, Elementor" />
+  <title>ShubWeb | Shubham — Frontend Developer Portfolio</title>
+  <meta name="description" content="ShubWeb - Developer Portfolio of Shubham. Skilled in HTML, CSS, JavaScript, React, PHP, WordPress & Elementor. View interactive projects, skills, and contact info." />
+  <meta name="keywords" content="ShubWeb, Shubham, Frontend Developer, Web Developer Portfolio, HTML, CSS, JavaScript, React, WordPress, Elementor" />
   <meta name="author" content="Shubham" />
 
   <!-- OpenGraph / Social Meta Tags -->
-  <meta property="og:title" content="Shubham | Aspiring Frontend Developer" />
+  <meta property="og:title" content="ShubWeb | Shubham — Frontend Developer" />
   <meta property="og:description" content="Building modern, responsive web experiences with HTML, CSS, JavaScript, React & WordPress." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://github.com/rishabvijard" />
+  <meta property="og:url" content="https://rishabvijard.github.io/shubham-portfolio/" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -45,7 +45,7 @@
     <nav class="navbar" id="navbar">
       <a href="#hero" class="nav-brand">
         <span class="brand-bracket">&lt;</span>
-        <span class="brand-name">Shubham</span>
+        <span class="brand-name">Shub<span class="gradient-text">Web</span></span>
         <span class="brand-slash">/</span>
         <span class="brand-bracket">&gt;</span>
       </a>
@@ -115,7 +115,7 @@
           <div class="status-badge-wrapper">
             <div class="status-pill">
               <span class="status-dot"></span>
-              <span class="status-text">Available for Frontend Roles &amp; Freelance</span>
+              <span class="status-text">ShubWeb &bull; Open for Frontend Roles &amp; Freelance</span>
             </div>
           </div>
 
@@ -181,7 +181,7 @@
                 <span class="dot dot-yellow"></span>
                 <span class="dot dot-green"></span>
               </div>
-              <div class="terminal-title">developer.js</div>
+              <div class="terminal-title">shubweb.config.js</div>
               <button class="terminal-copy-btn" id="terminal-copy-btn" title="Copy code snippet">
                 <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -191,6 +191,7 @@
             </div>
             <div class="terminal-body">
               <pre><code class="language-javascript"><span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
+  <span class="code-property">brand</span>: <span class="code-string">"ShubWeb"</span>,
   <span class="code-property">name</span>: <span class="code-string">"Shubham"</span>,
   <span class="code-property">role</span>: <span class="code-string">"Aspiring Frontend Developer"</span>,
   <span class="code-property">skills</span>: [
@@ -208,7 +209,7 @@
             </div>
             <div class="terminal-footer">
               <span class="terminal-status-badge">Node.js ES6+</span>
-              <span class="terminal-status-badge terminal-badge-accent">Interactive 3D Card</span>
+              <span class="terminal-status-badge terminal-badge-accent">ShubWeb Core</span>
             </div>
           </div>
         </div>
@@ -264,12 +265,12 @@
               </div>
               <div>
                 <h3 class="about-card-title">Shubham</h3>
-                <p class="about-card-subtitle">Aspiring Frontend Developer &amp; WordPress Specialist</p>
+                <p class="about-card-subtitle">Founder of ShubWeb &bull; Aspiring Frontend Developer</p>
               </div>
             </div>
 
             <p class="about-text">
-              I am an enthusiastic web developer passionate about turning creative concepts into responsive, accessible, and high-performance websites.
+              I am an enthusiastic web developer passionate about turning creative concepts into responsive, accessible, and high-performance websites under the <strong>ShubWeb</strong> banner.
             </p>
             <p class="about-text">
               My journey involves working with core web foundations—<strong>HTML5, CSS3, and JavaScript (ES6+)</strong>—along with <strong>React</strong> for component-based architecture and <strong>WordPress + Elementor</strong> for customizable client websites and dynamic content layouts.
@@ -502,7 +503,7 @@
       </div>
     </section>
 
-    <!-- FEATURED PROJECTS SECTION (Interactive Showcase) -->
+    <!-- FEATURED PROJECTS SECTION -->
     <section id="projects" class="section projects-section">
       <div class="container">
         <div class="section-header reveal-on-scroll">
@@ -882,12 +883,17 @@
             </div>
           </div>
 
-          <!-- Interactive Contact Form -->
+          <!-- Interactive Contact Form with Live Server Backend -->
           <div class="card contact-form-card spotlight-card reveal-on-scroll">
             <h3 class="form-title">Send a Direct Message</h3>
-            <p class="form-subtitle">Fill out the form below and I will get back to you promptly.</p>
+            <p class="form-subtitle">Fill out the form below to send an instant email to Shubham.</p>
 
-            <form id="contact-form" class="contact-form" novalidate>
+            <form id="contact-form" action="https://formsubmit.co/ajax/sd9906830@gmail.com" method="POST" class="contact-form" novalidate>
+              <!-- Hidden FormSubmit Server Config -->
+              <input type="hidden" name="_subject" value="New Message from ShubWeb Portfolio!" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+
               <div class="form-group">
                 <label for="name" class="form-label">Your Name <span class="required">*</span></label>
                 <div class="input-wrapper">
@@ -907,14 +913,14 @@
               <div class="form-group">
                 <label for="subject" class="form-label">Subject</label>
                 <div class="input-wrapper">
-                  <input type="text" id="subject" name="subject" class="form-input" placeholder="Project Inquiry / Opportunity" />
+                  <input type="text" id="subject" name="subject" class="form-input" placeholder="Project Inquiry / Frontend Role" />
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="message" class="form-label">Message <span class="required">*</span></label>
                 <div class="input-wrapper">
-                  <textarea id="message" name="message" class="form-textarea" rows="4" placeholder="Hello Shubham, I would like to discuss..." required></textarea>
+                  <textarea id="message" name="message" class="form-textarea" rows="4" placeholder="Hello Shubham, I would like to discuss a project with ShubWeb..." required></textarea>
                 </div>
                 <span class="form-error" id="message-error"></span>
               </div>
@@ -967,9 +973,9 @@
     <div class="container footer-container">
       <div class="footer-brand">
         <a href="#hero" class="footer-logo">
-          <span>&lt;Shubham /&gt;</span>
+          <span>&lt;Shub<span class="gradient-text">Web</span> /&gt;</span>
         </a>
-        <p class="footer-bio">Aspiring Frontend Developer passionate about building high quality web applications.</p>
+        <p class="footer-bio">Modern digital web experiences, responsive UI/UX, and clean frontend engineering by Shubham.</p>
       </div>
 
       <div class="footer-nav">
@@ -993,7 +999,7 @@
 
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
-        <p>&copy; 2026 Shubham. Designed &amp; Developed with Clean Code &amp; Dark Aesthetics.</p>
+        <p>&copy; 2026 ShubWeb by Shubham. Designed &amp; Developed with Clean Code &amp; Dark Aesthetics.</p>
         <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Back to top">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
         </button>

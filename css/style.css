@@ -530,6 +530,15 @@ img, svg {
   100% { transform: scale(0.95); opacity: 0.8; }
 }
 
+.spin-animation {
+  animation: spin 0.85s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 /* --------------------------------------------------------------------------
    7. Navigation Bar
    -------------------------------------------------------------------------- */
