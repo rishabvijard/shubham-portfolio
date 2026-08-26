@@ -635,32 +635,62 @@ body {
 .tag { font-family: var(--font-hero); font-size: 0.75rem; font-weight: 500; text-transform: uppercase; padding: 3px 8px; border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.05); color: var(--text-muted); }
 .project-actions { display: flex; gap: 0.75rem; }
 
-/* 5. JOURNEY ROADMAP */
-.timeline-wrapper { max-width: 800px; margin: 0 auto; position: relative; padding-left: 2.75rem; }
+/* 5. JOURNEY ROADMAP - 100% PERFECT MATHEMATICAL ALIGNMENT */
+.timeline-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 3rem; /* 48px */
+}
+
+/* Vertical line centered at 16px */
 .timeline-wrapper::before {
   content: '';
   position: absolute;
-  left: 11px;
+  left: 15px; /* 15px + 1px = 16px center */
   top: 16px;
   bottom: 16px;
   width: 2px;
   background: linear-gradient(180deg, var(--accent-glow), rgba(170, 66, 255, 0.15));
   z-index: 1;
 }
-.timeline-item { position: relative; margin-bottom: 2.5rem; }
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+
+/* Marker box placed at left: -3rem (-48px) with width 32px -> Center is 0 + 32/2 = 16px */
 .timeline-marker {
   position: absolute;
-  left: -2.75rem;
-  top: 24px;
-  width: 24px;
-  height: 24px;
+  left: -3rem;
+  top: 22px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2;
 }
-.marker-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--bg-main); border: 3px solid var(--accent-glow); box-shadow: 0 0 10px rgba(170, 66, 255, 0.4); display: block; }
-.marker-dot-active { background: #00ff88; border-color: #00ff88; box-shadow: 0 0 14px #00ff88; }
+
+.marker-dot {
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  min-height: 14px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: var(--bg-main);
+  border: 3px solid var(--accent-glow);
+  box-shadow: 0 0 10px rgba(170, 66, 255, 0.4);
+  display: block;
+}
+.marker-dot-active {
+  background: #00ff88;
+  border-color: #00ff88;
+  box-shadow: 0 0 14px #00ff88;
+}
+
 .timeline-card { padding: 1.5rem; }
 .timeline-meta { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
 .timeline-step { font-family: var(--font-hero); font-size: 0.85rem; font-weight: 700; color: var(--accent-purple); text-transform: uppercase; letter-spacing: 0.05em; }
@@ -810,7 +840,7 @@ body {
 }
 .back-to-top:hover { background: var(--accent-glow); color: #fff; }
 
-/* 📱 RESPONSIVE PHONE FIXES 📱 */
+/* 📱 RESPONSIVE PHONE FIXES (EXACT TIMELINE LINE & CIRCLE CENTERING) 📱 */
 @media (max-width: 992px) {
   .about-grid, .contact-grid, .footer-container { grid-template-columns: 1fr; }
   .nav-menu { display: none; }
@@ -862,7 +892,26 @@ body {
   }
   .hero-bio-text { max-width: 100%; font-size: 0.92rem; line-height: 1.5; }
   .projects-grid, .skills-grid { grid-template-columns: 1fr; }
-  .timeline-wrapper { padding-left: 2rem; }
-  .timeline-wrapper::before { left: 8px; }
-  .timeline-marker { left: -2rem; }
+
+  /* 🎯 100% PERFECT ALIGNMENT ON PHONES */
+  .timeline-wrapper {
+    padding-left: 2.5rem; /* 40px */
+  }
+  .timeline-wrapper::before {
+    left: 11px; /* 11px + 1px = 12px center */
+    top: 12px;
+    bottom: 12px;
+  }
+  .timeline-marker {
+    left: -2.5rem; /* -40px -> sits from 0px to 24px */
+    width: 24px;
+    height: 24px;
+    top: 20px;
+  }
+  .marker-dot {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    min-height: 12px;
+  }
 }
