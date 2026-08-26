@@ -183,7 +183,7 @@ body {
 }
 .btn-icon svg { width: 20px; height: 20px; }
 
-/* Hamburger Toggle Button */
+/* Hamburger Toggle */
 .nav-hamburger {
   display: none;
   flex-direction: column;
@@ -427,25 +427,79 @@ body {
   box-shadow: 0 12px 36px rgba(170, 66, 255, 0.18);
 }
 
-/* 2. ABOUT SECTION */
+/* 2. ABOUT SECTION (CIRCULAR BADGE & TECH LOGOS ROW) */
 .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; align-items: start; }
 .about-header-flex { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.5rem; }
+
+/* 100% Perfect Circular Badge */
 .avatar-badge {
   font-family: var(--font-hero);
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  min-height: 56px;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent-glow), #4ce1ff);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.75rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: #fff;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 20px rgba(170, 66, 255, 0.4);
 }
+
 .about-card-title { font-family: var(--font-hero); font-size: 1.5rem; font-weight: 800; text-transform: uppercase; color: #fff; }
 .about-card-subtitle { font-family: var(--font-hero); color: var(--accent-purple); font-size: 0.95rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
 .about-text { color: var(--text-dim); margin-bottom: 1rem; font-size: 1rem; }
+
+/* Tech Stack Logo Row in About */
+.about-tech-stack-row {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.tech-stack-label {
+  font-family: var(--font-hero);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-purple);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+.tech-stack-icons-flex {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.mini-tech-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  transition: var(--transition);
+}
+.mini-tech-icon:hover {
+  transform: translateY(-3px) scale(1.1);
+  border-color: var(--accent-purple);
+  background: rgba(194, 164, 255, 0.15);
+  box-shadow: 0 0 12px rgba(194, 164, 255, 0.3);
+}
+.mini-tech-icon img, .mini-tech-icon svg { width: 100%; height: 100%; object-fit: contain; }
+
 .about-highlights { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
 .highlight-item { display: flex; gap: 1rem; align-items: flex-start; }
 .highlight-icon { font-size: 1.4rem; line-height: 1; }
@@ -589,7 +643,7 @@ body {
 .timeline-title { font-family: var(--font-hero); font-size: 1.25rem; font-weight: 800; text-transform: uppercase; color: #fff; margin-bottom: 0.4rem; }
 .timeline-text { color: var(--text-dim); font-size: 0.9rem; }
 
-/* 6. CONTACT SECTION (100% RESPONSIVE & NO OVERFLOW) */
+/* 6. CONTACT SECTION */
 .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 2rem; width: 100%; }
 .contact-cards-column { display: flex; flex-direction: column; gap: 1.25rem; width: 100%; min-width: 0; }
 .contact-card {
@@ -613,11 +667,7 @@ body {
   flex-shrink: 0;
 }
 .contact-svg { width: 22px; height: 22px; }
-.contact-card-info {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-}
+.contact-card-info { flex: 1; min-width: 0; overflow: hidden; }
 .contact-label {
   font-family: var(--font-hero);
   font-size: 0.8rem;
@@ -733,7 +783,7 @@ body {
 }
 .back-to-top:hover { background: var(--accent-glow); color: #fff; }
 
-/* 📱 RESPONSIVE PHONE FIXES (ZERO RIGHT-SIDE CUTTING) 📱 */
+/* 📱 RESPONSIVE BREAKPOINTS 📱 */
 @media (max-width: 992px) {
   .about-grid, .contact-grid, .footer-container { grid-template-columns: 1fr; }
   .nav-menu { display: none; }
