@@ -4,138 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shubham — Frontend Developer Portfolio</title>
-  <meta name="description" content="Developer Portfolio of Shubham. Skilled in HTML, CSS, JavaScript, React, PHP, WordPress & Elementor. View interactive projects, skills, and contact info." />
-  <meta name="keywords" content="Shubham, Frontend Developer, Web Developer Portfolio, HTML, CSS, JavaScript, React, WordPress, Elementor" />
-  <meta name="author" content="Shubham" />
-
-  <!-- OpenGraph / Social Meta Tags -->
-  <meta property="og:title" content="Shubham — Frontend Developer Portfolio" />
-  <meta property="og:description" content="Building modern, responsive web experiences with HTML, CSS, JavaScript, React & WordPress." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://rishabvijard.github.io/shubham-portfolio/" />
-
-  <!-- Google Fonts: Kanit, Plus Jakarta Sans & JetBrains Mono -->
+  <meta name="description" content="Developer Portfolio of Shubham. Skilled in HTML, CSS, JavaScript, React, PHP, WordPress & Elementor." />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=5.0" />
-
-  <style>
-    /* Hero Section with 3D Face & Gradient Typography */
-    .hero-heading {
-      background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero-face-container {
-      position: relative;
-      min-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow: hidden;
-    }
-    .hero-big-title-wrap {
-      width: 100%;
-      text-align: center;
-      margin-top: 1rem;
-      overflow: hidden;
-    }
-    .hero-big-title {
-      font-family: 'Kanit', sans-serif;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -0.04em;
-      line-height: 0.95;
-      white-space: nowrap;
-      font-size: clamp(3rem, 14vw, 15rem);
-      user-select: none;
-    }
-    .portrait-magnet-box {
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      transform: translateX(-50%);
-      z-index: 10;
-      width: clamp(280px, 35vw, 500px);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: auto;
-    }
-    .portrait-img {
-      width: 100%;
-      height: auto;
-      object-contain: contain;
-      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.9));
-      user-select: none;
-    }
-    .hero-bottom-flex {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      padding-bottom: 2.5rem;
-      position: relative;
-      z-index: 20;
-    }
-    .hero-bottom-text {
-      font-family: 'Kanit', sans-serif;
-      font-weight: 300;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      line-height: 1.35;
-      color: #D7E2EA;
-      max-width: 260px;
-      font-size: clamp(0.85rem, 1.3vw, 1.25rem);
-    }
-    .contact-btn-glow {
-      background: linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%);
-      box-shadow: 0px 4px 4px rgba(181, 1, 167, 0.25), 4px 4px 12px #7721B1 inset;
-      outline: 2px solid #FFFFFF;
-      outline-offset: -3px;
-      color: #ffffff;
-      font-family: 'Kanit', sans-serif;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 0.85rem 2.25rem;
-      border-radius: 9999px;
-      transition: transform 0.25s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .contact-btn-glow:hover {
-      transform: scale(1.06);
-    }
-  </style>
-
-  <!-- Favicon -->
+  <link rel="stylesheet" href="css/style.css?v=7.0" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
 </head>
 <body>
-  <!-- Custom Glowing Cursor -->
   <div class="custom-cursor" id="custom-cursor"></div>
   <div class="custom-cursor-dot" id="custom-cursor-dot"></div>
 
-  <!-- Interactive Background Canvas & Ambient Mesh -->
   <canvas id="bg-canvas" class="bg-canvas"></canvas>
   <div class="ambient-glow glow-1"></div>
   <div class="ambient-glow glow-2"></div>
   <div class="ambient-glow glow-3"></div>
   <div class="grid-overlay"></div>
 
-  <!-- Toast Notification Container -->
   <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
-  <!-- Navigation Bar -->
+  <!-- Navbar -->
   <header class="navbar-wrapper">
     <nav class="navbar" id="navbar">
       <a href="#hero" class="nav-brand">
         <span class="brand-name">Shub<span class="gradient-text">ham</span></span>
       </a>
 
-      <!-- Desktop Navigation Menu -->
       <ul class="nav-menu" id="nav-menu">
         <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
         <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
@@ -144,7 +40,6 @@
         <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
 
-      <!-- Navbar Actions -->
       <div class="nav-actions">
         <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="GitHub Profile" title="View GitHub Profile">
           <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
@@ -157,69 +52,35 @@
             <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
           </svg>
         </a>
-        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
-          <span class="hamburger-bar"></span>
-          <span class="hamburger-bar"></span>
-          <span class="hamburger-bar"></span>
-        </button>
       </div>
     </nav>
   </header>
 
-  <!-- Mobile Drawer Menu -->
-  <div class="mobile-menu" id="mobile-menu">
-    <div class="mobile-menu-inner">
-      <ul class="mobile-nav-links">
-        <li><a href="#about" class="mobile-nav-link">About</a></li>
-        <li><a href="#skills" class="mobile-nav-link">Skills</a></li>
-        <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
-        <li><a href="#journey" class="mobile-nav-link">Journey</a></li>
-        <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
-      </ul>
-      <div class="mobile-menu-footer">
-        <div class="status-pill status-pill-sm">
-          <span class="status-dot"></span>
-          <span>Open for Opportunities &amp; Freelance</span>
-        </div>
-        <div class="mobile-socials">
-          <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-full">
-            <span>GitHub Profile</span>
-            <svg class="icon-sm" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <main>
-    <!-- 1. HERO FRONT PAGE WITH 3D MAGNETIC FACE PORTRAIT -->
-    <section id="hero" class="hero-section hero-face-container">
-      <div class="container" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
-        
-        <!-- Massive Heading -->
-        <div class="hero-big-title-wrap reveal-on-scroll">
-          <div class="status-pill" style="margin-bottom: 1rem; display: inline-flex;">
+    <!-- 1. HERO FRONT PAGE WITH 3D FACE -->
+    <section id="hero" class="hero-front-section">
+      <div class="container hero-container-flex">
+        <div class="hero-top-wrap">
+          <div class="status-pill">
             <span class="status-dot"></span>
-            <span class="status-text">Available for Frontend Roles &amp; Freelance</span>
+            <span class="status-text">Available for Junior Frontend Roles &amp; Freelance</span>
           </div>
-          <h1 class="hero-big-title hero-heading">
+          <h1 class="hero-main-title">
             Hi, i&apos;m shubham
           </h1>
         </div>
 
-        <!-- 3D Magnetic Portrait (Big Face) -->
         <div id="portrait-wrapper" class="portrait-magnet-box">
           <img
             src="https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png"
-            alt="Shubham 3D Face Portrait"
+            alt="Shubham Frontend Developer"
             class="portrait-img"
             draggable="false"
           />
         </div>
 
-        <!-- Bottom Bar -->
-        <div class="hero-bottom-flex reveal-on-scroll">
-          <p class="hero-bottom-text">
+        <div class="hero-bottom-bar">
+          <p class="hero-bio-text">
             a frontend developer driven by crafting striking, responsive, and unforgettable web experiences
           </p>
 
@@ -230,48 +91,17 @@
       </div>
     </section>
 
-    <!-- 2. INFINITE TECH MARQUEE (Awwwards Style) -->
-    <div class="marquee-section">
-      <div class="marquee-track">
-        <div class="marquee-content">
-          <span class="marquee-item"><span class="tech-dot html"></span> HTML5 Semantic</span>
-          <span class="marquee-item"><span class="tech-dot css"></span> CSS3 Animations</span>
-          <span class="marquee-item"><span class="tech-dot js"></span> JavaScript (ES6+)</span>
-          <span class="marquee-item"><span class="tech-dot react"></span> React Components</span>
-          <span class="marquee-item"><span class="tech-dot wp"></span> WordPress Custom</span>
-          <span class="marquee-item"><span class="tech-dot el"></span> Elementor Builder</span>
-          <span class="marquee-item"><span class="tech-dot api"></span> REST &amp; Fetch API</span>
-          <span class="marquee-item"><span class="tech-dot php"></span> PHP Scripting</span>
-          <span class="marquee-item"><span class="tech-dot git"></span> Git &amp; GitHub</span>
-          <span class="marquee-item"><span class="tech-dot ui"></span> Responsive UI/UX</span>
-        </div>
-        <div class="marquee-content" aria-hidden="true">
-          <span class="marquee-item"><span class="tech-dot html"></span> HTML5 Semantic</span>
-          <span class="marquee-item"><span class="tech-dot css"></span> CSS3 Animations</span>
-          <span class="marquee-item"><span class="tech-dot js"></span> JavaScript (ES6+)</span>
-          <span class="marquee-item"><span class="tech-dot react"></span> React Components</span>
-          <span class="marquee-item"><span class="tech-dot wp"></span> WordPress Custom</span>
-          <span class="marquee-item"><span class="tech-dot el"></span> Elementor Builder</span>
-          <span class="marquee-item"><span class="tech-dot api"></span> REST &amp; Fetch API</span>
-          <span class="marquee-item"><span class="tech-dot php"></span> PHP Scripting</span>
-          <span class="marquee-item"><span class="tech-dot git"></span> Git &amp; GitHub</span>
-          <span class="marquee-item"><span class="tech-dot ui"></span> Responsive UI/UX</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. ABOUT SECTION -->
+    <!-- 2. ABOUT ME SECTION -->
     <section id="about" class="section about-section">
       <div class="container">
-        <div class="section-header reveal-on-scroll">
+        <div class="section-header">
           <div class="section-tag">About Me</div>
           <h2 class="section-title">Crafting Clean Interfaces with Passion</h2>
           <p class="section-subtitle">Dedicated to mastering frontend development and delivering seamless digital experiences.</p>
         </div>
 
         <div class="about-grid">
-          <!-- Story Card -->
-          <div class="card about-main-card spotlight-card reveal-on-scroll">
+          <div class="card about-main-card spotlight-card">
             <div class="about-header-flex">
               <div class="avatar-badge">
                 <span class="avatar-initials">S</span>
@@ -314,8 +144,7 @@
             </div>
           </div>
 
-          <!-- Quick Fact / Stats Cards -->
-          <div class="about-stats-column reveal-on-scroll">
+          <div class="about-stats-column">
             <div class="card stat-box spotlight-card">
               <div class="stat-icon-wrapper">🚀</div>
               <div class="stat-info">
@@ -347,161 +176,119 @@
       </div>
     </section>
 
-    <!-- 4. TECHNICAL SKILLS SECTION -->
+    <!-- 3. TECHNICAL SKILLS SECTION -->
     <section id="skills" class="section skills-section">
       <div class="container">
-        <div class="section-header reveal-on-scroll">
+        <div class="section-header">
           <div class="section-tag">Technical Skills</div>
           <h2 class="section-title">My Tech Stack &amp; Capabilities</h2>
           <p class="section-subtitle">Core technologies and tools I utilize to craft modern web applications.</p>
         </div>
 
-        <!-- Skills Filter Tabs -->
-        <div class="skills-filter-wrapper reveal-on-scroll">
+        <div class="skills-filter-wrapper">
           <button class="skill-filter-btn active" data-filter="all">All Tech</button>
           <button class="skill-filter-btn" data-filter="frontend">Frontend</button>
           <button class="skill-filter-btn" data-filter="cms">CMS &amp; Backend</button>
           <button class="skill-filter-btn" data-filter="tools">Tools &amp; APIs</button>
         </div>
 
-        <!-- Skills Grid -->
         <div class="skills-grid" id="skills-grid">
-          <!-- Skill: HTML5 -->
-          <div class="card skill-card spotlight-card reveal-on-scroll" data-category="frontend">
+          <div class="card skill-card spotlight-card" data-category="frontend">
             <div class="skill-top">
-              <div class="skill-icon-box html-glow">
-                <span class="skill-badge-text">&lt;/&gt;</span>
-              </div>
+              <div class="skill-icon-box html-glow"><span class="skill-badge-text">&lt;/&gt;</span></div>
               <span class="skill-level-badge">Advanced</span>
             </div>
             <h3 class="skill-name">HTML5</h3>
             <p class="skill-desc">Semantic markup, accessibility (ARIA), clean DOM structure, and SEO standards.</p>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="width: 90%;"></div>
-            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 90%;"></div></div>
           </div>
 
-          <!-- Skill: CSS3 -->
-          <div class="card skill-card spotlight-card reveal-on-scroll" data-category="frontend">
+          <div class="card skill-card spotlight-card" data-category="frontend">
             <div class="skill-top">
-              <div class="skill-icon-box css-glow">
-                <span class="skill-badge-text">#</span>
-              </div>
+              <div class="skill-icon-box css-glow"><span class="skill-badge-text">#</span></div>
               <span class="skill-level-badge">Advanced</span>
             </div>
             <h3 class="skill-name">CSS3</h3>
             <p class="skill-desc">Flexbox, CSS Grid, custom properties, keyframe animations, and responsive media queries.</p>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="width: 88%;"></div>
-            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 88%;"></div></div>
           </div>
 
-          <!-- Skill: JavaScript -->
-          <div class="card skill-card spotlight-card reveal-on-scroll" data-category="frontend">
+          <div class="card skill-card spotlight-card" data-category="frontend">
             <div class="skill-top">
-              <div class="skill-icon-box js-glow">
-                <span class="skill-badge-text">JS</span>
-              </div>
+              <div class="skill-icon-box js-glow"><span class="skill-badge-text">JS</span></div>
               <span class="skill-level-badge">Proficient</span>
             </div>
             <h3 class="skill-name">JavaScript (ES6+)</h3>
             <p class="skill-desc">DOM manipulation, event handling, arrow functions, async/await, and form validation.</p>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="width: 80%;"></div>
-            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 80%;"></div></div>
           </div>
 
-          <!-- Skill: React -->
-          <div class="card skill-card spotlight-card reveal-on-scroll" data-category="frontend">
+          <div class="card skill-card spotlight-card" data-category="frontend">
             <div class="skill-top">
-              <div class="skill-icon-box react-glow">
-                <span class="skill-badge-text">⚛</span>
-              </div>
+              <div class="skill-icon-box react-glow"><span class="skill-badge-text">⚛</span></div>
               <span class="skill-level-badge">Learning</span>
             </div>
             <h3 class="skill-name">React</h3>
             <p class="skill-desc">Component architecture, JSX, hooks (useState, useEffect), props, and SPA state management.</p>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="width: 65%;"></div>
-            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 65%;"></div></div>
           </div>
 
-          <!-- Skill: WordPress -->
-          <div class="card skill-card spotlight-card reveal-on-scroll" data-category="cms">
+          <div class="card skill-card spotlight-card" data-category="cms">
             <div class="skill-top">
-              <div class="skill-icon-box wp-glow">
-                <span class="skill-badge-text">W</span>
-              </div>
+              <div class="skill-icon-box wp-glow"><span class="skill-badge-text">W</span></div>
               <span class="skill-level-badge">Proficient</span>
             </div>
             <h3 class="skill-name">WordPress</h3>
             <p class="skill-desc">Site architecture, theme customization, plugins management, and client site configuration.</p>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="width: 85%;"></div>
-            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 85%;"></div></div>
           </div>
 
-          <!-- Skill: Elementor -->
-          <div class="card skill-card spotlight-card reveal-on-scroll" data-category="cms">
+          <div class="card skill-card spotlight-card" data-category="cms">
             <div class="skill-top">
-              <div class="skill-icon-box elementor-glow">
-                <span class="skill-badge-text">E</span>
-              </div>
+              <div class="skill-icon-box elementor-glow"><span class="skill-badge-text">E</span></div>
               <span class="skill-level-badge">Advanced</span>
             </div>
             <h3 class="skill-name">Elementor</h3>
             <p class="skill-desc">Visual page builder, bespoke layouts, custom CSS extensions, and mobile breakpoint tuning.</p>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="width: 90%;"></div>
-            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 90%;"></div></div>
           </div>
 
-          <!-- Skill: REST APIs -->
-          <div class="card skill-card spotlight-card reveal-on-scroll" data-category="tools">
+          <div class="card skill-card spotlight-card" data-category="tools">
             <div class="skill-top">
-              <div class="skill-icon-box api-glow">
-                <span class="skill-badge-text">API</span>
-              </div>
+              <div class="skill-icon-box api-glow"><span class="skill-badge-text">API</span></div>
               <span class="skill-level-badge">Proficient</span>
             </div>
             <h3 class="skill-name">REST APIs &amp; Fetch API</h3>
             <p class="skill-desc">Asynchronous data retrieval, JSON parsing, error handling, and integrating external web services.</p>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="width: 75%;"></div>
-            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 75%;"></div></div>
           </div>
 
-          <!-- Skill: PHP -->
-          <div class="card skill-card spotlight-card reveal-on-scroll" data-category="cms">
+          <div class="card skill-card spotlight-card" data-category="cms">
             <div class="skill-top">
-              <div class="skill-icon-box php-glow">
-                <span class="skill-badge-text">PHP</span>
-              </div>
+              <div class="skill-icon-box php-glow"><span class="skill-badge-text">PHP</span></div>
               <span class="skill-level-badge">Learning</span>
             </div>
             <h3 class="skill-name">PHP</h3>
             <p class="skill-desc">Server scripting fundamentals, dynamic template modifications, and form processing.</p>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" style="width: 60%;"></div>
-            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 60%;"></div></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 5. FEATURED PROJECTS SECTION -->
+    <!-- 4. FEATURED PROJECTS SECTION -->
     <section id="projects" class="section projects-section">
       <div class="container">
-        <div class="section-header reveal-on-scroll">
+        <div class="section-header">
           <div class="section-tag">Featured Works</div>
           <h2 class="section-title">Selected Projects</h2>
           <p class="section-subtitle">A showcase of practical web applications and client customizations I've developed.</p>
         </div>
 
         <div class="projects-grid">
-          <!-- Project 1: Responsive Login Page -->
-          <article class="card project-card spotlight-card reveal-on-scroll" data-project-id="login">
-            <div class="project-preview-box screen-login">
+          <!-- Project 1 -->
+          <article class="card project-card spotlight-card" data-project-id="login">
+            <div class="project-preview-box">
               <div class="project-mockup-bar">
                 <span class="mockup-dot dot-r"></span>
                 <span class="mockup-dot dot-y"></span>
@@ -515,12 +302,6 @@
                   <div class="mini-line w-50"></div>
                   <div class="mini-btn">Sign In</div>
                 </div>
-              </div>
-              <div class="project-overlay">
-                <button class="btn btn-primary btn-sm view-project-btn" data-project="login">
-                  <span>View Details</span>
-                  <svg class="icon-sm" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-                </button>
               </div>
             </div>
 
@@ -538,25 +319,23 @@
                 <span class="tag">HTML5</span>
                 <span class="tag">CSS3</span>
                 <span class="tag">JavaScript</span>
-                <span class="tag">Regex Validation</span>
-                <span class="tag">Slider</span>
+                <span class="tag">Regex</span>
               </div>
 
               <div class="project-actions">
                 <button class="btn btn-primary btn-sm view-project-btn" data-project="login">
-                  <span>Details &amp; Architecture</span>
+                  <span>View Details</span>
                 </button>
-                <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" title="View Source on GitHub">
-                  <svg class="icon-sm" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
                   <span>Code</span>
                 </a>
               </div>
             </div>
           </article>
 
-          <!-- Project 2: Gym Website -->
-          <article class="card project-card spotlight-card reveal-on-scroll" data-project-id="gym">
-            <div class="project-preview-box screen-gym">
+          <!-- Project 2 -->
+          <article class="card project-card spotlight-card" data-project-id="gym">
+            <div class="project-preview-box">
               <div class="project-mockup-bar">
                 <span class="mockup-dot dot-r"></span>
                 <span class="mockup-dot dot-y"></span>
@@ -568,12 +347,6 @@
                   <span class="gym-badge">FITNESS HUB</span>
                   <h4>FORGE YOUR STRENGTH</h4>
                 </div>
-              </div>
-              <div class="project-overlay">
-                <button class="btn btn-primary btn-sm view-project-btn" data-project="gym">
-                  <span>View Details</span>
-                  <svg class="icon-sm" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-                </button>
               </div>
             </div>
 
@@ -591,25 +364,23 @@
                 <span class="tag">HTML5</span>
                 <span class="tag">CSS3</span>
                 <span class="tag">JavaScript</span>
-                <span class="tag">Flexbox / Grid</span>
-                <span class="tag">UI/UX</span>
+                <span class="tag">Grid</span>
               </div>
 
               <div class="project-actions">
                 <button class="btn btn-primary btn-sm view-project-btn" data-project="gym">
-                  <span>Details &amp; Architecture</span>
+                  <span>View Details</span>
                 </button>
-                <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" title="View Source on GitHub">
-                  <svg class="icon-sm" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
                   <span>Code</span>
                 </a>
               </div>
             </div>
           </article>
 
-          <!-- Project 3: WordPress Website Customization -->
-          <article class="card project-card spotlight-card reveal-on-scroll" data-project-id="wp">
-            <div class="project-preview-box screen-wp">
+          <!-- Project 3 -->
+          <article class="card project-card spotlight-card" data-project-id="wp">
+            <div class="project-preview-box">
               <div class="project-mockup-bar">
                 <span class="mockup-dot dot-r"></span>
                 <span class="mockup-dot dot-y"></span>
@@ -622,12 +393,6 @@
                   <h4>CUSTOM THEME ENGINE</h4>
                 </div>
               </div>
-              <div class="project-overlay">
-                <button class="btn btn-primary btn-sm view-project-btn" data-project="wp">
-                  <span>View Details</span>
-                  <svg class="icon-sm" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-                </button>
-              </div>
             </div>
 
             <div class="project-content">
@@ -635,7 +400,7 @@
                 <span class="project-type">CMS &amp; Client Solutions</span>
                 <span class="project-status-pill">Deployed</span>
               </div>
-              <h3 class="project-title">WordPress Website Customization</h3>
+              <h3 class="project-title">WordPress Customization</h3>
               <p class="project-desc">
                 Customized website sections, bespoke Elementor hero sliders, contact forms, custom CSS overrides, and mobile-first responsive layout restructuring.
               </p>
@@ -643,17 +408,15 @@
               <div class="project-tags">
                 <span class="tag">WordPress</span>
                 <span class="tag">Elementor</span>
-                <span class="tag">Custom CSS</span>
                 <span class="tag">PHP</span>
-                <span class="tag">Client Forms</span>
+                <span class="tag">Forms</span>
               </div>
 
               <div class="project-actions">
                 <button class="btn btn-primary btn-sm view-project-btn" data-project="wp">
-                  <span>Details &amp; Architecture</span>
+                  <span>View Details</span>
                 </button>
-                <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" title="View Source on GitHub">
-                  <svg class="icon-sm" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
                   <span>Profile</span>
                 </a>
               </div>
@@ -663,106 +426,82 @@
       </div>
     </section>
 
-    <!-- 6. LEARNING JOURNEY ROADMAP SECTION -->
+    <!-- 5. JOURNEY ROADMAP -->
     <section id="journey" class="section journey-section">
       <div class="container">
-        <div class="section-header reveal-on-scroll">
+        <div class="section-header">
           <div class="section-tag">Learning Journey</div>
           <h2 class="section-title">Development Roadmap</h2>
           <p class="section-subtitle">How I continue expanding my technical capabilities step by step.</p>
         </div>
 
         <div class="timeline-wrapper">
-          <!-- Milestone 1 -->
-          <div class="timeline-item reveal-on-scroll">
-            <div class="timeline-marker">
-              <span class="marker-dot"></span>
-            </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"><span class="marker-dot"></span></div>
             <div class="card timeline-card spotlight-card">
               <div class="timeline-meta">
                 <span class="timeline-step">Phase 1 &bull; Core Foundations</span>
                 <span class="timeline-date">Completed</span>
               </div>
               <h3 class="timeline-title">HTML5 &amp; Modern CSS3 Mastery</h3>
-              <p class="timeline-text">
-                Mastered semantic web layout, mobile-first responsive architecture, Flexbox, CSS Grid, custom properties, and keyframe animations for modern web interfaces.
-              </p>
+              <p class="timeline-text">Mastered semantic web layout, mobile-first responsive architecture, Flexbox, CSS Grid, and animations for modern interfaces.</p>
             </div>
           </div>
 
-          <!-- Milestone 2 -->
-          <div class="timeline-item reveal-on-scroll">
-            <div class="timeline-marker">
-              <span class="marker-dot"></span>
-            </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"><span class="marker-dot"></span></div>
             <div class="card timeline-card spotlight-card">
               <div class="timeline-meta">
                 <span class="timeline-step">Phase 2 &bull; Dynamic Interactivity</span>
                 <span class="timeline-date">Completed</span>
               </div>
               <h3 class="timeline-title">JavaScript (ES6+) &amp; Dynamic Web Apps</h3>
-              <p class="timeline-text">
-                Built interactive applications including full-screen authentication carousels, regex form validators, asynchronous Fetch API integrations, and modular DOM scripts.
-              </p>
+              <p class="timeline-text">Built interactive applications including full-screen auth carousels, regex form validators, and Fetch API integrations.</p>
             </div>
           </div>
 
-          <!-- Milestone 3 -->
-          <div class="timeline-item reveal-on-scroll">
-            <div class="timeline-marker">
-              <span class="marker-dot"></span>
-            </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"><span class="marker-dot"></span></div>
             <div class="card timeline-card spotlight-card">
               <div class="timeline-meta">
                 <span class="timeline-step">Phase 3 &bull; CMS Customization</span>
                 <span class="timeline-date">Completed</span>
               </div>
               <h3 class="timeline-title">WordPress, Elementor &amp; PHP Development</h3>
-              <p class="timeline-text">
-                Customized full-scale WordPress sites, tailored Elementor widgets, implemented dynamic hero sections, custom forms, and created high-converting client experiences.
-              </p>
+              <p class="timeline-text">Customized WordPress sites, tailored Elementor widgets, hero sections, and created high-converting client experiences.</p>
             </div>
           </div>
 
-          <!-- Milestone 4 (Current Focus) -->
-          <div class="timeline-item active-timeline-item reveal-on-scroll">
-            <div class="timeline-marker">
-              <span class="marker-dot marker-dot-active"></span>
-            </div>
-            <div class="card timeline-card spotlight-card active-card-glow">
+          <div class="timeline-item">
+            <div class="timeline-marker"><span class="marker-dot marker-dot-active"></span></div>
+            <div class="card timeline-card spotlight-card">
               <div class="timeline-meta">
                 <span class="timeline-step step-active">Phase 4 &bull; Current Focus</span>
                 <span class="timeline-date date-active">In Progress 🚀</span>
               </div>
               <h3 class="timeline-title">React Component Architecture &amp; Production Apps</h3>
-              <p class="timeline-text">
-                Diving deeper into React hooks, state management, component reusability, API consuming, and building production-grade frontend applications.
-              </p>
+              <p class="timeline-text">Diving deeper into React hooks, state management, component reusability, and building production-grade frontend applications.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 7. CONTACT SECTION (Live FormSubmit Server Backend) -->
+    <!-- 6. CONTACT SECTION (LIVE FORM) -->
     <section id="contact" class="section contact-section">
       <div class="container">
-        <div class="section-header reveal-on-scroll">
+        <div class="section-header">
           <div class="section-tag">Direct Connect</div>
           <h2 class="section-title">Let's Connect &amp; Collaborate</h2>
           <p class="section-subtitle">Interested in working together, discussing frontend opportunities, or checking out my projects? Feel free to reach out!</p>
         </div>
 
         <div class="contact-grid">
-          <!-- Direct Info Cards -->
-          <div class="contact-cards-column reveal-on-scroll">
-            <!-- Email Card -->
+          <div class="contact-cards-column">
+            <!-- Email -->
             <div class="card contact-card spotlight-card">
               <div class="contact-icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="contact-svg">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="contact-svg"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
               </div>
               <div class="contact-card-info">
                 <span class="contact-label">Email Address</span>
@@ -772,98 +511,63 @@
                 <button class="btn-icon-action copy-btn" data-copy="sd9906830@gmail.com" title="Copy Email">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 </button>
-                <a href="mailto:sd9906830@gmail.com" class="btn-icon-action" title="Send Email">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
               </div>
             </div>
 
-            <!-- Phone Card -->
+            <!-- Phone -->
             <div class="card contact-card spotlight-card">
               <div class="contact-icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="contact-svg">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="contact-svg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
               </div>
               <div class="contact-card-info">
                 <span class="contact-label">Phone &amp; WhatsApp</span>
                 <a href="tel:+917876841037" class="contact-value">+91 7876841037</a>
               </div>
               <div class="contact-actions-inline">
-                <button class="btn-icon-action copy-btn" data-copy="7876841037" title="Copy Phone Number">
+                <button class="btn-icon-action copy-btn" data-copy="7876841037" title="Copy Phone">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 </button>
-                <a href="tel:+917876841037" class="btn-icon-action" title="Call Now">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
               </div>
             </div>
 
-            <!-- GitHub Card -->
+            <!-- GitHub -->
             <div class="card contact-card spotlight-card">
               <div class="contact-icon-box">
-                <svg viewBox="0 0 24 24" fill="currentColor" class="contact-svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" class="contact-svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
               </div>
               <div class="contact-card-info">
-                <span class="contact-label">GitHub Repository</span>
+                <span class="contact-label">GitHub</span>
                 <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="contact-value">github.com/rishabvijard</a>
-              </div>
-              <div class="contact-actions-inline">
-                <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn-icon-action" title="Open GitHub Profile">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
               </div>
             </div>
           </div>
 
-          <!-- Interactive Contact Form with Live Server Backend -->
-          <div class="card contact-form-card spotlight-card reveal-on-scroll">
+          <!-- Form -->
+          <div class="card contact-form-card spotlight-card">
             <h3 class="form-title">Send a Direct Message</h3>
             <p class="form-subtitle">Fill out the form below to send an instant email to Shubham.</p>
 
             <form id="contact-form" action="https://formsubmit.co/ajax/sd9906830@gmail.com" method="POST" class="contact-form" novalidate>
               <input type="hidden" name="_subject" value="New Message from Shubham's Portfolio!" />
               <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_template" value="table" />
 
               <div class="form-group">
                 <label for="name" class="form-label">Your Name <span class="required">*</span></label>
-                <div class="input-wrapper">
-                  <input type="text" id="name" name="name" class="form-input" placeholder="e.g. John Doe" required />
-                </div>
-                <span class="form-error" id="name-error"></span>
+                <input type="text" id="name" name="name" class="form-input" placeholder="e.g. John Doe" required />
               </div>
 
               <div class="form-group">
                 <label for="email" class="form-label">Your Email <span class="required">*</span></label>
-                <div class="input-wrapper">
-                  <input type="email" id="email" name="email" class="form-input" placeholder="e.g. john@example.com" required />
-                </div>
-                <span class="form-error" id="email-error"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="subject" class="form-label">Subject</label>
-                <div class="input-wrapper">
-                  <input type="text" id="subject" name="subject" class="form-input" placeholder="Project Inquiry / Frontend Role" />
-                </div>
+                <input type="email" id="email" name="email" class="form-input" placeholder="e.g. john@example.com" required />
               </div>
 
               <div class="form-group">
                 <label for="message" class="form-label">Message <span class="required">*</span></label>
-                <div class="input-wrapper">
-                  <textarea id="message" name="message" class="form-textarea" rows="4" placeholder="Hello Shubham, I would like to discuss a project..." required></textarea>
-                </div>
-                <span class="form-error" id="message-error"></span>
+                <textarea id="message" name="message" class="form-textarea" rows="4" placeholder="Hello Shubham, let's discuss a project..." required></textarea>
               </div>
 
               <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
                 <span class="btn-text">Send Message</span>
-                <svg class="btn-arrow" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
               </button>
             </form>
           </div>
@@ -872,7 +576,7 @@
     </section>
   </main>
 
-  <!-- Interactive Project Preview Modal -->
+  <!-- Modal -->
   <div id="project-modal" class="modal" aria-hidden="true" role="dialog">
     <div class="modal-backdrop" id="modal-backdrop"></div>
     <div class="modal-dialog">
@@ -882,29 +586,22 @@
             <h3 class="modal-title" id="modal-title">Project Title</h3>
             <span class="modal-category" id="modal-category">Category</span>
           </div>
-          <button class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-          </button>
+          <button class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">&times;</button>
         </div>
         <div class="modal-body" id="modal-body"></div>
         <div class="modal-footer">
-          <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" id="modal-github-link">
-            <span>View Source on GitHub</span>
-            <svg class="icon-xs" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-          </a>
+          <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">View GitHub</a>
           <button class="btn btn-primary btn-sm" id="modal-close-action">Close Window</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- Footer -->
   <footer class="footer">
     <div class="container footer-container">
       <div class="footer-brand">
-        <a href="#hero" class="footer-logo">
-          <span>Shub<span class="gradient-text">ham</span></span>
-        </a>
+        <a href="#hero" class="footer-logo">Shub<span class="gradient-text">ham</span></a>
         <p class="footer-bio">Modern digital web experiences, responsive UI/UX, and clean frontend engineering by Shubham.</p>
       </div>
 
@@ -930,32 +627,12 @@
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
         <p>&copy; 2026 Shubham. Designed &amp; Developed with Clean Code &amp; Dark Aesthetics.</p>
-        <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Back to top">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
-        </button>
+        <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="js/projects-data.js?v=5.0"></script>
-  <script src="js/main.js?v=5.0"></script>
-  <script>
-    // 3D Mouse Following Magnetic Effect on Hero Portrait
-    const portrait = document.getElementById('portrait-wrapper');
-    if (portrait) {
-      window.addEventListener('mousemove', (e) => {
-        const rect = portrait.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const dx = (e.clientX - centerX) / 16;
-        const dy = (e.clientY - centerY) / 16;
-        portrait.style.transform = `translate3d(calc(-50% + ${dx}px), ${dy}px, 0)`;
-      });
-      window.addEventListener('mouseleave', () => {
-        portrait.style.transform = `translate3d(-50%, 0, 0)`;
-      });
-    }
-  </script>
+  <script src="js/projects-data.js?v=7.0"></script>
+  <script src="js/main.js?v=7.0"></script>
 </body>
 </html>

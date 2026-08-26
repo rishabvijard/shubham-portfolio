@@ -11,7 +11,16 @@
     });
   }
 
-  // 2. Interactive Canvas Particles
+  // 2. 🌟 Interactive Spotlight Glow Tracker on all Cards 🌟
+  document.querySelectorAll(".spotlight-card").forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+      card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+    });
+  });
+
+  // 3. Interactive Canvas Particles
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d");
@@ -52,7 +61,7 @@
     animate();
   }
 
-  // 3. 3D Magnetic Portrait Effect
+  // 4. 3D Magnetic Portrait Effect on Hero
   const portrait = document.getElementById("portrait-wrapper");
   if (portrait) {
     window.addEventListener("mousemove", (e) => {
@@ -68,7 +77,7 @@
     });
   }
 
-  // 4. Skills Filter
+  // 5. Skills Filter
   const filterBtns = document.querySelectorAll(".skill-filter-btn");
   const skillCards = document.querySelectorAll(".skill-card");
   filterBtns.forEach((btn) => {
@@ -86,7 +95,7 @@
     });
   });
 
-  // 5. Toast Notification System
+  // 6. Toast Notification System
   function showToast(message) {
     const container = document.getElementById("toast-container");
     if (!container) return;
@@ -94,14 +103,11 @@
     toast.className = "toast";
     toast.textContent = message;
     container.appendChild(toast);
-    setTimeout(() => {
-      toast.remove();
-    }, 3000);
+    setTimeout(() => { toast.remove(); }, 3000);
   }
 
-  // 6. Copy to Clipboard Buttons
-  const copyBtns = document.querySelectorAll(".copy-btn");
-  copyBtns.forEach((btn) => {
+  // 7. Copy to Clipboard Buttons
+  document.querySelectorAll(".copy-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const text = btn.getAttribute("data-copy");
       navigator.clipboard.writeText(text).then(() => {
@@ -110,7 +116,7 @@
     });
   });
 
-  // 7. Project Details Modal
+  // 8. Project Details Modal
   const modal = document.getElementById("project-modal");
   const modalBackdrop = document.getElementById("modal-backdrop");
   const modalCloseBtn = document.getElementById("modal-close-btn");
@@ -137,9 +143,7 @@
     modal.classList.add("is-open");
   }
 
-  function closeModal() {
-    if (modal) modal.classList.remove("is-open");
-  }
+  function closeModal() { if (modal) modal.classList.remove("is-open"); }
 
   document.querySelectorAll(".view-project-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -152,7 +156,7 @@
   if (modalCloseAction) modalCloseAction.addEventListener("click", closeModal);
   window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-  // 8. Contact Form AJAX Submission
+  // 9. Contact Form AJAX Submission
   const form = document.getElementById("contact-form");
   if (form) {
     form.addEventListener("submit", async (e) => {
@@ -189,7 +193,7 @@
     });
   }
 
-  // 9. Back to top button
+  // 10. Back to top button
   const backToTop = document.getElementById("back-to-top");
   if (backToTop) {
     backToTop.addEventListener("click", () => {
