@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=8.0" />
+  <link rel="stylesheet" href="css/style.css?v=10.0" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
 </head>
 <body>
@@ -57,7 +57,7 @@
   </header>
 
   <main>
-    <!-- 1. HERO FRONT PAGE WITH PERFECT TITLE SIZE & 3D FACE -->
+    <!-- 1. HERO FRONT PAGE -->
     <section id="hero" class="hero-front-section">
       <div class="container hero-container-flex">
         <div class="hero-top-wrap">
@@ -101,49 +101,63 @@
         </div>
 
         <div class="about-grid">
-          <div class="card about-main-card spotlight-card">
-            <div class="about-header-flex">
-              <div class="avatar-badge">
-                <span class="avatar-initials">S</span>
+          <div class="card project-card spotlight-card">
+            <div class="project-preview-box">
+              <div class="project-mockup-bar">
+                <span class="mockup-dot dot-r"></span>
+                <span class="mockup-dot dot-y"></span>
+                <span class="mockup-dot dot-g"></span>
+                <span class="mockup-url">shubham.dev/about.js</span>
               </div>
-              <div>
-                <h3 class="about-card-title">Shubham</h3>
-                <p class="about-card-subtitle">Aspiring Frontend Developer</p>
+              <div class="project-code-snippet">
+                <span class="code-kw">const</span> <span class="code-var">developer</span> = {<br/>
+                &nbsp;&nbsp;<span class="code-prop">name</span>: <span class="code-str">'Shubham'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">role</span>: <span class="code-str">'Frontend Developer'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">stack</span>: [<span class="code-str">'HTML5'</span>, <span class="code-str">'CSS3'</span>, <span class="code-str">'JS'</span>, <span class="code-str">'React'</span>, <span class="code-str">'WordPress'</span>],<br/>
+                &nbsp;&nbsp;<span class="code-prop">status</span>: <span class="code-str">'Available for Hire'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">passion</span>: <span class="code-str">'Crafting Fast, Responsive &amp; Clean UI'</span><br/>
+                };
               </div>
             </div>
 
-            <p class="about-text">
-              I am an enthusiastic web developer passionate about turning creative concepts into responsive, accessible, and high-performance websites.
-            </p>
-            <p class="about-text">
-              My journey involves working with core web foundations—<strong>HTML5, CSS3, and JavaScript (ES6+)</strong>—along with <strong>React</strong> for component-based architecture and <strong>WordPress + Elementor</strong> for customizable client websites and dynamic content layouts.
-            </p>
+            <div class="project-content">
+              <div class="about-header-flex" style="margin-bottom: 1rem;">
+                <div class="avatar-badge">
+                  <span class="avatar-initials">S</span>
+                </div>
+                <div>
+                  <h3 class="about-card-title">Shubham</h3>
+                  <p class="about-card-subtitle">Aspiring Frontend Developer</p>
+                </div>
+              </div>
 
-            <div class="about-highlights">
-              <div class="highlight-item">
-                <div class="highlight-icon">⚡</div>
-                <div>
-                  <h4 class="highlight-title">Fast &amp; Responsive</h4>
-                  <p class="highlight-desc">Mobile-first layouts ensuring cross-device compatibility.</p>
+              <p class="about-text">
+                I am an enthusiastic web developer passionate about turning creative concepts into responsive, accessible, and high-performance websites.
+              </p>
+              <p class="about-text">
+                My journey involves working with core web foundations—<strong>HTML5, CSS3, and JavaScript (ES6+)</strong>—along with <strong>React</strong> for component-based architecture and <strong>WordPress + Elementor</strong> for customizable client websites.
+              </p>
+
+              <div class="about-highlights">
+                <div class="highlight-item">
+                  <div class="highlight-icon">⚡</div>
+                  <div>
+                    <h4 class="highlight-title">Fast &amp; Responsive</h4>
+                    <p class="highlight-desc">Mobile-first layouts ensuring cross-device compatibility.</p>
+                  </div>
                 </div>
-              </div>
-              <div class="highlight-item">
-                <div class="highlight-icon">🎨</div>
-                <div>
-                  <h4 class="highlight-title">Modern Aesthetics</h4>
-                  <p class="highlight-desc">Clean dark UI, subtle glassmorphism, and sleek motion.</p>
-                </div>
-              </div>
-              <div class="highlight-item">
-                <div class="highlight-icon">🧩</div>
-                <div>
-                  <h4 class="highlight-title">Component-Driven</h4>
-                  <p class="highlight-desc">Modular HTML/CSS and reusable React components.</p>
+                <div class="highlight-item">
+                  <div class="highlight-icon">🎨</div>
+                  <div>
+                    <h4 class="highlight-title">Modern Aesthetics</h4>
+                    <p class="highlight-desc">Clean dark UI, subtle glassmorphism, and sleek motion.</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
+          <!-- Stats Column -->
           <div class="about-stats-column">
             <div class="card stat-box spotlight-card">
               <div class="stat-icon-wrapper">🚀</div>
@@ -176,7 +190,7 @@
       </div>
     </section>
 
-    <!-- 3. TECHNICAL SKILLS SECTION -->
+    <!-- 3. TECHNICAL SKILLS SECTION (WITH REALISTIC OFFICIAL LOGOS) -->
     <section id="skills" class="section skills-section">
       <div class="container">
         <div class="section-header">
@@ -193,9 +207,12 @@
         </div>
 
         <div class="skills-grid" id="skills-grid">
+          <!-- HTML5 -->
           <div class="card skill-card spotlight-card" data-category="frontend">
             <div class="skill-top">
-              <div class="skill-icon-box html-glow"><span class="skill-badge-text">&lt;/&gt;</span></div>
+              <div class="skill-icon-box">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 Logo" class="skill-logo-img" />
+              </div>
               <span class="skill-level-badge">Advanced</span>
             </div>
             <h3 class="skill-name">HTML5</h3>
@@ -203,9 +220,12 @@
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 90%;"></div></div>
           </div>
 
+          <!-- CSS3 -->
           <div class="card skill-card spotlight-card" data-category="frontend">
             <div class="skill-top">
-              <div class="skill-icon-box css-glow"><span class="skill-badge-text">#</span></div>
+              <div class="skill-icon-box">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3 Logo" class="skill-logo-img" />
+              </div>
               <span class="skill-level-badge">Advanced</span>
             </div>
             <h3 class="skill-name">CSS3</h3>
@@ -213,9 +233,12 @@
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 88%;"></div></div>
           </div>
 
+          <!-- JavaScript -->
           <div class="card skill-card spotlight-card" data-category="frontend">
             <div class="skill-top">
-              <div class="skill-icon-box js-glow"><span class="skill-badge-text">JS</span></div>
+              <div class="skill-icon-box">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript Logo" class="skill-logo-img" />
+              </div>
               <span class="skill-level-badge">Proficient</span>
             </div>
             <h3 class="skill-name">JavaScript (ES6+)</h3>
@@ -223,9 +246,12 @@
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 80%;"></div></div>
           </div>
 
+          <!-- React -->
           <div class="card skill-card spotlight-card" data-category="frontend">
             <div class="skill-top">
-              <div class="skill-icon-box react-glow"><span class="skill-badge-text">⚛</span></div>
+              <div class="skill-icon-box">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Logo" class="skill-logo-img" />
+              </div>
               <span class="skill-level-badge">Learning</span>
             </div>
             <h3 class="skill-name">React</h3>
@@ -233,9 +259,12 @@
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 65%;"></div></div>
           </div>
 
+          <!-- WordPress -->
           <div class="card skill-card spotlight-card" data-category="cms">
             <div class="skill-top">
-              <div class="skill-icon-box wp-glow"><span class="skill-badge-text">W</span></div>
+              <div class="skill-icon-box">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" alt="WordPress Logo" class="skill-logo-img" />
+              </div>
               <span class="skill-level-badge">Proficient</span>
             </div>
             <h3 class="skill-name">WordPress</h3>
@@ -243,9 +272,14 @@
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 85%;"></div></div>
           </div>
 
+          <!-- Elementor -->
           <div class="card skill-card spotlight-card" data-category="cms">
             <div class="skill-top">
-              <div class="skill-icon-box elementor-glow"><span class="skill-badge-text">E</span></div>
+              <div class="skill-icon-box">
+                <svg viewBox="0 0 512 512" class="skill-logo-img" fill="#D30C5C">
+                  <path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zm-85.3 384h-42.7V128h42.7v256zm170.7 0h-128v-42.7h128V384zm0-85.3h-128V256h128v42.7zm0-85.4h-128v-42.7h128v42.7z"/>
+                </svg>
+              </div>
               <span class="skill-level-badge">Advanced</span>
             </div>
             <h3 class="skill-name">Elementor</h3>
@@ -253,9 +287,16 @@
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 90%;"></div></div>
           </div>
 
+          <!-- REST APIs -->
           <div class="card skill-card spotlight-card" data-category="tools">
             <div class="skill-top">
-              <div class="skill-icon-box api-glow"><span class="skill-badge-text">API</span></div>
+              <div class="skill-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#4ce1ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="skill-logo-img">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </div>
               <span class="skill-level-badge">Proficient</span>
             </div>
             <h3 class="skill-name">REST APIs &amp; Fetch API</h3>
@@ -263,20 +304,36 @@
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 75%;"></div></div>
           </div>
 
+          <!-- PHP -->
           <div class="card skill-card spotlight-card" data-category="cms">
             <div class="skill-top">
-              <div class="skill-icon-box php-glow"><span class="skill-badge-text">PHP</span></div>
+              <div class="skill-icon-box">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP Logo" class="skill-logo-img" />
+              </div>
               <span class="skill-level-badge">Learning</span>
             </div>
             <h3 class="skill-name">PHP</h3>
             <p class="skill-desc">Server scripting fundamentals, dynamic template modifications, and form processing.</p>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 60%;"></div></div>
           </div>
+
+          <!-- Git & GitHub -->
+          <div class="card skill-card spotlight-card" data-category="tools">
+            <div class="skill-top">
+              <div class="skill-icon-box">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git Logo" class="skill-logo-img" />
+              </div>
+              <span class="skill-level-badge">Proficient</span>
+            </div>
+            <h3 class="skill-name">Git &amp; GitHub</h3>
+            <p class="skill-desc">Version control, branch management, GitHub Pages deployment, and open-source collaboration.</p>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 82%;"></div></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 4. FEATURED PROJECTS WITH CODE-SNIPPET CARDS -->
+    <!-- 4. FEATURED PROJECTS SECTION -->
     <section id="projects" class="section projects-section">
       <div class="container">
         <div class="section-header">
@@ -286,7 +343,7 @@
         </div>
 
         <div class="projects-grid">
-          <!-- Project 1: Login Page with Code Block -->
+          <!-- Project 1 -->
           <article class="card project-card spotlight-card" data-project-id="login">
             <div class="project-preview-box">
               <div class="project-mockup-bar">
@@ -333,7 +390,7 @@
             </div>
           </article>
 
-          <!-- Project 2: Gym Website with Code Block -->
+          <!-- Project 2 -->
           <article class="card project-card spotlight-card" data-project-id="gym">
             <div class="project-preview-box">
               <div class="project-mockup-bar">
@@ -380,7 +437,7 @@
             </div>
           </article>
 
-          <!-- Project 3: WordPress Customization with Code Block -->
+          <!-- Project 3 -->
           <article class="card project-card spotlight-card" data-project-id="wp">
             <div class="project-preview-box">
               <div class="project-mockup-bar">
@@ -430,7 +487,7 @@
       </div>
     </section>
 
-    <!-- 5. JOURNEY ROADMAP (PERFECTLY CENTERED TIMELINE) -->
+    <!-- 5. JOURNEY ROADMAP -->
     <section id="journey" class="section journey-section">
       <div class="container">
         <div class="section-header">
@@ -491,7 +548,7 @@
       </div>
     </section>
 
-    <!-- 6. CONTACT SECTION (LIVE AJAX FORM) -->
+    <!-- 6. CONTACT SECTION -->
     <section id="contact" class="section contact-section">
       <div class="container">
         <div class="section-header">
@@ -636,7 +693,7 @@
     </div>
   </footer>
 
-  <script src="js/projects-data.js?v=8.0"></script>
-  <script src="js/main.js?v=8.0"></script>
+  <script src="js/projects-data.js?v=10.0"></script>
+  <script src="js/main.js?v=10.0"></script>
 </body>
 </html>
