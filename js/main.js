@@ -1,5 +1,5 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  // 1. Custom Glowing Cursor
+  // Custom Cursor
   const cursor = document.getElementById("custom-cursor");
   const cursorDot = document.getElementById("custom-cursor-dot");
   if (cursor && cursorDot) {
@@ -11,7 +11,7 @@
     });
   }
 
-  // 2. 🌟 Interactive Spotlight Glow Tracker on all Cards 🌟
+  // Spotlight Hover Glow Tracker on all Cards
   document.querySelectorAll(".spotlight-card").forEach((card) => {
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
@@ -20,7 +20,7 @@
     });
   });
 
-  // 3. Interactive Canvas Particles
+  // Particle Canvas Background
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d");
@@ -61,7 +61,7 @@
     animate();
   }
 
-  // 4. 3D Magnetic Portrait Effect on Hero
+  // 3D Magnetic Portrait Effect
   const portrait = document.getElementById("portrait-wrapper");
   if (portrait) {
     window.addEventListener("mousemove", (e) => {
@@ -77,7 +77,7 @@
     });
   }
 
-  // 5. Skills Filter
+  // Skills Filtering
   const filterBtns = document.querySelectorAll(".skill-filter-btn");
   const skillCards = document.querySelectorAll(".skill-card");
   filterBtns.forEach((btn) => {
@@ -95,7 +95,7 @@
     });
   });
 
-  // 6. Toast Notification System
+  // Toast Notification
   function showToast(message) {
     const container = document.getElementById("toast-container");
     if (!container) return;
@@ -106,7 +106,7 @@
     setTimeout(() => { toast.remove(); }, 3000);
   }
 
-  // 7. Copy to Clipboard Buttons
+  // Copy to Clipboard
   document.querySelectorAll(".copy-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const text = btn.getAttribute("data-copy");
@@ -116,7 +116,7 @@
     });
   });
 
-  // 8. Project Details Modal
+  // Project Modal Dialog
   const modal = document.getElementById("project-modal");
   const modalBackdrop = document.getElementById("modal-backdrop");
   const modalCloseBtn = document.getElementById("modal-close-btn");
@@ -132,7 +132,7 @@
     modalCategory.textContent = data.category;
     modalBody.innerHTML = `
       <p style="margin-bottom: 1rem;">${data.desc}</p>
-      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Key Highlights:</h4>
+      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Key Features:</h4>
       <ul style="list-style: disc; padding-left: 1.25rem; margin-bottom: 1.25rem;">
         ${data.features.map((f) => `<li>${f}</li>`).join("")}
       </ul>
@@ -156,7 +156,7 @@
   if (modalCloseAction) modalCloseAction.addEventListener("click", closeModal);
   window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-  // 9. Contact Form AJAX Submission
+  // Contact Form AJAX Submission
   const form = document.getElementById("contact-form");
   if (form) {
     form.addEventListener("submit", async (e) => {
@@ -193,7 +193,7 @@
     });
   }
 
-  // 10. Back to top button
+  // Back to Top
   const backToTop = document.getElementById("back-to-top");
   if (backToTop) {
     backToTop.addEventListener("click", () => {
