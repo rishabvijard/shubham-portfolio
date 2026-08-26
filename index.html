@@ -14,13 +14,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://rishabvijard.github.io/shubham-portfolio/" />
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Geist, Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=2.0" />
+  <link rel="stylesheet" href="css/style.css?v=3.0" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
@@ -30,52 +30,72 @@
   <div class="custom-cursor" id="custom-cursor"></div>
   <div class="custom-cursor-dot" id="custom-cursor-dot"></div>
 
-  <!-- Interactive Background Canvas & Ambient Mesh -->
+  <!-- Ambient Glowing Neon Orbs (Moncy Signature) -->
+  <div class="landing-circle1"></div>
+  <div class="landing-circle2"></div>
+  <div class="nav-fade"></div>
   <canvas id="bg-canvas" class="bg-canvas"></canvas>
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
-  <div class="ambient-glow glow-3"></div>
   <div class="grid-overlay"></div>
 
   <!-- Toast Notification Container -->
   <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
-  <!-- Navigation Bar -->
-  <header class="navbar-wrapper">
-    <nav class="navbar" id="navbar">
-      <a href="#hero" class="nav-brand">
-        <span class="brand-name">Shub<span class="gradient-text">Web</span></span>
+  <!-- Fixed Vertical Social Sidebar (Left Edge) -->
+  <aside class="social-icons-vertical">
+    <div class="social-line-top"></div>
+    <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="social-v-link" title="GitHub Profile">
+      <svg class="icon-sm" viewBox="0 0 24 24" fill="currentColor">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+      </svg>
+    </a>
+    <a href="mailto:sd9906830@gmail.com" class="social-v-link" title="Send Email">
+      <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+    </a>
+    <a href="tel:+917876841037" class="social-v-link" title="Call / WhatsApp">
+      <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+    </a>
+    <div class="social-line-bottom"></div>
+  </aside>
+
+  <!-- Top Navigation Header -->
+  <header class="header">
+    <a href="#hero" class="navbar-title">
+      <span class="brand-name">Shub<span class="gradient-text">Web</span></span>
+    </a>
+
+    <a href="mailto:sd9906830@gmail.com" class="navbar-connect">
+      <span>sd9906830@gmail.com</span>
+    </a>
+
+    <nav class="nav-desktop">
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link-item">ABOUT</a></li>
+        <li><a href="#what-i-do" class="nav-link-item">WHAT I DO</a></li>
+        <li><a href="#career" class="nav-link-item">CAREER</a></li>
+        <li><a href="#work" class="nav-link-item">WORK</a></li>
+        <li><a href="#contact" class="nav-link-item">CONTACT</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#contact" class="btn btn-primary btn-sm header-cta">
+        <span>Let's Connect</span>
+        <svg class="btn-arrow" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
       </a>
 
-      <!-- Desktop Navigation Menu -->
-      <ul class="nav-menu" id="nav-menu">
-        <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
-        <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
-        <li class="nav-item"><a href="#journey" class="nav-link">Journey</a></li>
-        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
-
-      <!-- Navbar Actions -->
-      <div class="nav-actions">
-        <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="GitHub Profile" title="View GitHub Profile">
-          <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-          </svg>
-        </a>
-        <a href="#contact" class="btn btn-primary btn-sm">
-          <span>Let's Connect</span>
-          <svg class="btn-arrow" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </a>
-        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
-          <span class="hamburger-bar"></span>
-          <span class="hamburger-bar"></span>
-          <span class="hamburger-bar"></span>
-        </button>
-      </div>
-    </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
   </header>
 
   <!-- Mobile Drawer Menu -->
@@ -83,9 +103,9 @@
     <div class="mobile-menu-inner">
       <ul class="mobile-nav-links">
         <li><a href="#about" class="mobile-nav-link">About</a></li>
-        <li><a href="#skills" class="mobile-nav-link">Skills</a></li>
-        <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
-        <li><a href="#journey" class="mobile-nav-link">Journey</a></li>
+        <li><a href="#what-i-do" class="mobile-nav-link">What I Do</a></li>
+        <li><a href="#career" class="mobile-nav-link">Career</a></li>
+        <li><a href="#work" class="mobile-nav-link">Work</a></li>
         <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
       </ul>
       <div class="mobile-menu-footer">
@@ -103,117 +123,86 @@
     </div>
   </div>
 
-  <main>
-    <!-- HERO SECTION -->
-    <section id="hero" class="hero-section">
-      <div class="container hero-container">
-        <!-- Left Column: Hero Typography & CTAs -->
-        <div class="hero-content reveal-on-scroll">
-          <div class="status-badge-wrapper">
-            <div class="status-pill">
-              <span class="status-dot"></span>
-              <span class="status-text">ShubWeb &bull; Open for Frontend Roles &amp; Freelance</span>
-            </div>
+  <main class="main-content">
+    <!-- 1. HERO / LANDING SECTION (Moncy Style) -->
+    <section id="hero" class="landing-section">
+      <div class="landing-container">
+        <!-- Top Status Pill -->
+        <div class="landing-status-row">
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            <span class="status-text">ShubWeb &bull; Available for Frontend Roles &amp; Freelance</span>
+          </div>
+        </div>
+
+        <div class="landing-content-grid">
+          <!-- Left Main Greeting & Title -->
+          <div class="landing-intro reveal-on-scroll">
+            <h2 class="landing-greeting">Hello! I'm</h2>
+            <h1 class="landing-name">
+              SHUBHAM
+              <br />
+              <span class="gradient-text">VIJARD</span>
+            </h1>
           </div>
 
-          <h1 class="hero-title">
-            <span class="hero-greeting">Hi, I'm</span>
-            <span class="gradient-text hero-name">ShubWeb</span>
-          </h1>
-
-          <div class="hero-role-wrapper">
-            <span class="role-prefix">I build </span>
-            <span class="role-dynamic" id="role-dynamic">modern web experiences</span>
-            <span class="role-cursor">|</span>
-          </div>
-
-          <p class="hero-bio">
-            <strong>Aspiring Frontend Developer</strong> passionate about creating clean, responsive, and user-centric web applications. Learning and building with <strong>HTML5, CSS3, JavaScript, React, PHP &amp; WordPress</strong>.
-          </p>
-
-          <div class="hero-cta-group">
-            <a href="#projects" class="btn btn-primary">
-              <span>Explore My Work</span>
-              <svg class="btn-arrow" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-              </svg>
-            </a>
-            <a href="#contact" class="btn btn-outline">
-              <span>Get In Touch</span>
-            </a>
-            <button class="btn btn-ghost copy-btn" data-copy="sd9906830@gmail.com" title="Copy Email Address">
-              <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span>Copy Email</span>
-            </button>
-          </div>
-
-          <!-- Quick Metrics Bar -->
-          <div class="hero-stats">
-            <div class="stat-card">
-              <span class="stat-number">3+</span>
-              <span class="stat-label">Featured Projects</span>
+          <!-- Right Kinetic Role Slider -->
+          <div class="landing-info reveal-on-scroll">
+            <h3 class="landing-sub-tag">A Creative</h3>
+            <div class="kinetic-wrapper">
+              <div class="kinetic-item active" id="kinetic-role-1">
+                <span class="kinetic-text">DEVELOPER</span>
+              </div>
+              <div class="kinetic-item" id="kinetic-role-2">
+                <span class="kinetic-text gradient-text">DESIGNER</span>
+              </div>
             </div>
-            <div class="stat-divider"></div>
-            <div class="stat-card">
-              <span class="stat-number">8+</span>
-              <span class="stat-label">Core Technologies</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-card">
-              <span class="stat-number">100%</span>
-              <span class="stat-label">Responsive &amp; Modern</span>
+            <p class="landing-bio-text">
+              Aspiring Frontend Developer passionate about engineering clean, responsive, and user-centric web applications with <strong>HTML5, CSS3, JavaScript, React, PHP &amp; WordPress</strong>.
+            </p>
+
+            <div class="landing-cta-row">
+              <a href="#work" class="btn btn-primary">
+                <span>View Projects</span>
+                <svg class="btn-arrow" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </a>
+              <a href="#contact" class="btn btn-outline">
+                <span>Get In Touch</span>
+              </a>
+              <button class="btn btn-ghost copy-btn" data-copy="sd9906830@gmail.com" title="Copy Email">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy Email</span>
+              </button>
             </div>
           </div>
         </div>
 
-        <!-- Hero Visual: 3D Tilt Code Terminal -->
-        <div class="hero-visual reveal-on-scroll">
-          <div class="code-terminal tilt-element spotlight-card" id="hero-terminal">
-            <div class="terminal-header">
-              <div class="terminal-dots">
-                <span class="dot dot-red"></span>
-                <span class="dot dot-yellow"></span>
-                <span class="dot dot-green"></span>
-              </div>
-              <div class="terminal-title">shubweb.config.js</div>
-              <button class="terminal-copy-btn" id="terminal-copy-btn" title="Copy code snippet">
-                <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="terminal-body">
-              <pre><code class="language-javascript"><span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
-  <span class="code-property">brand</span>: <span class="code-string">"ShubWeb"</span>,
-  <span class="code-property">name</span>: <span class="code-string">"Shubham"</span>,
-  <span class="code-property">role</span>: <span class="code-string">"Aspiring Frontend Developer"</span>,
-  <span class="code-property">skills</span>: [
-    <span class="code-string">"HTML5"</span>, <span class="code-string">"CSS3"</span>, <span class="code-string">"JavaScript"</span>,
-    <span class="code-string">"React"</span>, <span class="code-string">"WordPress"</span>, <span class="code-string">"Elementor"</span>,
-    <span class="code-string">"REST APIs"</span>, <span class="code-string">"PHP"</span>
-  ],
-  <span class="code-property">passion</span>: <span class="code-string">"Building responsive &amp; interactive web apps"</span>,
-  <span class="code-property">currentFocus</span>: <span class="code-string">"Refining frontend skills &amp; shipping projects"</span>,
-  <span class="code-property">status</span>: <span class="code-string">"Open for opportunities 🚀"</span>
-};
-
-<span class="code-comment">// Let's build something awesome together!</span>
-<span class="code-keyword">export default</span> <span class="code-variable">developer</span>;</code></pre>
-            </div>
-            <div class="terminal-footer">
-              <span class="terminal-status-badge">Node.js ES6+</span>
-              <span class="terminal-status-badge terminal-badge-accent">ShubWeb Core</span>
-            </div>
+        <!-- Quick Highlight Metrics -->
+        <div class="landing-metrics-bar reveal-on-scroll">
+          <div class="metric-block">
+            <span class="metric-num">3+</span>
+            <span class="metric-label">Featured Projects</span>
+          </div>
+          <div class="metric-separator"></div>
+          <div class="metric-block">
+            <span class="metric-num">8+</span>
+            <span class="metric-label">Core Technologies</span>
+          </div>
+          <div class="metric-separator"></div>
+          <div class="metric-block">
+            <span class="metric-num">100%</span>
+            <span class="metric-label">Responsive &amp; Modern UI</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- INFINITE TECH MARQUEE (Awwwards Style) -->
+    <!-- INFINITE TECH MARQUEE -->
     <div class="marquee-section">
       <div class="marquee-track">
         <div class="marquee-content">
@@ -228,7 +217,7 @@
           <span class="marquee-item"><span class="tech-dot git"></span> Git &amp; GitHub</span>
           <span class="marquee-item"><span class="tech-dot ui"></span> Responsive UI/UX</span>
         </div>
-        <!-- Duplicated for seamless loop -->
+        <!-- Duplicated for seamless infinite loop -->
         <div class="marquee-content" aria-hidden="true">
           <span class="marquee-item"><span class="tech-dot html"></span> HTML5 Semantic</span>
           <span class="marquee-item"><span class="tech-dot css"></span> CSS3 Animations</span>
@@ -244,330 +233,266 @@
       </div>
     </div>
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="section about-section">
-      <div class="container">
-        <div class="section-header reveal-on-scroll">
+    <!-- 2. ABOUT ME SECTION -->
+    <section id="about" class="about-section">
+      <div class="about-container">
+        <div class="about-header-row reveal-on-scroll">
           <div class="section-tag">About Me</div>
-          <h2 class="section-title">Crafting Clean Interfaces with Passion</h2>
-          <p class="section-subtitle">Dedicated to mastering frontend development and delivering seamless digital experiences.</p>
+          <h2 class="about-headline">
+            Crafting Clean, Responsive Interfaces with <span class="gradient-text">Precision &amp; Passion</span>
+          </h2>
         </div>
 
-        <div class="about-grid">
-          <!-- Story Card -->
-          <div class="card about-main-card spotlight-card reveal-on-scroll">
-            <div class="about-header-flex">
-              <div class="avatar-badge">
-                <span class="avatar-initials">S</span>
-              </div>
+        <div class="about-grid-content">
+          <div class="about-card-left card spotlight-card reveal-on-scroll">
+            <div class="about-bio-avatar">
+              <div class="avatar-circle">S</div>
               <div>
-                <h3 class="about-card-title">Shubham</h3>
-                <p class="about-card-subtitle">Founder of ShubWeb &bull; Aspiring Frontend Developer</p>
+                <h3 class="about-name">Shubham</h3>
+                <p class="about-role">Founder of ShubWeb &bull; Frontend Developer</p>
               </div>
             </div>
-
-            <p class="about-text">
-              I am an enthusiastic web developer passionate about turning creative concepts into responsive, accessible, and high-performance websites under the <strong>ShubWeb</strong> banner.
+            <p class="about-lead-para">
+              I am an aspiring Frontend Developer dedicated to turning ideas into polished, accessible, and high-performance websites under the <strong>ShubWeb</strong> banner.
             </p>
-            <p class="about-text">
-              My journey involves working with core web foundations—<strong>HTML5, CSS3, and JavaScript (ES6+)</strong>—along with <strong>React</strong> for component-based architecture and <strong>WordPress + Elementor</strong> for customizable client websites and dynamic content layouts.
+            <p class="about-lead-para">
+              My technical foundation includes <strong>HTML5, CSS3, and JavaScript (ES6+)</strong> along with <strong>React</strong> for scalable single-page interfaces and <strong>WordPress + Elementor</strong> for customizable client websites.
             </p>
-
-            <div class="about-highlights">
-              <div class="highlight-item">
-                <div class="highlight-icon">⚡</div>
-                <div>
-                  <h4 class="highlight-title">Fast &amp; Responsive</h4>
-                  <p class="highlight-desc">Mobile-first layouts ensuring cross-device compatibility.</p>
-                </div>
-              </div>
-              <div class="highlight-item">
-                <div class="highlight-icon">🎨</div>
-                <div>
-                  <h4 class="highlight-title">Modern UI/UX</h4>
-                  <p class="highlight-desc">Clean aesthetics, smooth micro-interactions, and high usability.</p>
-                </div>
-              </div>
-              <div class="highlight-item">
-                <div class="highlight-icon">🧩</div>
-                <div>
-                  <h4 class="highlight-title">Clean Code</h4>
-                  <p class="highlight-desc">Structured, readable HTML, CSS, and modular JavaScript.</p>
-                </div>
-              </div>
-              <div class="highlight-item">
-                <div class="highlight-icon">🚀</div>
-                <div>
-                  <h4 class="highlight-title">Continuous Growth</h4>
-                  <p class="highlight-desc">Constantly building real-world projects and learning modern tools.</p>
-                </div>
-              </div>
-            </div>
           </div>
 
-          <!-- Quick Info Cards -->
-          <div class="about-side-cards reveal-on-scroll">
-            <div class="card info-box spotlight-card">
-              <div class="info-icon-wrapper">
-                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                </svg>
+          <div class="about-cards-right reveal-on-scroll">
+            <div class="about-info-item card spotlight-card">
+              <div class="info-icon-badge">⚡</div>
+              <div>
+                <h4>Fast &amp; Responsive</h4>
+                <p>Mobile-first layouts ensuring cross-device compatibility and fluid responsiveness.</p>
               </div>
-              <h4 class="info-title">Core Development Stack</h4>
-              <p class="info-desc">HTML5, CSS3, JavaScript, React, REST API integration, PHP, and WordPress styling.</p>
             </div>
-
-            <div class="card info-box spotlight-card">
-              <div class="info-icon-wrapper">
-                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-                </svg>
+            <div class="about-info-item card spotlight-card">
+              <div class="info-icon-badge">🎨</div>
+              <div>
+                <h4>Modern UI / UX</h4>
+                <p>Clean dark aesthetics, subtle glowing accents, and smooth micro-interactions.</p>
               </div>
-              <h4 class="info-title">Portfolio Projects</h4>
-              <p class="info-desc">Practical apps featuring automatic image carousels, JS validation, gym landing page, and Elementor solutions.</p>
             </div>
-
-            <div class="card info-box info-box-highlight spotlight-card">
-              <div class="info-icon-wrapper highlight-icon-bg">
-                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                </svg>
+            <div class="about-info-item card spotlight-card">
+              <div class="info-icon-badge">🧩</div>
+              <div>
+                <h4>Modular Clean Code</h4>
+                <p>Structured semantic markup, reusable components, and maintainable styles.</p>
               </div>
-              <h4 class="info-title">Quick Connect</h4>
-              <p class="info-desc">Email: <span class="text-accent">sd9906830@gmail.com</span><br />Phone: <span class="text-accent">+91 7876841037</span></p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SKILLS SECTION -->
-    <section id="skills" class="section skills-section">
-      <div class="container">
-        <div class="section-header reveal-on-scroll">
-          <div class="section-tag">Technical Skills</div>
-          <h2 class="section-title">Technical Skills &amp; Tools</h2>
-          <p class="section-subtitle">A curated toolset for engineering clean, modern, and scalable web solutions.</p>
+    <!-- 3. WHAT I DO SECTION (Moncy Cyber Cards Style) -->
+    <section id="what-i-do" class="what-section">
+      <div class="what-container">
+        <div class="what-left reveal-on-scroll">
+          <h2 class="what-title">
+            W<span class="hat-h2">HAT</span>
+            <div>
+              I<span class="do-h2"> DO</span>
+            </div>
+          </h2>
+          <p class="what-subtitle">
+            Specialized frontend engineering and web design services crafted for modern digital experiences.
+          </p>
         </div>
 
-        <!-- Filter Tabs -->
-        <div class="skill-filters reveal-on-scroll" id="skill-filters">
-          <button class="filter-btn active" data-category="all">All Technologies</button>
-          <button class="filter-btn" data-category="frontend">Frontend &amp; UI</button>
-          <button class="filter-btn" data-category="cms">WordPress &amp; Builders</button>
-          <button class="filter-btn" data-category="backend">APIs &amp; Backend</button>
-        </div>
+        <div class="what-right reveal-on-scroll">
+          <!-- Cyber Card 1: Frontend Development -->
+          <div class="what-cyber-card active-cyber-card">
+            <div class="cyber-corner top-left"></div>
+            <div class="cyber-corner top-right"></div>
+            <div class="cyber-corner bottom-left"></div>
+            <div class="cyber-corner bottom-right"></div>
 
-        <!-- Skills Grid -->
-        <div class="skills-grid reveal-on-scroll" id="skills-grid">
-          <!-- HTML5 -->
-          <div class="skill-card spotlight-card" data-category="frontend">
-            <div class="skill-icon-wrap html-color">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="skill-svg">
-                <path d="M12 2L3 5l2 15 7 2 7-2 2-15-9-3zm6 5.5l-.2 2.2H8.3l.2 2.3h9.3l-.6 6.5-5.2 1.5-5.2-1.5-.3-3.6h2.2l.1 1.8 3.2.9 3.2-.9.3-3.5H5.8L5.2 7.5h12.8z"/>
-              </svg>
+            <div class="what-card-header">
+              <span class="what-card-num">01</span>
+              <h3 class="what-card-name">FRONTEND DEVELOPMENT</h3>
             </div>
-            <div class="skill-info">
-              <div class="skill-name-row">
-                <h4 class="skill-name">HTML5</h4>
-                <span class="skill-badge">Core Foundation</span>
-              </div>
-              <p class="skill-description">Semantic markup, accessibility (a11y), modern web standards &amp; SEO-ready structure.</p>
+            <h4 class="what-card-tag">Description</h4>
+            <p class="what-card-desc">
+              Building interactive, fast, and accessible user interfaces with clean semantic HTML, modern responsive CSS layouts, dynamic JavaScript (ES6+), and React components.
+            </p>
+            <h5 class="what-skills-heading">Skillset &amp; Tools</h5>
+            <div class="what-tags-wrap">
+              <span class="what-tag">HTML5</span>
+              <span class="what-tag">CSS3</span>
+              <span class="what-tag">JavaScript (ES6+)</span>
+              <span class="what-tag">React.js</span>
+              <span class="what-tag">Flexbox &amp; Grid</span>
+              <span class="what-tag">Keyframe FX</span>
             </div>
           </div>
 
-          <!-- CSS3 -->
-          <div class="skill-card spotlight-card" data-category="frontend">
-            <div class="skill-icon-wrap css-color">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="skill-svg">
-                <path d="M12 2L3 5l2 15 7 2 7-2 2-15-9-3zm6 5.5l-.2 2.2H8.3l.2 2.3h9.3l-.6 6.5-5.2 1.5-5.2-1.5-.3-3.6h2.2l.1 1.8 3.2.9 3.2-.9.3-3.5H5.8L5.2 7.5h12.8z"/>
-              </svg>
+          <!-- Cyber Card 2: WordPress & CMS -->
+          <div class="what-cyber-card">
+            <div class="cyber-corner top-left"></div>
+            <div class="cyber-corner top-right"></div>
+            <div class="cyber-corner bottom-left"></div>
+            <div class="cyber-corner bottom-right"></div>
+
+            <div class="what-card-header">
+              <span class="what-card-num">02</span>
+              <h3 class="what-card-name">WORDPRESS &amp; CMS</h3>
             </div>
-            <div class="skill-info">
-              <div class="skill-name-row">
-                <h4 class="skill-name">CSS3</h4>
-                <span class="skill-badge">Styling &amp; FX</span>
-              </div>
-              <p class="skill-description">Flexbox, CSS Grid, Custom Properties, Keyframe Animations, Glassmorphism &amp; Media Queries.</p>
+            <h4 class="what-card-tag">Description</h4>
+            <p class="what-card-desc">
+              Customizing WordPress websites with Elementor Pro, developing custom page layouts, hero banners, visual carousels, PHP template styling, and high-converting contact forms.
+            </p>
+            <h5 class="what-skills-heading">Skillset &amp; Tools</h5>
+            <div class="what-tags-wrap">
+              <span class="what-tag">WordPress</span>
+              <span class="what-tag">Elementor Pro</span>
+              <span class="what-tag">PHP</span>
+              <span class="what-tag">Theme Styling</span>
+              <span class="what-tag">Custom Widgets</span>
             </div>
           </div>
 
-          <!-- JavaScript (ES6+) -->
-          <div class="skill-card spotlight-card" data-category="frontend">
-            <div class="skill-icon-wrap js-color">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="skill-svg">
-                <path d="M3 3h18v18H3V3zm13.7 13.8c-.8 0-1.4-.4-1.8-1l-1.3.8c.6 1.1 1.8 1.8 3.1 1.8 2.2 0 3.7-1.3 3.7-3.2 0-2-1.2-2.7-2.6-3.3l-.5-.2c-.8-.3-1.2-.6-1.2-1.2 0-.6.5-1.1 1.3-1.1.7 0 1.3.3 1.7.9l1.3-.8c-.6-1-1.6-1.6-3-1.6-2 0-3.3 1.3-3.3 3 0 1.8 1.1 2.6 2.5 3.2l.5.2c.9.4 1.4.7 1.4 1.3 0 .7-.6 1.3-1.6 1.3zm-6.2.2h2.2V9.3H10.5v5.7c0 1.2-.4 1.8-1.5 1.8-.7 0-1.2-.2-1.5-.6l-.9 1.4c.6.7 1.4 1.1 2.4 1.1z"/>
-              </svg>
-            </div>
-            <div class="skill-info">
-              <div class="skill-name-row">
-                <h4 class="skill-name">JavaScript (ES6+)</h4>
-                <span class="skill-badge">Dynamic Logic</span>
-              </div>
-              <p class="skill-description">DOM Manipulation, Event Handling, Async/Await, ES Modules, Array Methods &amp; Validation.</p>
-            </div>
-          </div>
+          <!-- Cyber Card 3: REST APIs & Data Integration -->
+          <div class="what-cyber-card">
+            <div class="cyber-corner top-left"></div>
+            <div class="cyber-corner top-right"></div>
+            <div class="cyber-corner bottom-left"></div>
+            <div class="cyber-corner bottom-right"></div>
 
-          <!-- React -->
-          <div class="skill-card spotlight-card" data-category="frontend">
-            <div class="skill-icon-wrap react-color">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="skill-svg">
-                <circle cx="12" cy="12" r="2.2"></circle>
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" opacity="0.3"/>
-                <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(30 12 12)" fill="none" stroke="currentColor" stroke-width="1.5"></ellipse>
-                <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(90 12 12)" fill="none" stroke="currentColor" stroke-width="1.5"></ellipse>
-                <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(150 12 12)" fill="none" stroke="currentColor" stroke-width="1.5"></ellipse>
-              </svg>
+            <div class="what-card-header">
+              <span class="what-card-num">03</span>
+              <h3 class="what-card-name">APIS &amp; INTEGRATION</h3>
             </div>
-            <div class="skill-info">
-              <div class="skill-name-row">
-                <h4 class="skill-name">React</h4>
-                <span class="skill-badge">Components &amp; State</span>
-              </div>
-              <p class="skill-description">Functional Components, JSX, Hooks (useState, useEffect), Reusable UI Elements.</p>
-            </div>
-          </div>
-
-          <!-- REST APIs & Fetch API -->
-          <div class="skill-card spotlight-card" data-category="backend">
-            <div class="skill-icon-wrap api-color">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="skill-svg">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-            </div>
-            <div class="skill-info">
-              <div class="skill-name-row">
-                <h4 class="skill-name">REST APIs &amp; Fetch</h4>
-                <span class="skill-badge">Data Integration</span>
-              </div>
-              <p class="skill-description">Fetching JSON data, asynchronous promises, handling responses, error handling &amp; dynamic rendering.</p>
-            </div>
-          </div>
-
-          <!-- WordPress -->
-          <div class="skill-card spotlight-card" data-category="cms">
-            <div class="skill-icon-wrap wp-color">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="skill-svg">
-                <path d="M12 2C6.486 2 2 6.486 2 12c0 4.686 3.242 8.618 7.621 9.689L5.347 9.873A9.974 9.974 0 0 1 12 4c2.257 0 4.331.751 6.002 2.015L12 2zm7.621 9.689C19.758 20.618 16.514 22 12 22a9.96 9.96 0 0 1-5.111-1.399l5.074-14.733 4.298 12.484c.821-.611 1.543-1.354 2.139-2.203l-1.221-3.541z"/>
-              </svg>
-            </div>
-            <div class="skill-info">
-              <div class="skill-name-row">
-                <h4 class="skill-name">WordPress</h4>
-                <span class="skill-badge">CMS Development</span>
-              </div>
-              <p class="skill-description">Theme customization, page setup, plugins integration, responsive design, site structuring.</p>
-            </div>
-          </div>
-
-          <!-- Elementor -->
-          <div class="skill-card spotlight-card" data-category="cms">
-            <div class="skill-icon-wrap elementor-color">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="skill-svg">
-                <circle cx="12" cy="12" r="10" fill="#E24B7F"></circle>
-                <rect x="8" y="7" width="2.5" height="10" fill="#fff"></rect>
-                <rect x="13.5" y="7" width="2.5" height="2.5" fill="#fff"></rect>
-                <rect x="13.5" y="10.8" width="2.5" height="2.5" fill="#fff"></rect>
-                <rect x="13.5" y="14.5" width="2.5" height="2.5" fill="#fff"></rect>
-              </svg>
-            </div>
-            <div class="skill-info">
-              <div class="skill-name-row">
-                <h4 class="skill-name">Elementor</h4>
-                <span class="skill-badge">Visual Page Builder</span>
-              </div>
-              <p class="skill-description">Custom hero sections, contact forms, interactive sliders, Elementor widgets &amp; templates.</p>
-            </div>
-          </div>
-
-          <!-- PHP -->
-          <div class="skill-card spotlight-card" data-category="backend">
-            <div class="skill-icon-wrap php-color">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="skill-svg">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5h-2v-1.8h-1.5c-1.38 0-2.5-1.12-2.5-2.5 0-.85.43-1.6 1.09-2.05C8.03 9.4 8.78 9 9.6 9H13v7.5zm4 0h-2v-6h2v6zm-4-4.5h-2.5c-.28 0-.5-.22-.5-.5s.22-.5.5-.5H13v1z"/>
-              </svg>
-            </div>
-            <div class="skill-info">
-              <div class="skill-name-row">
-                <h4 class="skill-name">PHP</h4>
-                <span class="skill-badge">Server Scripting</span>
-              </div>
-              <p class="skill-description">WordPress template tags, dynamic functions, form handling &amp; backend data logic.</p>
+            <h4 class="what-card-tag">Description</h4>
+            <p class="what-card-desc">
+              Integrating asynchronous REST APIs with the Fetch API, handling JSON payloads, managing state, input validation, and connecting serverless form backends.
+            </p>
+            <h5 class="what-skills-heading">Skillset &amp; Tools</h5>
+            <div class="what-tags-wrap">
+              <span class="what-tag">REST APIs</span>
+              <span class="what-tag">Fetch API</span>
+              <span class="what-tag">Async / Await</span>
+              <span class="what-tag">JSON Data</span>
+              <span class="what-tag">Form Submit</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FEATURED PROJECTS SECTION -->
-    <section id="projects" class="section projects-section">
-      <div class="container">
-        <div class="section-header reveal-on-scroll">
+    <!-- 4. CAREER & EXPERIENCE ROADMAP (Moncy Style) -->
+    <section id="career" class="career-section">
+      <div class="career-container">
+        <div class="career-header reveal-on-scroll">
+          <div class="section-tag">Learning Journey</div>
+          <h2 class="career-title">
+            My career <span>&amp;</span>
+            <br /> experience
+          </h2>
+          <p class="career-subtitle">A progressive trajectory of technical milestones and continuous learning.</p>
+        </div>
+
+        <div class="career-timeline-wrap reveal-on-scroll">
+          <div class="career-timeline-line">
+            <div class="career-glowing-dot"></div>
+          </div>
+
+          <div class="career-list">
+            <!-- Timeline Item 1 -->
+            <div class="career-item card spotlight-card">
+              <div class="career-meta">
+                <div class="career-role">
+                  <h4>HTML5 &amp; Modern CSS3 Foundations</h4>
+                  <span class="career-tag">Milestone 01</span>
+                </div>
+                <div class="career-year">Foundations</div>
+              </div>
+              <p class="career-desc">
+                Mastered semantic web markup, mobile-first responsive architecture, Flexbox, CSS Grid, custom properties, and keyframe animations for modern web interfaces.
+              </p>
+            </div>
+
+            <!-- Timeline Item 2 -->
+            <div class="career-item card spotlight-card">
+              <div class="career-meta">
+                <div class="career-role">
+                  <h4>JavaScript (ES6+) &amp; Dynamic UI Projects</h4>
+                  <span class="career-tag">Milestone 02</span>
+                </div>
+                <div class="career-year">Logic &amp; DOM</div>
+              </div>
+              <p class="career-desc">
+                Built interactive applications including full-screen authentication carousels, regex form validators, asynchronous Fetch API integrations, and modular DOM scripts.
+              </p>
+            </div>
+
+            <!-- Timeline Item 3 -->
+            <div class="career-item card spotlight-card">
+              <div class="career-meta">
+                <div class="career-role">
+                  <h4>WordPress, Elementor &amp; PHP Customizations</h4>
+                  <span class="career-tag">Milestone 03</span>
+                </div>
+                <div class="career-year">CMS &amp; Client</div>
+              </div>
+              <p class="career-desc">
+                Customized full-scale WordPress sites, tailored Elementor widgets, implemented dynamic hero sections, custom forms, and created high-converting client experiences.
+              </p>
+            </div>
+
+            <!-- Timeline Item 4 -->
+            <div class="career-item card active-career-item spotlight-card">
+              <div class="career-meta">
+                <div class="career-role">
+                  <h4>React Component Architecture &amp; Single Page Apps</h4>
+                  <span class="career-tag tag-now">Current Focus</span>
+                </div>
+                <div class="career-year">NOW 🚀</div>
+              </div>
+              <p class="career-desc">
+                Diving deeper into React hooks, state management, component reusability, API consuming, and building production-grade frontend applications.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. MY WORK / FEATURED PROJECTS SECTION (Moncy Style) -->
+    <section id="work" class="work-section">
+      <div class="work-container">
+        <div class="work-header reveal-on-scroll">
           <div class="section-tag">Featured Works</div>
-          <h2 class="section-title">Featured Web Projects</h2>
-          <p class="section-subtitle">Real-world applications showcasing frontend engineering, responsive design, and UI interactions.</p>
+          <h2 class="work-title">
+            My <span class="gradient-text">Work</span>
+          </h2>
+          <p class="work-subtitle">Real-world applications showcasing frontend engineering, responsive design, and UI interactions.</p>
         </div>
 
-        <div class="projects-grid">
-          <!-- PROJECT 1: Responsive Login Page -->
-          <article class="project-card tilt-element spotlight-card reveal-on-scroll">
-            <div class="project-preview-box">
-              <div class="project-mockup-wrapper">
-                <div class="mockup-header">
-                  <div class="mockup-dots">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="mockup-title">login-auth.html</span>
-                </div>
-                <div class="mockup-screen screen-login">
-                  <div class="mini-login-card">
-                    <div class="mini-avatar">🔒</div>
-                    <div class="mini-input-skeleton"></div>
-                    <div class="mini-input-skeleton"></div>
-                    <div class="mini-btn-skeleton">Sign In</div>
-                  </div>
-                  <div class="slider-indicator">
-                    <span class="indicator-dot active"></span>
-                    <span class="indicator-dot"></span>
-                    <span class="indicator-dot"></span>
-                  </div>
+        <div class="work-grid">
+          <!-- WORK 01: Responsive Login Page -->
+          <article class="work-box card spotlight-card reveal-on-scroll">
+            <div class="work-info">
+              <div class="work-title-row">
+                <span class="work-num">01</span>
+                <div>
+                  <h3 class="work-name">Responsive Login Page</h3>
+                  <span class="work-category">Full-Screen Authentication UI</span>
                 </div>
               </div>
-              <div class="project-badge-float">Featured UI</div>
-            </div>
 
-            <div class="project-content">
-              <div class="project-tech-tags">
-                <span class="tech-tag">HTML5</span>
-                <span class="tech-tag">CSS3</span>
-                <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">Form Validation</span>
-              </div>
+              <h4 class="work-tools-title">Tools &amp; Features</h4>
+              <p class="work-tools-desc">HTML5, CSS3, JavaScript (ES6+), Auto Slider, Live Validation</p>
 
-              <h3 class="project-title">Responsive Login Page</h3>
-              <p class="project-description">
-                A full-screen, responsive authentication UI featuring an automatic background image slider with smooth cross-fade transitions and real-time JavaScript validation for email and password fields.
+              <p class="work-summary">
+                Full-screen responsive login UI with an automatic background image slider, smooth cross-fade transitions, and real-time JavaScript validation.
               </p>
 
-              <div class="project-features-list">
-                <div class="feature-bullet">
-                  <span class="bullet-check">✓</span>
-                  <span>Auto-advancing background carousel with manual controls</span>
-                </div>
-                <div class="feature-bullet">
-                  <span class="bullet-check">✓</span>
-                  <span>Instant regex validation &amp; password visibility toggle</span>
-                </div>
-                <div class="feature-bullet">
-                  <span class="bullet-check">✓</span>
-                  <span>100% mobile responsive glassmorphism card</span>
-                </div>
-              </div>
-
-              <div class="project-actions">
+              <div class="work-actions">
                 <button class="btn btn-primary btn-sm view-project-btn" data-project="login">
-                  <span>View Details &amp; Demo</span>
+                  <span>View Details</span>
                   <svg class="icon-sm" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                 </button>
                 <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
@@ -576,64 +501,46 @@
                 </a>
               </div>
             </div>
+
+            <div class="work-visual-box screen-login-preview">
+              <div class="mini-mockup-top">
+                <span class="mockup-dot red"></span>
+                <span class="mockup-dot yellow"></span>
+                <span class="mockup-dot green"></span>
+                <span class="mockup-url">login-auth.html</span>
+              </div>
+              <div class="mini-mockup-body">
+                <div class="mockup-card-glass">
+                  <div class="mockup-avatar">🔒</div>
+                  <div class="mockup-line w-80"></div>
+                  <div class="mockup-line w-60"></div>
+                  <div class="mockup-btn-pill">Sign In</div>
+                </div>
+              </div>
+            </div>
           </article>
 
-          <!-- PROJECT 2: Gym Website -->
-          <article class="project-card tilt-element spotlight-card reveal-on-scroll">
-            <div class="project-preview-box">
-              <div class="project-mockup-wrapper">
-                <div class="mockup-header">
-                  <div class="mockup-dots">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="mockup-title">iron-fitness-hub.com</span>
-                </div>
-                <div class="mockup-screen screen-gym">
-                  <div class="mini-gym-hero">
-                    <span class="gym-badge">FITNESS &amp; POWER</span>
-                    <h5 class="gym-title">PUSH YOUR LIMITS</h5>
-                    <div class="gym-grid-mini">
-                      <div class="gym-box"></div>
-                      <div class="gym-box"></div>
-                      <div class="gym-box"></div>
-                    </div>
-                  </div>
+          <!-- WORK 02: Gym Website -->
+          <article class="work-box card spotlight-card reveal-on-scroll">
+            <div class="work-info">
+              <div class="work-title-row">
+                <span class="work-num">02</span>
+                <div>
+                  <h3 class="work-name">Gym Website — Fitness Hub</h3>
+                  <span class="work-category">Modern Fitness Landing Page</span>
                 </div>
               </div>
-              <div class="project-badge-float">Landing Page</div>
-            </div>
 
-            <div class="project-content">
-              <div class="project-tech-tags">
-                <span class="tech-tag">HTML5</span>
-                <span class="tech-tag">CSS3</span>
-                <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">Responsive UI</span>
-              </div>
+              <h4 class="work-tools-title">Tools &amp; Features</h4>
+              <p class="work-tools-desc">HTML5, CSS3, JavaScript, Responsive Grid, Class Schedules</p>
 
-              <h3 class="project-title">Gym Website — Fitness Hub</h3>
-              <p class="project-description">
-                Modern and high-impact fitness website built with clean semantic HTML, modular CSS styling, dynamic training program showcases, membership pricing cards, and interactive schedule navigations.
+              <p class="work-summary">
+                High-impact fitness website with training program showcases, membership pricing cards, and interactive class schedules.
               </p>
 
-              <div class="project-features-list">
-                <div class="feature-bullet">
-                  <span class="bullet-check">✓</span>
-                  <span>Modern hero banner with call-to-action triggers</span>
-                </div>
-                <div class="feature-bullet">
-                  <span class="bullet-check">✓</span>
-                  <span>Interactive class schedules, trainer cards &amp; pricing tiers</span>
-                </div>
-                <div class="feature-bullet">
-                  <span class="bullet-check">✓</span>
-                  <span>Fully mobile optimized with smooth scroll navigation</span>
-                </div>
-              </div>
-
-              <div class="project-actions">
+              <div class="work-actions">
                 <button class="btn btn-primary btn-sm view-project-btn" data-project="gym">
-                  <span>View Details &amp; Demo</span>
+                  <span>View Details</span>
                   <svg class="icon-sm" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                 </button>
                 <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
@@ -642,65 +549,44 @@
                 </a>
               </div>
             </div>
+
+            <div class="work-visual-box screen-gym-preview">
+              <div class="mini-mockup-top">
+                <span class="mockup-dot red"></span>
+                <span class="mockup-dot yellow"></span>
+                <span class="mockup-dot green"></span>
+                <span class="mockup-url">iron-fitness-hub.com</span>
+              </div>
+              <div class="mini-mockup-body">
+                <div class="gym-mini-banner">
+                  <span class="badge-gym-neon">FITNESS HUB</span>
+                  <h5>PUSH YOUR LIMITS</h5>
+                </div>
+              </div>
+            </div>
           </article>
 
-          <!-- PROJECT 3: WordPress Website Customization -->
-          <article class="project-card tilt-element spotlight-card reveal-on-scroll">
-            <div class="project-preview-box">
-              <div class="project-mockup-wrapper">
-                <div class="mockup-header">
-                  <div class="mockup-dots">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="mockup-title">wordpress-custom-site.com</span>
-                </div>
-                <div class="mockup-screen screen-wp">
-                  <div class="mini-wp-layout">
-                    <div class="wp-topbar"></div>
-                    <div class="wp-hero-banner">
-                      <span class="wp-tag">ELEMENTOR PRO</span>
-                    </div>
-                    <div class="wp-columns">
-                      <div class="wp-col"></div>
-                      <div class="wp-col"></div>
-                    </div>
-                  </div>
+          <!-- WORK 03: WordPress Customization -->
+          <article class="work-box card spotlight-card reveal-on-scroll">
+            <div class="work-info">
+              <div class="work-title-row">
+                <span class="work-num">03</span>
+                <div>
+                  <h3 class="work-name">WordPress Website Customization</h3>
+                  <span class="work-category">CMS &amp; Elementor Architecture</span>
                 </div>
               </div>
-              <div class="project-badge-float">WordPress &amp; CMS</div>
-            </div>
 
-            <div class="project-content">
-              <div class="project-tech-tags">
-                <span class="tech-tag">WordPress</span>
-                <span class="tech-tag">Elementor</span>
-                <span class="tech-tag">Custom CSS</span>
-                <span class="tech-tag">Responsive Layouts</span>
-              </div>
+              <h4 class="work-tools-title">Tools &amp; Features</h4>
+              <p class="work-tools-desc">WordPress, Elementor Pro, Custom CSS, PHP, Sliders, Forms</p>
 
-              <h3 class="project-title">WordPress Website Customization</h3>
-              <p class="project-description">
-                Comprehensive WordPress customization featuring custom hero areas, dynamic interactive sliders, custom contact forms, tailored Elementor widgets, and performance-tuned responsive layouts.
+              <p class="work-summary">
+                Comprehensive WordPress customization with tailored Elementor widgets, custom hero sliders, responsive layouts, and conversion-focused forms.
               </p>
 
-              <div class="project-features-list">
-                <div class="feature-bullet">
-                  <span class="bullet-check">✓</span>
-                  <span>Custom Elementor widgets, hero headers &amp; visual sliders</span>
-                </div>
-                <div class="feature-bullet">
-                  <span class="bullet-check">✓</span>
-                  <span>Customized CSS styling for bespoke brand identity</span>
-                </div>
-                <div class="feature-bullet">
-                  <span class="bullet-check">✓</span>
-                  <span>High-converting contact forms &amp; cross-device responsiveness</span>
-                </div>
-              </div>
-
-              <div class="project-actions">
+              <div class="work-actions">
                 <button class="btn btn-primary btn-sm view-project-btn" data-project="wp">
-                  <span>View Details &amp; Demo</span>
+                  <span>View Details</span>
                   <svg class="icon-sm" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                 </button>
                 <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
@@ -709,104 +595,27 @@
                 </a>
               </div>
             </div>
+
+            <div class="work-visual-box screen-wp-preview">
+              <div class="mini-mockup-top">
+                <span class="mockup-dot red"></span>
+                <span class="mockup-dot yellow"></span>
+                <span class="mockup-dot green"></span>
+                <span class="mockup-url">wordpress-custom-site.com</span>
+              </div>
+              <div class="mini-mockup-body">
+                <div class="wp-mini-banner">
+                  <span class="badge-wp-neon">ELEMENTOR PRO</span>
+                  <h5>CUSTOM THEMES</h5>
+                </div>
+              </div>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- LEARNING JOURNEY / ROADMAP SECTION -->
-    <section id="journey" class="section journey-section">
-      <div class="container">
-        <div class="section-header reveal-on-scroll">
-          <div class="section-tag">Learning Journey</div>
-          <h2 class="section-title">Developer Learning Roadmap</h2>
-          <p class="section-subtitle">A progressive trajectory of technical skills, milestones, and hands-on projects.</p>
-        </div>
-
-        <div class="timeline reveal-on-scroll">
-          <!-- Step 1 -->
-          <div class="timeline-item">
-            <div class="timeline-dot-wrapper">
-              <div class="timeline-dot"></div>
-            </div>
-            <div class="timeline-content card spotlight-card">
-              <span class="timeline-badge">Milestone 1 — Foundations</span>
-              <h4 class="timeline-title">Mastering Semantic HTML5 &amp; Modern CSS3</h4>
-              <p class="timeline-text">
-                Built responsive layouts using Flexbox and Grid, mastered typography, custom properties, CSS animations, and mobile-first design principles.
-              </p>
-              <div class="timeline-tags">
-                <span>Semantic HTML</span>
-                <span>Flexbox / Grid</span>
-                <span>Responsive Design</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="timeline-item">
-            <div class="timeline-dot-wrapper">
-              <div class="timeline-dot"></div>
-            </div>
-            <div class="timeline-content card spotlight-card">
-              <span class="timeline-badge">Milestone 2 — Logic &amp; DOM</span>
-              <h4 class="timeline-title">JavaScript (ES6+) &amp; Dynamic UI Projects</h4>
-              <p class="timeline-text">
-                Developed interactive applications like full-screen image sliders, real-time input validators, event handlers, asynchronous Fetch API integrations, and modular clean code.
-              </p>
-              <div class="timeline-tags">
-                <span>ES6+</span>
-                <span>DOM Manipulation</span>
-                <span>Form Validation</span>
-                <span>Fetch API</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="timeline-item">
-            <div class="timeline-dot-wrapper">
-              <div class="timeline-dot"></div>
-            </div>
-            <div class="timeline-content card spotlight-card">
-              <span class="timeline-badge">Milestone 3 — CMS &amp; Client Projects</span>
-              <h4 class="timeline-title">WordPress, Elementor &amp; PHP Customizations</h4>
-              <p class="timeline-text">
-                Customized full-scale WordPress sites, tailored Elementor widgets, implemented dynamic hero sections, custom forms, and created high-converting client experiences.
-              </p>
-              <div class="timeline-tags">
-                <span>WordPress</span>
-                <span>Elementor</span>
-                <span>PHP</span>
-                <span>Theme Styling</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="timeline-item">
-            <div class="timeline-dot-wrapper">
-              <div class="timeline-dot pulse-dot"></div>
-            </div>
-            <div class="timeline-content card active-milestone spotlight-card">
-              <span class="timeline-badge badge-accent">Current Focus — Modern Stack</span>
-              <h4 class="timeline-title">React Component Architecture &amp; Production Apps</h4>
-              <p class="timeline-text">
-                Diving deeper into React hooks, state management, component reusability, API consuming, and building production-grade frontend applications.
-              </p>
-              <div class="timeline-tags">
-                <span>React.js</span>
-                <span>Hooks</span>
-                <span>Single Page Apps</span>
-                <span>Git / GitHub</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
+    <!-- 6. CONTACT SECTION (Preserved as requested with Form Server) -->
     <section id="contact" class="section contact-section">
       <div class="container">
         <div class="section-header reveal-on-scroll">
@@ -965,7 +774,7 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- 7. FOOTER (Preserved as requested) -->
   <footer class="footer">
     <div class="container footer-container">
       <div class="footer-brand">
@@ -979,9 +788,9 @@
         <h5 class="footer-heading">Navigation</h5>
         <ul>
           <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#journey">Journey</a></li>
+          <li><a href="#what-i-do">What I Do</a></li>
+          <li><a href="#career">Career</a></li>
+          <li><a href="#work">Work</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
@@ -1005,7 +814,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js/projects-data.js?v=2.0"></script>
-  <script src="js/main.js?v=2.0"></script>
+  <script src="js/projects-data.js?v=3.0"></script>
+  <script src="js/main.js?v=3.0"></script>
 </body>
 </html>
