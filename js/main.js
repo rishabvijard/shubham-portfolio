@@ -266,19 +266,13 @@
     return ((n % m) + m) % m;
   }
 
-  // 🌟 6 & 7. TRUE 3D CYLINDRICAL CAROUSEL ENGINE (PREVIOUS CYLINDRICAL MOTION) 🌟
-  function initCylindricalCarousel({
-    viewportId,
-    trackId,
-    cardSelector,
-    defaultCardWidth = 280,
-    gap = 40
-  }) {
-    const viewport = document.getElementById(viewportId);
-    const track = document.getElementById(trackId);
+  // 🌟 6. SKILLS ONLY: MID SMALL (0.78) -> SIDES BIG (1.18) AMPHITHEATER 🌟
+  function initSkillsAmphitheater() {
+    const viewport = document.getElementById("skills-coverflow-viewport");
+    const track = document.getElementById("skills-coverflow-track");
     if (!viewport || !track) return;
 
-    const cards = Array.from(track.querySelectorAll(cardSelector));
+    const cards = Array.from(track.querySelectorAll(".skill-coverflow-card"));
     const totalCards = cards.length;
     if (!totalCards) return;
 
@@ -288,37 +282,33 @@
     let currentOffset = 0;
     let isLoopRunning = false;
 
-    let cardWidth = cards[0].offsetWidth || defaultCardWidth;
-    let stride = cardWidth + gap;
-    let totalOrbitWidth = totalCards * stride;
-
-    function updateMetrics() {
-      cardWidth = cards[0].offsetWidth || defaultCardWidth;
-      stride = cardWidth + gap;
-      totalOrbitWidth = totalCards * stride;
-    }
+    const cardWidth = 260;
+    const gap = 48;
+    const stride = cardWidth + gap;
+    const totalOrbitWidth = totalCards * stride;
 
     function renderFrame() {
       const viewportCenter = window.innerWidth / 2;
+      const centerFactor = Math.max(280, window.innerWidth * 0.36);
       const halfOrbit = totalOrbitWidth / 2;
-      const radius = Math.max(520, window.innerWidth * 0.48);
 
       for (let i = 0; i < totalCards; i++) {
         const card = cards[i];
         const pos = mod(i * stride + currentOffset, totalOrbitWidth);
         const distFromCenter = pos - halfOrbit;
 
-        // 🎡 CYLINDRICAL ANGLE & ARC POSITION 🎡
-        const angle = distFromCenter / radius;
-        const clampedAngle = Math.max(-1.45, Math.min(1.45, angle));
+        const screenX = viewportCenter + distFromCenter - (cardWidth / 2);
+        const normDist = distFromCenter / centerFactor;
+        const clampedNorm = Math.max(-1.7, Math.min(1.7, normDist));
+        const absNorm = Math.abs(clampedNorm);
 
-        const screenX = viewportCenter + (Math.sin(clampedAngle) * radius) - (cardWidth / 2);
-        const translateZ = (Math.cos(clampedAngle) - 1) * 180; // Curves smoothly back into depth
-        const rotateY = -clampedAngle * (180 / Math.PI) * 0.52; // Cylinder tangent
-        const scale = Math.max(0.82, Math.cos(clampedAngle));
-        const opacity = Math.max(0.55, Math.cos(clampedAngle));
+        // 🌟 SKILLS: CENTER/MID SMALL (0.78) -> SIDES GROW BIG (1.18) 🌟
+        const scale = 0.78 + (absNorm * 0.32);
+        const translateZ = -90 + (absNorm * 125);
+        const rotateY = clampedNorm * -22;
+        const opacity = Math.min(1.0, 0.75 + absNorm * 0.2);
 
-        card.style.transform = `translate3d(${screenX}px, 0, 0) perspective(1200px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
+        card.style.transform = `translate3d(${screenX}px, 0, 0) perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
         card.style.opacity = opacity;
       }
     }
@@ -327,12 +317,12 @@
       if (!isDragging) {
         if (Math.abs(velocity) > 0.05) {
           currentOffset += velocity;
-          velocity *= 0.90;
+          velocity *= 0.92;
         } else {
           velocity = 0;
           isLoopRunning = false;
           renderFrame();
-          return; // 🛑 Strict Stillness on idle
+          return;
         }
       }
 
@@ -352,12 +342,9 @@
       }
     }
 
-    window.addEventListener("resize", () => {
-      updateMetrics();
-      renderFrame();
-    }, { passive: true });
+    window.addEventListener("resize", () => renderFrame(), { passive: true });
 
-    // 🔄 OPPOSITE MOUSE DRAG: Drag Left -> Rotates Right
+    // ⚡ FAST OPPOSITE MOUSE DRAG
     viewport.addEventListener("mousedown", (e) => {
       isDragging = true;
       startX = e.pageX;
@@ -369,14 +356,14 @@
     window.addEventListener("mousemove", (e) => {
       if (!isDragging) return;
       const x = e.pageX;
-      const delta = (x - startX) * 1.25;
-      currentOffset -= delta; // Inverted
-      velocity = -delta * 0.5; // Inverted
+      const delta = (x - startX) * 1.5;
+      currentOffset -= delta;
+      velocity = -delta * 0.7;
       startX = x;
       wakeLoop();
     });
 
-    // 🔄 OPPOSITE TOUCH DRAG
+    // ⚡ FAST OPPOSITE TOUCH DRAG
     viewport.addEventListener("touchstart", (e) => {
       isDragging = true;
       startX = e.touches[0].pageX;
@@ -387,45 +374,156 @@
     viewport.addEventListener("touchmove", (e) => {
       if (!isDragging) return;
       const x = e.touches[0].pageX;
-      const delta = (x - startX) * 1.25;
-      currentOffset -= delta; // Inverted
-      velocity = -delta * 0.5; // Inverted
+      const delta = (x - startX) * 1.5;
+      currentOffset -= delta;
+      velocity = -delta * 0.7;
       startX = x;
       wakeLoop();
     }, { passive: true });
 
-    // 🔄 OPPOSITE MOUSE WHEEL
+    // ⚡ FAST OPPOSITE WHEEL
     viewport.addEventListener("wheel", (e) => {
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       if (Math.abs(delta) > 2) {
-        velocity += delta * 0.24; // Inverted
-        if (velocity > 30) velocity = 30;
-        if (velocity < -30) velocity = -30;
+        velocity += delta * 0.35;
+        if (velocity > 45) velocity = 45;
+        if (velocity < -45) velocity = -45;
         wakeLoop();
       }
     }, { passive: true });
 
-    updateMetrics();
     renderFrame();
   }
 
-  // Initialize Skills Cylindrical 3D
-  initCylindricalCarousel({
-    viewportId: "skills-coverflow-viewport",
-    trackId: "skills-coverflow-track",
-    cardSelector: ".skill-coverflow-card",
-    defaultCardWidth: 260,
-    gap: 45
-  });
+  // 🌟 7. PROJECTS: FAST & CRISP STANDARD 3D COVERFLOW 🌟
+  function initProjectsFastCoverflow() {
+    const viewport = document.getElementById("coverflow-viewport");
+    const track = document.getElementById("coverflow-track");
+    if (!viewport || !track) return;
 
-  // Initialize Projects Cylindrical 3D
-  initCylindricalCarousel({
-    viewportId: "coverflow-viewport",
-    trackId: "coverflow-track",
-    cardSelector: ".coverflow-card-item",
-    defaultCardWidth: 280,
-    gap: 45
-  });
+    const cards = Array.from(track.querySelectorAll(".coverflow-card-item"));
+    const totalCards = cards.length;
+    if (!totalCards) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let velocity = 0;
+    let currentOffset = 0;
+    let isLoopRunning = false;
+
+    const cardWidth = 280;
+    const gap = 32;
+    const stride = cardWidth + gap;
+    const totalOrbitWidth = totalCards * stride;
+
+    function renderFrame() {
+      const viewportCenter = window.innerWidth / 2;
+      const centerFactor = Math.max(260, window.innerWidth * 0.35);
+      const halfOrbit = totalOrbitWidth / 2;
+
+      for (let i = 0; i < totalCards; i++) {
+        const card = cards[i];
+        const pos = mod(i * stride + currentOffset, totalOrbitWidth);
+        const distFromCenter = pos - halfOrbit;
+
+        const screenX = viewportCenter + distFromCenter - (cardWidth / 2);
+        const normDist = distFromCenter / centerFactor;
+        const clampedNorm = Math.max(-1.7, Math.min(1.7, normDist));
+        const absNorm = Math.abs(clampedNorm);
+
+        // Standard 3D Coverflow for Projects
+        const rotateY = clampedNorm * -20;
+        const translateZ = -absNorm * 45;
+        const scale = Math.max(0.86, 1 - absNorm * 0.10);
+        const opacity = Math.max(0.6, 1 - absNorm * 0.18);
+
+        card.style.transform = `translate3d(${screenX}px, 0, 0) perspective(1200px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
+        card.style.opacity = opacity;
+      }
+    }
+
+    function step() {
+      if (!isDragging) {
+        if (Math.abs(velocity) > 0.05) {
+          currentOffset += velocity;
+          velocity *= 0.92;
+        } else {
+          velocity = 0;
+          isLoopRunning = false;
+          renderFrame();
+          return;
+        }
+      }
+
+      renderFrame();
+
+      if (isDragging || Math.abs(velocity) > 0.05) {
+        requestAnimationFrame(step);
+      } else {
+        isLoopRunning = false;
+      }
+    }
+
+    function wakeLoop() {
+      if (!isLoopRunning) {
+        isLoopRunning = true;
+        requestAnimationFrame(step);
+      }
+    }
+
+    window.addEventListener("resize", () => renderFrame(), { passive: true });
+
+    viewport.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      startX = e.pageX;
+      velocity = 0;
+      wakeLoop();
+    });
+    window.addEventListener("mouseup", () => { isDragging = false; });
+    viewport.addEventListener("mouseleave", () => { isDragging = false; });
+    window.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      const x = e.pageX;
+      const delta = (x - startX) * 1.5;
+      currentOffset -= delta;
+      velocity = -delta * 0.7;
+      startX = x;
+      wakeLoop();
+    });
+
+    viewport.addEventListener("touchstart", (e) => {
+      isDragging = true;
+      startX = e.touches[0].pageX;
+      velocity = 0;
+      wakeLoop();
+    }, { passive: true });
+    window.addEventListener("touchend", () => { isDragging = false; });
+    viewport.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
+      const x = e.touches[0].pageX;
+      const delta = (x - startX) * 1.5;
+      currentOffset -= delta;
+      velocity = -delta * 0.7;
+      startX = x;
+      wakeLoop();
+    }, { passive: true });
+
+    viewport.addEventListener("wheel", (e) => {
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) > 2) {
+        velocity += delta * 0.35;
+        if (velocity > 45) velocity = 45;
+        if (velocity < -45) velocity = -45;
+        wakeLoop();
+      }
+    }, { passive: true });
+
+    renderFrame();
+  }
+
+  // Initialize
+  initSkillsAmphitheater();
+  initProjectsFastCoverflow();
 
   // 8. Toast Notification
   function showToast(message) {
