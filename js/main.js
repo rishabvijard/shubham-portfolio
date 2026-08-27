@@ -271,7 +271,7 @@
     return ((n % m) + m) % m;
   }
 
-  // 🌟 6. SKILLS: REVERSE-PERSPECTIVE AMPHITHEATER (CENTER SMALL, EDGES LARGE) 🌟
+  // 🌟 6. SKILLS: REVERSE-PERSPECTIVE AMPHITHEATER (CENTER 0.78 -> EDGES 1.18) 🌟
   function initSkillsAmphitheater() {
     const viewport = document.getElementById("skills-coverflow-viewport");
     const track = document.getElementById("skills-coverflow-track");
@@ -307,7 +307,7 @@
         const clampedNorm = Math.max(-1.7, Math.min(1.7, normDist));
         const absNorm = Math.abs(clampedNorm);
 
-        // Amphitheater: Center 0.78 -> Edges 1.18
+        // Amphitheater scaling
         const scale = 0.78 + (absNorm * 0.32);
         const translateZ = -90 + (absNorm * 125);
         const rotateY = clampedNorm * -22;
@@ -397,8 +397,8 @@
     renderFrame();
   }
 
-  // 🌟 7. PROJECTS: CLASSIC 3D COVERFLOW (CENTER CARD PROMINENT & FEATURED) 🌟
-  function initProjectsClassicCoverflow() {
+  // 🌟 7. PROJECTS: UNIFORM SAME SIZE (SCALE: 1.0 FOR ALL CARDS) 🌟
+  function initProjectsUniformCards() {
     const viewport = document.getElementById("coverflow-viewport");
     const track = document.getElementById("coverflow-track");
     if (!viewport || !track) return;
@@ -413,14 +413,13 @@
     let currentOffset = 0;
     let isLoopRunning = false;
 
-    const cardWidth = 280;
-    const gap = 45;
+    const cardWidth = 290;
+    const gap = 32;
     const stride = cardWidth + gap;
     const totalOrbitWidth = totalCards * stride;
 
     function renderFrame() {
       const viewportCenter = window.innerWidth / 2;
-      const centerFactor = Math.max(280, window.innerWidth * 0.38);
       const halfOrbit = totalOrbitWidth / 2;
 
       for (let i = 0; i < totalCards; i++) {
@@ -429,18 +428,10 @@
         const distFromCenter = pos - halfOrbit;
 
         const screenX = viewportCenter + distFromCenter - (cardWidth / 2);
-        const normDist = distFromCenter / centerFactor;
-        const clampedNorm = Math.max(-1.6, Math.min(1.6, normDist));
-        const absNorm = Math.abs(clampedNorm);
 
-        // Classic Coverflow: Center 1.0 -> Sides 0.85
-        const scale = Math.max(0.85, 1 - absNorm * 0.10);
-        const translateZ = -absNorm * 50;
-        const rotateY = clampedNorm * -20;
-        const opacity = Math.max(0.6, 1 - absNorm * 0.2);
-
-        card.style.transform = `translate3d(${screenX}px, 0, 0) perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
-        card.style.opacity = opacity;
+        // 🌟 UNIFORM SAME SIZE (SCALE 1.0) FOR ALL PROJECT CARDS 🌟
+        card.style.transform = `translate3d(${screenX}px, 0, 0)`;
+        card.style.opacity = "1";
       }
     }
 
@@ -526,8 +517,8 @@
   // Initialize Skills Amphitheater
   initSkillsAmphitheater();
 
-  // Initialize Projects Classic
-  initProjectsClassicCoverflow();
+  // Initialize Projects Uniform Same Size
+  initProjectsUniformCards();
 
   // 8. Toast Notification
   function showToast(message) {
