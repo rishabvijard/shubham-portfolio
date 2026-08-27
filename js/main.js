@@ -266,7 +266,7 @@
     return ((n % m) + m) % m;
   }
 
-  // 🌟 6. SKILLS ONLY: MID SMALL (0.78) -> SIDES BIG (1.18) AMPHITHEATER 🌟
+  // 🌟 6. SKILLS ONLY: AMPHITHEATER 3D (MID SMALL 0.78 -> SIDES BIG 1.18) 🌟
   function initSkillsAmphitheater() {
     const viewport = document.getElementById("skills-coverflow-viewport");
     const track = document.getElementById("skills-coverflow-track");
@@ -302,7 +302,7 @@
         const clampedNorm = Math.max(-1.7, Math.min(1.7, normDist));
         const absNorm = Math.abs(clampedNorm);
 
-        // 🌟 SKILLS: CENTER/MID SMALL (0.78) -> SIDES GROW BIG (1.18) 🌟
+        // 🌟 SKILLS ONLY: MID SMALL (0.78) -> SIDES BIG (1.18) 🌟
         const scale = 0.78 + (absNorm * 0.32);
         const translateZ = -90 + (absNorm * 125);
         const rotateY = clampedNorm * -22;
@@ -344,7 +344,6 @@
 
     window.addEventListener("resize", () => renderFrame(), { passive: true });
 
-    // ⚡ FAST OPPOSITE MOUSE DRAG
     viewport.addEventListener("mousedown", (e) => {
       isDragging = true;
       startX = e.pageX;
@@ -363,7 +362,6 @@
       wakeLoop();
     });
 
-    // ⚡ FAST OPPOSITE TOUCH DRAG
     viewport.addEventListener("touchstart", (e) => {
       isDragging = true;
       startX = e.touches[0].pageX;
@@ -381,7 +379,6 @@
       wakeLoop();
     }, { passive: true });
 
-    // ⚡ FAST OPPOSITE WHEEL
     viewport.addEventListener("wheel", (e) => {
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       if (Math.abs(delta) > 2) {
@@ -395,8 +392,8 @@
     renderFrame();
   }
 
-  // 🌟 7. PROJECTS: FAST & CRISP STANDARD 3D COVERFLOW 🌟
-  function initProjectsFastCoverflow() {
+  // 🌟 7. PROJECTS ONLY: UNIFORM IDENTICAL SIZE (SCALE 1.0 FOR ALL CARDS) 🌟
+  function initProjectsUniformCards() {
     const viewport = document.getElementById("coverflow-viewport");
     const track = document.getElementById("coverflow-track");
     if (!viewport || !track) return;
@@ -418,7 +415,6 @@
 
     function renderFrame() {
       const viewportCenter = window.innerWidth / 2;
-      const centerFactor = Math.max(260, window.innerWidth * 0.35);
       const halfOrbit = totalOrbitWidth / 2;
 
       for (let i = 0; i < totalCards; i++) {
@@ -427,18 +423,10 @@
         const distFromCenter = pos - halfOrbit;
 
         const screenX = viewportCenter + distFromCenter - (cardWidth / 2);
-        const normDist = distFromCenter / centerFactor;
-        const clampedNorm = Math.max(-1.7, Math.min(1.7, normDist));
-        const absNorm = Math.abs(clampedNorm);
 
-        // Standard 3D Coverflow for Projects
-        const rotateY = clampedNorm * -20;
-        const translateZ = -absNorm * 45;
-        const scale = Math.max(0.86, 1 - absNorm * 0.10);
-        const opacity = Math.max(0.6, 1 - absNorm * 0.18);
-
-        card.style.transform = `translate3d(${screenX}px, 0, 0) perspective(1200px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
-        card.style.opacity = opacity;
+        // 🌟 EXACT SAME UNIFORM SIZE (SCALE 1.0) FOR ALL PROJECT CARDS 🌟
+        card.style.transform = `translate3d(${screenX}px, 0, 0)`;
+        card.style.opacity = "1";
       }
     }
 
@@ -523,7 +511,7 @@
 
   // Initialize
   initSkillsAmphitheater();
-  initProjectsFastCoverflow();
+  initProjectsUniformCards();
 
   // 8. Toast Notification
   function showToast(message) {
