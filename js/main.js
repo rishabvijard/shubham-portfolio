@@ -20,12 +20,12 @@
         cursorSparks.push({
           x: mouseX + (Math.random() - 0.5) * 6,
           y: mouseY + (Math.random() - 0.5) * 6,
-          vx: (Math.random() - 0.5) * 1.6,
-          vy: (Math.random() - 0.5) * 1.6 - 0.4,
-          size: Math.random() * 3 + 1.2,
-          alpha: 1,
-          decay: Math.random() * 0.03 + 0.02,
-          color: Math.random() > 0.4 ? "rgba(255, 215, 0, " : "rgba(251, 141, 255, "
+          vx: (Math.random() - 0.5) * 1.4,
+          vy: (Math.random() - 0.5) * 1.4 - 0.3,
+          size: Math.random() * 2.2 + 1,
+          alpha: 0.75,
+          decay: Math.random() * 0.035 + 0.02,
+          color: Math.random() > 0.4 ? "rgba(229, 192, 123, " : "rgba(251, 141, 255, "
         });
       }
     });
@@ -52,7 +52,7 @@
     }
   }
 
-  // 🌟 2. GOLDEN PERSPECTIVE TUNNEL (MATCHING IMAGE & MOVES ONLY ON MOUSE SCROLL) 🌟
+  // 🌟 2. ULTRA-DENSE (50 RINGS) + SUBTLE LINE LUMINANCE 🌟
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d");
@@ -81,84 +81,78 @@
     }
 
     const tunnelStars = [];
-    const starCount = window.innerWidth < 768 ? 40 : 80;
+    const starCount = window.innerWidth < 768 ? 30 : 60;
     for (let i = 0; i < starCount; i++) {
       tunnelStars.push({
         x: (Math.random() - 0.5) * 2200,
         y: (Math.random() - 0.5) * 2200,
         baseZ: Math.random() * 1200 + 40,
-        size: Math.random() * 1.8 + 0.6,
-        alpha: Math.random() * 0.8 + 0.2
+        size: Math.random() * 1.4 + 0.4,
+        alpha: Math.random() * 0.5 + 0.1
       });
     }
 
     function renderTunnel() {
-      // Smoothly follow page scroll ONLY (No autonomous motion when idle)
+      // Moves strictly with scroll
       const targetScrollY = window.pageYOffset;
       smoothScrollY += (targetScrollY - smoothScrollY) * 0.12;
 
       ctx.clearRect(0, 0, width, height);
 
-      // Central Golden Depth Glow (matching reference image)
-      const gradient = ctx.createRadialGradient(centerX, centerY, 10, centerX, centerY, Math.max(width, height) * 0.55);
-      gradient.addColorStop(0, "rgba(255, 215, 0, 0.2)");
-      gradient.addColorStop(0.25, "rgba(229, 192, 123, 0.08)");
-      gradient.addColorStop(0.65, "rgba(18, 14, 22, 0.0)");
-      gradient.addColorStop(1, "transparent");
+      // Deep Subtle Glow
+      const gradient = ctx.createRadialGradient(centerX, centerY, 5, centerX, centerY, Math.max(width, height) * 0.45);
+      gradient.addColorStop(0, "rgba(229, 192, 123, 0.05)");
+      gradient.addColorStop(0.35, "rgba(229, 192, 123, 0.015)");
+      gradient.addColorStop(0.7, "transparent");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
-      // 8 Corner Perspective Diagonal Ray Lines
+      // 16 High-Density Perspective Diagonal Rays
       const maxRadius = Math.max(width, height) * 1.25;
       ctx.save();
-      ctx.strokeStyle = "rgba(229, 192, 123, 0.32)";
-      ctx.lineWidth = 1;
-      ctx.shadowBlur = 10;
-      ctx.shadowColor = "rgba(255, 215, 0, 0.4)";
-      for (let a = 0; a < 8; a++) {
-        const angle = (a * Math.PI) / 4 + Math.PI / 8;
+      ctx.strokeStyle = "rgba(229, 192, 123, 0.10)";
+      ctx.lineWidth = 0.55;
+      for (let a = 0; a < 16; a++) {
+        const angle = (a * Math.PI) / 8;
         ctx.beginPath();
-        ctx.moveTo(centerX + Math.cos(angle) * 12 * 1.58, centerY + Math.sin(angle) * 12);
+        ctx.moveTo(centerX + Math.cos(angle) * 6 * 1.58, centerY + Math.sin(angle) * 6);
         ctx.lineTo(centerX + Math.cos(angle) * maxRadius * 1.58, centerY + Math.sin(angle) * maxRadius);
         ctx.stroke();
       }
       ctx.restore();
 
-      // Concentric Golden Wireframe Octagons (Depth tied strictly to scroll)
-      const numRings = 14;
-      const ringSpacing = 75;
+      // 🌟 ULTRA-DENSE 50 CONCENTRIC RINGS (GENTLE 0.03 - 0.16 ALPHA) 🌟
+      const numRings = 50;
+      const ringSpacing = 24;
       const totalDepth = numRings * ringSpacing;
-      // scrollOffset moves strictly when smoothScrollY changes!
-      const scrollOffset = (smoothScrollY * 0.55) % totalDepth;
+      const scrollOffset = (smoothScrollY * 0.4) % totalDepth;
 
       for (let i = 0; i < numRings; i++) {
         let ringDist = (i * ringSpacing + scrollOffset) % totalDepth;
         if (ringDist < 0) ringDist += totalDepth;
 
         let progress = ringDist / totalDepth;
-        let scale = Math.pow(progress, 2.3);
-        let rx = scale * (width * 0.95);
-        let ry = scale * (height * 0.88);
+        let scale = Math.pow(progress, 2.0);
+        let rx = scale * (width * 0.98);
+        let ry = scale * (height * 0.92);
 
-        if (rx > 6 && ry > 4) {
+        if (rx > 3 && ry > 2) {
           let alpha = Math.sin(progress * Math.PI);
-          alpha = Math.max(0.1, alpha * 0.65);
+          // Delicate alpha from 0.03 to 0.15 max
+          alpha = Math.max(0.03, alpha * 0.15);
 
           ctx.save();
-          ctx.strokeStyle = `rgba(255, 215, 0, ${alpha})`;
-          ctx.lineWidth = Math.max(1, scale * 3.2);
-          ctx.shadowBlur = 14;
-          ctx.shadowColor = "rgba(255, 215, 0, 0.5)";
-
+          ctx.strokeStyle = `rgba(229, 192, 123, ${alpha})`;
+          ctx.lineWidth = 0.6;
           drawOctagon(centerX, centerY, rx, ry);
           ctx.stroke();
           ctx.restore();
         }
       }
 
-      // Floating Stardust Particles (Z position tied strictly to scroll)
+      // Subtle Stardust
       tunnelStars.forEach((star) => {
-        let z = (star.baseZ - (smoothScrollY * 0.5)) % 1200;
+        let z = (star.baseZ - (smoothScrollY * 0.35)) % 1200;
         if (z < 10) z += 1200;
 
         const k = 450 / z;
@@ -167,8 +161,8 @@
 
         if (px >= 0 && px <= width && py >= 0 && py <= height) {
           ctx.beginPath();
-          ctx.arc(px, py, star.size * k * 0.45, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 215, 0, ${star.alpha * Math.min(1, k * 0.8)})`;
+          ctx.arc(px, py, star.size * k * 0.3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(229, 192, 123, ${star.alpha * Math.min(0.5, k * 0.4)})`;
           ctx.fill();
         }
       });
@@ -187,8 +181,8 @@
           ctx.beginPath();
           ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
           ctx.fillStyle = `${s.color}${s.alpha})`;
-          ctx.shadowBlur = 8;
-          ctx.shadowColor = s.color + "0.8)";
+          ctx.shadowBlur = 4;
+          ctx.shadowColor = s.color + "0.4)";
           ctx.fill();
         }
       }
