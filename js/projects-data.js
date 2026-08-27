@@ -1,46 +1,41 @@
 ﻿const projectsData = {
-  aniverse: {
-    title: "ANIVERSE — Anime & K-Drama Streaming Platform",
-    category: "Full-Stack Web App • Python Flask & JavaScript",
-    desc: "An engaging anime and K-drama streaming landing page featuring dynamic movie sliders, interactive card hover states, video previews, and a responsive modern dark UI. Deployed to production on Render.",
+  login: {
+    title: "Responsive Login Page UI",
+    category: "Frontend Application",
+    desc: "A responsive full-screen authentication interface featuring an automated background image slider, smooth cross-fade transitions, password visibility toggling, and client-side JavaScript validation.",
     features: [
-      "Dynamic Hero Carousel & Media Sliders",
-      "Interactive Stream Showcase & Hover Animations",
-      "Python Flask Backend routing & templating",
-      "Live Cloud Deployment on Render",
-      "Mobile-first responsive architecture"
+      "Auto-advancing background image carousel with cross-fade effect",
+      "Interactive password reveal/hide eye toggle",
+      "Real-time email and password regex validation",
+      "Glassmorphism dark card container",
+      "Mobile-first responsive styling"
     ],
-    tech: ["Python", "Flask", "HTML5", "CSS3", "JavaScript", "Render", "Cloud"],
-    liveUrl: "https://aniverse-stt4.onrender.com",
-    githubUrl: "https://github.com/rishabvijard/ANIVERSE_APP"
+    tech: ["HTML5", "CSS3", "JavaScript", "Regex", "Flexbox"]
   },
   gym: {
-    title: "Gym Management System",
-    category: "Web Application • Python Flask & CSS3",
-    desc: "A streamlined web management application designed to organize gym member records, training schedules, fitness programs, and operations in a clean, intuitive dashboard.",
+    title: "Gym Website — Fitness Hub",
+    category: "Responsive Web Portal",
+    desc: "A high-performance modern fitness web application crafted with pure HTML5, CSS Grid, and JavaScript. Features dedicated workout sections, responsive membership pricing tables, and interactive schedules.",
     features: [
-      "Member Registration & Record Tracking",
-      "Tiered Membership Plans & Workout Modules",
-      "Python Flask backend data handling",
-      "Clean CSS Grid & Flexbox responsive layouts",
-      "Deployed to the cloud via Render"
+      "Modern high-contrast fitness hero banner",
+      "Interactive class schedule and program overview",
+      "Tiered membership pricing cards with hover highlights",
+      "Smooth anchor scrolling and responsive navigation",
+      "Mobile-optimized touch targets"
     ],
-    tech: ["Python", "Flask", "HTML5", "CSS3", "MySQL", "Render"],
-    liveUrl: "https://github.com/rishabvijard/gym-management",
-    githubUrl: "https://github.com/rishabvijard/gym-management"
+    tech: ["HTML5", "CSS3", "JavaScript", "CSS Grid", "Animations"]
   },
-  wordpress: {
-    title: "WordPress CMS & Custom UI Development",
-    category: "CMS & Frontend Solutions",
-    desc: "Custom WordPress site development utilizing Elementor Pro, tailored PHP templates, custom CSS styling, dynamic contact forms, and speed optimization.",
+  wp: {
+    title: "WordPress Customization & Solutions",
+    category: "CMS & Client Solutions",
+    desc: "Custom WordPress website development including bespoke Elementor layout structures, custom CSS overrides, PHP child-theme template adaptations, and conversion-focused contact forms.",
     features: [
-      "Custom Elementor Widgets & Layout Styling",
-      "PHP Template Modification & Child Themes",
-      "AJAX FormSubmit contact integrations",
-      "SEO & Mobile Performance Optimization"
+      "Bespoke Elementor page builder widgets and sections",
+      "Custom CSS styling and animation overrides",
+      "PHP template function adjustments",
+      "Dynamic AJAX contact form integration",
+      "Page speed and mobile layout optimization"
     ],
-    tech: ["WordPress", "Elementor Pro", "PHP", "HTML5", "CSS3", "JavaScript"],
-    liveUrl: "https://github.com/rishabvijard",
-    githubUrl: "https://github.com/rishabvijard"
+    tech: ["WordPress", "Elementor Pro", "PHP", "CSS3", "AJAX"]
   }
 };

@@ -1,22 +1,5 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  // Live India (IST) Timezone Clock
-  function updateLiveClock() {
-    const clockEl = document.getElementById("live-clock");
-    if (!clockEl) return;
-    const now = new Date();
-    const options = {
-      timeZone: "Asia/Kolkata",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: true
-    };
-    clockEl.textContent = new Intl.DateTimeFormat("en-US", options).format(now);
-  }
-  updateLiveClock();
-  setInterval(updateLiveClock, 1000);
-
-  // Custom Cursor for Desktop
+  // Custom Cursor on Desktop
   const cursor = document.getElementById("custom-cursor");
   const cursorDot = document.getElementById("custom-cursor-dot");
   if (cursor && cursorDot && window.matchMedia("(hover: hover)").matches) {
@@ -25,6 +8,17 @@
       cursor.style.top = `${e.clientY}px`;
       cursorDot.style.left = `${e.clientX}px`;
       cursorDot.style.top = `${e.clientY}px`;
+    });
+  }
+
+  // 3D Magnetic Portrait Tilt Effect (Desktop)
+  const portrait = document.getElementById("portrait-wrapper");
+  if (portrait && window.innerWidth > 768) {
+    window.addEventListener("mousemove", (e) => {
+      const { innerWidth, innerHeight } = window;
+      const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
+      const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
+      portrait.style.transform = `translateX(calc(-50% + ${x * 16}px)) translateY(${y * 12}px) rotate(${x * 2}deg)`;
     });
   }
 
@@ -49,7 +43,7 @@
     });
   }
 
-  // Spotlight Hover Glow Tracker on all Cards
+  // Spotlight Hover Gradient Tracker
   document.querySelectorAll(".spotlight-card").forEach((card) => {
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
@@ -100,7 +94,7 @@
     animate();
   }
 
-  // Skills Filtering
+  // Skills Filter
   const filterBtns = document.querySelectorAll(".skill-filter-btn");
   const skillCards = document.querySelectorAll(".skill-card");
   filterBtns.forEach((btn) => {
@@ -139,7 +133,7 @@
     });
   });
 
-  // Project Modal Dialog
+  // Modal Dialog
   const modal = document.getElementById("project-modal");
   const modalBackdrop = document.getElementById("modal-backdrop");
   const modalCloseBtn = document.getElementById("modal-close-btn");
@@ -155,7 +149,7 @@
     modalCategory.textContent = data.category;
     modalBody.innerHTML = `
       <p style="margin-bottom: 1rem;">${data.desc}</p>
-      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem; font-family: var(--font-heading);">Key Features:</h4>
+      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem; font-family: var(--font-hero);">Key Features:</h4>
       <ul style="list-style: disc; padding-left: 1.25rem; margin-bottom: 1.25rem;">
         ${data.features.map((f) => `<li>${f}</li>`).join("")}
       </ul>
@@ -201,17 +195,17 @@
           submitBtn.textContent = "Message Sent! ✓";
           setTimeout(() => {
             submitBtn.disabled = false;
-            submitBtn.textContent = "Send Message →";
+            submitBtn.textContent = "Send Message";
           }, 4000);
         } else {
           showToast("Failed to send. Please email directly.");
           submitBtn.disabled = false;
-          submitBtn.textContent = "Send Message →";
+          submitBtn.textContent = "Send Message";
         }
       } catch (err) {
         showToast("Error sending message. Please try again.");
         submitBtn.disabled = false;
-        submitBtn.textContent = "Send Message →";
+        submitBtn.textContent = "Send Message";
       }
     });
   }
