@@ -271,19 +271,13 @@
     return ((n % m) + m) % m;
   }
 
-  // 🌟 6 & 7. CLEAN NON-OVERLAPPING 3D AMPHITHEATER PERSPECTIVE ENGINE 🌟
-  function initCleanAmphitheater({
-    viewportId,
-    trackId,
-    cardSelector,
-    defaultCardWidth = 260,
-    gap = 55
-  }) {
-    const viewport = document.getElementById(viewportId);
-    const track = document.getElementById(trackId);
+  // 🌟 6. SKILLS: REVERSE-PERSPECTIVE AMPHITHEATER (CENTER SMALL, EDGES LARGE) 🌟
+  function initSkillsAmphitheater() {
+    const viewport = document.getElementById("skills-coverflow-viewport");
+    const track = document.getElementById("skills-coverflow-track");
     if (!viewport || !track) return;
 
-    const cards = Array.from(track.querySelectorAll(cardSelector));
+    const cards = Array.from(track.querySelectorAll(".skill-coverflow-card"));
     const totalCards = cards.length;
     if (!totalCards) return;
 
@@ -293,15 +287,10 @@
     let currentOffset = 0;
     let isLoopRunning = false;
 
-    let cardWidth = cards[0].offsetWidth || defaultCardWidth;
-    let stride = cardWidth + gap;
-    let totalOrbitWidth = totalCards * stride;
-
-    function updateMetrics() {
-      cardWidth = cards[0].offsetWidth || defaultCardWidth;
-      stride = cardWidth + gap;
-      totalOrbitWidth = totalCards * stride;
-    }
+    const cardWidth = 260;
+    const gap = 55;
+    const stride = cardWidth + gap;
+    const totalOrbitWidth = totalCards * stride;
 
     function renderFrame() {
       const viewportCenter = window.innerWidth / 2;
@@ -318,7 +307,7 @@
         const clampedNorm = Math.max(-1.7, Math.min(1.7, normDist));
         const absNorm = Math.abs(clampedNorm);
 
-        // 🌟 CLEAN BALANCED SCALE: 0.78 (Center) -> 1.18 (Edges) with ZERO OVERLAP 🌟
+        // Amphitheater: Center 0.78 -> Edges 1.18
         const scale = 0.78 + (absNorm * 0.32);
         const translateZ = -90 + (absNorm * 125);
         const rotateY = clampedNorm * -22;
@@ -338,7 +327,7 @@
           velocity = 0;
           isLoopRunning = false;
           renderFrame();
-          return; // 🛑 100% Still when idle
+          return;
         }
       }
 
@@ -358,13 +347,8 @@
       }
     }
 
-    // Resize
-    window.addEventListener("resize", () => {
-      updateMetrics();
-      renderFrame();
-    }, { passive: true });
+    window.addEventListener("resize", () => renderFrame(), { passive: true });
 
-    // 🔄 OPPOSITE MOUSE DRAG: Drag Left -> Cards Move Right
     viewport.addEventListener("mousedown", (e) => {
       isDragging = true;
       startX = e.pageX;
@@ -383,7 +367,6 @@
       wakeLoop();
     });
 
-    // 🔄 OPPOSITE TOUCH DRAG
     viewport.addEventListener("touchstart", (e) => {
       isDragging = true;
       startX = e.touches[0].pageX;
@@ -401,7 +384,6 @@
       wakeLoop();
     }, { passive: true });
 
-    // 🔄 OPPOSITE MOUSE WHEEL SCROLLING
     viewport.addEventListener("wheel", (e) => {
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       if (Math.abs(delta) > 2) {
@@ -412,27 +394,140 @@
       }
     }, { passive: true });
 
-    updateMetrics();
     renderFrame();
   }
 
-  // Initialize Skills (Clean spacing, zero overlap)
-  initCleanAmphitheater({
-    viewportId: "skills-coverflow-viewport",
-    trackId: "skills-coverflow-track",
-    cardSelector: ".skill-coverflow-card",
-    defaultCardWidth: 260,
-    gap: 55
-  });
+  // 🌟 7. PROJECTS: CLASSIC 3D COVERFLOW (CENTER CARD PROMINENT & FEATURED) 🌟
+  function initProjectsClassicCoverflow() {
+    const viewport = document.getElementById("coverflow-viewport");
+    const track = document.getElementById("coverflow-track");
+    if (!viewport || !track) return;
 
-  // Initialize Projects (Clean spacing, zero overlap)
-  initCleanAmphitheater({
-    viewportId: "coverflow-viewport",
-    trackId: "coverflow-track",
-    cardSelector: ".coverflow-card-item",
-    defaultCardWidth: 280,
-    gap: 55
-  });
+    const cards = Array.from(track.querySelectorAll(".coverflow-card-item"));
+    const totalCards = cards.length;
+    if (!totalCards) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let velocity = 0;
+    let currentOffset = 0;
+    let isLoopRunning = false;
+
+    const cardWidth = 280;
+    const gap = 45;
+    const stride = cardWidth + gap;
+    const totalOrbitWidth = totalCards * stride;
+
+    function renderFrame() {
+      const viewportCenter = window.innerWidth / 2;
+      const centerFactor = Math.max(280, window.innerWidth * 0.38);
+      const halfOrbit = totalOrbitWidth / 2;
+
+      for (let i = 0; i < totalCards; i++) {
+        const card = cards[i];
+        const pos = mod(i * stride + currentOffset, totalOrbitWidth);
+        const distFromCenter = pos - halfOrbit;
+
+        const screenX = viewportCenter + distFromCenter - (cardWidth / 2);
+        const normDist = distFromCenter / centerFactor;
+        const clampedNorm = Math.max(-1.6, Math.min(1.6, normDist));
+        const absNorm = Math.abs(clampedNorm);
+
+        // Classic Coverflow: Center 1.0 -> Sides 0.85
+        const scale = Math.max(0.85, 1 - absNorm * 0.10);
+        const translateZ = -absNorm * 50;
+        const rotateY = clampedNorm * -20;
+        const opacity = Math.max(0.6, 1 - absNorm * 0.2);
+
+        card.style.transform = `translate3d(${screenX}px, 0, 0) perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
+        card.style.opacity = opacity;
+      }
+    }
+
+    function step() {
+      if (!isDragging) {
+        if (Math.abs(velocity) > 0.05) {
+          currentOffset += velocity;
+          velocity *= 0.90;
+        } else {
+          velocity = 0;
+          isLoopRunning = false;
+          renderFrame();
+          return;
+        }
+      }
+
+      renderFrame();
+
+      if (isDragging || Math.abs(velocity) > 0.05) {
+        requestAnimationFrame(step);
+      } else {
+        isLoopRunning = false;
+      }
+    }
+
+    function wakeLoop() {
+      if (!isLoopRunning) {
+        isLoopRunning = true;
+        requestAnimationFrame(step);
+      }
+    }
+
+    window.addEventListener("resize", () => renderFrame(), { passive: true });
+
+    viewport.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      startX = e.pageX;
+      velocity = 0;
+      wakeLoop();
+    });
+    window.addEventListener("mouseup", () => { isDragging = false; });
+    viewport.addEventListener("mouseleave", () => { isDragging = false; });
+    window.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      const x = e.pageX;
+      const delta = (x - startX) * 1.25;
+      currentOffset -= delta; // Inverted
+      velocity = -delta * 0.5; // Inverted
+      startX = x;
+      wakeLoop();
+    });
+
+    viewport.addEventListener("touchstart", (e) => {
+      isDragging = true;
+      startX = e.touches[0].pageX;
+      velocity = 0;
+      wakeLoop();
+    }, { passive: true });
+    window.addEventListener("touchend", () => { isDragging = false; });
+    viewport.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
+      const x = e.touches[0].pageX;
+      const delta = (x - startX) * 1.25;
+      currentOffset -= delta; // Inverted
+      velocity = -delta * 0.5; // Inverted
+      startX = x;
+      wakeLoop();
+    }, { passive: true });
+
+    viewport.addEventListener("wheel", (e) => {
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) > 2) {
+        velocity += delta * 0.24; // Inverted
+        if (velocity > 30) velocity = 30;
+        if (velocity < -30) velocity = -30;
+        wakeLoop();
+      }
+    }, { passive: true });
+
+    renderFrame();
+  }
+
+  // Initialize Skills Amphitheater
+  initSkillsAmphitheater();
+
+  // Initialize Projects Classic
+  initProjectsClassicCoverflow();
 
   // 8. Toast Notification
   function showToast(message) {
