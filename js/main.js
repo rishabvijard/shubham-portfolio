@@ -217,7 +217,7 @@
     requestCanvasFrame();
   }
 
-  // 3. 3D Magnetic Portrait Tilt
+  // 3. 3D Magnetic Portrait Face Tilt
   const portrait = document.getElementById("portrait-wrapper");
   const title = document.getElementById("sparkle-title");
 
@@ -236,7 +236,7 @@
     }, { passive: true });
   }
 
-  // 4. Mobile Hamburger
+  // 4. Mobile Hamburger Toggle
   const hamburger = document.getElementById("nav-hamburger");
   const drawer = document.getElementById("mobile-nav-drawer");
   const drawerLinks = document.querySelectorAll(".mobile-nav-link");
@@ -257,7 +257,7 @@
     });
   }
 
-  // 5. Spotlight Hover
+  // 5. Spotlight Hover Tracker
   document.querySelectorAll(".spotlight-card").forEach((card) => {
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
@@ -271,7 +271,7 @@
     return ((n % m) + m) % m;
   }
 
-  // 🌟 6 & 7. FLAWLESS INFINITE 3D COVERFLOW ENGINE (WITH SMOOTH AUTO-GLIDE) 🌟
+  // 🌟 6 & 7. FLAWLESS INFINITE 3D COVERFLOW ENGINE (OPPOSITE INVERTED INTERACTION) 🌟
   function initFlawlessInfiniteCoverflow({
     viewportId,
     trackId,
@@ -355,7 +355,7 @@
       renderFrame();
     }, { passive: true });
 
-    // Mouse drag
+    // 🔄 OPPOSITE / INVERTED MOUSE DRAG: Drag Left -> Cards Move Right
     viewport.addEventListener("mousedown", (e) => {
       isDragging = true;
       startX = e.pageX;
@@ -366,12 +366,12 @@
       if (!isDragging) return;
       const x = e.pageX;
       const delta = (x - startX) * 1.25;
-      currentOffset += delta;
-      velocity = delta * 0.5;
+      currentOffset -= delta; // Inverted
+      velocity = -delta * 0.5; // Inverted
       startX = x;
     });
 
-    // Touch drag
+    // 🔄 OPPOSITE / INVERTED TOUCH DRAG (Mobile/Tablet)
     viewport.addEventListener("touchstart", (e) => {
       isDragging = true;
       startX = e.touches[0].pageX;
@@ -382,16 +382,16 @@
       if (!isDragging) return;
       const x = e.touches[0].pageX;
       const delta = (x - startX) * 1.25;
-      currentOffset += delta;
-      velocity = delta * 0.5;
+      currentOffset -= delta; // Inverted
+      velocity = -delta * 0.5; // Inverted
       startX = x;
     }, { passive: true });
 
-    // Mouse wheel scrolling
+    // 🔄 OPPOSITE / INVERTED MOUSE WHEEL SCROLLING
     viewport.addEventListener("wheel", (e) => {
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       if (Math.abs(delta) > 2) {
-        velocity -= delta * 0.22;
+        velocity += delta * 0.22; // Inverted direction
         if (velocity > 30) velocity = 30;
         if (velocity < -30) velocity = -30;
       }
