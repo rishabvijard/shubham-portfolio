@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shubham — Frontend Developer Portfolio</title>
-  <meta name="description" content="Developer Portfolio of Shubham. Skilled in HTML, CSS, JavaScript, React, PHP, WordPress & Elementor." />
+  <meta name="description" content="Portfolio of Shubham. Crafting modern, fast & responsive web experiences with React, JavaScript & WordPress." />
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=14.0" />
+  <link rel="stylesheet" href="css/style.css?v=15.0" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
 </head>
 <body>
@@ -25,7 +25,7 @@
 
   <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
-  <!-- Mobile Nav Drawer -->
+  <!-- Mobile Navigation Drawer -->
   <div id="mobile-nav-drawer" class="mobile-nav-drawer">
     <a href="#hero" class="mobile-nav-link">Home</a>
     <a href="#about" class="mobile-nav-link">About</a>
@@ -35,190 +35,167 @@
     <a href="#contact" class="mobile-nav-link">Contact</a>
   </div>
 
-  <!-- Navbar -->
-  <header class="navbar-wrapper">
+  <!-- Floating Island Navbar (Framer Style) -->
+  <div class="navbar-wrapper">
     <nav class="navbar" id="navbar">
       <a href="#hero" class="nav-brand">
-        <span class="brand-name">Shub<span class="gradient-text">ham</span></span>
+        Shub<span class="gradient-text">ham</span>
       </a>
 
       <ul class="nav-menu" id="nav-menu">
-        <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
-        <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
-        <li class="nav-item"><a href="#journey" class="nav-link">Journey</a></li>
-        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#journey" class="nav-link">Journey</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="GitHub Profile" title="View GitHub Profile">
-          <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+        <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn-nav-github" aria-label="GitHub Profile" title="View GitHub Profile">
+          <svg viewBox="0 0 24 24" fill="currentColor">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
         </a>
         <a href="#contact" class="btn btn-primary btn-sm">
-          <span>Connect</span>
+          <span>Connect &rarr;</span>
         </a>
         <button id="nav-hamburger" class="nav-hamburger" aria-label="Toggle navigation menu">
           <span></span><span></span><span></span>
         </button>
       </div>
     </nav>
-  </header>
+  </div>
 
   <main>
-    <!-- 1. HERO FRONT PAGE -->
-    <section id="hero" class="hero-front-section">
-      <div class="container hero-container-flex">
-        <div class="hero-top-wrap">
+    <!-- 1. HERO SECTION (RISHI VIJAY KRISHNA STYLE) -->
+    <section id="hero" class="hero-section">
+      <div class="container">
+        <div class="hero-content-wrap">
           <div class="status-pill">
             <span class="status-dot"></span>
-            <span class="status-text">Available for Junior Frontend Roles &amp; Freelance</span>
+            <span>Available for Junior Frontend Roles &amp; Freelance</span>
           </div>
+
           <h1 class="hero-main-title">
-            Hi, i&apos;m shubham
+            Designing &amp; Building <br/>
+            <span class="hero-gradient-text">Next-Gen Web Experiences.</span>
           </h1>
-        </div>
 
-        <div id="portrait-wrapper" class="portrait-magnet-box">
-          <img
-            src="https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png"
-            alt="Shubham Frontend Developer"
-            class="portrait-img"
-            draggable="false"
-          />
-        </div>
-
-        <div class="hero-bottom-bar">
           <p class="hero-bio-text">
-            a frontend developer driven by crafting striking, responsive, and unforgettable web experiences
+            Hi, I&apos;m <strong>Shubham</strong> — an aspiring Frontend Developer focused on crafting striking, accessible, and high-performance digital products using <strong>React, JavaScript (ES6+), and WordPress</strong>.
           </p>
 
-          <a href="#contact" class="contact-btn-glow">
-            Contact Me
-          </a>
+          <div class="hero-actions-wrap">
+            <a href="#contact" class="btn btn-primary">
+              <span>Let&apos;s Build Together &rarr;</span>
+            </a>
+            <a href="#projects" class="btn btn-outline">
+              <span>Explore Selected Work &darr;</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 2. ABOUT ME SECTION WITH GLOWING TECH BADGES -->
+    <!-- 2. BENTO GRID (ABOUT ME SECTION) -->
     <section id="about" class="section about-section">
       <div class="container">
         <div class="section-header">
           <div class="section-tag">About Me</div>
-          <h2 class="section-title">Crafting Clean Interfaces with Passion</h2>
-          <p class="section-subtitle">Dedicated to mastering frontend development and delivering seamless digital experiences.</p>
+          <h2 class="section-title">Developer &amp; Interface Craftsman</h2>
+          <p class="section-subtitle">A glimpse into my background, technical philosophy, and current status.</p>
         </div>
 
-        <div class="about-grid">
-          <div class="card project-card spotlight-card">
-            <div class="project-preview-box">
-              <div class="project-mockup-bar">
-                <span class="mockup-dot dot-r"></span>
-                <span class="mockup-dot dot-y"></span>
-                <span class="mockup-dot dot-g"></span>
-                <span class="mockup-url">shubham.dev/about.js</span>
-              </div>
-              <div class="project-code-snippet">
-                <span class="code-kw">const</span> <span class="code-var">developer</span> = {<br/>
-                &nbsp;&nbsp;<span class="code-prop">name</span>: <span class="code-str">'Shubham'</span>,<br/>
-                &nbsp;&nbsp;<span class="code-prop">role</span>: <span class="code-str">'Frontend Developer'</span>,<br/>
-                &nbsp;&nbsp;<span class="code-prop">stack</span>: [<span class="code-str">'HTML5'</span>, <span class="code-str">'CSS3'</span>, <span class="code-str">'JS'</span>, <span class="code-str">'React'</span>, <span class="code-str">'WordPress'</span>],<br/>
-                &nbsp;&nbsp;<span class="code-prop">status</span>: <span class="code-str">'Available for Hire'</span>,<br/>
-                &nbsp;&nbsp;<span class="code-prop">passion</span>: <span class="code-str">'Crafting Fast, Responsive &amp; Clean UI'</span><br/>
-                };
+        <div class="bento-grid">
+          <!-- Bento 1: Main Story (7 cols) -->
+          <div class="card spotlight-card bento-main-story">
+            <div class="bento-header-flex">
+              <div class="bento-avatar-badge">S</div>
+              <div>
+                <h3 class="bento-name">Shubham</h3>
+                <p class="bento-role">Aspiring Frontend Developer</p>
               </div>
             </div>
 
-            <div class="project-content">
-              <div class="about-header-flex" style="margin-bottom: 1.25rem;">
-                <div class="avatar-badge">
-                  <span class="avatar-initials">S</span>
+            <p class="bento-text">
+              I specialize in turning complex creative concepts into seamless, pixel-perfect web interfaces. My focus is writing clean, scalable code with modern frontend tools.
+            </p>
+            <p class="bento-text">
+              From building responsive single-page applications with <strong>React</strong> to custom client themes in <strong>WordPress &amp; Elementor</strong>, I take pride in creating fast, intuitive experiences.
+            </p>
+          </div>
+
+          <!-- Bento 2: Live Location & Timezone (5 cols) -->
+          <div class="card spotlight-card bento-time-card">
+            <div class="time-card-inner">
+              <div class="time-card-top">
+                <div class="time-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                 </div>
                 <div>
-                  <h3 class="about-card-title">Shubham</h3>
-                  <p class="about-card-subtitle">Aspiring Frontend Developer</p>
+                  <h4 class="time-location-title">India (IST)</h4>
+                  <p class="time-location-sub">GMT+5:30 Timezone</p>
                 </div>
               </div>
 
-              <!-- Tech Stack Logos Row in About -->
-              <div class="about-tech-stack-row">
-                <span class="tech-stack-label">Core Technologies:</span>
-                <div class="tech-stack-icons-flex">
-                  <div class="mini-tech-icon" title="HTML5"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" /></div>
-                  <div class="mini-tech-icon" title="CSS3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" /></div>
-                  <div class="mini-tech-icon" title="JavaScript"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS" /></div>
-                  <div class="mini-tech-icon" title="React"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" /></div>
-                  <div class="mini-tech-icon" title="WordPress"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" alt="WordPress" /></div>
-                  <div class="mini-tech-icon" title="Elementor">
-                    <svg viewBox="0 0 512 512" fill="#D30C5C"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zm-85.3 384h-42.7V128h42.7v256zm170.7 0h-128v-42.7h128V384zm0-85.3h-128V256h128v42.7zm0-85.4h-128v-42.7h128v42.7z"/></svg>
-                  </div>
-                </div>
+              <div>
+                <div id="live-clock" class="live-clock-display">--:--:--</div>
               </div>
 
-              <p class="about-text">
-                I am an enthusiastic web developer passionate about turning creative concepts into responsive, accessible, and high-performance websites.
-              </p>
-              <p class="about-text">
-                My journey involves working with core web foundations—<strong>HTML5, CSS3, and JavaScript (ES6+)</strong>—along with <strong>React</strong> for component-based architecture and <strong>WordPress + Elementor</strong> for customizable client websites.
-              </p>
-
-              <div class="about-highlights">
-                <div class="highlight-item">
-                  <div class="highlight-icon-box glow-bolt">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                  </div>
-                  <div>
-                    <h4 class="highlight-title">Fast &amp; Responsive</h4>
-                    <p class="highlight-desc">Mobile-first layouts ensuring cross-device compatibility.</p>
-                  </div>
-                </div>
-
-                <div class="highlight-item">
-                  <div class="highlight-icon-box glow-palette">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"></path></svg>
-                  </div>
-                  <div>
-                    <h4 class="highlight-title">Modern Aesthetics</h4>
-                    <p class="highlight-desc">Clean dark UI, subtle glassmorphism, and sleek motion.</p>
-                  </div>
-                </div>
+              <div class="live-status-row">
+                <span class="status-dot"></span>
+                <span>Active &amp; Ready for Opportunities</span>
               </div>
             </div>
           </div>
 
-          <!-- Stats Column with Glowing Vector Tech Boxes -->
-          <div class="about-stats-column">
-            <div class="card stat-box spotlight-card">
-              <div class="stat-icon-wrapper stat-glow-purple">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="stat-svg"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+          <!-- Bento 3: Tech Stack Pills (6 cols) -->
+          <div class="card spotlight-card bento-tech-card">
+            <h3 class="bento-tech-title">Core Technologies</h3>
+            <div class="bento-tech-pills">
+              <div class="tech-pill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="tech-pill-icon" />
+                <span>HTML5</span>
               </div>
-              <div class="stat-info">
-                <span class="stat-big-number">100%</span>
-                <h4 class="stat-heading">Dedicated Learning</h4>
-                <p class="stat-subtext">Constantly refining skills in JavaScript, React, PHP &amp; WordPress ecosystem.</p>
+              <div class="tech-pill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="tech-pill-icon" />
+                <span>CSS3</span>
+              </div>
+              <div class="tech-pill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS" class="tech-pill-icon" />
+                <span>JavaScript</span>
+              </div>
+              <div class="tech-pill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="tech-pill-icon" />
+                <span>React</span>
+              </div>
+              <div class="tech-pill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" alt="WordPress" class="tech-pill-icon" />
+                <span>WordPress</span>
+              </div>
+              <div class="tech-pill-item">
+                <svg viewBox="0 0 512 512" fill="#D30C5C" class="tech-pill-icon"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zm-85.3 384h-42.7V128h42.7v256zm170.7 0h-128v-42.7h128V384zm0-85.3h-128V256h128v42.7zm0-85.4h-128v-42.7h128v42.7z"/></svg>
+                <span>Elementor</span>
+              </div>
+              <div class="tech-pill-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" class="tech-pill-icon" />
+                <span>PHP</span>
               </div>
             </div>
+          </div>
 
-            <div class="card stat-box spotlight-card">
-              <div class="stat-icon-wrapper stat-glow-cyan">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="stat-svg"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          <!-- Bento 4: Core Stats (6 cols) -->
+          <div class="card spotlight-card bento-stat-card">
+            <div class="bento-stats-grid">
+              <div class="bento-stat-box">
+                <div class="bento-stat-num">3+</div>
+                <h4 class="bento-stat-label">Featured Projects</h4>
+                <p class="bento-stat-desc">From auth applications to custom CMS themes.</p>
               </div>
-              <div class="stat-info">
-                <span class="stat-big-number">3+</span>
-                <h4 class="stat-heading">Featured Projects</h4>
-                <p class="stat-subtext">From interactive login auth UIs to custom WordPress themes &amp; fitness hubs.</p>
-              </div>
-            </div>
-
-            <div class="card stat-box spotlight-card">
-              <div class="stat-icon-wrapper stat-glow-green">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="stat-svg"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-              </div>
-              <div class="stat-info">
-                <span class="stat-big-number">Ready</span>
-                <h4 class="stat-heading">Available for Opportunities</h4>
-                <p class="stat-subtext">Open for junior frontend developer roles, internships, and freelance projects.</p>
+              <div class="bento-stat-box">
+                <div class="bento-stat-num">100%</div>
+                <h4 class="bento-stat-label">Clean Code</h4>
+                <p class="bento-stat-desc">Semantic, accessible, and high-performance.</p>
               </div>
             </div>
           </div>
@@ -230,7 +207,7 @@
     <section id="skills" class="section skills-section">
       <div class="container">
         <div class="section-header">
-          <div class="section-tag">Technical Skills</div>
+          <div class="section-tag">Technical Arsenal</div>
           <h2 class="section-title">My Tech Stack &amp; Capabilities</h2>
           <p class="section-subtitle">Core technologies and tools I utilize to craft modern web applications.</p>
         </div>
@@ -360,9 +337,9 @@
     <section id="projects" class="section projects-section">
       <div class="container">
         <div class="section-header">
-          <div class="section-tag">Featured Works</div>
+          <div class="section-tag">Featured Work</div>
           <h2 class="section-title">Selected Projects</h2>
-          <p class="section-subtitle">A showcase of practical web applications and client customizations I've developed.</p>
+          <p class="section-subtitle">Practical applications and client customizations I&apos;ve crafted.</p>
         </div>
 
         <div class="projects-grid">
@@ -407,7 +384,7 @@
                   <span>View Details</span>
                 </button>
                 <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-                  <span>Code</span>
+                  <span>Code &nearr;</span>
                 </a>
               </div>
             </div>
@@ -454,7 +431,7 @@
                   <span>View Details</span>
                 </button>
                 <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-                  <span>Code</span>
+                  <span>Code &nearr;</span>
                 </a>
               </div>
             </div>
@@ -501,7 +478,7 @@
                   <span>View Details</span>
                 </button>
                 <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-                  <span>Profile</span>
+                  <span>Profile &nearr;</span>
                 </a>
               </div>
             </div>
@@ -576,8 +553,8 @@
       <div class="container">
         <div class="section-header">
           <div class="section-tag">Direct Connect</div>
-          <h2 class="section-title">Let's Connect &amp; Collaborate</h2>
-          <p class="section-subtitle">Interested in working together, discussing frontend opportunities, or checking out my projects? Feel free to reach out!</p>
+          <h2 class="section-title">Let&apos;s Build Something Together</h2>
+          <p class="section-subtitle">Interested in discussing frontend opportunities, projects, or collaborating? Feel free to reach out!</p>
         </div>
 
         <div class="contact-grid">
@@ -651,7 +628,7 @@
               </div>
 
               <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
-                <span class="btn-text">Send Message</span>
+                <span class="btn-text">Send Message &rarr;</span>
               </button>
             </form>
           </div>
@@ -681,17 +658,13 @@
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- Minimalist Footer -->
   <footer class="footer">
-    <div class="container footer-container">
-      <div class="footer-brand">
+    <div class="container">
+      <div class="footer-container">
         <a href="#hero" class="footer-logo">Shub<span class="gradient-text">ham</span></a>
-        <p class="footer-bio">Modern digital web experiences, responsive UI/UX, and clean frontend engineering by Shubham.</p>
-      </div>
-
-      <div class="footer-nav">
-        <h5 class="footer-heading">Navigation</h5>
-        <ul>
+        
+        <ul class="footer-links">
           <li><a href="#about">About</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
@@ -700,23 +673,16 @@
         </ul>
       </div>
 
-      <div class="footer-contact">
-        <h5 class="footer-heading">Direct Contact</h5>
-        <p>Email: <a href="mailto:sd9906830@gmail.com">sd9906830@gmail.com</a></p>
-        <p>Phone: <a href="tel:+917876841037">+91 7876841037</a></p>
-        <p>GitHub: <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer">rishabvijard</a></p>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="container footer-bottom-inner">
-        <p>&copy; 2026 Shubham. Designed &amp; Developed with Clean Code &amp; Dark Aesthetics.</p>
-        <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <p>&copy; 2026 Shubham. Designed &amp; Developed with Modern Dark Aesthetics.</p>
+          <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Back to top">&uarr;</button>
+        </div>
       </div>
     </div>
   </footer>
 
-  <script src="js/projects-data.js?v=14.0"></script>
-  <script src="js/main.js?v=14.0"></script>
+  <script src="js/projects-data.js?v=15.0"></script>
+  <script src="js/main.js?v=15.0"></script>
 </body>
 </html>

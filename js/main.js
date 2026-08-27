@@ -1,4 +1,21 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
+  // Live India (IST) Timezone Clock
+  function updateLiveClock() {
+    const clockEl = document.getElementById("live-clock");
+    if (!clockEl) return;
+    const now = new Date();
+    const options = {
+      timeZone: "Asia/Kolkata",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true
+    };
+    clockEl.textContent = new Intl.DateTimeFormat("en-US", options).format(now);
+  }
+  updateLiveClock();
+  setInterval(updateLiveClock, 1000);
+
   // Custom Cursor for Desktop
   const cursor = document.getElementById("custom-cursor");
   const cursorDot = document.getElementById("custom-cursor-dot");
@@ -53,20 +70,20 @@
     resize();
     window.addEventListener("resize", resize);
 
-    const count = window.innerWidth < 768 ? 20 : 40;
+    const count = window.innerWidth < 768 ? 20 : 35;
     for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r: Math.random() * 2 + 1
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 1.8 + 0.8
       });
     }
 
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(194, 164, 255, 0.25)";
+      ctx.fillStyle = "rgba(194, 164, 255, 0.2)";
       particles.forEach((p) => {
         p.x += p.vx;
         p.y += p.vy;
@@ -81,22 +98,6 @@
       requestAnimationFrame(animate);
     }
     animate();
-  }
-
-  // 3D Magnetic Portrait Effect on Desktop Only
-  const portrait = document.getElementById("portrait-wrapper");
-  if (portrait && window.innerWidth > 768) {
-    window.addEventListener("mousemove", (e) => {
-      const rect = portrait.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const dx = (e.clientX - centerX) / 16;
-      const dy = (e.clientY - centerY) / 16;
-      portrait.style.transform = `translate3d(calc(-50% + ${dx}px), ${dy}px, 0)`;
-    });
-    window.addEventListener("mouseleave", () => {
-      portrait.style.transform = "translate3d(-50%, 0, 0)";
-    });
   }
 
   // Skills Filtering
@@ -154,7 +155,7 @@
     modalCategory.textContent = data.category;
     modalBody.innerHTML = `
       <p style="margin-bottom: 1rem;">${data.desc}</p>
-      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem; font-family: var(--font-hero); text-transform: uppercase;">Key Features:</h4>
+      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem; font-family: var(--font-heading);">Key Features:</h4>
       <ul style="list-style: disc; padding-left: 1.25rem; margin-bottom: 1.25rem;">
         ${data.features.map((f) => `<li>${f}</li>`).join("")}
       </ul>
@@ -200,17 +201,17 @@
           submitBtn.textContent = "Message Sent! ✓";
           setTimeout(() => {
             submitBtn.disabled = false;
-            submitBtn.textContent = "Send Message";
+            submitBtn.textContent = "Send Message →";
           }, 4000);
         } else {
           showToast("Failed to send. Please email directly.");
           submitBtn.disabled = false;
-          submitBtn.textContent = "Send Message";
+          submitBtn.textContent = "Send Message →";
         }
       } catch (err) {
         showToast("Error sending message. Please try again.");
         submitBtn.disabled = false;
-        submitBtn.textContent = "Send Message";
+        submitBtn.textContent = "Send Message →";
       }
     });
   }
