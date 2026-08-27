@@ -17,7 +17,6 @@
     });
 
     function renderCursor() {
-      // Linear interpolation (lerp) for smooth trailing
       followerX += (mouseX - followerX) * 0.18;
       followerY += (mouseY - followerY) * 0.18;
       dotX += (mouseX - dotX) * 0.75;
@@ -30,7 +29,6 @@
     }
     renderCursor();
 
-    // Hover magnetic expansion
     const interactiveElements = document.querySelectorAll("a, button, .skill-coverflow-card, .coverflow-card-item, .card");
     interactiveElements.forEach((el) => {
       el.addEventListener("mouseenter", () => follower.classList.add("is-hovering"));
@@ -38,7 +36,7 @@
     });
   }
 
-  // 2. 3D Magnetic Portrait Face Tilt (Desktop)
+  // 2. 3D Magnetic Portrait Face Tilt
   const portrait = document.getElementById("portrait-wrapper");
   const title = document.getElementById("sparkle-title");
 
@@ -152,10 +150,9 @@
         const clampedDist = Math.max(-1.5, Math.min(1.5, distFromCenter));
         const absDist = Math.abs(clampedDist);
 
-        // 🌟 SMOOTH CYLINDRICAL CURVATURE (NO OVERLAPPING) 🌟
-        const scale = 0.86 + (absDist * 0.16); // Center is 0.86, outer is 1.10
-        const translateZ = (absDist * 40) - 35; // Center recessed, sides forward
-        const rotateY = clampedDist * -20; // Gentle yaw
+        const scale = 0.86 + (absDist * 0.16);
+        const translateZ = (absDist * 40) - 35;
+        const rotateY = clampedDist * -20;
         const opacity = Math.max(0.6, 1 - absDist * 0.15);
 
         card.style.transform = `perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
@@ -324,7 +321,7 @@
     modalCategory.textContent = data.category;
     modalBody.innerHTML = `
       <p style="margin-bottom: 1rem;">${data.desc}</p>
-      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem; font-family: var(--font-serif);">Key Features:</h4>
+      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem; font-family: var(--font-hero);">Key Features:</h4>
       <ul style="list-style: disc; padding-left: 1.25rem; margin-bottom: 1.25rem;">
         ${data.features.map((f) => `<li>${f}</li>`).join("")}
       </ul>
