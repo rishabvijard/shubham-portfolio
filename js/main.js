@@ -271,8 +271,8 @@
     return ((n % m) + m) % m;
   }
 
-  // 🛑 6 & 7. STRICTLY ZERO-MOTION MANUAL-ONLY 3D COVERFLOW ENGINE 🛑
-  function initZeroMotionCoverflow({
+  // 🌟 6 & 7. REVERSE-PERSPECTIVE AMPHITHEATER 3D COVERFLOW (EXACT IMAGE MATCH) 🌟
+  function initAmphitheaterCoverflow({
     viewportId,
     trackId,
     cardSelector,
@@ -310,18 +310,20 @@
 
       for (let i = 0; i < totalCards; i++) {
         const card = cards[i];
+        // Seamless modular calculation
         const pos = mod(i * stride + currentOffset, totalOrbitWidth);
         const distFromCenter = pos - halfOrbit;
 
         const screenX = viewportCenter + distFromCenter - (cardWidth / 2);
         const normDist = distFromCenter / centerFactor;
-        const clampedNorm = Math.max(-1.7, Math.min(1.7, normDist));
+        const clampedNorm = Math.max(-1.8, Math.min(1.8, normDist));
         const absNorm = Math.abs(clampedNorm);
 
-        const rotateY = clampedNorm * -18;
-        const translateZ = (absNorm * 35) - 25;
-        const scale = Math.max(0.85, 1 - absNorm * 0.07);
-        const opacity = Math.max(0.45, 1 - absNorm * 0.18);
+        // 🌟 EXACT IMAGE MATCH: CENTER CARDS ARE SMALL (0.74) -> SIDES GROW BIG (1.28) 🌟
+        const scale = 0.74 + (absNorm * 0.42); // small in center, huge on sides!
+        const translateZ = -100 + (absNorm * 165); // deep in center, pops forward on sides!
+        const rotateY = clampedNorm * -24; // angles inward towards center
+        const opacity = Math.min(1.0, 0.65 + absNorm * 0.25); // bright and crystal clear
 
         card.style.transform = `translate3d(${screenX}px, 0, 0) perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
         card.style.opacity = opacity;
@@ -337,7 +339,7 @@
           velocity = 0;
           isLoopRunning = false;
           renderFrame();
-          return; // 🛑 STRICT STOP: ZERO BACKGROUND MOVEMENT
+          return; // 🛑 Strict Freeze when idle
         }
       }
 
@@ -411,13 +413,12 @@
       }
     }, { passive: true });
 
-    // Render once on load and STAY STILL
     updateMetrics();
     renderFrame();
   }
 
-  // Initialize Skills (Strictly frozen until interacted)
-  initZeroMotionCoverflow({
+  // Initialize Skills (Center cards small, sides grow large)
+  initAmphitheaterCoverflow({
     viewportId: "skills-coverflow-viewport",
     trackId: "skills-coverflow-track",
     cardSelector: ".skill-coverflow-card",
@@ -425,8 +426,8 @@
     gap: 28
   });
 
-  // Initialize Projects (Strictly frozen until interacted)
-  initZeroMotionCoverflow({
+  // Initialize Projects (Center cards small, sides grow large)
+  initAmphitheaterCoverflow({
     viewportId: "coverflow-viewport",
     trackId: "coverflow-track",
     cardSelector: ".coverflow-card-item",
