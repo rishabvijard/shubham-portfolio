@@ -31,7 +31,7 @@
     renderCursor();
 
     // Hover magnetic expansion
-    const interactiveElements = document.querySelectorAll("a, button, .coverflow-card-item, .card, .marquee-tech-pill");
+    const interactiveElements = document.querySelectorAll("a, button, .coverflow-card-item, .card");
     interactiveElements.forEach((el) => {
       el.addEventListener("mouseenter", () => follower.classList.add("is-hovering"));
       el.addEventListener("mouseleave", () => follower.classList.remove("is-hovering"));
@@ -86,67 +86,6 @@
       card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
     });
   });
-
-  // 5. Core Technologies Marquee Spinner
-  const techWrapper = document.getElementById("tech-spinner-wrapper");
-  const techTrack = document.getElementById("tech-spinner-track");
-  if (techWrapper && techTrack) {
-    let isDown = false;
-    let startX = 0;
-    let currentX = 0;
-    let velocity = -1.2;
-
-    techWrapper.addEventListener("mousedown", (e) => {
-      isDown = true;
-      startX = e.pageX;
-      velocity = 0;
-    });
-    window.addEventListener("mouseup", () => { if (isDown) isDown = false; });
-    techWrapper.addEventListener("mouseleave", () => { if (isDown) isDown = false; });
-    window.addEventListener("mousemove", (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX;
-      const delta = (x - startX) * 1.6;
-      currentX += delta;
-      velocity = delta * 0.8;
-      startX = x;
-      techTrack.style.transform = `translateX(${currentX}px)`;
-    });
-
-    techWrapper.addEventListener("touchstart", (e) => {
-      isDown = true;
-      startX = e.touches[0].pageX;
-      velocity = 0;
-    });
-    window.addEventListener("touchend", () => { if (isDown) isDown = false; });
-    techWrapper.addEventListener("touchmove", (e) => {
-      if (!isDown) return;
-      const x = e.touches[0].pageX;
-      const delta = (x - startX) * 1.6;
-      currentX += delta;
-      velocity = delta * 0.8;
-      startX = x;
-      techTrack.style.transform = `translateX(${currentX}px)`;
-    });
-
-    function animateTechSpinner() {
-      if (!isDown) {
-        currentX += velocity;
-        velocity *= 0.96;
-        if (Math.abs(velocity) < 0.6) {
-          velocity = -0.8;
-        }
-        const halfWidth = techTrack.scrollWidth / 2;
-        if (currentX < -halfWidth) currentX += halfWidth;
-        if (currentX > 0) currentX -= halfWidth;
-
-        techTrack.style.transform = `translateX(${currentX}px)`;
-      }
-      requestAnimationFrame(animateTechSpinner);
-    }
-    animateTechSpinner();
-  }
 
   // 🌟 REUSABLE 3D CURVED COVERFLOW ENGINE 🌟
   function init3DCoverflow(viewportId, trackId) {
@@ -232,7 +171,7 @@
   init3DCoverflow("skills-coverflow-viewport", "skills-coverflow-track");
   init3DCoverflow("coverflow-viewport", "coverflow-track");
 
-  // 7. Canvas Background Particles
+  // 6. Canvas Background Particles
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d");
@@ -274,7 +213,7 @@
     animate();
   }
 
-  // 8. Toast Notification
+  // 7. Toast Notification
   function showToast(message) {
     const container = document.getElementById("toast-container");
     if (!container) return;
@@ -285,7 +224,7 @@
     setTimeout(() => { toast.remove(); }, 3000);
   }
 
-  // 9. Copy to Clipboard
+  // 8. Copy to Clipboard
   document.querySelectorAll(".copy-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const text = btn.getAttribute("data-copy");
@@ -295,7 +234,7 @@
     });
   });
 
-  // 10. Modal Dialog
+  // 9. Modal Dialog
   const modal = document.getElementById("project-modal");
   const modalBackdrop = document.getElementById("modal-backdrop");
   const modalCloseBtn = document.getElementById("modal-close-btn");
@@ -336,7 +275,7 @@
   if (modalCloseAction) modalCloseAction.addEventListener("click", closeModal);
   window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-  // 11. Contact Form AJAX Submission
+  // 10. Contact Form AJAX Submission
   const form = document.getElementById("contact-form");
   if (form) {
     form.addEventListener("submit", async (e) => {
@@ -373,7 +312,7 @@
     });
   }
 
-  // 12. Back to Top
+  // 11. Back to Top
   const backToTop = document.getElementById("back-to-top");
   if (backToTop) {
     backToTop.addEventListener("click", () => {
