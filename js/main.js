@@ -1,5 +1,5 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  // 🎯 1. SILKY-SMOOTH LERPING CUSTOM CURSOR & SPARKLING PARTICLE TRAIL 🎯
+  // 🎯 1. CUSTOM CURSOR & SPARKLING PARTICLE TRAIL 🎯
   const follower = document.getElementById("cursor-follower");
   const dot = document.getElementById("cursor-dot");
   const cursorSparks = [];
@@ -25,7 +25,7 @@
           size: Math.random() * 3 + 1.2,
           alpha: 1,
           decay: Math.random() * 0.03 + 0.02,
-          color: Math.random() > 0.4 ? "rgba(229, 192, 123, " : "rgba(251, 141, 255, "
+          color: Math.random() > 0.4 ? "rgba(255, 215, 0, " : "rgba(251, 141, 255, "
         });
       }
     });
@@ -52,7 +52,7 @@
     }
   }
 
-  // 🌟 2. VIBRANT GOLDEN OCTAGONAL PERSPECTIVE SCROLL TUNNEL (FROM USER SCREENSHOT) 🌟
+  // 🌟 2. VIBRANT GOLDEN OCTAGONAL SCROLL TUNNEL (IMAGE REFERENCE MATCH) 🌟
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d");
@@ -74,7 +74,6 @@
       targetScrollY = window.pageYOffset;
     });
 
-    // Draw regular octagon in perspective
     function drawOctagon(cx, cy, radius) {
       ctx.beginPath();
       for (let i = 0; i < 8; i++) {
@@ -87,55 +86,52 @@
       ctx.closePath();
     }
 
-    // Ambient floating stardust inside the tunnel
     const tunnelStars = [];
-    const starCount = window.innerWidth < 768 ? 40 : 80;
+    const starCount = window.innerWidth < 768 ? 40 : 85;
     for (let i = 0; i < starCount; i++) {
       tunnelStars.push({
         x: Math.random() * width,
         y: Math.random() * height,
         z: Math.random() * 1000 + 40,
-        size: Math.random() * 1.6 + 0.6,
-        alpha: Math.random() * 0.8 + 0.2
+        size: Math.random() * 1.8 + 0.6,
+        alpha: Math.random() * 0.85 + 0.2
       });
     }
 
     function animateTunnel() {
       ctx.clearRect(0, 0, width, height);
 
-      // Smooth scroll lerp for camera forward motion
       scrollY += (targetScrollY - scrollY) * 0.08;
-      tunnelOffset += 0.5 + (targetScrollY - scrollY) * 0.04;
+      tunnelOffset += 0.55 + (targetScrollY - scrollY) * 0.045;
 
-      const numRings = 15;
-      const baseSpacing = 80;
+      const numRings = 16;
+      const baseSpacing = 75;
 
       for (let i = 0; i < numRings; i++) {
         let ringDist = ((i * baseSpacing + tunnelOffset) % (numRings * baseSpacing));
         let scale = Math.pow(ringDist / (numRings * baseSpacing), 2.2);
-        let radius = scale * (Math.max(width, height) * 0.95);
+        let radius = scale * (Math.max(width, height) * 0.96);
 
-        if (radius > 6) {
+        if (radius > 5) {
           let alpha = Math.sin((ringDist / (numRings * baseSpacing)) * Math.PI);
-          alpha = Math.max(0.08, alpha * 0.42);
+          alpha = Math.max(0.1, alpha * 0.55);
 
           ctx.save();
-          ctx.strokeStyle = `rgba(229, 192, 123, ${alpha})`;
-          ctx.lineWidth = Math.max(1, scale * 2.5);
-          ctx.shadowBlur = 14;
-          ctx.shadowColor = "rgba(229, 192, 123, 0.45)";
+          ctx.strokeStyle = `rgba(255, 215, 0, ${alpha})`;
+          ctx.lineWidth = Math.max(1, scale * 2.8);
+          ctx.shadowBlur = 16;
+          ctx.shadowColor = "rgba(255, 215, 0, 0.5)";
 
           drawOctagon(centerX, centerY, radius);
           ctx.stroke();
 
-          // Connective perspective diagonal wireframe lines
-          if (i === 0 || i === 5 || i === 10) {
-            ctx.strokeStyle = `rgba(229, 192, 123, ${alpha * 0.35})`;
-            ctx.lineWidth = 0.6;
+          if (i === 0 || i === 4 || i === 8 || i === 12) {
+            ctx.strokeStyle = `rgba(255, 215, 0, ${alpha * 0.4})`;
+            ctx.lineWidth = 0.7;
             for (let a = 0; a < 8; a++) {
               const angle = (a * Math.PI) / 4 + Math.PI / 8;
               ctx.beginPath();
-              ctx.moveTo(centerX + Math.cos(angle) * 20 * 1.58, centerY + Math.sin(angle) * 20);
+              ctx.moveTo(centerX + Math.cos(angle) * 15 * 1.58, centerY + Math.sin(angle) * 15);
               ctx.lineTo(centerX + Math.cos(angle) * radius * 1.58, centerY + Math.sin(angle) * radius);
               ctx.stroke();
             }
@@ -144,9 +140,8 @@
         }
       }
 
-      // Draw floating cosmic stars
       tunnelStars.forEach((star) => {
-        star.z -= 0.65 + (targetScrollY - scrollY) * 0.035;
+        star.z -= 0.7 + (targetScrollY - scrollY) * 0.04;
         if (star.z <= 10) {
           star.z = 1000;
           star.x = Math.random() * width;
@@ -158,13 +153,12 @@
 
         if (px >= 0 && px <= width && py >= 0 && py <= height) {
           ctx.beginPath();
-          ctx.arc(px, py, star.size * k * 0.4, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(229, 192, 123, ${star.alpha * Math.min(1, k * 0.7)})`;
+          ctx.arc(px, py, star.size * k * 0.45, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 215, 0, ${star.alpha * Math.min(1, k * 0.8)})`;
           ctx.fill();
         }
       });
 
-      // Render cursor stardust sparks
       for (let i = cursorSparks.length - 1; i >= 0; i--) {
         const s = cursorSparks[i];
         s.x += s.vx;
@@ -238,7 +232,7 @@
     });
   });
 
-  // 🌟 6. SKILLS 3D CYLINDRICAL COVERFLOW (SILKY SMOOTH, NON-OVERLAPPING) 🌟
+  // 🌟 6. SKILLS 3D COVERFLOW 🌟
   const skillsViewport = document.getElementById("skills-coverflow-viewport");
   const skillsTrack = document.getElementById("skills-coverflow-track");
   if (skillsViewport && skillsTrack) {
@@ -265,7 +259,6 @@
       startX = x;
     });
 
-    // Touch support
     skillsViewport.addEventListener("touchstart", (e) => {
       isDraggingSkills = true;
       startX = e.touches[0].pageX;
