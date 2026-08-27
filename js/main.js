@@ -1,24 +1,5 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  // 1. 3D Mouse Parallax on Hero Tunnel Grid & Name Title
-  const tunnelGrid = document.getElementById("tunnel-grid");
-  const heroName = document.getElementById("hero-cinzel-name");
-  
-  if (window.matchMedia("(hover: hover)").matches) {
-    window.addEventListener("mousemove", (e) => {
-      const { innerWidth, innerHeight } = window;
-      const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
-      const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
-
-      if (tunnelGrid) {
-        tunnelGrid.style.transform = `translate(calc(-50% + ${x * 30}px), calc(-50% + ${y * 25}px)) rotateX(${-y * 18}deg) rotateY(${x * 20}deg)`;
-      }
-      if (heroName) {
-        heroName.style.transform = `translateX(${x * 12}px) translateY(${y * 8}px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg)`;
-      }
-    });
-  }
-
-  // 2. Custom Cursor for Desktop
+  // 1. Custom Cursor on Desktop
   const cursor = document.getElementById("custom-cursor");
   const cursorDot = document.getElementById("custom-cursor-dot");
   if (cursor && cursorDot && window.matchMedia("(hover: hover)").matches) {
@@ -27,6 +8,25 @@
       cursor.style.top = `${e.clientY}px`;
       cursorDot.style.left = `${e.clientX}px`;
       cursorDot.style.top = `${e.clientY}px`;
+    });
+  }
+
+  // 2. 3D Magnetic Portrait Face Tilt (Desktop)
+  const portrait = document.getElementById("portrait-wrapper");
+  const title = document.getElementById("sparkle-title");
+
+  if (window.matchMedia("(hover: hover)").matches) {
+    window.addEventListener("mousemove", (e) => {
+      const { innerWidth, innerHeight } = window;
+      const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
+      const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
+
+      if (portrait && window.innerWidth > 768) {
+        portrait.style.transform = `translateX(calc(-50% + ${x * 20}px)) translateY(${y * 14}px) rotate(${x * 3}deg)`;
+      }
+      if (title) {
+        title.style.transform = `translateX(${x * 8}px) translateY(${y * 4}px)`;
+      }
     });
   }
 
@@ -157,7 +157,7 @@
     modalCategory.textContent = data.category;
     modalBody.innerHTML = `
       <p style="margin-bottom: 1rem;">${data.desc}</p>
-      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem; font-family: var(--font-heading);">Key Features:</h4>
+      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem; font-family: var(--font-hero);">Key Features:</h4>
       <ul style="list-style: disc; padding-left: 1.25rem; margin-bottom: 1.25rem;">
         ${data.features.map((f) => `<li>${f}</li>`).join("")}
       </ul>
