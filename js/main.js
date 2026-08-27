@@ -1,5 +1,5 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  // 🎯 1. HIGH PERFORMANCE CUSTOM CURSOR & SPARKS 🎯
+  // 🎯 1. CUSTOM CURSOR & SPARKS 🎯
   const follower = document.getElementById("cursor-follower");
   const dot = document.getElementById("cursor-dot");
   const cursorSparks = [];
@@ -271,8 +271,8 @@
     return ((n % m) + m) % m;
   }
 
-  // 🌟 6 & 7. MANUAL-ONLY 3D COVERFLOW ENGINE (MOVES ONLY ON MOUSE/TOUCH INTERACTION) 🌟
-  function initManualCoverflow({
+  // 🛑 6 & 7. STRICTLY ZERO-MOTION MANUAL-ONLY 3D COVERFLOW ENGINE 🛑
+  function initZeroMotionCoverflow({
     viewportId,
     trackId,
     cardSelector,
@@ -310,7 +310,6 @@
 
       for (let i = 0; i < totalCards; i++) {
         const card = cards[i];
-        // Seamless modular positioning
         const pos = mod(i * stride + currentOffset, totalOrbitWidth);
         const distFromCenter = pos - halfOrbit;
 
@@ -333,15 +332,17 @@
       if (!isDragging) {
         if (Math.abs(velocity) > 0.05) {
           currentOffset += velocity;
-          velocity *= 0.92;
+          velocity *= 0.90;
         } else {
-          velocity = 0; // Completely still when idle
+          velocity = 0;
+          isLoopRunning = false;
+          renderFrame();
+          return; // 🛑 STRICT STOP: ZERO BACKGROUND MOVEMENT
         }
       }
 
       renderFrame();
 
-      // Only run loop when actively dragging or gliding from momentum
       if (isDragging || Math.abs(velocity) > 0.05) {
         requestAnimationFrame(step);
       } else {
@@ -381,7 +382,7 @@
       wakeLoop();
     });
 
-    // 🔄 OPPOSITE TOUCH DRAG (Mobile/Tablet)
+    // 🔄 OPPOSITE TOUCH DRAG
     viewport.addEventListener("touchstart", (e) => {
       isDragging = true;
       startX = e.touches[0].pageX;
@@ -399,23 +400,24 @@
       wakeLoop();
     }, { passive: true });
 
-    // 🔄 OPPOSITE MOUSE WHEEL SCROLLING: Scroll Left/Down -> Cards Move Right
+    // 🔄 OPPOSITE MOUSE WHEEL SCROLLING
     viewport.addEventListener("wheel", (e) => {
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       if (Math.abs(delta) > 2) {
-        velocity += delta * 0.24; // Inverted direction
+        velocity += delta * 0.24; // Inverted
         if (velocity > 30) velocity = 30;
         if (velocity < -30) velocity = -30;
         wakeLoop();
       }
     }, { passive: true });
 
+    // Render once on load and STAY STILL
     updateMetrics();
     renderFrame();
   }
 
-  // Initialize Skills Manual 3D Coverflow (Still until interacted)
-  initManualCoverflow({
+  // Initialize Skills (Strictly frozen until interacted)
+  initZeroMotionCoverflow({
     viewportId: "skills-coverflow-viewport",
     trackId: "skills-coverflow-track",
     cardSelector: ".skill-coverflow-card",
@@ -423,8 +425,8 @@
     gap: 28
   });
 
-  // Initialize Projects Manual 3D Coverflow (Still until interacted)
-  initManualCoverflow({
+  // Initialize Projects (Strictly frozen until interacted)
+  initZeroMotionCoverflow({
     viewportId: "coverflow-viewport",
     trackId: "coverflow-track",
     cardSelector: ".coverflow-card-item",
