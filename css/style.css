@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 :root {
   --bg-main: #0c0a0e;
@@ -20,6 +20,7 @@
   --border-hover: rgba(194, 164, 255, 0.35);
 
   --font-main: 'Plus Jakarta Sans', sans-serif;
+  --font-serif: 'Cinzel', serif;
   --font-hero: 'Kanit', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
@@ -72,32 +73,46 @@ body {
   pointer-events: none;
 }
 
-/* Desktop Custom Cursor */
+/* 🎯 1. FRAMER-GRADE FLUID LERPING CUSTOM CURSOR 🎯 */
 @media (hover: hover) and (pointer: fine) {
-  .custom-cursor {
+  .custom-cursor-follower {
     position: fixed;
-    width: 30px;
-    height: 30px;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    border: 1.5px solid var(--accent-purple);
+    border: 1.5px solid rgba(194, 164, 255, 0.6);
+    background: radial-gradient(circle, rgba(170, 66, 255, 0.15), transparent 70%);
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s ease-out;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, background 0.3s ease;
+    will-change: transform;
   }
   .custom-cursor-dot {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 6px;
     height: 6px;
-    background-color: var(--accent-purple);
+    background: var(--accent-purple);
+    box-shadow: 0 0 10px var(--accent-purple);
     border-radius: 50%;
     pointer-events: none;
     z-index: 10000;
     transform: translate(-50%, -50%);
+    will-change: transform;
+  }
+  .custom-cursor-follower.is-hovering {
+    width: 60px;
+    height: 60px;
+    border-color: var(--accent-gold);
+    background: radial-gradient(circle, rgba(229, 192, 123, 0.2), transparent 70%);
   }
 }
 @media (hover: none) or (pointer: coarse) {
-  .custom-cursor, .custom-cursor-dot { display: none !important; }
+  .custom-cursor-follower, .custom-cursor-dot { display: none !important; }
 }
 
 .container {
@@ -274,7 +289,7 @@ body {
 .btn-outline:hover { border-color: var(--accent-purple); background: rgba(194, 164, 255, 0.12); transform: translateY(-2px); }
 .btn-full { width: 100%; justify-content: center; }
 
-/* 🌟 1. HERO FRONT PAGE WITH STRICT IN-TEXT BROKEN TV SCANLINE SWEEP 🌟 */
+/* 🌟 2. HERO FRONT PAGE WITH ULTRA-PREMIUM HOLOGRAPHIC AURORA NAME EFFECT 🌟 */
 .hero-front-section {
   min-height: 100vh;
   padding-top: 5.5rem;
@@ -325,38 +340,38 @@ body {
   margin: 0 auto;
 }
 
-/* 📺 BROKEN TV SCREEN / CRT SCANLINE SWEEP STRICTLY CONFINED INSIDE TEXT 📺 */
-.in-text-tv-glitch {
+/* ✨ HOLOGRAPHIC CHROMATIC AURORA BEAM (BEST EFFECT ON NAME "SHUBHAM") ✨ */
+.aurora-hologram-text {
   position: relative;
   display: inline-block;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.01em;
   background: linear-gradient(
-    90deg,
+    110deg,
     #ffffff 0%,
-    #D7E2EA 15%,
-    #00f0ff 28%,
-    #ff0055 35%,
-    #ffffff 42%,
+    #e5c07b 15%,
+    #fb8dff 30%,
+    #aa42ff 45%,
     #00f0ff 60%,
-    #ff0055 72%,
-    #D7E2EA 85%,
+    #ffffff 75%,
+    #e5c07b 90%,
     #ffffff 100%
   );
-  background-size: 250% 100%;
+  background-size: 280% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: tvRasterSweep 3.2s linear infinite;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0.65) 51%);
-  mask-size: 100% 4px;
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0.65) 51%);
-  -webkit-mask-size: 100% 4px;
+  animation: auroraShimmer 4s linear infinite;
+  filter: drop-shadow(0 0 18px rgba(170, 66, 255, 0.4));
+  transition: filter 0.3s ease;
+}
+.aurora-hologram-text:hover {
+  filter: drop-shadow(0 0 28px rgba(0, 240, 255, 0.8)) drop-shadow(0 0 45px rgba(251, 141, 255, 0.5));
 }
 
-@keyframes tvRasterSweep {
-  0% { background-position: 250% 0; }
-  100% { background-position: -250% 0; }
+@keyframes auroraShimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 280% center; }
 }
 
 /* 👤 3D BIG FACE PORTRAIT 👤 */
@@ -410,29 +425,50 @@ body {
 
 /* Common Sections */
 .section { padding: 6.5rem 0; position: relative; z-index: 20; }
-.section-header { text-align: center; max-width: 750px; margin: 0 auto 3rem; position: relative; z-index: 5; }
+.section-header { text-align: center; max-width: 800px; margin: 0 auto 3rem; position: relative; z-index: 5; }
+
+/* 🔤 CINEMATIC SERIF HEADINGS MATCHING FRAMER SCREENSHOT 🔤 */
 .section-tag {
   font-family: var(--font-hero);
   display: inline-block;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   color: var(--accent-gold);
   margin-bottom: 0.75rem;
   text-shadow: 0 0 16px rgba(229, 192, 123, 0.4);
 }
 .section-title {
-  font-family: var(--font-hero);
-  font-size: clamp(2.2rem, 4.2vw, 3.2rem);
-  font-weight: 800;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4.2vw, 3.1rem);
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
-  line-height: 1.18;
+  letter-spacing: 0.04em;
+  line-height: 1.22;
   color: #fff;
   margin-bottom: 0.75rem;
 }
-.section-subtitle { color: var(--text-dim); font-size: 1.05rem; }
+.section-subtitle { color: var(--text-dim); font-size: 1.02rem; font-family: var(--font-main); }
+
+/* Golden Octagonal Wireframe Tunnel in Section Backgrounds */
+.golden-tunnel-bg {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 480px;
+  pointer-events: none;
+  z-index: 1;
+}
+.tunnel-oct-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(229, 192, 123, 0.16);
+  border-radius: 42%;
+  transform: scale(var(--scale, 1));
+}
 
 /* 🌟 SPOTLIGHT CARDS 🌟 */
 .card {
@@ -495,7 +531,7 @@ body {
 .about-card-subtitle { font-family: var(--font-hero); color: var(--accent-purple); font-size: 0.95rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
 .about-text { color: var(--text-dim); margin-bottom: 1rem; font-size: 1rem; }
 
-/* 🌟 CORE TECHNOLOGIES CLEAN FREE SPINNER WITH SVGS ONLY 🌟 */
+/* SVG CORE TECHNOLOGIES FREE SPINNER */
 .about-marquee-container {
   margin: 1.5rem 0;
   padding: 1.15rem 0;
@@ -599,92 +635,7 @@ body {
 .stat-heading { font-family: var(--font-hero); font-size: 1.05rem; font-weight: 700; text-transform: uppercase; color: #fff; margin: 0.2rem 0; }
 .stat-subtext { font-size: 0.85rem; color: var(--text-muted); }
 
-/* 3. SKILLS SECTION */
-.skills-filter-wrapper { display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
-.skill-filter-btn {
-  font-family: var(--font-hero);
-  padding: 0.5rem 1.25rem;
-  border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border);
-  color: var(--text-dim);
-  font-weight: 600;
-  font-size: 0.88rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  cursor: pointer;
-  transition: var(--transition);
-}
-.skill-filter-btn.active, .skill-filter-btn:hover {
-  background: var(--accent-glow);
-  border-color: var(--accent-glow);
-  color: #fff;
-  transform: translateY(-2px);
-}
-.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
-.skill-card { display: flex; flex-direction: column; justify-content: space-between; }
-.skill-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-.skill-icon-box {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  transition: var(--transition);
-}
-.skill-card:hover .skill-icon-box {
-  transform: scale(1.1);
-  border-color: var(--accent-purple);
-  box-shadow: 0 0 16px rgba(194, 164, 255, 0.3);
-}
-.skill-logo-img { width: 100%; height: 100%; object-fit: contain; }
-.skill-level-badge {
-  font-family: var(--font-hero);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.25rem 0.6rem;
-  border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text-muted);
-}
-.skill-name { font-family: var(--font-hero); font-size: 1.25rem; font-weight: 700; text-transform: uppercase; color: #fff; margin-bottom: 0.4rem; }
-.skill-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem; }
-.skill-bar-track { width: 100%; height: 6px; background: rgba(255, 255, 255, 0.08); border-radius: var(--radius-full); overflow: hidden; }
-.skill-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent-glow), var(--accent-cyan)); border-radius: var(--radius-full); }
-
-/* 🌟 4. 3D CURVED CYLINDRICAL COVERFLOW RIBBON (SCREENSHOT REFERENCE) 🌟 */
-.projects-coverflow-section {
-  position: relative;
-  overflow: hidden;
-  padding-bottom: 7rem;
-}
-
-/* Golden Octagonal Wireframe Tunnel in Header */
-.golden-tunnel-bg {
-  position: absolute;
-  top: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 900px;
-  height: 480px;
-  pointer-events: none;
-  z-index: 1;
-}
-.tunnel-oct-ring {
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(229, 192, 123, 0.16);
-  border-radius: 42%;
-  transform: scale(var(--scale, 1));
-}
-
-/* 3D Cylindrical Coverflow Ribbon Track */
+/* 🌟 3. 3D CURVED COVERFLOW RIBBON (APPLIED TO SKILLS & PROJECTS) 🌟 */
 .coverflow-stage-viewport {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
@@ -709,7 +660,7 @@ body {
 }
 
 .coverflow-card-item {
-  width: clamp(280px, 32vw, 360px);
+  width: clamp(290px, 32vw, 360px);
   flex-shrink: 0;
   transition: transform 0.15s ease-out, opacity 0.15s ease-out;
   transform-style: preserve-3d;
@@ -724,6 +675,44 @@ body {
   box-shadow: 0 25px 60px rgba(170, 66, 255, 0.4);
 }
 
+/* Specific Skill Card Styling inside Coverflow */
+.skill-coverflow-card {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.skill-badge-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+.skill-icon-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+.skill-icon-wrap img, .skill-icon-wrap svg { width: 100%; height: 100%; object-fit: contain; }
+.skill-card-tier {
+  font-family: var(--font-hero);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: rgba(229, 192, 123, 0.12);
+  color: var(--accent-gold);
+  border: 1px solid rgba(229, 192, 123, 0.3);
+}
+.skill-card-name { font-family: var(--font-hero); font-size: 1.35rem; font-weight: 800; text-transform: uppercase; color: #fff; margin-bottom: 0.5rem; }
+.skill-card-desc { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 1.5rem; line-height: 1.5; }
+.skill-bar-track { width: 100%; height: 6px; background: rgba(255, 255, 255, 0.08); border-radius: var(--radius-full); overflow: hidden; }
+.skill-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent-glow), var(--accent-cyan)); border-radius: var(--radius-full); }
+
+/* Project Preview Box in Coverflow */
 .project-preview-box { background: #110d14; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; }
 .project-mockup-bar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: rgba(0, 0, 0, 0.4); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
 .mockup-dot { width: 8px; height: 8px; border-radius: 50%; }
@@ -994,7 +983,6 @@ body {
     gap: 1rem;
   }
   .hero-bio-text { max-width: 100%; font-size: 0.92rem; line-height: 1.5; }
-  .skills-grid { grid-template-columns: 1fr; }
 
   .coverflow-card-item { width: 280px; }
   .golden-tunnel-bg { width: 360px; height: 320px; }

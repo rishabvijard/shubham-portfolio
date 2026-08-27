@@ -1,13 +1,40 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  // 1. Custom Cursor on Desktop
-  const cursor = document.getElementById("custom-cursor");
-  const cursorDot = document.getElementById("custom-cursor-dot");
-  if (cursor && cursorDot && window.matchMedia("(hover: hover)").matches) {
+  // 🎯 1. SILKY-SMOOTH LERPING CUSTOM CURSOR 🎯
+  const follower = document.getElementById("cursor-follower");
+  const dot = document.getElementById("cursor-dot");
+
+  if (follower && dot && window.matchMedia("(hover: hover)").matches) {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let followerX = mouseX;
+    let followerY = mouseY;
+    let dotX = mouseX;
+    let dotY = mouseY;
+
     window.addEventListener("mousemove", (e) => {
-      cursor.style.left = `${e.clientX}px`;
-      cursor.style.top = `${e.clientY}px`;
-      cursorDot.style.left = `${e.clientX}px`;
-      cursorDot.style.top = `${e.clientY}px`;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function renderCursor() {
+      // Linear interpolation (lerp) for smooth trailing
+      followerX += (mouseX - followerX) * 0.18;
+      followerY += (mouseY - followerY) * 0.18;
+      dotX += (mouseX - dotX) * 0.75;
+      dotY += (mouseY - dotY) * 0.75;
+
+      follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
+      dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
+
+      requestAnimationFrame(renderCursor);
+    }
+    renderCursor();
+
+    // Hover magnetic expansion
+    const interactiveElements = document.querySelectorAll("a, button, .coverflow-card-item, .card, .marquee-tech-pill");
+    interactiveElements.forEach((el) => {
+      el.addEventListener("mouseenter", () => follower.classList.add("is-hovering"));
+      el.addEventListener("mouseleave", () => follower.classList.remove("is-hovering"));
     });
   }
 
@@ -60,7 +87,7 @@
     });
   });
 
-  // 🌟 5. CORE TECHNOLOGIES FREE INERTIA SPINNER 🌟
+  // 5. Core Technologies Marquee Spinner
   const techWrapper = document.getElementById("tech-spinner-wrapper");
   const techTrack = document.getElementById("tech-spinner-track");
   if (techWrapper && techTrack) {
@@ -74,15 +101,8 @@
       startX = e.pageX;
       velocity = 0;
     });
-
-    window.addEventListener("mouseup", () => {
-      if (isDown) isDown = false;
-    });
-
-    techWrapper.addEventListener("mouseleave", () => {
-      if (isDown) isDown = false;
-    });
-
+    window.addEventListener("mouseup", () => { if (isDown) isDown = false; });
+    techWrapper.addEventListener("mouseleave", () => { if (isDown) isDown = false; });
     window.addEventListener("mousemove", (e) => {
       if (!isDown) return;
       e.preventDefault();
@@ -99,11 +119,7 @@
       startX = e.touches[0].pageX;
       velocity = 0;
     });
-
-    window.addEventListener("touchend", () => {
-      if (isDown) isDown = false;
-    });
-
+    window.addEventListener("touchend", () => { if (isDown) isDown = false; });
     techWrapper.addEventListener("touchmove", (e) => {
       if (!isDown) return;
       const x = e.touches[0].pageX;
@@ -132,88 +148,74 @@
     animateTechSpinner();
   }
 
-  // 🌟 6. 3D CURVED CYLINDRICAL COVERFLOW RIBBON (SCREENSHOT MATCH) 🌟
-  const coverflowViewport = document.getElementById("coverflow-viewport");
-  const coverflowTrack = document.getElementById("coverflow-track");
-  const coverflowCards = document.querySelectorAll(".coverflow-card-item");
+  // 🌟 REUSABLE 3D CURVED COVERFLOW ENGINE 🌟
+  function init3DCoverflow(viewportId, trackId) {
+    const viewport = document.getElementById(viewportId);
+    const track = document.getElementById(trackId);
+    if (!viewport || !track) return;
 
-  if (coverflowViewport && coverflowTrack && coverflowCards.length) {
-    let isDraggingCoverflow = false;
+    const cards = track.querySelectorAll(".coverflow-card-item");
+    let isDragging = false;
     let startX = 0;
-    let currentCoverflowOffset = -120;
-    let coverflowVelocity = -0.7; // smooth idle drift speed
+    let currentOffset = -150;
+    let velocity = -0.65;
 
-    coverflowViewport.addEventListener("mousedown", (e) => {
-      isDraggingCoverflow = true;
+    viewport.addEventListener("mousedown", (e) => {
+      isDragging = true;
       startX = e.pageX;
-      coverflowVelocity = 0;
+      velocity = 0;
     });
-
-    window.addEventListener("mouseup", () => {
-      if (isDraggingCoverflow) isDraggingCoverflow = false;
-    });
-
-    coverflowViewport.addEventListener("mouseleave", () => {
-      if (isDraggingCoverflow) isDraggingCoverflow = false;
-    });
-
+    window.addEventListener("mouseup", () => { if (isDragging) isDragging = false; });
+    viewport.addEventListener("mouseleave", () => { if (isDragging) isDragging = false; });
     window.addEventListener("mousemove", (e) => {
-      if (!isDraggingCoverflow) return;
+      if (!isDragging) return;
       e.preventDefault();
       const x = e.pageX;
       const delta = (x - startX) * 1.5;
-      currentCoverflowOffset += delta;
-      coverflowVelocity = delta * 0.7;
+      currentOffset += delta;
+      velocity = delta * 0.7;
       startX = x;
     });
 
-    // Touch support for mobile
-    coverflowViewport.addEventListener("touchstart", (e) => {
-      isDraggingCoverflow = true;
+    // Touch support
+    viewport.addEventListener("touchstart", (e) => {
+      isDragging = true;
       startX = e.touches[0].pageX;
-      coverflowVelocity = 0;
+      velocity = 0;
     });
-
-    window.addEventListener("touchend", () => {
-      if (isDraggingCoverflow) isDraggingCoverflow = false;
-    });
-
-    coverflowViewport.addEventListener("touchmove", (e) => {
-      if (!isDraggingCoverflow) return;
+    window.addEventListener("touchend", () => { if (isDragging) isDragging = false; });
+    viewport.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
       const x = e.touches[0].pageX;
       const delta = (x - startX) * 1.5;
-      currentCoverflowOffset += delta;
-      coverflowVelocity = delta * 0.7;
+      currentOffset += delta;
+      velocity = delta * 0.7;
       startX = x;
     });
 
-    // 3D Curvature & Momentum Animation Loop
-    function update3DCoverflow() {
-      if (!isDraggingCoverflow) {
-        currentCoverflowOffset += coverflowVelocity;
-        coverflowVelocity *= 0.95; // friction
-        if (Math.abs(coverflowVelocity) < 0.3) {
-          coverflowVelocity = -0.6; // gentle continuous drift
+    function updateCoverflow() {
+      if (!isDragging) {
+        currentOffset += velocity;
+        velocity *= 0.95;
+        if (Math.abs(velocity) < 0.3) {
+          velocity = -0.6; // subtle constant drift
         }
-
-        const halfWidth = coverflowTrack.scrollWidth / 2;
-        if (currentCoverflowOffset < -halfWidth) currentCoverflowOffset += halfWidth;
-        if (currentCoverflowOffset > 0) currentCoverflowOffset -= halfWidth;
+        const halfWidth = track.scrollWidth / 2;
+        if (currentOffset < -halfWidth) currentOffset += halfWidth;
+        if (currentOffset > 0) currentOffset -= halfWidth;
       }
 
-      coverflowTrack.style.transform = `translateX(${currentCoverflowOffset}px)`;
+      track.style.transform = `translateX(${currentOffset}px)`;
 
-      // Calculate 3D cylindrical arc tilt for each card
       const viewportCenter = window.innerWidth / 2;
-      coverflowCards.forEach((card) => {
+      cards.forEach((card) => {
         const rect = card.getBoundingClientRect();
         const cardCenter = rect.left + rect.width / 2;
         const distFromCenter = (cardCenter - viewportCenter) / (window.innerWidth * 0.45);
         const clampedDist = Math.max(-1.8, Math.min(1.8, distFromCenter));
 
-        // Curvature rotation angle: left cards tilt inward (+), right cards tilt inward (-)
-        const rotateY = clampedDist * -24; 
-        const translateZ = -Math.abs(clampedDist) * 75; // pushes outer cards deeper in perspective
+        const rotateY = clampedDist * -24;
+        const translateZ = -Math.abs(clampedDist) * 75;
         const scale = Math.max(0.85, 1 - Math.abs(clampedDist) * 0.08);
         const opacity = Math.max(0.4, 1 - Math.abs(clampedDist) * 0.25);
 
@@ -221,12 +223,16 @@
         card.style.opacity = opacity;
       });
 
-      requestAnimationFrame(update3DCoverflow);
+      requestAnimationFrame(updateCoverflow);
     }
-    update3DCoverflow();
+    updateCoverflow();
   }
 
-  // 7. Particle Canvas Background
+  // Initialize both Skills and Projects Coverflow Ribbons!
+  init3DCoverflow("skills-coverflow-viewport", "skills-coverflow-track");
+  init3DCoverflow("coverflow-viewport", "coverflow-track");
+
+  // 7. Canvas Background Particles
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d");
@@ -268,25 +274,7 @@
     animate();
   }
 
-  // 8. Skills Filter
-  const filterBtns = document.querySelectorAll(".skill-filter-btn");
-  const skillCards = document.querySelectorAll(".skill-card");
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      filterBtns.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      const filter = btn.getAttribute("data-filter");
-      skillCards.forEach((card) => {
-        if (filter === "all" || card.getAttribute("data-category") === filter) {
-          card.style.display = "flex";
-        } else {
-          card.style.display = "none";
-        }
-      });
-    });
-  });
-
-  // 9. Toast Notification
+  // 8. Toast Notification
   function showToast(message) {
     const container = document.getElementById("toast-container");
     if (!container) return;
@@ -297,7 +285,7 @@
     setTimeout(() => { toast.remove(); }, 3000);
   }
 
-  // 10. Copy to Clipboard
+  // 9. Copy to Clipboard
   document.querySelectorAll(".copy-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const text = btn.getAttribute("data-copy");
@@ -307,7 +295,7 @@
     });
   });
 
-  // 11. Modal Dialog
+  // 10. Modal Dialog
   const modal = document.getElementById("project-modal");
   const modalBackdrop = document.getElementById("modal-backdrop");
   const modalCloseBtn = document.getElementById("modal-close-btn");
@@ -348,7 +336,7 @@
   if (modalCloseAction) modalCloseAction.addEventListener("click", closeModal);
   window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-  // 12. Contact Form AJAX Submission
+  // 11. Contact Form AJAX Submission
   const form = document.getElementById("contact-form");
   if (form) {
     form.addEventListener("submit", async (e) => {
@@ -385,7 +373,7 @@
     });
   }
 
-  // 13. Back to Top
+  // 12. Back to Top
   const backToTop = document.getElementById("back-to-top");
   if (backToTop) {
     backToTop.addEventListener("click", () => {

@@ -8,14 +8,14 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=25.0" />
+  <link rel="stylesheet" href="css/style.css?v=26.0" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
 </head>
 <body>
-  <div class="custom-cursor" id="custom-cursor"></div>
-  <div class="custom-cursor-dot" id="custom-cursor-dot"></div>
+  <div class="custom-cursor-follower" id="cursor-follower"></div>
+  <div class="custom-cursor-dot" id="cursor-dot"></div>
 
   <canvas id="bg-canvas" class="bg-canvas"></canvas>
   <div class="ambient-glow glow-1"></div>
@@ -52,7 +52,7 @@
 
       <div class="nav-actions">
         <a href="https://www.linkedin.com/in/shubham-dhiman" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="LinkedIn Profile" title="View LinkedIn Profile">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.65 1.65 0 0 0-1.66 1.66 1.66 1.66 0 0 0 1.66 1.66 1.66 1.66 0 0 0 1.66-1.66c0-.92-.74-1.66-1.66-1.66Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.65 1.65 0 0 0-1.66 1.66 1.66 1.66 1.66 0 0 0 1.66 1.66 1.66 1.66 0 0 0 1.66-1.66c0-.92-.74-1.66-1.66-1.66Z"/></svg>
         </a>
         <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="GitHub Profile" title="View GitHub Profile">
           <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
@@ -70,7 +70,7 @@
   </header>
 
   <main>
-    <!-- 1. HERO FRONT PAGE WITH STRICT IN-TEXT BROKEN TV SCANLINE ON "SHUBHAM" ONLY -->
+    <!-- 1. HERO FRONT PAGE WITH ULTRA-PREMIUM HOLOGRAPHIC AURORA EFFECT ON "SHUBHAM" -->
     <section id="hero" class="hero-front-section">
       <div class="container hero-container-flex">
         <div class="hero-top-wrap">
@@ -79,7 +79,7 @@
             <span class="status-text">Available for Junior Frontend Roles &amp; Freelance</span>
           </div>
           <h1 class="hero-main-title" id="sparkle-title">
-            Hi, i&apos;m <span class="in-text-tv-glitch">shubham</span>
+            Hi, i&apos;m <span class="aurora-hologram-text">shubham</span>
           </h1>
         </div>
 
@@ -104,11 +104,11 @@
       </div>
     </section>
 
-    <!-- 2. ABOUT ME SECTION WITH 2-LINE HEADING & CLEAN SVG SPINNER -->
+    <!-- 2. ABOUT ME SECTION -->
     <section id="about" class="section about-section">
       <div class="container">
         <div class="section-header">
-          <div class="section-tag">About Me</div>
+          <div class="section-tag">&mdash; ABOUT ME &mdash;</div>
           <h2 class="section-title">
             Crafting Clean Interfaces<br/>
             with Passion &amp; Precision
@@ -147,7 +147,7 @@
                 </div>
               </div>
 
-              <!-- 🌟 CLEAN SVG CORE TECHNOLOGIES FREE SPINNER 🌟 -->
+              <!-- SVG CORE TECHNOLOGIES FREE SPINNER -->
               <div class="about-marquee-container">
                 <div class="marquee-header-label">
                   <span>Core Technologies</span>
@@ -214,7 +214,7 @@
                       <span>Elementor</span>
                     </div>
                     <div class="marquee-tech-pill">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#4ce1ff" stroke-width="2" class="marquee-pill-icon"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#4ce1ff" stroke-width="2" class="marquee-pill-icon"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1 4-10z"></path></svg>
                       <span>REST APIs</span>
                     </div>
                     <div class="marquee-tech-pill">
@@ -253,7 +253,7 @@
             </div>
           </div>
 
-          <!-- Stats Column with Glowing Vector Boxes -->
+          <!-- Stats Column -->
           <div class="about-stats-column">
             <div class="card stat-box spotlight-card">
               <div class="stat-icon-wrapper stat-glow-purple">
@@ -292,142 +292,210 @@
       </div>
     </section>
 
-    <!-- 3. TECHNICAL SKILLS SECTION -->
-    <section id="skills" class="section skills-section">
+    <!-- 🌟 3. TECHNICAL SKILLS — 3D CURVED CYLINDRICAL COVERFLOW RIBBON SLIDER 🌟 -->
+    <section id="skills" class="section skills-coverflow-section">
+      <!-- Golden Wireframe Tunnel -->
+      <div class="golden-tunnel-bg">
+        <div class="tunnel-oct-ring" style="--scale: 0.45;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 0.7;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 0.95;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 1.2;"></div>
+      </div>
+
       <div class="container">
         <div class="section-header">
-          <div class="section-tag">Technical Skills</div>
-          <h2 class="section-title">
-            My Tech Stack &amp;<br/>
-            Core Capabilities
-          </h2>
-          <p class="section-subtitle">Core technologies and tools I utilize to craft modern web applications.</p>
+          <div class="section-tag">&mdash; TECHNICAL PROFICIENCY &mdash;</div>
+          <h2 class="section-title">CORE SKILLS &amp; CAPABILITIES</h2>
+          <p class="section-subtitle">A dynamic showcase of technologies, frameworks, and tools I utilize to engineer modern web applications.</p>
         </div>
+      </div>
 
-        <div class="skills-filter-wrapper">
-          <button class="skill-filter-btn active" data-filter="all">All Tech</button>
-          <button class="skill-filter-btn" data-filter="frontend">Frontend</button>
-          <button class="skill-filter-btn" data-filter="cms">CMS &amp; Backend</button>
-          <button class="skill-filter-btn" data-filter="tools">Tools &amp; APIs</button>
-        </div>
-
-        <div class="skills-grid" id="skills-grid">
-          <!-- HTML5 -->
-          <div class="card skill-card spotlight-card" data-category="frontend">
-            <div class="skill-top">
-              <div class="skill-icon-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 Logo" class="skill-logo-img" />
+      <!-- Skills 3D Curved Coverflow Ribbon -->
+      <div class="coverflow-stage-viewport" id="skills-coverflow-viewport">
+        <div class="coverflow-ribbon-track" id="skills-coverflow-track">
+          <!-- Skill 1: HTML5 -->
+          <div class="coverflow-card-item skill-coverflow-card">
+            <div class="skill-badge-header">
+              <div class="skill-icon-wrap">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" />
               </div>
-              <span class="skill-level-badge">Advanced</span>
+              <span class="skill-card-tier">Advanced</span>
             </div>
-            <h3 class="skill-name">HTML5</h3>
-            <p class="skill-desc">Semantic markup, accessibility (ARIA), clean DOM structure, and SEO standards.</p>
+            <div>
+              <h3 class="skill-card-name">HTML5</h3>
+              <p class="skill-card-desc">Semantic markup, accessibility (ARIA), clean DOM structure, and high SEO standards.</p>
+            </div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 90%;"></div></div>
           </div>
 
-          <!-- CSS3 -->
-          <div class="card skill-card spotlight-card" data-category="frontend">
-            <div class="skill-top">
-              <div class="skill-icon-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3 Logo" class="skill-logo-img" />
+          <!-- Skill 2: CSS3 -->
+          <div class="coverflow-card-item skill-coverflow-card">
+            <div class="skill-badge-header">
+              <div class="skill-icon-wrap">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" />
               </div>
-              <span class="skill-level-badge">Advanced</span>
+              <span class="skill-card-tier">Advanced</span>
             </div>
-            <h3 class="skill-name">CSS3</h3>
-            <p class="skill-desc">Flexbox, CSS Grid, custom properties, keyframe animations, and responsive media queries.</p>
+            <div>
+              <h3 class="skill-card-name">CSS3</h3>
+              <p class="skill-card-desc">Flexbox, CSS Grid, custom properties, keyframe animations, and responsive media queries.</p>
+            </div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 88%;"></div></div>
           </div>
 
-          <!-- JavaScript -->
-          <div class="card skill-card spotlight-card" data-category="frontend">
-            <div class="skill-top">
-              <div class="skill-icon-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript Logo" class="skill-logo-img" />
+          <!-- Skill 3: JavaScript -->
+          <div class="coverflow-card-item skill-coverflow-card">
+            <div class="skill-badge-header">
+              <div class="skill-icon-wrap">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
               </div>
-              <span class="skill-level-badge">Proficient</span>
+              <span class="skill-card-tier">Proficient</span>
             </div>
-            <h3 class="skill-name">JavaScript (ES6+)</h3>
-            <p class="skill-desc">DOM manipulation, event handling, arrow functions, async/await, and form validation.</p>
+            <div>
+              <h3 class="skill-card-name">JavaScript (ES6+)</h3>
+              <p class="skill-card-desc">DOM manipulation, event handling, arrow functions, async/await, and form validation.</p>
+            </div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 80%;"></div></div>
           </div>
 
-          <!-- React -->
-          <div class="card skill-card spotlight-card" data-category="frontend">
-            <div class="skill-top">
-              <div class="skill-icon-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Logo" class="skill-logo-img" />
+          <!-- Skill 4: React -->
+          <div class="coverflow-card-item skill-coverflow-card">
+            <div class="skill-badge-header">
+              <div class="skill-icon-wrap">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
               </div>
-              <span class="skill-level-badge">Learning</span>
+              <span class="skill-card-tier">Learning</span>
             </div>
-            <h3 class="skill-name">React</h3>
-            <p class="skill-desc">Component architecture, JSX, hooks (useState, useEffect), props, and SPA state management.</p>
+            <div>
+              <h3 class="skill-card-name">React</h3>
+              <p class="skill-card-desc">Component architecture, JSX, hooks (useState, useEffect), props, and SPA management.</p>
+            </div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 65%;"></div></div>
           </div>
 
-          <!-- WordPress -->
-          <div class="card skill-card spotlight-card" data-category="cms">
-            <div class="skill-top">
-              <div class="skill-icon-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" alt="WordPress Logo" class="skill-logo-img" />
+          <!-- Skill 5: WordPress -->
+          <div class="coverflow-card-item skill-coverflow-card">
+            <div class="skill-badge-header">
+              <div class="skill-icon-wrap">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" alt="WordPress" />
               </div>
-              <span class="skill-level-badge">Proficient</span>
+              <span class="skill-card-tier">Proficient</span>
             </div>
-            <h3 class="skill-name">WordPress</h3>
-            <p class="skill-desc">Site architecture, theme customization, plugins management, and client site configuration.</p>
+            <div>
+              <h3 class="skill-card-name">WordPress</h3>
+              <p class="skill-card-desc">Site architecture, theme customization, plugins management, and client site builds.</p>
+            </div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 85%;"></div></div>
           </div>
 
-          <!-- Elementor -->
-          <div class="card skill-card spotlight-card" data-category="cms">
-            <div class="skill-top">
-              <div class="skill-icon-box">
-                <svg viewBox="0 0 512 512" class="skill-logo-img" fill="#D30C5C">
-                  <path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zm-85.3 384h-42.7V128h42.7v256zm170.7 0h-128v-42.7h128V384zm0-85.3h-128V256h128v42.7zm0-85.4h-128v-42.7h128v42.7z"/>
-                </svg>
+          <!-- Skill 6: Elementor -->
+          <div class="coverflow-card-item skill-coverflow-card">
+            <div class="skill-badge-header">
+              <div class="skill-icon-wrap">
+                <svg viewBox="0 0 512 512" fill="#D30C5C"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zm-85.3 384h-42.7V128h42.7v256zm170.7 0h-128v-42.7h128V384zm0-85.3h-128V256h128v42.7zm0-85.4h-128v-42.7h128v42.7z"/></svg>
               </div>
-              <span class="skill-level-badge">Advanced</span>
+              <span class="skill-card-tier">Advanced</span>
             </div>
-            <h3 class="skill-name">Elementor</h3>
-            <p class="skill-desc">Visual page builder, bespoke layouts, custom CSS extensions, and mobile breakpoint tuning.</p>
+            <div>
+              <h3 class="skill-card-name">Elementor</h3>
+              <p class="skill-card-desc">Visual page builder, bespoke layouts, custom CSS overrides, and mobile tuning.</p>
+            </div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 90%;"></div></div>
           </div>
 
-          <!-- REST APIs -->
-          <div class="card skill-card spotlight-card" data-category="tools">
-            <div class="skill-top">
-              <div class="skill-icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#4ce1ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="skill-logo-img">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="2" y1="12" x2="22" y2="12"></line>
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path>
-                </svg>
+          <!-- Skill 7: REST APIs -->
+          <div class="coverflow-card-item skill-coverflow-card">
+            <div class="skill-badge-header">
+              <div class="skill-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#4ce1ff" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path></svg>
               </div>
-              <span class="skill-level-badge">Proficient</span>
+              <span class="skill-card-tier">Proficient</span>
             </div>
-            <h3 class="skill-name">REST APIs &amp; Fetch API</h3>
-            <p class="skill-desc">Asynchronous data retrieval, JSON parsing, error handling, and integrating external web services.</p>
+            <div>
+              <h3 class="skill-card-name">REST APIs</h3>
+              <p class="skill-card-desc">Asynchronous data retrieval, JSON parsing, error handling, and integrating external web services.</p>
+            </div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 75%;"></div></div>
           </div>
 
-          <!-- PHP -->
-          <div class="card skill-card spotlight-card" data-category="cms">
-            <div class="skill-top">
-              <div class="skill-icon-box">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP Logo" class="skill-logo-img" />
+          <!-- Skill 8: PHP -->
+          <div class="coverflow-card-item skill-coverflow-card">
+            <div class="skill-badge-header">
+              <div class="skill-icon-wrap">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" />
               </div>
-              <span class="skill-level-badge">Learning</span>
+              <span class="skill-card-tier">Learning</span>
             </div>
-            <h3 class="skill-name">PHP</h3>
-            <p class="skill-desc">Server scripting fundamentals, dynamic template modifications, and form processing.</p>
+            <div>
+              <h3 class="skill-card-name">PHP</h3>
+              <p class="skill-card-desc">Server scripting fundamentals, dynamic template modifications, and form handling.</p>
+            </div>
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 60%;"></div></div>
+          </div>
+
+          <!-- Duplicate Set for Seamless Infinite Loop -->
+          <div class="coverflow-card-item skill-coverflow-card">
+            <div class="skill-badge-header">
+              <div class="skill-icon-wrap">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" />
+              </div>
+              <span class="skill-card-tier">Advanced</span>
+            </div>
+            <div>
+              <h3 class="skill-card-name">HTML5</h3>
+              <p class="skill-card-desc">Semantic markup, accessibility (ARIA), clean DOM structure, and high SEO standards.</p>
+            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+          </div>
+
+          <div class="coverflow-card-item skill-coverflow-card">
+            <div class="skill-badge-header">
+              <div class="skill-icon-wrap">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" />
+              </div>
+              <span class="skill-card-tier">Advanced</span>
+            </div>
+            <div>
+              <h3 class="skill-card-name">CSS3</h3>
+              <p class="skill-card-desc">Flexbox, CSS Grid, custom properties, keyframe animations, and responsive media queries.</p>
+            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 88%;"></div></div>
+          </div>
+
+          <div class="coverflow-card-item skill-coverflow-card">
+            <div class="skill-badge-header">
+              <div class="skill-icon-wrap">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
+              </div>
+              <span class="skill-card-tier">Proficient</span>
+            </div>
+            <div>
+              <h3 class="skill-card-name">JavaScript (ES6+)</h3>
+              <p class="skill-card-desc">DOM manipulation, event handling, arrow functions, async/await, and form validation.</p>
+            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+          </div>
+
+          <div class="coverflow-card-item skill-coverflow-card">
+            <div class="skill-badge-header">
+              <div class="skill-icon-wrap">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
+              </div>
+              <span class="skill-card-tier">Learning</span>
+            </div>
+            <div>
+              <h3 class="skill-card-name">React</h3>
+              <p class="skill-card-desc">Component architecture, JSX, hooks (useState, useEffect), props, and SPA management.</p>
+            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 65%;"></div></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 🌟 4. FEATURED PROJECTS — 3D CURVED CYLINDRICAL COVERFLOW RIBBON (SCREENSHOT MATCH) 🌟 -->
+    <!-- 🌟 4. FEATURED PROJECTS — 3D CURVED CYLINDRICAL COVERFLOW RIBBON 🌟 -->
     <section id="projects" class="section projects-coverflow-section">
-      <!-- Golden Octagonal Wireframe Tunnel Background -->
+      <!-- Golden Wireframe Tunnel -->
       <div class="golden-tunnel-bg">
         <div class="tunnel-oct-ring" style="--scale: 0.45;"></div>
         <div class="tunnel-oct-ring" style="--scale: 0.7;"></div>
@@ -764,7 +832,7 @@
             <!-- LinkedIn -->
             <div class="card contact-card spotlight-card">
               <div class="contact-icon-box">
-                <svg viewBox="0 0 24 24" fill="currentColor" class="contact-svg"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.65 1.65 0 0 0-1.66 1.66 1.66 1.66 0 0 0 1.66 1.66 1.66 1.66 0 0 0 1.66-1.66c0-.92-.74-1.66-1.66-1.66Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" class="contact-svg"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.65 1.65 0 0 0-1.66 1.66 1.66 1.66 1.66 0 0 0 1.66 1.66 1.66 1.66 0 0 0 1.66-1.66c0-.92-.74-1.66-1.66-1.66Z"/></svg>
               </div>
               <div class="contact-card-info">
                 <span class="contact-label">LinkedIn</span>
@@ -875,7 +943,7 @@
     </div>
   </footer>
 
-  <script src="js/projects-data.js?v=25.0"></script>
-  <script src="js/main.js?v=25.0"></script>
+  <script src="js/projects-data.js?v=26.0"></script>
+  <script src="js/main.js?v=26.0"></script>
 </body>
 </html>
