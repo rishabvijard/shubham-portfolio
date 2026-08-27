@@ -289,7 +289,7 @@ body {
 .btn-outline:hover { border-color: var(--accent-purple); background: rgba(194, 164, 255, 0.12); transform: translateY(-2px); }
 .btn-full { width: 100%; justify-content: center; }
 
-/* 🌟 2. HERO FRONT PAGE WITH BROKEN TV SCANLINE VERTICAL SPLIT EFFECT ON "SHUBHAM" 🌟 */
+/* 🌟 2. HERO FRONT PAGE WITH 3.5s STAGGERED BROKEN TV SCANLINE EFFECT ON "SHUBHAM" 🌟 */
 .hero-front-section {
   min-height: 100vh;
   padding-top: 5.5rem;
@@ -340,7 +340,7 @@ body {
   margin: 0 auto;
 }
 
-/* 📺 BROKEN TV CRT SCREEN VERTICAL SPLIT EFFECT (TOP HALF 1.5s -> BOTTOM HALF 1.5s) 📺 */
+/* 📺 BROKEN TV CRT SCREEN VERTICAL SPLIT EFFECT (TOP HALF 3.5s -> BOTTOM HALF 3.5s) 📺 */
 .tv-screen-glitch-wrap {
   display: inline-block;
   position: relative;
@@ -363,51 +363,40 @@ body {
   pointer-events: none;
 }
 
-/* Top Half Split */
+/* Top Half Split (Clips Top 50%) */
 .tv-layer-top {
   clip-path: inset(0 0 50% 0);
-  animation: brokenTvTop 3s infinite steps(2, start);
+  animation: brokenTvTop 7s infinite steps(2, start);
 }
 
-/* Bottom Half Split */
+/* Bottom Half Split (Clips Bottom 50%) */
 .tv-layer-bottom {
   clip-path: inset(50% 0 0 0);
-  animation: brokenTvBottom 3s infinite steps(2, start);
-}
-
-/* Broken TV Scanline Cut in Center */
-.tv-screen-crack-line {
-  position: absolute;
-  top: 50%;
-  left: -5%;
-  width: 110%;
-  height: 2px;
-  background: rgba(0, 240, 255, 0.85);
-  box-shadow: 0 0 8px #00f0ff, 0 0 15px rgba(255, 255, 255, 0.9);
-  pointer-events: none;
-  transform: translateY(-50%);
-  animation: crackFlicker 3s infinite;
+  animation: brokenTvBottom 7s infinite steps(2, start);
 }
 
 @keyframes brokenTvTop {
-  /* 0s to 1.5s: Top Half is actively glitching with broken TV scanlines & jitter */
-  0%, 46% {
+  /* 0s to 3.5s: Top Half is actively glitching with broken TV scanlines & jitter */
+  0%, 47% {
     transform: translate(-3px, 0);
     text-shadow: 2px 0 #00f0ff, -2px 0 #aa42ff, 0 0 12px rgba(255, 255, 255, 0.9);
-    filter: contrast(1.4) brightness(1.25);
+    filter: contrast(1.3) brightness(1.2);
   }
-  6% {
-    transform: translate(4px, -1px);
+  5% {
+    transform: translate(3px, -1px);
     text-shadow: -3px 0 #00f0ff, 3px 0 #ff0055;
   }
-  14% {
+  15% {
     transform: translate(-2px, 1px);
   }
-  24% {
+  25% {
     transform: translate(2px, 0);
-    opacity: 0.9;
+    opacity: 0.92;
   }
-  /* 1.5s to 3s: Top Half is steady/clean while Bottom Half glitches */
+  38% {
+    transform: translate(-3px, 0);
+  }
+  /* 3.5s to 7s: Top Half is steady/clean while Bottom Half glitches */
   50%, 100% {
     transform: translate(0, 0);
     text-shadow: 0 0 6px rgba(194, 164, 255, 0.4);
@@ -416,41 +405,37 @@ body {
 }
 
 @keyframes brokenTvBottom {
-  /* 0s to 1.5s: Bottom Half is steady/clean */
-  0%, 46% {
+  /* 0s to 3.5s: Bottom Half is steady/clean */
+  0%, 48% {
     transform: translate(0, 0);
     text-shadow: 0 0 6px rgba(194, 164, 255, 0.4);
     filter: none;
   }
-  /* 1.5s to 3s: Bottom Half is actively glitching with broken TV scanlines & jitter */
-  50%, 96% {
+  /* 3.5s to 7s: Bottom Half is actively glitching with broken TV scanlines & jitter */
+  50%, 97% {
     transform: translate(3px, 0);
     text-shadow: -2px 0 #fb8dff, 2px 0 #00f0ff, 0 0 12px rgba(255, 255, 255, 0.9);
-    filter: contrast(1.4) brightness(1.25);
+    filter: contrast(1.3) brightness(1.2);
   }
-  56% {
-    transform: translate(-4px, 1px);
+  55% {
+    transform: translate(-3px, 1px);
     text-shadow: 3px 0 #ff0055, -3px 0 #00f0ff;
   }
-  64% {
+  65% {
     transform: translate(2px, -1px);
   }
-  74% {
+  78% {
     transform: translate(-2px, 0);
-    opacity: 0.9;
+    opacity: 0.92;
+  }
+  88% {
+    transform: translate(3px, 0);
   }
   100% {
     transform: translate(0, 0);
     text-shadow: 0 0 6px rgba(194, 164, 255, 0.4);
     filter: none;
   }
-}
-
-@keyframes crackFlicker {
-  0%, 45% { opacity: 0.9; transform: translateY(-50%) scaleX(1); }
-  48% { opacity: 0.3; transform: translateY(-50%) scaleX(0.95); }
-  50%, 95% { opacity: 0.95; transform: translateY(-50%) scaleX(1.02); }
-  98% { opacity: 0.2; transform: translateY(-50%) scaleX(0.9); }
 }
 
 /* 👤 3D BIG FACE PORTRAIT 👤 */

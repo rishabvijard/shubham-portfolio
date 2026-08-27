@@ -1,42 +1,197 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  // 🎯 1. SILKY-SMOOTH LERPING CUSTOM CURSOR 🎯
+  // 🎯 1. SILKY-SMOOTH LERPING CUSTOM CURSOR & SPARKLING PARTICLE TRAIL 🎯
   const follower = document.getElementById("cursor-follower");
   const dot = document.getElementById("cursor-dot");
+  const cursorSparks = [];
 
-  if (follower && dot && window.matchMedia("(hover: hover)").matches) {
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let followerX = mouseX;
-    let followerY = mouseY;
-    let dotX = mouseX;
-    let dotY = mouseY;
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let followerX = mouseX;
+  let followerY = mouseY;
+  let dotX = mouseX;
+  let dotY = mouseY;
 
+  if (window.matchMedia("(hover: hover)").matches) {
     window.addEventListener("mousemove", (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+
+      // Spawn mouse stardust sparks
+      for (let i = 0; i < 2; i++) {
+        cursorSparks.push({
+          x: mouseX + (Math.random() - 0.5) * 8,
+          y: mouseY + (Math.random() - 0.5) * 8,
+          vx: (Math.random() - 0.5) * 1.5,
+          vy: (Math.random() - 0.5) * 1.5 - 0.5,
+          size: Math.random() * 2.8 + 1.2,
+          alpha: 1,
+          decay: Math.random() * 0.035 + 0.02,
+          color: Math.random() > 0.5 ? "rgba(229, 192, 123, " : "rgba(194, 164, 255, "
+        });
+      }
     });
 
-    function renderCursor() {
-      followerX += (mouseX - followerX) * 0.18;
-      followerY += (mouseY - followerY) * 0.18;
-      dotX += (mouseX - dotX) * 0.75;
-      dotY += (mouseY - dotY) * 0.75;
+    if (follower && dot) {
+      function renderCursor() {
+        followerX += (mouseX - followerX) * 0.18;
+        followerY += (mouseY - followerY) * 0.18;
+        dotX += (mouseX - dotX) * 0.75;
+        dotY += (mouseY - dotY) * 0.75;
 
-      follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
-      dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
+        follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
+        dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
 
-      requestAnimationFrame(renderCursor);
+        requestAnimationFrame(renderCursor);
+      }
+      renderCursor();
+
+      const interactiveElements = document.querySelectorAll("a, button, .skill-coverflow-card, .coverflow-card-item, .card");
+      interactiveElements.forEach((el) => {
+        el.addEventListener("mouseenter", () => follower.classList.add("is-hovering"));
+        el.addEventListener("mouseleave", () => follower.classList.remove("is-hovering"));
+      });
     }
-    renderCursor();
-
-    const interactiveElements = document.querySelectorAll("a, button, .skill-coverflow-card, .coverflow-card-item, .card");
-    interactiveElements.forEach((el) => {
-      el.addEventListener("mouseenter", () => follower.classList.add("is-hovering"));
-      el.addEventListener("mouseleave", () => follower.classList.remove("is-hovering"));
-    });
   }
 
-  // 2. 3D Magnetic Portrait Face Tilt
+  // 🌟 2. INTERACTIVE GOLDEN OCTAGONAL PERSPECTIVE TUNNEL & SCROLL LOOP (FROM IMAGE REF) 🌟
+  const canvas = document.getElementById("bg-canvas");
+  if (canvas) {
+    const ctx = canvas.getContext("2d");
+    let width, height, centerX, centerY;
+    let scrollY = window.pageYOffset;
+    let targetScrollY = scrollY;
+    let tunnelOffset = 0;
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      centerX = width / 2;
+      centerY = height * 0.45;
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    window.addEventListener("scroll", () => {
+      targetScrollY = window.pageYOffset;
+    });
+
+    // Draw a single regular octagon
+    function drawOctagon(cx, cy, radius, rotation = 0) {
+      ctx.beginPath();
+      for (let i = 0; i < 8; i++) {
+        const angle = rotation + (i * Math.PI) / 4;
+        const x = cx + Math.cos(angle) * radius * 1.55; // widescreen perspective stretch
+        const y = cy + Math.sin(angle) * radius;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+    }
+
+    // Ambient floating stardust particles inside the tunnel
+    const tunnelStars = [];
+    const starCount = window.innerWidth < 768 ? 35 : 70;
+    for (let i = 0; i < starCount; i++) {
+      tunnelStars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        z: Math.random() * 1000 + 50,
+        size: Math.random() * 1.5 + 0.5,
+        alpha: Math.random() * 0.7 + 0.3
+      });
+    }
+
+    function animateTunnel() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Smooth scroll lerp for camera travel
+      scrollY += (targetScrollY - scrollY) * 0.08;
+      tunnelOffset += 0.45 + (targetScrollY - scrollY) * 0.05;
+
+      const numRings = 14;
+      const baseSpacing = 85;
+
+      for (let i = 0; i < numRings; i++) {
+        // Continuous looping depth calculation
+        let ringDist = ((i * baseSpacing + tunnelOffset) % (numRings * baseSpacing));
+        let scale = Math.pow(ringDist / (numRings * baseSpacing), 2.2);
+        let radius = scale * (Math.max(width, height) * 0.9);
+
+        if (radius > 8) {
+          let alpha = Math.min(1, Math.sin((ringDist / (numRings * baseSpacing)) * Math.PI));
+          alpha = alpha * 0.35; // graceful glowing wireframe opacity
+
+          ctx.save();
+          ctx.strokeStyle = `rgba(229, 192, 123, ${alpha})`;
+          ctx.lineWidth = Math.max(0.8, scale * 2.2);
+          ctx.shadowBlur = 12;
+          ctx.shadowColor = "rgba(229, 192, 123, 0.4)";
+
+          drawOctagon(centerX, centerY, radius, 0);
+          ctx.stroke();
+
+          // Connective perspective wireframe lines on major diagonals
+          if (i === 0 || i === 4 || i === 8) {
+            ctx.strokeStyle = `rgba(229, 192, 123, ${alpha * 0.4})`;
+            ctx.lineWidth = 0.5;
+            for (let a = 0; a < 8; a++) {
+              const angle = (a * Math.PI) / 4;
+              ctx.beginPath();
+              ctx.moveTo(centerX + Math.cos(angle) * 30 * 1.55, centerY + Math.sin(angle) * 30);
+              ctx.lineTo(centerX + Math.cos(angle) * radius * 1.55, centerY + Math.sin(angle) * radius);
+              ctx.stroke();
+            }
+          }
+          ctx.restore();
+        }
+      }
+
+      // Draw floating cosmic stars
+      tunnelStars.forEach((star) => {
+        star.z -= 0.6 + (targetScrollY - scrollY) * 0.04;
+        if (star.z <= 10) {
+          star.z = 1000;
+          star.x = Math.random() * width;
+          star.y = Math.random() * height;
+        }
+        const k = 400 / star.z;
+        const px = (star.x - centerX) * k + centerX;
+        const py = (star.y - centerY) * k + centerY;
+
+        if (px >= 0 && px <= width && py >= 0 && py <= height) {
+          ctx.beginPath();
+          ctx.arc(px, py, star.size * k * 0.4, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(229, 192, 123, ${star.alpha * Math.min(1, k * 0.6)})`;
+          ctx.fill();
+        }
+      });
+
+      // Render cursor stardust sparks
+      for (let i = cursorSparks.length - 1; i >= 0; i--) {
+        const s = cursorSparks[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.alpha -= s.decay;
+        s.size *= 0.96;
+
+        if (s.alpha <= 0 || s.size <= 0.2) {
+          cursorSparks.splice(i, 1);
+        } else {
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+          ctx.fillStyle = `${s.color}${s.alpha})`;
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = s.color + "0.8)";
+          ctx.fill();
+        }
+      }
+
+      requestAnimationFrame(animateTunnel);
+    }
+    animateTunnel();
+  }
+
+  // 3. 3D Magnetic Portrait Face Tilt
   const portrait = document.getElementById("portrait-wrapper");
   const title = document.getElementById("sparkle-title");
 
@@ -55,7 +210,7 @@
     });
   }
 
-  // 3. Mobile Hamburger Toggle
+  // 4. Mobile Hamburger Toggle
   const hamburger = document.getElementById("nav-hamburger");
   const drawer = document.getElementById("mobile-nav-drawer");
   const drawerLinks = document.querySelectorAll(".mobile-nav-link");
@@ -76,7 +231,7 @@
     });
   }
 
-  // 4. Spotlight Hover Gradient Tracker
+  // 5. Spotlight Hover Gradient Tracker
   document.querySelectorAll(".spotlight-card").forEach((card) => {
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
@@ -85,7 +240,7 @@
     });
   });
 
-  // 🌟 5. SKILLS 3D CYLINDRICAL COVERFLOW (SILKY SMOOTH, NON-OVERLAPPING) 🌟
+  // 🌟 6. SKILLS 3D CYLINDRICAL COVERFLOW (SILKY SMOOTH, NON-OVERLAPPING) 🌟
   const skillsViewport = document.getElementById("skills-coverflow-viewport");
   const skillsTrack = document.getElementById("skills-coverflow-track");
   if (skillsViewport && skillsTrack) {
@@ -164,7 +319,7 @@
     updateSkillsCoverflow();
   }
 
-  // 🌟 6. PROJECTS 3D COVERFLOW ENGINE 🌟
+  // 🌟 7. PROJECTS 3D COVERFLOW ENGINE 🌟
   const projViewport = document.getElementById("coverflow-viewport");
   const projTrack = document.getElementById("coverflow-track");
   if (projViewport && projTrack) {
@@ -240,48 +395,6 @@
       requestAnimationFrame(updateProjCoverflow);
     }
     updateProjCoverflow();
-  }
-
-  // 7. Canvas Background Particles
-  const canvas = document.getElementById("bg-canvas");
-  if (canvas) {
-    const ctx = canvas.getContext("2d");
-    let particles = [];
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener("resize", resize);
-
-    const count = window.innerWidth < 768 ? 20 : 35;
-    for (let i = 0; i < count; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        r: Math.random() * 1.8 + 0.8
-      });
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(194, 164, 255, 0.2)";
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = canvas.width;
-        if (p.x > canvas.width) p.x = 0;
-        if (p.y < 0) p.y = canvas.height;
-        if (p.y > canvas.height) p.y = 0;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      requestAnimationFrame(animate);
-    }
-    animate();
   }
 
   // 8. Toast Notification
