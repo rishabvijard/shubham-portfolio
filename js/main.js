@@ -271,12 +271,11 @@
     return ((n % m) + m) % m;
   }
 
-  // 🌟 6 & 7. FLAWLESS INFINITE 3D COVERFLOW ENGINE (OPPOSITE INVERTED INTERACTION) 🌟
-  function initFlawlessInfiniteCoverflow({
+  // 🌟 6 & 7. MANUAL-ONLY 3D COVERFLOW ENGINE (MOVES ONLY ON MOUSE/TOUCH INTERACTION) 🌟
+  function initManualCoverflow({
     viewportId,
     trackId,
     cardSelector,
-    baseSpeed = 0.55,
     defaultCardWidth = 270,
     gap = 28
   }) {
@@ -289,10 +288,10 @@
     if (!totalCards) return;
 
     let isDragging = false;
-    let isHovered = false;
     let startX = 0;
     let velocity = 0;
     let currentOffset = 0;
+    let isLoopRunning = false;
 
     let cardWidth = cards[0].offsetWidth || defaultCardWidth;
     let stride = cardWidth + gap;
@@ -311,6 +310,7 @@
 
       for (let i = 0; i < totalCards; i++) {
         const card = cards[i];
+        // Seamless modular positioning
         const pos = mod(i * stride + currentOffset, totalOrbitWidth);
         const distFromCenter = pos - halfOrbit;
 
@@ -329,25 +329,32 @@
       }
     }
 
-    function loop() {
+    function step() {
       if (!isDragging) {
         if (Math.abs(velocity) > 0.05) {
           currentOffset += velocity;
-          velocity *= 0.94;
+          velocity *= 0.92;
         } else {
-          velocity = 0;
-          const speed = isHovered ? (baseSpeed * 0.25) : baseSpeed;
-          currentOffset -= speed;
+          velocity = 0; // Completely still when idle
         }
       }
 
       renderFrame();
-      requestAnimationFrame(loop);
+
+      // Only run loop when actively dragging or gliding from momentum
+      if (isDragging || Math.abs(velocity) > 0.05) {
+        requestAnimationFrame(step);
+      } else {
+        isLoopRunning = false;
+      }
     }
 
-    // Hover slowdown
-    viewport.addEventListener("mouseenter", () => { isHovered = true; }, { passive: true });
-    viewport.addEventListener("mouseleave", () => { isHovered = false; isDragging = false; }, { passive: true });
+    function wakeLoop() {
+      if (!isLoopRunning) {
+        isLoopRunning = true;
+        requestAnimationFrame(step);
+      }
+    }
 
     // Resize
     window.addEventListener("resize", () => {
@@ -355,13 +362,15 @@
       renderFrame();
     }, { passive: true });
 
-    // 🔄 OPPOSITE / INVERTED MOUSE DRAG: Drag Left -> Cards Move Right
+    // 🔄 OPPOSITE MOUSE DRAG: Drag Left -> Cards Move Right
     viewport.addEventListener("mousedown", (e) => {
       isDragging = true;
       startX = e.pageX;
       velocity = 0;
+      wakeLoop();
     });
     window.addEventListener("mouseup", () => { isDragging = false; });
+    viewport.addEventListener("mouseleave", () => { isDragging = false; });
     window.addEventListener("mousemove", (e) => {
       if (!isDragging) return;
       const x = e.pageX;
@@ -369,13 +378,15 @@
       currentOffset -= delta; // Inverted
       velocity = -delta * 0.5; // Inverted
       startX = x;
+      wakeLoop();
     });
 
-    // 🔄 OPPOSITE / INVERTED TOUCH DRAG (Mobile/Tablet)
+    // 🔄 OPPOSITE TOUCH DRAG (Mobile/Tablet)
     viewport.addEventListener("touchstart", (e) => {
       isDragging = true;
       startX = e.touches[0].pageX;
       velocity = 0;
+      wakeLoop();
     }, { passive: true });
     window.addEventListener("touchend", () => { isDragging = false; });
     viewport.addEventListener("touchmove", (e) => {
@@ -385,39 +396,38 @@
       currentOffset -= delta; // Inverted
       velocity = -delta * 0.5; // Inverted
       startX = x;
+      wakeLoop();
     }, { passive: true });
 
-    // 🔄 OPPOSITE / INVERTED MOUSE WHEEL SCROLLING
+    // 🔄 OPPOSITE MOUSE WHEEL SCROLLING: Scroll Left/Down -> Cards Move Right
     viewport.addEventListener("wheel", (e) => {
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       if (Math.abs(delta) > 2) {
-        velocity += delta * 0.22; // Inverted direction
+        velocity += delta * 0.24; // Inverted direction
         if (velocity > 30) velocity = 30;
         if (velocity < -30) velocity = -30;
+        wakeLoop();
       }
     }, { passive: true });
 
     updateMetrics();
     renderFrame();
-    requestAnimationFrame(loop);
   }
 
-  // Initialize Skills Continuous Infinite 3D Coverflow
-  initFlawlessInfiniteCoverflow({
+  // Initialize Skills Manual 3D Coverflow (Still until interacted)
+  initManualCoverflow({
     viewportId: "skills-coverflow-viewport",
     trackId: "skills-coverflow-track",
     cardSelector: ".skill-coverflow-card",
-    baseSpeed: 0.5,
     defaultCardWidth: 260,
     gap: 28
   });
 
-  // Initialize Projects Continuous Infinite 3D Coverflow
-  initFlawlessInfiniteCoverflow({
+  // Initialize Projects Manual 3D Coverflow (Still until interacted)
+  initManualCoverflow({
     viewportId: "coverflow-viewport",
     trackId: "coverflow-track",
     cardSelector: ".coverflow-card-item",
-    baseSpeed: 0.5,
     defaultCardWidth: 280,
     gap: 28
   });
