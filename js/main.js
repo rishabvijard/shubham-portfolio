@@ -1,5 +1,24 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  // Custom Cursor on Desktop
+  // 1. 3D Mouse Parallax on Hero Tunnel Grid & Name Title
+  const tunnelGrid = document.getElementById("tunnel-grid");
+  const heroName = document.getElementById("hero-cinzel-name");
+  
+  if (window.matchMedia("(hover: hover)").matches) {
+    window.addEventListener("mousemove", (e) => {
+      const { innerWidth, innerHeight } = window;
+      const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
+      const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
+
+      if (tunnelGrid) {
+        tunnelGrid.style.transform = `translate(calc(-50% + ${x * 30}px), calc(-50% + ${y * 25}px)) rotateX(${-y * 18}deg) rotateY(${x * 20}deg)`;
+      }
+      if (heroName) {
+        heroName.style.transform = `translateX(${x * 12}px) translateY(${y * 8}px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg)`;
+      }
+    });
+  }
+
+  // 2. Custom Cursor for Desktop
   const cursor = document.getElementById("custom-cursor");
   const cursorDot = document.getElementById("custom-cursor-dot");
   if (cursor && cursorDot && window.matchMedia("(hover: hover)").matches) {
@@ -11,18 +30,7 @@
     });
   }
 
-  // 3D Magnetic Portrait Tilt Effect (Desktop)
-  const portrait = document.getElementById("portrait-wrapper");
-  if (portrait && window.innerWidth > 768) {
-    window.addEventListener("mousemove", (e) => {
-      const { innerWidth, innerHeight } = window;
-      const x = (e.clientX - innerWidth / 2) / (innerWidth / 2);
-      const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
-      portrait.style.transform = `translateX(calc(-50% + ${x * 16}px)) translateY(${y * 12}px) rotate(${x * 2}deg)`;
-    });
-  }
-
-  // Mobile Hamburger Toggle
+  // 3. Mobile Hamburger Toggle
   const hamburger = document.getElementById("nav-hamburger");
   const drawer = document.getElementById("mobile-nav-drawer");
   const drawerLinks = document.querySelectorAll(".mobile-nav-link");
@@ -43,7 +51,7 @@
     });
   }
 
-  // Spotlight Hover Gradient Tracker
+  // 4. Spotlight Hover Gradient Tracker
   document.querySelectorAll(".spotlight-card").forEach((card) => {
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
@@ -52,7 +60,7 @@
     });
   });
 
-  // Particle Canvas Background
+  // 5. Particle Canvas Background
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d");
@@ -94,7 +102,7 @@
     animate();
   }
 
-  // Skills Filter
+  // 6. Skills Filter
   const filterBtns = document.querySelectorAll(".skill-filter-btn");
   const skillCards = document.querySelectorAll(".skill-card");
   filterBtns.forEach((btn) => {
@@ -112,7 +120,7 @@
     });
   });
 
-  // Toast Notification
+  // 7. Toast Notification
   function showToast(message) {
     const container = document.getElementById("toast-container");
     if (!container) return;
@@ -123,7 +131,7 @@
     setTimeout(() => { toast.remove(); }, 3000);
   }
 
-  // Copy to Clipboard
+  // 8. Copy to Clipboard
   document.querySelectorAll(".copy-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const text = btn.getAttribute("data-copy");
@@ -133,7 +141,7 @@
     });
   });
 
-  // Modal Dialog
+  // 9. Modal Dialog
   const modal = document.getElementById("project-modal");
   const modalBackdrop = document.getElementById("modal-backdrop");
   const modalCloseBtn = document.getElementById("modal-close-btn");
@@ -149,7 +157,7 @@
     modalCategory.textContent = data.category;
     modalBody.innerHTML = `
       <p style="margin-bottom: 1rem;">${data.desc}</p>
-      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem; font-family: var(--font-hero);">Key Features:</h4>
+      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem; font-family: var(--font-heading);">Key Features:</h4>
       <ul style="list-style: disc; padding-left: 1.25rem; margin-bottom: 1.25rem;">
         ${data.features.map((f) => `<li>${f}</li>`).join("")}
       </ul>
@@ -173,7 +181,7 @@
   if (modalCloseAction) modalCloseAction.addEventListener("click", closeModal);
   window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-  // Contact Form AJAX Submission
+  // 10. Contact Form AJAX Submission
   const form = document.getElementById("contact-form");
   if (form) {
     form.addEventListener("submit", async (e) => {
@@ -210,7 +218,7 @@
     });
   }
 
-  // Back to Top
+  // 11. Back to Top
   const backToTop = document.getElementById("back-to-top");
   if (backToTop) {
     backToTop.addEventListener("click", () => {
