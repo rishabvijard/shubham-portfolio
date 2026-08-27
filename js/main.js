@@ -79,6 +79,10 @@
       if (isDown) isDown = false;
     });
 
+    techWrapper.addEventListener("mouseleave", () => {
+      if (isDown) isDown = false;
+    });
+
     window.addEventListener("mousemove", (e) => {
       if (!isDown) return;
       e.preventDefault();
@@ -128,65 +132,98 @@
     animateTechSpinner();
   }
 
-  // 🌟 6. 3D CYLINDRICAL TURNTABLE SPINNER FOR PROJECTS 🌟
-  const turntable = document.getElementById("project-3d-turntable");
-  const stage = document.getElementById("project-3d-stage");
-  if (turntable && stage) {
-    let isDragging3D = false;
-    let startMouseX = 0;
-    let currentRotationY = 0;
-    let spinVelocity = 0;
+  // 🌟 6. 3D CURVED CYLINDRICAL COVERFLOW RIBBON (SCREENSHOT MATCH) 🌟
+  const coverflowViewport = document.getElementById("coverflow-viewport");
+  const coverflowTrack = document.getElementById("coverflow-track");
+  const coverflowCards = document.querySelectorAll(".coverflow-card-item");
 
-    stage.addEventListener("mousedown", (e) => {
-      isDragging3D = true;
-      startMouseX = e.clientX;
-      spinVelocity = 0;
+  if (coverflowViewport && coverflowTrack && coverflowCards.length) {
+    let isDraggingCoverflow = false;
+    let startX = 0;
+    let currentCoverflowOffset = -120;
+    let coverflowVelocity = -0.7; // smooth idle drift speed
+
+    coverflowViewport.addEventListener("mousedown", (e) => {
+      isDraggingCoverflow = true;
+      startX = e.pageX;
+      coverflowVelocity = 0;
     });
 
     window.addEventListener("mouseup", () => {
-      if (isDragging3D) isDragging3D = false;
+      if (isDraggingCoverflow) isDraggingCoverflow = false;
+    });
+
+    coverflowViewport.addEventListener("mouseleave", () => {
+      if (isDraggingCoverflow) isDraggingCoverflow = false;
     });
 
     window.addEventListener("mousemove", (e) => {
-      if (!isDragging3D) return;
-      const delta = e.clientX - startMouseX;
-      currentRotationY += delta * 0.35;
-      spinVelocity = delta * 0.35;
-      startMouseX = e.clientX;
-      turntable.style.transform = `rotateY(${currentRotationY}deg)`;
+      if (!isDraggingCoverflow) return;
+      e.preventDefault();
+      const x = e.pageX;
+      const delta = (x - startX) * 1.5;
+      currentCoverflowOffset += delta;
+      coverflowVelocity = delta * 0.7;
+      startX = x;
     });
 
-    stage.addEventListener("touchstart", (e) => {
-      isDragging3D = true;
-      startMouseX = e.touches[0].clientX;
-      spinVelocity = 0;
+    // Touch support for mobile
+    coverflowViewport.addEventListener("touchstart", (e) => {
+      isDraggingCoverflow = true;
+      startX = e.touches[0].pageX;
+      coverflowVelocity = 0;
     });
 
     window.addEventListener("touchend", () => {
-      if (isDragging3D) isDragging3D = false;
+      if (isDraggingCoverflow) isDraggingCoverflow = false;
     });
 
-    stage.addEventListener("touchmove", (e) => {
-      if (!isDragging3D) return;
-      const delta = e.touches[0].clientX - startMouseX;
-      currentRotationY += delta * 0.35;
-      spinVelocity = delta * 0.35;
-      startMouseX = e.touches[0].clientX;
-      turntable.style.transform = `rotateY(${currentRotationY}deg)`;
+    coverflowViewport.addEventListener("touchmove", (e) => {
+      if (!isDraggingCoverflow) return;
+      const x = e.touches[0].pageX;
+      const delta = (x - startX) * 1.5;
+      currentCoverflowOffset += delta;
+      coverflowVelocity = delta * 0.7;
+      startX = x;
     });
 
-    function animate3DTurntable() {
-      if (!isDragging3D) {
-        currentRotationY += spinVelocity;
-        spinVelocity *= 0.94;
-        if (Math.abs(spinVelocity) < 0.05) {
-          spinVelocity = 0;
+    // 3D Curvature & Momentum Animation Loop
+    function update3DCoverflow() {
+      if (!isDraggingCoverflow) {
+        currentCoverflowOffset += coverflowVelocity;
+        coverflowVelocity *= 0.95; // friction
+        if (Math.abs(coverflowVelocity) < 0.3) {
+          coverflowVelocity = -0.6; // gentle continuous drift
         }
-        turntable.style.transform = `rotateY(${currentRotationY}deg)`;
+
+        const halfWidth = coverflowTrack.scrollWidth / 2;
+        if (currentCoverflowOffset < -halfWidth) currentCoverflowOffset += halfWidth;
+        if (currentCoverflowOffset > 0) currentCoverflowOffset -= halfWidth;
       }
-      requestAnimationFrame(animate3DTurntable);
+
+      coverflowTrack.style.transform = `translateX(${currentCoverflowOffset}px)`;
+
+      // Calculate 3D cylindrical arc tilt for each card
+      const viewportCenter = window.innerWidth / 2;
+      coverflowCards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const distFromCenter = (cardCenter - viewportCenter) / (window.innerWidth * 0.45);
+        const clampedDist = Math.max(-1.8, Math.min(1.8, distFromCenter));
+
+        // Curvature rotation angle: left cards tilt inward (+), right cards tilt inward (-)
+        const rotateY = clampedDist * -24; 
+        const translateZ = -Math.abs(clampedDist) * 75; // pushes outer cards deeper in perspective
+        const scale = Math.max(0.85, 1 - Math.abs(clampedDist) * 0.08);
+        const opacity = Math.max(0.4, 1 - Math.abs(clampedDist) * 0.25);
+
+        card.style.transform = `perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
+        card.style.opacity = opacity;
+      });
+
+      requestAnimationFrame(update3DCoverflow);
     }
-    animate3DTurntable();
+    update3DCoverflow();
   }
 
   // 7. Particle Canvas Background
@@ -300,7 +337,8 @@
   function closeModal() { if (modal) modal.classList.remove("is-open"); }
 
   document.querySelectorAll(".view-project-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
       openModal(btn.getAttribute("data-project"));
     });
   });

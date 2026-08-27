@@ -10,7 +10,7 @@
   --accent-glow: #aa42ff;
   --accent-pink: #fb8dff;
   --accent-cyan: #00f0ff;
-  --accent-red: #ff0055;
+  --accent-gold: #e5c07b;
 
   --text-main: #f5f2f8;
   --text-dim: #a69db2;
@@ -312,7 +312,6 @@ body {
 .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #00ff88; box-shadow: 0 0 10px #00ff88; animation: pulse 2s infinite; }
 @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.85); } }
 
-/* Hero Main Title */
 .hero-main-title {
   font-family: var(--font-hero);
   font-weight: 900;
@@ -411,16 +410,17 @@ body {
 
 /* Common Sections */
 .section { padding: 6.5rem 0; position: relative; z-index: 20; }
-.section-header { text-align: center; max-width: 750px; margin: 0 auto 3rem; }
+.section-header { text-align: center; max-width: 750px; margin: 0 auto 3rem; position: relative; z-index: 5; }
 .section-tag {
   font-family: var(--font-hero);
   display: inline-block;
   font-size: 0.88rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--accent-purple);
+  letter-spacing: 0.18em;
+  color: var(--accent-gold);
   margin-bottom: 0.75rem;
+  text-shadow: 0 0 16px rgba(229, 192, 123, 0.4);
 }
 .section-title {
   font-family: var(--font-hero);
@@ -658,43 +658,70 @@ body {
 .skill-bar-track { width: 100%; height: 6px; background: rgba(255, 255, 255, 0.08); border-radius: var(--radius-full); overflow: hidden; }
 .skill-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent-glow), var(--accent-cyan)); border-radius: var(--radius-full); }
 
-/* 🌟 4. BEAUTIFUL 3D CYLINDRICAL PROJECT TURNTABLE (PERFECT PROPORTIONS & SPACING) 🌟 */
-.project-spinner-stage {
-  max-width: 960px;
-  margin: 2.5rem auto 0;
-  perspective: 1400px;
+/* 🌟 4. 3D CURVED CYLINDRICAL COVERFLOW RIBBON (SCREENSHOT REFERENCE) 🌟 */
+.projects-coverflow-section {
   position: relative;
+  overflow: hidden;
+  padding-bottom: 7rem;
+}
+
+/* Golden Octagonal Wireframe Tunnel in Header */
+.golden-tunnel-bg {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 480px;
+  pointer-events: none;
+  z-index: 1;
+}
+.tunnel-oct-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(229, 192, 123, 0.16);
+  border-radius: 42%;
+  transform: scale(var(--scale, 1));
+}
+
+/* 3D Cylindrical Coverflow Ribbon Track */
+.coverflow-stage-viewport {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  overflow: hidden;
+  perspective: 1400px;
+  perspective-origin: center 50%;
   cursor: grab;
   user-select: none;
-  min-height: 520px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.project-spinner-stage:active { cursor: grabbing; }
-
-.project-3d-turntable {
+  padding: 3rem 0;
   position: relative;
-  width: 100%;
-  height: 480px;
+  z-index: 10;
+}
+.coverflow-stage-viewport:active { cursor: grabbing; }
+
+.coverflow-ribbon-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  padding: 0 4rem;
   transform-style: preserve-3d;
   will-change: transform;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.project-card-3d-item {
-  position: absolute;
-  width: min(100%, 640px);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+.coverflow-card-item {
+  width: clamp(280px, 32vw, 360px);
+  flex-shrink: 0;
+  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+  transform-style: preserve-3d;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
 }
-.project-card-3d-item:hover {
-  box-shadow: 0 20px 50px rgba(170, 66, 255, 0.35);
+.coverflow-card-item:hover {
   border-color: var(--accent-purple);
+  box-shadow: 0 25px 60px rgba(170, 66, 255, 0.4);
 }
 
 .project-preview-box { background: #110d14; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; }
@@ -706,10 +733,10 @@ body {
 .mockup-url { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); margin-left: 6px; }
 
 .project-code-snippet {
-  padding: 1.25rem 1.5rem;
+  padding: 1rem 1.25rem;
   font-family: var(--font-mono);
-  font-size: 0.82rem;
-  line-height: 1.6;
+  font-size: 0.78rem;
+  line-height: 1.5;
   background: rgba(0, 0, 0, 0.25);
   color: var(--text-dim);
   overflow-x: auto;
@@ -720,15 +747,15 @@ body {
 .code-prop { color: #c2a4ff; }
 .code-bool { color: #ffbd2e; }
 
-.project-content { padding: 1.75rem; display: flex; flex-direction: column; flex: 1; z-index: 2; position: relative; }
-.project-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
-.project-type { font-family: var(--font-hero); font-size: 0.85rem; font-weight: 600; color: var(--accent-purple); text-transform: uppercase; letter-spacing: 0.05em; }
-.project-status-pill { font-family: var(--font-hero); font-size: 0.72rem; text-transform: uppercase; font-weight: 600; padding: 2px 8px; border-radius: var(--radius-full); background: rgba(0, 255, 136, 0.1); color: #00ff88; }
-.project-title { font-family: var(--font-hero); font-size: 1.45rem; font-weight: 800; text-transform: uppercase; color: #fff; margin-bottom: 0.5rem; }
-.project-desc { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1.25rem; flex: 1; }
-.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
-.tag { font-family: var(--font-hero); font-size: 0.75rem; font-weight: 500; text-transform: uppercase; padding: 3px 8px; border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.05); color: var(--text-muted); }
-.project-actions { display: flex; gap: 0.75rem; }
+.project-content { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; z-index: 2; position: relative; }
+.project-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+.project-type { font-family: var(--font-hero); font-size: 0.8rem; font-weight: 600; color: var(--accent-purple); text-transform: uppercase; letter-spacing: 0.05em; }
+.project-status-pill { font-family: var(--font-hero); font-size: 0.68rem; text-transform: uppercase; font-weight: 600; padding: 2px 7px; border-radius: var(--radius-full); background: rgba(0, 255, 136, 0.1); color: #00ff88; }
+.project-title { font-family: var(--font-hero); font-size: 1.25rem; font-weight: 800; text-transform: uppercase; color: #fff; margin-bottom: 0.4rem; }
+.project-desc { color: var(--text-dim); font-size: 0.88rem; margin-bottom: 1rem; flex: 1; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.25rem; }
+.tag { font-family: var(--font-hero); font-size: 0.72rem; font-weight: 500; text-transform: uppercase; padding: 2px 7px; border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.05); color: var(--text-muted); }
+.project-actions { display: flex; gap: 0.5rem; }
 
 /* 5. JOURNEY ROADMAP */
 .timeline-wrapper { max-width: 800px; margin: 0 auto; position: relative; padding-left: 3rem; }
@@ -969,9 +996,8 @@ body {
   .hero-bio-text { max-width: 100%; font-size: 0.92rem; line-height: 1.5; }
   .skills-grid { grid-template-columns: 1fr; }
 
-  .project-spinner-stage { min-height: 490px; }
-  .project-3d-turntable { height: 470px; }
-  .project-card-3d-item { width: 92%; }
+  .coverflow-card-item { width: 280px; }
+  .golden-tunnel-bg { width: 360px; height: 320px; }
 
   .timeline-wrapper { padding-left: 2.5rem; }
   .timeline-wrapper::before { left: 11px; top: 12px; bottom: 12px; }

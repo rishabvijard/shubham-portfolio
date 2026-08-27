@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=24.0" />
+  <link rel="stylesheet" href="css/style.css?v=25.0" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
 </head>
 <body>
@@ -52,7 +52,7 @@
 
       <div class="nav-actions">
         <a href="https://www.linkedin.com/in/shubham-dhiman" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="LinkedIn Profile" title="View LinkedIn Profile">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.65 1.65 0 0 0-1.66 1.66 1.66 1.66 1.66 0 0 0 1.66 1.66 1.66 1.66 0 0 0 1.66-1.66c0-.92-.74-1.66-1.66-1.66Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.65 1.65 0 0 0-1.66 1.66 1.66 1.66 0 0 0 1.66 1.66 1.66 1.66 0 0 0 1.66-1.66c0-.92-.74-1.66-1.66-1.66Z"/></svg>
         </a>
         <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="GitHub Profile" title="View GitHub Profile">
           <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
@@ -147,7 +147,7 @@
                 </div>
               </div>
 
-              <!-- 🌟 CLEAN SVG CORE TECHNOLOGIES FREE SPINNER (NO EMOJIS, NO HELPER TEXT) 🌟 -->
+              <!-- 🌟 CLEAN SVG CORE TECHNOLOGIES FREE SPINNER 🌟 -->
               <div class="about-marquee-container">
                 <div class="marquee-header-label">
                   <span>Core Technologies</span>
@@ -425,161 +425,228 @@
       </div>
     </section>
 
-    <!-- 🌟 4. FEATURED PROJECTS SECTION — REFINED 3D CYLINDRICAL FREE TURNTABLE 🌟 -->
-    <section id="projects" class="section projects-section">
+    <!-- 🌟 4. FEATURED PROJECTS — 3D CURVED CYLINDRICAL COVERFLOW RIBBON (SCREENSHOT MATCH) 🌟 -->
+    <section id="projects" class="section projects-coverflow-section">
+      <!-- Golden Octagonal Wireframe Tunnel Background -->
+      <div class="golden-tunnel-bg">
+        <div class="tunnel-oct-ring" style="--scale: 0.45;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 0.7;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 0.95;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 1.2;"></div>
+      </div>
+
       <div class="container">
         <div class="section-header">
-          <div class="section-tag">Featured Works</div>
-          <h2 class="section-title">
-            Selected Projects &amp;<br/>
-            Interactive Showcases
-          </h2>
-          <p class="section-subtitle">A showcase of practical web applications and client customizations I've developed.</p>
+          <div class="section-tag">&mdash; SELECTED WORKS &mdash;</div>
+          <h2 class="section-title">IMAGINATION IN CODE</h2>
+          <p class="section-subtitle">Creating and exploring interactive web applications that blend clean code, responsiveness, and visual expression.</p>
         </div>
+      </div>
 
-        <div class="project-spinner-stage" id="project-3d-stage">
-          <div class="project-3d-turntable" id="project-3d-turntable">
-            <!-- Card 1 -->
-            <article class="card project-card spotlight-card project-card-3d-item" style="transform: rotateY(0deg) translateZ(360px);" data-project-id="login">
-              <div class="project-preview-box">
-                <div class="project-mockup-bar">
-                  <span class="mockup-dot dot-r"></span>
-                  <span class="mockup-dot dot-y"></span>
-                  <span class="mockup-dot dot-g"></span>
-                  <span class="mockup-url">auth-portal.app/auth.js</span>
-                </div>
-                <div class="project-code-snippet">
-                  <span class="code-kw">const</span> <span class="code-var">authPortal</span> = {<br/>
-                  &nbsp;&nbsp;<span class="code-prop">theme</span>: <span class="code-str">'dark-glassmorphism'</span>,<br/>
-                  &nbsp;&nbsp;<span class="code-prop">features</span>: [<span class="code-str">'Slider'</span>, <span class="code-str">'Regex'</span>, <span class="code-str">'Reveal'</span>],<br/>
-                  &nbsp;&nbsp;<span class="code-prop">status</span>: <span class="code-str">'200 OK'</span>,<br/>
-                  &nbsp;&nbsp;<span class="code-prop">responsive</span>: <span class="code-bool">true</span><br/>
-                  };
-                </div>
+      <!-- 3D Cylindrical Coverflow Ribbon Stage -->
+      <div class="coverflow-stage-viewport" id="coverflow-viewport">
+        <div class="coverflow-ribbon-track" id="coverflow-track">
+          <!-- Card 1: Login UI -->
+          <article class="coverflow-card-item" data-project-id="login">
+            <div class="project-preview-box">
+              <div class="project-mockup-bar">
+                <span class="mockup-dot dot-r"></span>
+                <span class="mockup-dot dot-y"></span>
+                <span class="mockup-dot dot-g"></span>
+                <span class="mockup-url">auth-portal.app</span>
               </div>
-
-              <div class="project-content">
-                <div class="project-meta">
-                  <span class="project-type">Frontend Application &bull; 01</span>
-                  <span class="project-status-pill">Interactive</span>
-                </div>
-                <h3 class="project-title">Responsive Login Page UI</h3>
-                <p class="project-desc">
-                  Full-screen authentication UI with an automatic background image slider, smooth cross-fade transitions, password visibility toggle, and client-side JavaScript validation.
-                </p>
-                
-                <div class="project-tags">
-                  <span class="tag">HTML5</span>
-                  <span class="tag">CSS3</span>
-                  <span class="tag">JavaScript</span>
-                  <span class="tag">Regex</span>
-                </div>
-
-                <div class="project-actions">
-                  <button class="btn btn-primary btn-sm view-project-btn" data-project="login">
-                    <span>View Details</span>
-                  </button>
-                  <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-                    <span>Code</span>
-                  </a>
-                </div>
+              <div class="project-code-snippet">
+                <span class="code-kw">const</span> <span class="code-var">authPortal</span> = {<br/>
+                &nbsp;&nbsp;<span class="code-prop">theme</span>: <span class="code-str">'dark-glass'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">features</span>: [<span class="code-str">'Slider'</span>, <span class="code-str">'Regex'</span>],<br/>
+                &nbsp;&nbsp;<span class="code-prop">responsive</span>: <span class="code-bool">true</span><br/>
+                };
               </div>
-            </article>
-
-            <!-- Card 2 -->
-            <article class="card project-card spotlight-card project-card-3d-item" style="transform: rotateY(120deg) translateZ(360px);" data-project-id="gym">
-              <div class="project-preview-box">
-                <div class="project-mockup-bar">
-                  <span class="mockup-dot dot-r"></span>
-                  <span class="mockup-dot dot-y"></span>
-                  <span class="mockup-dot dot-g"></span>
-                  <span class="mockup-url">iron-fit-hub.com/config.js</span>
-                </div>
-                <div class="project-code-snippet">
-                  <span class="code-kw">const</span> <span class="code-var">fitnessHub</span> = {<br/>
-                  &nbsp;&nbsp;<span class="code-prop">layout</span>: <span class="code-str">'CSS Grid + Flexbox'</span>,<br/>
-                  &nbsp;&nbsp;<span class="code-prop">modules</span>: [<span class="code-str">'Programs'</span>, <span class="code-str">'Schedules'</span>, <span class="code-str">'Pricing'</span>],<br/>
-                  &nbsp;&nbsp;<span class="code-prop">performance</span>: <span class="code-str">'60fps UI'</span>,<br/>
-                  &nbsp;&nbsp;<span class="code-prop">mobileFirst</span>: <span class="code-bool">true</span><br/>
-                  };
-                </div>
+            </div>
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="project-type">Frontend &bull; 01</span>
+                <span class="project-status-pill">Interactive</span>
               </div>
-
-              <div class="project-content">
-                <div class="project-meta">
-                  <span class="project-type">Responsive Web Portal &bull; 02</span>
-                  <span class="project-status-pill">Featured</span>
-                </div>
-                <h3 class="project-title">Gym Website — Fitness Hub</h3>
-                <p class="project-desc">
-                  Responsive fitness website with modern layout, high-contrast visual sections, interactive class schedules, membership pricing tiers, and smooth scroll navigation.
-                </p>
-                
-                <div class="project-tags">
-                  <span class="tag">HTML5</span>
-                  <span class="tag">CSS3</span>
-                  <span class="tag">JavaScript</span>
-                  <span class="tag">Grid</span>
-                </div>
-
-                <div class="project-actions">
-                  <button class="btn btn-primary btn-sm view-project-btn" data-project="gym">
-                    <span>View Details</span>
-                  </button>
-                  <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-                    <span>Code</span>
-                  </a>
-                </div>
+              <h3 class="project-title">Responsive Login UI</h3>
+              <p class="project-desc">Full-screen auth interface with automated cross-fade carousel and JS password reveal.</p>
+              <div class="project-tags">
+                <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span>
               </div>
-            </article>
-
-            <!-- Card 3 -->
-            <article class="card project-card spotlight-card project-card-3d-item" style="transform: rotateY(240deg) translateZ(360px);" data-project-id="wp">
-              <div class="project-preview-box">
-                <div class="project-mockup-bar">
-                  <span class="mockup-dot dot-r"></span>
-                  <span class="mockup-dot dot-y"></span>
-                  <span class="mockup-dot dot-g"></span>
-                  <span class="mockup-url">custom-wp.com/theme.php</span>
-                </div>
-                <div class="project-code-snippet">
-                  <span class="code-kw">const</span> <span class="code-var">wpCustom</span> = {<br/>
-                  &nbsp;&nbsp;<span class="code-prop">builder</span>: <span class="code-str">'Elementor Pro'</span>,<br/>
-                  &nbsp;&nbsp;<span class="code-prop">engine</span>: <span class="code-str">'PHP + Custom CSS'</span>,<br/>
-                  &nbsp;&nbsp;<span class="code-prop">forms</span>: <span class="code-str">'AJAX FormSubmit'</span>,<br/>
-                  &nbsp;&nbsp;<span class="code-prop">deployed</span>: <span class="code-bool">true</span><br/>
-                  };
-                </div>
+              <div class="project-actions">
+                <button class="btn btn-primary btn-sm view-project-btn" data-project="login">Details</button>
+                <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Code</a>
               </div>
+            </div>
+          </article>
 
-              <div class="project-content">
-                <div class="project-meta">
-                  <span class="project-type">CMS &amp; Client Solutions &bull; 03</span>
-                  <span class="project-status-pill">Deployed</span>
-                </div>
-                <h3 class="project-title">WordPress Customization</h3>
-                <p class="project-desc">
-                  Customized website sections, bespoke Elementor hero sliders, contact forms, custom CSS overrides, and mobile-first responsive layout restructuring.
-                </p>
-                
-                <div class="project-tags">
-                  <span class="tag">WordPress</span>
-                  <span class="tag">Elementor</span>
-                  <span class="tag">PHP</span>
-                  <span class="tag">Forms</span>
-                </div>
-
-                <div class="project-actions">
-                  <button class="btn btn-primary btn-sm view-project-btn" data-project="wp">
-                    <span>View Details</span>
-                  </button>
-                  <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-                    <span>Profile</span>
-                  </a>
-                </div>
+          <!-- Card 2: Gym Website -->
+          <article class="coverflow-card-item" data-project-id="gym">
+            <div class="project-preview-box">
+              <div class="project-mockup-bar">
+                <span class="mockup-dot dot-r"></span>
+                <span class="mockup-dot dot-y"></span>
+                <span class="mockup-dot dot-g"></span>
+                <span class="mockup-url">iron-fit-hub.com</span>
               </div>
-            </article>
-          </div>
+              <div class="project-code-snippet">
+                <span class="code-kw">const</span> <span class="code-var">fitnessHub</span> = {<br/>
+                &nbsp;&nbsp;<span class="code-prop">layout</span>: <span class="code-str">'CSS Grid'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">performance</span>: <span class="code-str">'60fps'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">mobileFirst</span>: <span class="code-bool">true</span><br/>
+                };
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="project-type">Web Portal &bull; 02</span>
+                <span class="project-status-pill">Featured</span>
+              </div>
+              <h3 class="project-title">Gym Fitness Hub</h3>
+              <p class="project-desc">Modern fitness portal featuring class schedules, tier pricing cards, and sleek grid.</p>
+              <div class="project-tags">
+                <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Grid</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-primary btn-sm view-project-btn" data-project="gym">Details</button>
+                <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Code</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3: WordPress -->
+          <article class="coverflow-card-item" data-project-id="wp">
+            <div class="project-preview-box">
+              <div class="project-mockup-bar">
+                <span class="mockup-dot dot-r"></span>
+                <span class="mockup-dot dot-y"></span>
+                <span class="mockup-dot dot-g"></span>
+                <span class="mockup-url">custom-wp.com</span>
+              </div>
+              <div class="project-code-snippet">
+                <span class="code-kw">const</span> <span class="code-var">wpCustom</span> = {<br/>
+                &nbsp;&nbsp;<span class="code-prop">builder</span>: <span class="code-str">'Elementor'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">engine</span>: <span class="code-str">'PHP'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">deployed</span>: <span class="code-bool">true</span><br/>
+                };
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="project-type">CMS &bull; 03</span>
+                <span class="project-status-pill">Deployed</span>
+              </div>
+              <h3 class="project-title">WordPress Solutions</h3>
+              <p class="project-desc">Bespoke Elementor page builder sections, custom PHP functions, and responsive styling.</p>
+              <div class="project-tags">
+                <span class="tag">WordPress</span><span class="tag">Elementor</span><span class="tag">PHP</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-primary btn-sm view-project-btn" data-project="wp">Details</button>
+                <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Profile</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Duplicate Set for Seamless Infinite Coverflow Arc -->
+          <article class="coverflow-card-item" data-project-id="login">
+            <div class="project-preview-box">
+              <div class="project-mockup-bar">
+                <span class="mockup-dot dot-r"></span>
+                <span class="mockup-dot dot-y"></span>
+                <span class="mockup-dot dot-g"></span>
+                <span class="mockup-url">auth-portal.app</span>
+              </div>
+              <div class="project-code-snippet">
+                <span class="code-kw">const</span> <span class="code-var">authPortal</span> = {<br/>
+                &nbsp;&nbsp;<span class="code-prop">theme</span>: <span class="code-str">'dark-glass'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">features</span>: [<span class="code-str">'Slider'</span>, <span class="code-str">'Regex'</span>],<br/>
+                &nbsp;&nbsp;<span class="code-prop">responsive</span>: <span class="code-bool">true</span><br/>
+                };
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="project-type">Frontend &bull; 01</span>
+                <span class="project-status-pill">Interactive</span>
+              </div>
+              <h3 class="project-title">Responsive Login UI</h3>
+              <p class="project-desc">Full-screen auth interface with automated cross-fade carousel and JS password reveal.</p>
+              <div class="project-tags">
+                <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-primary btn-sm view-project-btn" data-project="login">Details</button>
+                <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Code</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="coverflow-card-item" data-project-id="gym">
+            <div class="project-preview-box">
+              <div class="project-mockup-bar">
+                <span class="mockup-dot dot-r"></span>
+                <span class="mockup-dot dot-y"></span>
+                <span class="mockup-dot dot-g"></span>
+                <span class="mockup-url">iron-fit-hub.com</span>
+              </div>
+              <div class="project-code-snippet">
+                <span class="code-kw">const</span> <span class="code-var">fitnessHub</span> = {<br/>
+                &nbsp;&nbsp;<span class="code-prop">layout</span>: <span class="code-str">'CSS Grid'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">performance</span>: <span class="code-str">'60fps'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">mobileFirst</span>: <span class="code-bool">true</span><br/>
+                };
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="project-type">Web Portal &bull; 02</span>
+                <span class="project-status-pill">Featured</span>
+              </div>
+              <h3 class="project-title">Gym Fitness Hub</h3>
+              <p class="project-desc">Modern fitness portal featuring class schedules, tier pricing cards, and sleek grid.</p>
+              <div class="project-tags">
+                <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Grid</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-primary btn-sm view-project-btn" data-project="gym">Details</button>
+                <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Code</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="coverflow-card-item" data-project-id="wp">
+            <div class="project-preview-box">
+              <div class="project-mockup-bar">
+                <span class="mockup-dot dot-r"></span>
+                <span class="mockup-dot dot-y"></span>
+                <span class="mockup-dot dot-g"></span>
+                <span class="mockup-url">custom-wp.com</span>
+              </div>
+              <div class="project-code-snippet">
+                <span class="code-kw">const</span> <span class="code-var">wpCustom</span> = {<br/>
+                &nbsp;&nbsp;<span class="code-prop">builder</span>: <span class="code-str">'Elementor'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">engine</span>: <span class="code-str">'PHP'</span>,<br/>
+                &nbsp;&nbsp;<span class="code-prop">deployed</span>: <span class="code-bool">true</span><br/>
+                };
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-meta">
+                <span class="project-type">CMS &bull; 03</span>
+                <span class="project-status-pill">Deployed</span>
+              </div>
+              <h3 class="project-title">WordPress Solutions</h3>
+              <p class="project-desc">Bespoke Elementor page builder sections, custom PHP functions, and responsive styling.</p>
+              <div class="project-tags">
+                <span class="tag">WordPress</span><span class="tag">Elementor</span><span class="tag">PHP</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-primary btn-sm view-project-btn" data-project="wp">Details</button>
+                <a href="https://github.com/rishabvijard" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Profile</a>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -588,7 +655,7 @@
     <section id="journey" class="section journey-section">
       <div class="container">
         <div class="section-header">
-          <div class="section-tag">Learning Journey</div>
+          <div class="section-tag">&mdash; LEARNING ROADMAP &mdash;</div>
           <h2 class="section-title">
             Development Roadmap &amp;<br/>
             Technical Growth
@@ -652,7 +719,7 @@
     <section id="contact" class="section contact-section">
       <div class="container">
         <div class="section-header">
-          <div class="section-tag">Direct Connect</div>
+          <div class="section-tag">&mdash; DIRECT CONNECT &mdash;</div>
           <h2 class="section-title">
             Let's Connect &amp;<br/>
             Build Something Great
@@ -808,7 +875,7 @@
     </div>
   </footer>
 
-  <script src="js/projects-data.js?v=24.0"></script>
-  <script src="js/main.js?v=24.0"></script>
+  <script src="js/projects-data.js?v=25.0"></script>
+  <script src="js/main.js?v=25.0"></script>
 </body>
 </html>
