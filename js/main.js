@@ -60,122 +60,138 @@
     });
   });
 
-  // 🌟 5. INTERACTIVE MOUSE DRAG & SPIN ON CORE TECHNOLOGIES MARQUEE 🌟
-  const marqueeWrapper = document.getElementById("tech-marquee-wrapper");
-  const marqueeTrack = document.getElementById("tech-marquee-track");
-  if (marqueeWrapper && marqueeTrack) {
+  // 🌟 5. TRUE FREE-SPINNING INERTIA WHEEL ON CORE TECHNOLOGIES 🌟
+  const techWrapper = document.getElementById("tech-spinner-wrapper");
+  const techTrack = document.getElementById("tech-spinner-track");
+  if (techWrapper && techTrack) {
     let isDown = false;
     let startX = 0;
     let currentX = 0;
+    let velocity = -1.2; // default auto-drift speed
 
-    marqueeWrapper.addEventListener("mousedown", (e) => {
+    techWrapper.addEventListener("mousedown", (e) => {
       isDown = true;
       startX = e.pageX;
-      marqueeTrack.style.animationPlayState = "paused";
+      velocity = 0;
     });
 
     window.addEventListener("mouseup", () => {
-      if (isDown) {
-        isDown = false;
-        marqueeTrack.style.animationPlayState = "running";
-      }
+      if (isDown) isDown = false;
     });
 
-    marqueeWrapper.addEventListener("mousemove", (e) => {
+    window.addEventListener("mousemove", (e) => {
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX;
-      const walk = (x - startX) * 1.5;
-      currentX += walk;
+      const delta = (x - startX) * 1.6;
+      currentX += delta;
+      velocity = delta * 0.8;
       startX = x;
-      marqueeTrack.style.transform = `translateX(${currentX}px)`;
+      techTrack.style.transform = `translateX(${currentX}px)`;
     });
 
-    // Touch support
-    marqueeWrapper.addEventListener("touchstart", (e) => {
+    // Touch support for mobile
+    techWrapper.addEventListener("touchstart", (e) => {
       isDown = true;
       startX = e.touches[0].pageX;
-      marqueeTrack.style.animationPlayState = "paused";
+      velocity = 0;
     });
 
     window.addEventListener("touchend", () => {
-      if (isDown) {
-        isDown = false;
-        marqueeTrack.style.animationPlayState = "running";
-      }
+      if (isDown) isDown = false;
     });
 
-    marqueeWrapper.addEventListener("touchmove", (e) => {
+    techWrapper.addEventListener("touchmove", (e) => {
       if (!isDown) return;
       const x = e.touches[0].pageX;
-      const walk = (x - startX) * 1.5;
-      currentX += walk;
+      const delta = (x - startX) * 1.6;
+      currentX += delta;
+      velocity = delta * 0.8;
       startX = x;
-      marqueeTrack.style.transform = `translateX(${currentX}px)`;
+      techTrack.style.transform = `translateX(${currentX}px)`;
     });
-  }
 
-  // 🌟 6. CIRCULAR LOOP PROJECT CAROUSEL / SLIDER (1 CARD AT A TIME) 🌟
-  const projectSlides = document.querySelectorAll(".project-slide-item");
-  const prevBtn = document.getElementById("project-prev-btn");
-  const nextBtn = document.getElementById("project-next-btn");
-  const counterEl = document.getElementById("project-counter");
-  const dots = document.querySelectorAll(".proj-dot");
-  const totalSlides = projectSlides.length;
-  let currentIndex = 0;
+    // Inertia physics loop
+    function animateTechSpinner() {
+      if (!isDown) {
+        currentX += velocity;
+        velocity *= 0.96; // friction
+        if (Math.abs(velocity) < 0.6) {
+          velocity = -0.8; // smooth endless auto drift
+        }
+        // Infinite wrap-around bounds
+        const halfWidth = techTrack.scrollWidth / 2;
+        if (currentX < -halfWidth) currentX += halfWidth;
+        if (currentX > 0) currentX -= halfWidth;
 
-  function showSlide(index) {
-    currentIndex = (index + totalSlides) % totalSlides;
-
-    projectSlides.forEach((slide, i) => {
-      slide.classList.remove("active", "prev-slide", "next-slide");
-      if (i === currentIndex) {
-        slide.classList.add("active");
-      } else if (i < currentIndex) {
-        slide.classList.add("prev-slide");
-      } else {
-        slide.classList.add("next-slide");
+        techTrack.style.transform = `translateX(${currentX}px)`;
       }
-    });
-
-    if (counterEl) counterEl.textContent = `0${currentIndex + 1} / 0${totalSlides}`;
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("active", i === currentIndex);
-    });
+      requestAnimationFrame(animateTechSpinner);
+    }
+    animateTechSpinner();
   }
 
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      showSlide(currentIndex - 1);
-    });
-  }
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      showSlide(currentIndex + 1);
-    });
-  }
+  // 🌟 6. 3D CYLINDRICAL FREE-SPIN CAROUSEL FOR PROJECTS 🌟
+  const turntable = document.getElementById("project-3d-turntable");
+  const stage = document.getElementById("project-3d-stage");
+  if (turntable && stage) {
+    let isDragging3D = false;
+    let startMouseX = 0;
+    let currentRotationY = 0;
+    let spinVelocity = 0;
 
-  dots.forEach((dot) => {
-    dot.addEventListener("click", () => {
-      showSlide(parseInt(dot.getAttribute("data-slide"), 10));
-    });
-  });
-
-  // Swipe / Drag on Project Viewport
-  const projectViewport = document.getElementById("project-viewport");
-  if (projectViewport) {
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    projectViewport.addEventListener("touchstart", (e) => {
-      touchStartX = e.changedTouches[0].screenX;
+    stage.addEventListener("mousedown", (e) => {
+      isDragging3D = true;
+      startMouseX = e.clientX;
+      spinVelocity = 0;
     });
 
-    projectViewport.addEventListener("touchend", (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      if (touchStartX - touchEndX > 50) showSlide(currentIndex + 1);
-      if (touchEndX - touchStartX > 50) showSlide(currentIndex - 1);
+    window.addEventListener("mouseup", () => {
+      if (isDragging3D) isDragging3D = false;
     });
+
+    window.addEventListener("mousemove", (e) => {
+      if (!isDragging3D) return;
+      const delta = e.clientX - startMouseX;
+      currentRotationY += delta * 0.35;
+      spinVelocity = delta * 0.35;
+      startMouseX = e.clientX;
+      turntable.style.transform = `rotateY(${currentRotationY}deg)`;
+    });
+
+    // Touch support for phone
+    stage.addEventListener("touchstart", (e) => {
+      isDragging3D = true;
+      startMouseX = e.touches[0].clientX;
+      spinVelocity = 0;
+    });
+
+    window.addEventListener("touchend", () => {
+      if (isDragging3D) isDragging3D = false;
+    });
+
+    stage.addEventListener("touchmove", (e) => {
+      if (!isDragging3D) return;
+      const delta = e.touches[0].clientX - startMouseX;
+      currentRotationY += delta * 0.35;
+      spinVelocity = delta * 0.35;
+      startMouseX = e.touches[0].clientX;
+      turntable.style.transform = `rotateY(${currentRotationY}deg)`;
+    });
+
+    // Inertia physics loop for 3D turntable
+    function animate3DTurntable() {
+      if (!isDragging3D) {
+        currentRotationY += spinVelocity;
+        spinVelocity *= 0.94; // friction
+        if (Math.abs(spinVelocity) < 0.05) {
+          spinVelocity = 0;
+        }
+        turntable.style.transform = `rotateY(${currentRotationY}deg)`;
+      }
+      requestAnimationFrame(animate3DTurntable);
+    }
+    animate3DTurntable();
   }
 
   // 7. Particle Canvas Background

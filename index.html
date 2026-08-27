@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=22.0" />
+  <link rel="stylesheet" href="css/style.css?v=23.0" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
 </head>
 <body>
@@ -70,7 +70,7 @@
   </header>
 
   <main>
-    <!-- 1. HERO FRONT PAGE WITH SPARKLING EFFECT ON "SHUBHAM" ONLY -->
+    <!-- 1. HERO FRONT PAGE WITH BROKEN TV GLITCH EFFECT ON "SHUBHAM" ONLY -->
     <section id="hero" class="hero-front-section">
       <div class="container hero-container-flex">
         <div class="hero-top-wrap">
@@ -79,13 +79,7 @@
             <span class="status-text">Available for Junior Frontend Roles &amp; Freelance</span>
           </div>
           <h1 class="hero-main-title" id="sparkle-title">
-            Hi, i&apos;m 
-            <span class="sparkle-name-wrapper">
-              shubham
-              <span class="spark-star spark-1">✨</span>
-              <span class="spark-star spark-2">✦</span>
-              <span class="spark-star spark-3">✨</span>
-            </span>
+            Hi, i&apos;m <span class="broken-tv-glitch" data-text="shubham">shubham</span>
           </h1>
         </div>
 
@@ -110,7 +104,7 @@
       </div>
     </section>
 
-    <!-- 2. ABOUT ME SECTION WITH 2-LINE HEADING & DRAGGABLE CORE TECH SLIDER -->
+    <!-- 2. ABOUT ME SECTION WITH 2-LINE HEADING & FREE-SPINNING CORE TECH SLIDER -->
     <section id="about" class="section about-section">
       <div class="container">
         <div class="section-header">
@@ -153,14 +147,14 @@
                 </div>
               </div>
 
-              <!-- 🌟 DRAGGABLE CIRCULAR LOOP CORE TECHNOLOGIES SPINNER SLIDER 🌟 -->
+              <!-- 🌟 FREE-SPINNING INERTIA WHEEL IN CORE TECHNOLOGIES 🌟 -->
               <div class="about-marquee-container">
                 <div class="marquee-header-label">
                   <span>⚡ Core Technologies</span>
-                  <span class="drag-hint">🖱️ Click &amp; drag left/right to spin</span>
+                  <span class="spinner-hint">🎡 Free Spinner (Drag &amp; spin with mouse)</span>
                 </div>
-                <div class="tech-marquee-wrapper" id="tech-marquee-wrapper">
-                  <div class="tech-marquee-track" id="tech-marquee-track">
+                <div class="tech-marquee-wrapper" id="tech-spinner-wrapper">
+                  <div class="tech-marquee-track" id="tech-spinner-track">
                     <!-- Set 1 -->
                     <div class="marquee-tech-pill">
                       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="marquee-pill-icon" />
@@ -299,7 +293,7 @@
       </div>
     </section>
 
-    <!-- 3. TECHNICAL SKILLS SECTION (2-LINE CLEAN HEADING) -->
+    <!-- 3. TECHNICAL SKILLS SECTION -->
     <section id="skills" class="section skills-section">
       <div class="container">
         <div class="section-header">
@@ -432,7 +426,7 @@
       </div>
     </section>
 
-    <!-- 🌟 4. FEATURED PROJECTS SECTION — CIRCULAR LOOP SPINNER CAROUSEL 🌟 -->
+    <!-- 🌟 4. FEATURED PROJECTS SECTION — 3D CYLINDRICAL FREE SPINNER 🌟 -->
     <section id="projects" class="section projects-section">
       <div class="container">
         <div class="section-header">
@@ -441,13 +435,13 @@
             Selected Projects &amp;<br/>
             Interactive Showcases
           </h2>
-          <p class="section-subtitle">Use the arrows or drag/swipe left and right to spin through my projects.</p>
+          <p class="section-subtitle">🎡 Free 3D Spinner — Drag and fling with your mouse to rotate through projects.</p>
         </div>
 
-        <div class="project-carousel-container">
-          <div class="project-carousel-viewport" id="project-viewport">
-            <!-- Slide 1: Login UI -->
-            <article class="card project-card spotlight-card project-slide-item active" data-index="0" data-project-id="login">
+        <div class="project-spinner-stage" id="project-3d-stage">
+          <div class="project-3d-turntable" id="project-3d-turntable">
+            <!-- Card 1 -->
+            <article class="card project-card spotlight-card project-card-3d-item" style="transform: rotateY(0deg) translateZ(320px);" data-project-id="login">
               <div class="project-preview-box">
                 <div class="project-mockup-bar">
                   <span class="mockup-dot dot-r"></span>
@@ -467,7 +461,7 @@
 
               <div class="project-content">
                 <div class="project-meta">
-                  <span class="project-type">Frontend Application &bull; Project 01</span>
+                  <span class="project-type">Frontend Application &bull; 01</span>
                   <span class="project-status-pill">Interactive</span>
                 </div>
                 <h3 class="project-title">Responsive Login Page UI</h3>
@@ -493,8 +487,8 @@
               </div>
             </article>
 
-            <!-- Slide 2: Gym Hub -->
-            <article class="card project-card spotlight-card project-slide-item" data-index="1" data-project-id="gym">
+            <!-- Card 2 -->
+            <article class="card project-card spotlight-card project-card-3d-item" style="transform: rotateY(120deg) translateZ(320px);" data-project-id="gym">
               <div class="project-preview-box">
                 <div class="project-mockup-bar">
                   <span class="mockup-dot dot-r"></span>
@@ -514,7 +508,7 @@
 
               <div class="project-content">
                 <div class="project-meta">
-                  <span class="project-type">Responsive Web Portal &bull; Project 02</span>
+                  <span class="project-type">Responsive Web Portal &bull; 02</span>
                   <span class="project-status-pill">Featured</span>
                 </div>
                 <h3 class="project-title">Gym Website — Fitness Hub</h3>
@@ -540,8 +534,8 @@
               </div>
             </article>
 
-            <!-- Slide 3: WordPress -->
-            <article class="card project-card spotlight-card project-slide-item" data-index="2" data-project-id="wp">
+            <!-- Card 3 -->
+            <article class="card project-card spotlight-card project-card-3d-item" style="transform: rotateY(240deg) translateZ(320px);" data-project-id="wp">
               <div class="project-preview-box">
                 <div class="project-mockup-bar">
                   <span class="mockup-dot dot-r"></span>
@@ -561,7 +555,7 @@
 
               <div class="project-content">
                 <div class="project-meta">
-                  <span class="project-type">CMS &amp; Client Solutions &bull; Project 03</span>
+                  <span class="project-type">CMS &amp; Client Solutions &bull; 03</span>
                   <span class="project-status-pill">Deployed</span>
                 </div>
                 <h3 class="project-title">WordPress Customization</h3>
@@ -586,26 +580,6 @@
                 </div>
               </div>
             </article>
-          </div>
-
-          <!-- Carousel Controls Bar -->
-          <div class="carousel-controls-bar">
-            <button id="project-prev-btn" class="carousel-nav-btn" aria-label="Previous Project">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            </button>
-
-            <div class="carousel-indicators">
-              <span id="project-counter" class="carousel-counter">01 / 03</span>
-              <div class="carousel-dots-flex">
-                <span class="proj-dot active" data-slide="0"></span>
-                <span class="proj-dot" data-slide="1"></span>
-                <span class="proj-dot" data-slide="2"></span>
-              </div>
-            </div>
-
-            <button id="project-next-btn" class="carousel-nav-btn" aria-label="Next Project">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </button>
           </div>
         </div>
       </div>
@@ -675,7 +649,7 @@
       </div>
     </section>
 
-    <!-- 6. CONTACT SECTION (2-LINE CLEAN HEADING) -->
+    <!-- 6. CONTACT SECTION -->
     <section id="contact" class="section contact-section">
       <div class="container">
         <div class="section-header">
@@ -835,7 +809,7 @@
     </div>
   </footer>
 
-  <script src="js/projects-data.js?v=22.0"></script>
-  <script src="js/main.js?v=22.0"></script>
+  <script src="js/projects-data.js?v=23.0"></script>
+  <script src="js/main.js?v=23.0"></script>
 </body>
 </html>
