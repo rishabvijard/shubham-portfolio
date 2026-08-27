@@ -87,15 +87,15 @@
     });
   });
 
-  // 🌟 5. SKILLS 3D IMAX PANORAMIC COVERFLOW (LEFT & RIGHT CARDS INCREASE IN SIZE) 🌟
+  // 🌟 5. SKILLS 3D CYLINDRICAL COVERFLOW (SILKY SMOOTH, NON-OVERLAPPING) 🌟
   const skillsViewport = document.getElementById("skills-coverflow-viewport");
   const skillsTrack = document.getElementById("skills-coverflow-track");
   if (skillsViewport && skillsTrack) {
     const skillCards = skillsTrack.querySelectorAll(".skill-coverflow-card");
     let isDraggingSkills = false;
     let startX = 0;
-    let currentOffset = -150;
-    let velocity = -0.65;
+    let currentOffset = -100;
+    let velocity = -0.6;
 
     skillsViewport.addEventListener("mousedown", (e) => {
       isDraggingSkills = true;
@@ -108,9 +108,9 @@
       if (!isDraggingSkills) return;
       e.preventDefault();
       const x = e.pageX;
-      const delta = (x - startX) * 1.5;
+      const delta = (x - startX) * 1.4;
       currentOffset += delta;
-      velocity = delta * 0.7;
+      velocity = delta * 0.65;
       startX = x;
     });
 
@@ -124,9 +124,9 @@
     skillsViewport.addEventListener("touchmove", (e) => {
       if (!isDraggingSkills) return;
       const x = e.touches[0].pageX;
-      const delta = (x - startX) * 1.5;
+      const delta = (x - startX) * 1.4;
       currentOffset += delta;
-      velocity = delta * 0.7;
+      velocity = delta * 0.65;
       startX = x;
     });
 
@@ -135,7 +135,7 @@
         currentOffset += velocity;
         velocity *= 0.95;
         if (Math.abs(velocity) < 0.3) {
-          velocity = -0.6; // gentle drift
+          velocity = -0.55;
         }
         const halfWidth = skillsTrack.scrollWidth / 2;
         if (currentOffset < -halfWidth) currentOffset += halfWidth;
@@ -148,15 +148,15 @@
       skillCards.forEach((card) => {
         const rect = card.getBoundingClientRect();
         const cardCenter = rect.left + rect.width / 2;
-        const distFromCenter = (cardCenter - viewportCenter) / (window.innerWidth * 0.42);
-        const clampedDist = Math.max(-1.7, Math.min(1.7, distFromCenter));
+        const distFromCenter = (cardCenter - viewportCenter) / (window.innerWidth * 0.36);
+        const clampedDist = Math.max(-1.5, Math.min(1.5, distFromCenter));
         const absDist = Math.abs(clampedDist);
 
-        // 🌟 KEY FEATURE: SIDE CARDS INCREASE IN SIZE (SCALE UP ON LEFT & RIGHT) 🌟
-        const scale = 0.90 + Math.pow(absDist, 1.2) * 0.26; // Center is 0.90, outer edges scale up to 1.26+!
-        const translateZ = (absDist * 80) - 20; // Side cards come forward closer to the user
-        const rotateY = clampedDist * -26; // Inward 3D curve
-        const opacity = Math.max(0.65, 1 - absDist * 0.12);
+        // 🌟 SMOOTH CYLINDRICAL CURVATURE (NO OVERLAPPING) 🌟
+        const scale = 0.86 + (absDist * 0.16); // Center is 0.86, outer is 1.10
+        const translateZ = (absDist * 40) - 35; // Center recessed, sides forward
+        const rotateY = clampedDist * -20; // Gentle yaw
+        const opacity = Math.max(0.6, 1 - absDist * 0.15);
 
         card.style.transform = `perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
         card.style.opacity = opacity;
@@ -174,8 +174,8 @@
     const projCards = projTrack.querySelectorAll(".coverflow-card-item");
     let isDraggingProj = false;
     let startX = 0;
-    let currentOffset = -150;
-    let velocity = -0.65;
+    let currentOffset = -100;
+    let velocity = -0.6;
 
     projViewport.addEventListener("mousedown", (e) => {
       isDraggingProj = true;
@@ -188,9 +188,9 @@
       if (!isDraggingProj) return;
       e.preventDefault();
       const x = e.pageX;
-      const delta = (x - startX) * 1.5;
+      const delta = (x - startX) * 1.4;
       currentOffset += delta;
-      velocity = delta * 0.7;
+      velocity = delta * 0.65;
       startX = x;
     });
 
@@ -203,9 +203,9 @@
     projViewport.addEventListener("touchmove", (e) => {
       if (!isDraggingProj) return;
       const x = e.touches[0].pageX;
-      const delta = (x - startX) * 1.5;
+      const delta = (x - startX) * 1.4;
       currentOffset += delta;
-      velocity = delta * 0.7;
+      velocity = delta * 0.65;
       startX = x;
     });
 
@@ -214,7 +214,7 @@
         currentOffset += velocity;
         velocity *= 0.95;
         if (Math.abs(velocity) < 0.3) {
-          velocity = -0.6;
+          velocity = -0.55;
         }
         const halfWidth = projTrack.scrollWidth / 2;
         if (currentOffset < -halfWidth) currentOffset += halfWidth;
@@ -227,13 +227,14 @@
       projCards.forEach((card) => {
         const rect = card.getBoundingClientRect();
         const cardCenter = rect.left + rect.width / 2;
-        const distFromCenter = (cardCenter - viewportCenter) / (window.innerWidth * 0.45);
-        const clampedDist = Math.max(-1.8, Math.min(1.8, distFromCenter));
+        const distFromCenter = (cardCenter - viewportCenter) / (window.innerWidth * 0.38);
+        const clampedDist = Math.max(-1.5, Math.min(1.5, distFromCenter));
+        const absDist = Math.abs(clampedDist);
 
-        const rotateY = clampedDist * -24;
-        const translateZ = -Math.abs(clampedDist) * 75;
-        const scale = Math.max(0.85, 1 - Math.abs(clampedDist) * 0.08);
-        const opacity = Math.max(0.4, 1 - Math.abs(clampedDist) * 0.25);
+        const rotateY = clampedDist * -20;
+        const translateZ = -absDist * 50;
+        const scale = Math.max(0.85, 1 - absDist * 0.08);
+        const opacity = Math.max(0.5, 1 - absDist * 0.22);
 
         card.style.transform = `perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
         card.style.opacity = opacity;
@@ -323,7 +324,7 @@
     modalCategory.textContent = data.category;
     modalBody.innerHTML = `
       <p style="margin-bottom: 1rem;">${data.desc}</p>
-      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem; font-family: var(--font-hero);">Key Features:</h4>
+      <h4 style="color: #fff; margin-bottom: 0.5rem; font-size: 1rem; font-family: var(--font-serif);">Key Features:</h4>
       <ul style="list-style: disc; padding-left: 1.25rem; margin-bottom: 1.25rem;">
         ${data.features.map((f) => `<li>${f}</li>`).join("")}
       </ul>

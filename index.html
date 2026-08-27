@@ -8,9 +8,9 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=27.0" />
+  <link rel="stylesheet" href="css/style.css?v=30.0" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
 </head>
 <body>
@@ -70,8 +70,16 @@
   </header>
 
   <main>
-    <!-- 1. HERO FRONT PAGE WITH HOLOGRAPHIC AURORA EFFECT ON "SHUBHAM" -->
+    <!-- 1. HERO FRONT PAGE WITH ALTERNATING LIGHTNING SPARKLE ON "SHUBHAM" -->
     <section id="hero" class="hero-front-section">
+      <!-- Golden Wireframe Tunnel -->
+      <div class="golden-tunnel-bg">
+        <div class="tunnel-oct-ring" style="--scale: 0.45;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 0.7;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 0.95;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 1.2;"></div>
+      </div>
+
       <div class="container hero-container-flex">
         <div class="hero-top-wrap">
           <div class="status-pill">
@@ -79,7 +87,7 @@
             <span class="status-text">Available for Junior Frontend Roles &amp; Freelance</span>
           </div>
           <h1 class="hero-main-title" id="sparkle-title">
-            Hi, i&apos;m <span class="aurora-hologram-text">shubham</span>
+            Hi, i&apos;m <span class="hero-name-wrap"><span class="name-half-1">shub</span><span class="name-half-2">ham</span></span>
           </h1>
         </div>
 
@@ -104,8 +112,16 @@
       </div>
     </section>
 
-    <!-- 2. ABOUT ME SECTION — CLEAN & REFINED (NO DUPLICATE CORE TECH) -->
+    <!-- 2. ABOUT ME SECTION -->
     <section id="about" class="section about-section">
+      <!-- Golden Wireframe Tunnel -->
+      <div class="golden-tunnel-bg">
+        <div class="tunnel-oct-ring" style="--scale: 0.45;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 0.7;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 0.95;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 1.2;"></div>
+      </div>
+
       <div class="container">
         <div class="section-header">
           <div class="section-tag">&mdash; ABOUT ME &mdash;</div>
@@ -220,7 +236,7 @@
       </div>
     </section>
 
-    <!-- 🌟 3. TECHNICAL SKILLS — 3D CURVED CYLINDRICAL COVERFLOW RIBBON SLIDER 🌟 -->
+    <!-- 🌟 3. TECHNICAL SKILLS — SMOOTH 3D CYLINDRICAL COVERFLOW (NON-OVERLAPPING) 🌟 -->
     <section id="skills" class="section skills-coverflow-section">
       <!-- Golden Wireframe Tunnel -->
       <div class="golden-tunnel-bg">
@@ -242,7 +258,7 @@
       <div class="coverflow-stage-viewport" id="skills-coverflow-viewport">
         <div class="coverflow-ribbon-track" id="skills-coverflow-track">
           <!-- Skill 1: HTML5 -->
-          <div class="coverflow-card-item skill-coverflow-card">
+          <div class="skill-coverflow-card">
             <div class="skill-badge-header">
               <div class="skill-icon-wrap">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" />
@@ -257,7 +273,7 @@
           </div>
 
           <!-- Skill 2: CSS3 -->
-          <div class="coverflow-card-item skill-coverflow-card">
+          <div class="skill-coverflow-card">
             <div class="skill-badge-header">
               <div class="skill-icon-wrap">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" />
@@ -272,7 +288,7 @@
           </div>
 
           <!-- Skill 3: JavaScript -->
-          <div class="coverflow-card-item skill-coverflow-card">
+          <div class="skill-coverflow-card">
             <div class="skill-badge-header">
               <div class="skill-icon-wrap">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
@@ -287,7 +303,7 @@
           </div>
 
           <!-- Skill 4: React -->
-          <div class="coverflow-card-item skill-coverflow-card">
+          <div class="skill-coverflow-card">
             <div class="skill-badge-header">
               <div class="skill-icon-wrap">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
@@ -302,7 +318,7 @@
           </div>
 
           <!-- Skill 5: WordPress -->
-          <div class="coverflow-card-item skill-coverflow-card">
+          <div class="skill-coverflow-card">
             <div class="skill-badge-header">
               <div class="skill-icon-wrap">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" alt="WordPress" />
@@ -317,7 +333,7 @@
           </div>
 
           <!-- Skill 6: Elementor -->
-          <div class="coverflow-card-item skill-coverflow-card">
+          <div class="skill-coverflow-card">
             <div class="skill-badge-header">
               <div class="skill-icon-wrap">
                 <svg viewBox="0 0 512 512" fill="#D30C5C"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zm-85.3 384h-42.7V128h42.7v256zm170.7 0h-128v-42.7h128V384zm0-85.3h-128V256h128v42.7zm0-85.4h-128v-42.7h128v42.7z"/></svg>
@@ -332,7 +348,7 @@
           </div>
 
           <!-- Skill 7: REST APIs -->
-          <div class="coverflow-card-item skill-coverflow-card">
+          <div class="skill-coverflow-card">
             <div class="skill-badge-header">
               <div class="skill-icon-wrap">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#4ce1ff" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1 4-10z"></path></svg>
@@ -347,7 +363,7 @@
           </div>
 
           <!-- Skill 8: PHP -->
-          <div class="coverflow-card-item skill-coverflow-card">
+          <div class="skill-coverflow-card">
             <div class="skill-badge-header">
               <div class="skill-icon-wrap">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" />
@@ -362,7 +378,7 @@
           </div>
 
           <!-- Duplicate Set for Seamless Infinite Loop -->
-          <div class="coverflow-card-item skill-coverflow-card">
+          <div class="skill-coverflow-card">
             <div class="skill-badge-header">
               <div class="skill-icon-wrap">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" />
@@ -376,7 +392,7 @@
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 90%;"></div></div>
           </div>
 
-          <div class="coverflow-card-item skill-coverflow-card">
+          <div class="skill-coverflow-card">
             <div class="skill-badge-header">
               <div class="skill-icon-wrap">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" />
@@ -390,7 +406,7 @@
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 88%;"></div></div>
           </div>
 
-          <div class="coverflow-card-item skill-coverflow-card">
+          <div class="skill-coverflow-card">
             <div class="skill-badge-header">
               <div class="skill-icon-wrap">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
@@ -404,7 +420,7 @@
             <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 80%;"></div></div>
           </div>
 
-          <div class="coverflow-card-item skill-coverflow-card">
+          <div class="skill-coverflow-card">
             <div class="skill-badge-header">
               <div class="skill-icon-wrap">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
@@ -421,7 +437,7 @@
       </div>
     </section>
 
-    <!-- 🌟 4. FEATURED PROJECTS — 3D CURVED CYLINDRICAL COVERFLOW RIBBON 🌟 -->
+    <!-- 🌟 4. FEATURED PROJECTS — 3D CYLINDRICAL COVERFLOW RIBBON 🌟 -->
     <section id="projects" class="section projects-coverflow-section">
       <!-- Golden Wireframe Tunnel -->
       <div class="golden-tunnel-bg">
@@ -649,6 +665,14 @@
 
     <!-- 5. JOURNEY ROADMAP -->
     <section id="journey" class="section journey-section">
+      <!-- Golden Wireframe Tunnel -->
+      <div class="golden-tunnel-bg">
+        <div class="tunnel-oct-ring" style="--scale: 0.45;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 0.7;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 0.95;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 1.2;"></div>
+      </div>
+
       <div class="container">
         <div class="section-header">
           <div class="section-tag">&mdash; LEARNING ROADMAP &mdash;</div>
@@ -713,6 +737,14 @@
 
     <!-- 6. CONTACT SECTION -->
     <section id="contact" class="section contact-section">
+      <!-- Golden Wireframe Tunnel -->
+      <div class="golden-tunnel-bg">
+        <div class="tunnel-oct-ring" style="--scale: 0.45;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 0.7;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 0.95;"></div>
+        <div class="tunnel-oct-ring" style="--scale: 1.2;"></div>
+      </div>
+
       <div class="container">
         <div class="section-header">
           <div class="section-tag">&mdash; DIRECT CONNECT &mdash;</div>
@@ -871,7 +903,7 @@
     </div>
   </footer>
 
-  <script src="js/projects-data.js?v=27.0"></script>
-  <script src="js/main.js?v=27.0"></script>
+  <script src="js/projects-data.js?v=30.0"></script>
+  <script src="js/main.js?v=30.0"></script>
 </body>
 </html>
