@@ -1,5 +1,40 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  // 🎯 1. CUSTOM CURSOR & SPARKS 🎯
+  // 🌟 0. REACTIVE TOP SCROLL PROGRESS INDICATOR 🌟
+  const progressBar = document.createElement("div");
+  progressBar.className = "scroll-progress-indicator";
+  document.body.appendChild(progressBar);
+
+  window.addEventListener("scroll", () => {
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    progressBar.style.width = `${scrolled}%`;
+  }, { passive: true });
+
+  // 🌟 1. REACTIVE NAVBAR SCROLLSPY 🌟
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  function highlightNavOnScroll() {
+    const scrollY = window.pageYOffset + 200;
+    sections.forEach((current) => {
+      const sectionHeight = current.offsetHeight;
+      const sectionTop = current.offsetTop;
+      const sectionId = current.getAttribute("id");
+
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${sectionId}`) {
+            link.classList.add("active");
+          }
+        });
+      }
+    });
+  }
+  window.addEventListener("scroll", highlightNavOnScroll, { passive: true });
+
+  // 🎯 2. HIGH PERFORMANCE CUSTOM CURSOR & SPARKS 🎯
   const follower = document.getElementById("cursor-follower");
   const dot = document.getElementById("cursor-dot");
   const cursorSparks = [];
@@ -64,7 +99,7 @@
     });
   }
 
-  // 🌟 2. FAST CANVAS (SCROLL-REACTIVE TUNNEL) 🌟
+  // 🌟 3. FAST CANVAS (SCROLL-REACTIVE TUNNEL) 🌟
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d", { alpha: true });
@@ -113,7 +148,6 @@
 
       ctx.clearRect(0, 0, width, height);
 
-      // Deep Subtle Glow
       const gradient = ctx.createRadialGradient(centerX, centerY, 5, centerX, centerY, Math.max(width, height) * 0.45);
       gradient.addColorStop(0, "rgba(229, 192, 123, 0.05)");
       gradient.addColorStop(0.35, "rgba(229, 192, 123, 0.015)");
@@ -121,7 +155,6 @@
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
-      // 16 Perspective Rays
       const maxRadius = Math.max(width, height) * 1.25;
       ctx.save();
       ctx.strokeStyle = "rgba(229, 192, 123, 0.10)";
@@ -135,7 +168,6 @@
       }
       ctx.restore();
 
-      // 50 Concentric Rings
       const numRings = 50;
       const ringSpacing = 24;
       const totalDepth = numRings * ringSpacing;
@@ -163,7 +195,6 @@
       }
       ctx.restore();
 
-      // Stardust
       for (let i = 0; i < tunnelStars.length; i++) {
         const star = tunnelStars[i];
         let z = (star.baseZ - (smoothScrollY * 0.35)) % 1200;
@@ -181,7 +212,6 @@
         }
       }
 
-      // Cursor sparks
       for (let i = cursorSparks.length - 1; i >= 0; i--) {
         const s = cursorSparks[i];
         s.x += s.vx;
@@ -217,7 +247,7 @@
     requestCanvasFrame();
   }
 
-  // 3. 3D Magnetic Portrait Face Tilt
+  // 4. 3D Magnetic Portrait Face Tilt
   const portrait = document.getElementById("portrait-wrapper");
   const title = document.getElementById("sparkle-title");
 
@@ -236,7 +266,7 @@
     }, { passive: true });
   }
 
-  // 4. Mobile Hamburger Toggle
+  // 5. Mobile Hamburger Toggle
   const hamburger = document.getElementById("nav-hamburger");
   const drawer = document.getElementById("mobile-nav-drawer");
   const drawerLinks = document.querySelectorAll(".mobile-nav-link");
@@ -257,7 +287,7 @@
     });
   }
 
-  // 5. Spotlight Hover Tracker
+  // 6. Spotlight Hover Tracker
   document.querySelectorAll(".spotlight-card").forEach((card) => {
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
@@ -271,7 +301,7 @@
     return ((n % m) + m) % m;
   }
 
-  // 🌟 6. SKILLS: REVERSE-PERSPECTIVE AMPHITHEATER (CENTER 0.78 -> EDGES 1.18) 🌟
+  // 🌟 7. SKILLS: REVERSE-PERSPECTIVE AMPHITHEATER 🌟
   function initSkillsAmphitheater() {
     const viewport = document.getElementById("skills-coverflow-viewport");
     const track = document.getElementById("skills-coverflow-track");
@@ -307,7 +337,6 @@
         const clampedNorm = Math.max(-1.7, Math.min(1.7, normDist));
         const absNorm = Math.abs(clampedNorm);
 
-        // Amphitheater scaling
         const scale = 0.78 + (absNorm * 0.32);
         const translateZ = -90 + (absNorm * 125);
         const rotateY = clampedNorm * -22;
@@ -361,8 +390,8 @@
       if (!isDragging) return;
       const x = e.pageX;
       const delta = (x - startX) * 1.25;
-      currentOffset -= delta; // Inverted
-      velocity = -delta * 0.5; // Inverted
+      currentOffset -= delta;
+      velocity = -delta * 0.5;
       startX = x;
       wakeLoop();
     });
@@ -378,8 +407,8 @@
       if (!isDragging) return;
       const x = e.touches[0].pageX;
       const delta = (x - startX) * 1.25;
-      currentOffset -= delta; // Inverted
-      velocity = -delta * 0.5; // Inverted
+      currentOffset -= delta;
+      velocity = -delta * 0.5;
       startX = x;
       wakeLoop();
     }, { passive: true });
@@ -387,7 +416,7 @@
     viewport.addEventListener("wheel", (e) => {
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       if (Math.abs(delta) > 2) {
-        velocity += delta * 0.24; // Inverted
+        velocity += delta * 0.24;
         if (velocity > 30) velocity = 30;
         if (velocity < -30) velocity = -30;
         wakeLoop();
@@ -397,7 +426,7 @@
     renderFrame();
   }
 
-  // 🌟 7. PROJECTS: UNIFORM SAME SIZE (SCALE: 1.0 FOR ALL CARDS) 🌟
+  // 🌟 8. PROJECTS: UNIFORM CRISP PROFESSIONAL CARDS 🌟
   function initProjectsUniformCards() {
     const viewport = document.getElementById("coverflow-viewport");
     const track = document.getElementById("coverflow-track");
@@ -429,7 +458,6 @@
 
         const screenX = viewportCenter + distFromCenter - (cardWidth / 2);
 
-        // 🌟 UNIFORM SAME SIZE (SCALE 1.0) FOR ALL PROJECT CARDS 🌟
         card.style.transform = `translate3d(${screenX}px, 0, 0)`;
         card.style.opacity = "1";
       }
@@ -478,8 +506,8 @@
       if (!isDragging) return;
       const x = e.pageX;
       const delta = (x - startX) * 1.25;
-      currentOffset -= delta; // Inverted
-      velocity = -delta * 0.5; // Inverted
+      currentOffset -= delta;
+      velocity = -delta * 0.5;
       startX = x;
       wakeLoop();
     });
@@ -495,8 +523,8 @@
       if (!isDragging) return;
       const x = e.touches[0].pageX;
       const delta = (x - startX) * 1.25;
-      currentOffset -= delta; // Inverted
-      velocity = -delta * 0.5; // Inverted
+      currentOffset -= delta;
+      velocity = -delta * 0.5;
       startX = x;
       wakeLoop();
     }, { passive: true });
@@ -504,7 +532,7 @@
     viewport.addEventListener("wheel", (e) => {
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       if (Math.abs(delta) > 2) {
-        velocity += delta * 0.24; // Inverted
+        velocity += delta * 0.24;
         if (velocity > 30) velocity = 30;
         if (velocity < -30) velocity = -30;
         wakeLoop();
@@ -514,13 +542,11 @@
     renderFrame();
   }
 
-  // Initialize Skills Amphitheater
+  // Initialize
   initSkillsAmphitheater();
-
-  // Initialize Projects Uniform Same Size
   initProjectsUniformCards();
 
-  // 8. Toast Notification
+  // 9. Toast Notification
   function showToast(message) {
     const container = document.getElementById("toast-container");
     if (!container) return;
@@ -531,7 +557,7 @@
     setTimeout(() => { toast.remove(); }, 3000);
   }
 
-  // 9. Copy to Clipboard
+  // 10. Copy to Clipboard
   document.querySelectorAll(".copy-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const text = btn.getAttribute("data-copy");
@@ -541,7 +567,7 @@
     });
   });
 
-  // 10. Modal Dialog
+  // 11. Modal Dialog
   const modal = document.getElementById("project-modal");
   const modalBackdrop = document.getElementById("modal-backdrop");
   const modalCloseBtn = document.getElementById("modal-close-btn");
@@ -582,7 +608,7 @@
   if (modalCloseAction) modalCloseAction.addEventListener("click", closeModal);
   window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-  // 11. Contact Form AJAX Submission
+  // 12. Contact Form AJAX Submission
   const form = document.getElementById("contact-form");
   if (form) {
     form.addEventListener("submit", async (e) => {
@@ -619,7 +645,7 @@
     });
   }
 
-  // 12. Back to Top
+  // 13. Back to Top
   const backToTop = document.getElementById("back-to-top");
   if (backToTop) {
     backToTop.addEventListener("click", () => {

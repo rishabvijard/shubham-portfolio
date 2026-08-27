@@ -18,7 +18,7 @@
   --text-muted: #9e94af;
 
   --border: rgba(229, 192, 123, 0.18);
-  --border-hover: rgba(255, 215, 0, 0.5);
+  --border-hover: rgba(255, 215, 0, 0.6);
 
   --font-hero: 'Kanit', sans-serif;
   --font-main: 'Plus Jakarta Sans', sans-serif;
@@ -28,7 +28,7 @@
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-full: 9999px;
-  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *, *::before, *::after {
@@ -57,7 +57,19 @@ body {
   min-height: 100vh;
   position: relative;
   line-height: 1.68;
-  font-family: var(--font-main);
+}
+
+/* 🌟 TOP SCROLL PROGRESS BAR 🌟 */
+.scroll-progress-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-cyan), var(--accent-pink));
+  z-index: 1000;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+  transition: width 0.1s linear;
 }
 
 /* 🌌 ULTRA-DENSE & SOFT GOLDEN PERSPECTIVE TUNNEL CANVAS 🌌 */
@@ -132,8 +144,8 @@ header, main, footer {
     will-change: transform;
   }
   .custom-cursor-follower.is-hovering {
-    width: 60px;
-    height: 60px;
+    width: 58px;
+    height: 58px;
     border-color: #ffd700;
     background: radial-gradient(circle, rgba(255, 215, 0, 0.25), transparent 70%);
   }
@@ -161,6 +173,7 @@ header, main, footer {
   -webkit-backdrop-filter: blur(16px);
   background: rgba(5, 3, 7, 0.92);
   border-bottom: 1px solid var(--border);
+  transition: var(--transition);
 }
 .navbar {
   max-width: 1320px;
@@ -196,7 +209,7 @@ header, main, footer {
   transition: var(--transition);
   position: relative;
 }
-.nav-link:hover { color: #fff; }
+.nav-link:hover, .nav-link.active { color: #fff; }
 .nav-link::after {
   content: '';
   position: absolute;
@@ -207,7 +220,7 @@ header, main, footer {
   background: var(--accent-gold);
   transition: var(--transition);
 }
-.nav-link:hover::after { width: 100%; }
+.nav-link:hover::after, .nav-link.active::after { width: 100%; box-shadow: 0 0 8px var(--accent-gold); }
 
 .nav-actions { display: flex; align-items: center; gap: 0.85rem; }
 .btn-icon {
@@ -228,10 +241,11 @@ header, main, footer {
   border-color: var(--accent-gold);
   background: rgba(255, 215, 0, 0.15);
   transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
 }
 .btn-icon svg { width: 20px; height: 20px; }
 
-/* Hamburger Toggle */
+/* Hamburger */
 .nav-hamburger {
   display: none;
   flex-direction: column;
@@ -313,10 +327,10 @@ header, main, footer {
 }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(170, 66, 255, 0.55); }
 .btn-outline { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); color: var(--text-main); }
-.btn-outline:hover { border-color: var(--accent-gold); background: rgba(255, 215, 0, 0.12); transform: translateY(-2px); }
+.btn-outline:hover { border-color: var(--accent-gold); background: rgba(255, 215, 0, 0.12); transform: translateY(-2px); box-shadow: 0 0 14px rgba(255, 215, 0, 0.25); }
 .btn-full { width: 100%; justify-content: center; }
 
-/* 🌟 2. HERO FRONT PAGE WITH HALF-AND-HALF BROKEN TV GLITCH 🌟 */
+/* 🌟 HERO FRONT PAGE WITH CRT BROKEN TV GLITCH 🌟 */
 .hero-front-section {
   min-height: 100vh;
   padding-top: 5.5rem;
@@ -668,13 +682,13 @@ header, main, footer {
 .stat-heading { font-family: var(--font-hero); font-size: 1.05rem; font-weight: 700; text-transform: uppercase; color: #fff; margin: 0.2rem 0; }
 .stat-subtext { font-size: 0.88rem; color: var(--text-muted); font-family: var(--font-main); line-height: 1.5; }
 
-/* 🌟 3. TRUE MODULAR 3D CURVED COVERFLOW STAGE VIEWPORT 🌟 */
+/* 🌟 3. TRUE MODULAR 3D COVERFLOW STAGE VIEWPORT 🌟 */
 .coverflow-stage-viewport {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   overflow: hidden;
   position: relative;
-  height: 440px;
+  height: 480px;
   cursor: grab;
   user-select: none;
   z-index: 10;
@@ -689,10 +703,10 @@ header, main, footer {
   transform-style: preserve-3d;
 }
 
-/* Individual Modular Cards */
+/* Skills Cards */
 .skill-coverflow-card {
   position: absolute;
-  top: 15px;
+  top: 25px;
   left: 0;
   width: clamp(240px, 22vw, 270px);
   min-height: 340px;
@@ -712,7 +726,7 @@ header, main, footer {
 }
 .skill-coverflow-card:hover {
   border-color: var(--accent-gold);
-  box-shadow: 0 20px 45px rgba(255, 215, 0, 0.25);
+  box-shadow: 0 20px 45px rgba(255, 215, 0, 0.3);
 }
 
 .skill-badge-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
@@ -745,12 +759,12 @@ header, main, footer {
 .skill-bar-track { width: 100%; height: 6px; background: rgba(255, 255, 255, 0.08); border-radius: var(--radius-full); overflow: hidden; }
 .skill-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent-gold), var(--accent-cyan)); border-radius: var(--radius-full); }
 
-/* Project Cards */
+/* Project Cards (Uniform Crisp Professional Size) */
 .coverflow-card-item {
   position: absolute;
-  top: 15px;
+  top: 25px;
   left: 0;
-  width: clamp(260px, 24vw, 300px);
+  width: clamp(270px, 24vw, 305px);
   transform-style: preserve-3d;
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -760,10 +774,12 @@ header, main, footer {
   border: 1px solid var(--border);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
   will-change: transform, opacity;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
 }
 .coverflow-card-item:hover {
   border-color: var(--accent-gold);
-  box-shadow: 0 20px 45px rgba(255, 215, 0, 0.25);
+  box-shadow: 0 22px 50px rgba(255, 215, 0, 0.28);
+  transform: translateY(-8px) !important;
 }
 
 .project-preview-box { background: rgba(10, 7, 14, 0.98); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; }
@@ -983,7 +999,7 @@ header, main, footer {
   cursor: pointer;
   transition: var(--transition);
 }
-.back-to-top:hover { background: var(--accent-gold); color: #000; }
+.back-to-top:hover { background: var(--accent-gold); color: #000; box-shadow: 0 0 16px rgba(255, 215, 0, 0.5); }
 
 /* 📱 RESPONSIVE PHONE FIXES 📱 */
 @media (max-width: 992px) {
