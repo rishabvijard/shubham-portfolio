@@ -64,7 +64,7 @@
     });
   }
 
-  // 🌟 2. FAST CANVAS WITH ON-DEMAND DIRTY RENDERING (0% CPU WHEN IDLE) 🌟
+  // 🌟 2. FAST CANVAS (SCROLL-REACTIVE TUNNEL) 🌟
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d", { alpha: true });
@@ -121,7 +121,7 @@
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
-      // 16 High-Density Perspective Diagonal Rays
+      // 16 Perspective Rays
       const maxRadius = Math.max(width, height) * 1.25;
       ctx.save();
       ctx.strokeStyle = "rgba(229, 192, 123, 0.10)";
@@ -217,7 +217,7 @@
     requestCanvasFrame();
   }
 
-  // 3. 3D Magnetic Portrait Face Tilt
+  // 3. 3D Magnetic Portrait Tilt
   const portrait = document.getElementById("portrait-wrapper");
   const title = document.getElementById("sparkle-title");
 
@@ -236,7 +236,7 @@
     }, { passive: true });
   }
 
-  // 4. Mobile Hamburger Toggle
+  // 4. Mobile Hamburger
   const hamburger = document.getElementById("nav-hamburger");
   const drawer = document.getElementById("mobile-nav-drawer");
   const drawerLinks = document.querySelectorAll(".mobile-nav-link");
@@ -257,7 +257,7 @@
     });
   }
 
-  // 5. Spotlight Hover Tracker
+  // 5. Spotlight Hover
   document.querySelectorAll(".spotlight-card").forEach((card) => {
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
@@ -266,11 +266,17 @@
     }, { passive: true });
   });
 
-  // 🌟 6 & 7. BULLETPROOF MODULAR ORBITAL 3D COVERFLOW ENGINE (NEVER CUTS OFF) 🌟
-  function initOrbitalCoverflow({
+  // 🌟 TRUE MATHEMATICAL MODULO FUNCTION 🌟
+  function mod(n, m) {
+    return ((n % m) + m) % m;
+  }
+
+  // 🌟 6 & 7. FLAWLESS INFINITE 3D COVERFLOW ENGINE (WITH SMOOTH AUTO-GLIDE) 🌟
+  function initFlawlessInfiniteCoverflow({
     viewportId,
     trackId,
     cardSelector,
+    baseSpeed = 0.55,
     defaultCardWidth = 270,
     gap = 28
   }) {
@@ -283,43 +289,36 @@
     if (!totalCards) return;
 
     let isDragging = false;
+    let isHovered = false;
     let startX = 0;
     let velocity = 0;
     let currentOffset = 0;
-    let isLoopRunning = false;
 
     let cardWidth = cards[0].offsetWidth || defaultCardWidth;
     let stride = cardWidth + gap;
     let totalOrbitWidth = totalCards * stride;
 
-    function updateCardMetrics() {
+    function updateMetrics() {
       cardWidth = cards[0].offsetWidth || defaultCardWidth;
       stride = cardWidth + gap;
       totalOrbitWidth = totalCards * stride;
     }
 
-    function renderOrbitalPositions() {
+    function renderFrame() {
       const viewportCenter = window.innerWidth / 2;
       const centerFactor = Math.max(260, window.innerWidth * 0.35);
       const halfOrbit = totalOrbitWidth / 2;
 
       for (let i = 0; i < totalCards; i++) {
         const card = cards[i];
-        // Calculate raw position on the continuous track
-        const rawX = i * stride + currentOffset;
+        const pos = mod(i * stride + currentOffset, totalOrbitWidth);
+        const distFromCenter = pos - halfOrbit;
 
-        // Modulo distance from screen center wrapped within [-halfOrbit, +halfOrbit]
-        let distFromCenter = ((rawX) % totalOrbitWidth);
-        if (distFromCenter < -halfOrbit) distFromCenter += totalOrbitWidth;
-        if (distFromCenter > halfOrbit) distFromCenter -= totalOrbitWidth;
-
-        // Place card precisely at its 3D screen position
         const screenX = viewportCenter + distFromCenter - (cardWidth / 2);
         const normDist = distFromCenter / centerFactor;
         const clampedNorm = Math.max(-1.7, Math.min(1.7, normDist));
         const absNorm = Math.abs(clampedNorm);
 
-        // 3D Perspective Curved Cylinder parameters
         const rotateY = clampedNorm * -18;
         const translateZ = (absNorm * 35) - 25;
         const scale = Math.max(0.85, 1 - absNorm * 0.07);
@@ -330,36 +329,30 @@
       }
     }
 
-    function step() {
+    function loop() {
       if (!isDragging) {
-        if (Math.abs(velocity) > 0.02) {
+        if (Math.abs(velocity) > 0.05) {
           currentOffset += velocity;
-          velocity *= 0.92;
+          velocity *= 0.94;
         } else {
           velocity = 0;
+          const speed = isHovered ? (baseSpeed * 0.25) : baseSpeed;
+          currentOffset -= speed;
         }
       }
 
-      renderOrbitalPositions();
-
-      if (isDragging || Math.abs(velocity) > 0.02) {
-        requestAnimationFrame(step);
-      } else {
-        isLoopRunning = false;
-      }
+      renderFrame();
+      requestAnimationFrame(loop);
     }
 
-    function wakeLoop() {
-      if (!isLoopRunning) {
-        isLoopRunning = true;
-        requestAnimationFrame(step);
-      }
-    }
+    // Hover slowdown
+    viewport.addEventListener("mouseenter", () => { isHovered = true; }, { passive: true });
+    viewport.addEventListener("mouseleave", () => { isHovered = false; isDragging = false; }, { passive: true });
 
-    // Resize listener
+    // Resize
     window.addEventListener("resize", () => {
-      updateCardMetrics();
-      renderOrbitalPositions();
+      updateMetrics();
+      renderFrame();
     }, { passive: true });
 
     // Mouse drag
@@ -367,26 +360,22 @@
       isDragging = true;
       startX = e.pageX;
       velocity = 0;
-      wakeLoop();
     });
     window.addEventListener("mouseup", () => { isDragging = false; });
-    viewport.addEventListener("mouseleave", () => { isDragging = false; });
     window.addEventListener("mousemove", (e) => {
       if (!isDragging) return;
       const x = e.pageX;
       const delta = (x - startX) * 1.25;
       currentOffset += delta;
-      velocity = delta * 0.45;
+      velocity = delta * 0.5;
       startX = x;
-      wakeLoop();
     });
 
-    // Touch drag (Mobile/Tablet)
+    // Touch drag
     viewport.addEventListener("touchstart", (e) => {
       isDragging = true;
       startX = e.touches[0].pageX;
       velocity = 0;
-      wakeLoop();
     }, { passive: true });
     window.addEventListener("touchend", () => { isDragging = false; });
     viewport.addEventListener("touchmove", (e) => {
@@ -394,9 +383,8 @@
       const x = e.touches[0].pageX;
       const delta = (x - startX) * 1.25;
       currentOffset += delta;
-      velocity = delta * 0.45;
+      velocity = delta * 0.5;
       startX = x;
-      wakeLoop();
     }, { passive: true });
 
     // Mouse wheel scrolling
@@ -406,28 +394,30 @@
         velocity -= delta * 0.22;
         if (velocity > 30) velocity = 30;
         if (velocity < -30) velocity = -30;
-        wakeLoop();
       }
     }, { passive: true });
 
-    updateCardMetrics();
-    renderOrbitalPositions();
+    updateMetrics();
+    renderFrame();
+    requestAnimationFrame(loop);
   }
 
-  // Initialize Skills Orbital 3D Coverflow (16 cards total)
-  initOrbitalCoverflow({
+  // Initialize Skills Continuous Infinite 3D Coverflow
+  initFlawlessInfiniteCoverflow({
     viewportId: "skills-coverflow-viewport",
     trackId: "skills-coverflow-track",
     cardSelector: ".skill-coverflow-card",
+    baseSpeed: 0.5,
     defaultCardWidth: 260,
     gap: 28
   });
 
-  // Initialize Projects Orbital 3D Coverflow (18 cards total)
-  initOrbitalCoverflow({
+  // Initialize Projects Continuous Infinite 3D Coverflow
+  initFlawlessInfiniteCoverflow({
     viewportId: "coverflow-viewport",
     trackId: "coverflow-track",
     cardSelector: ".coverflow-card-item",
+    baseSpeed: 0.5,
     defaultCardWidth: 280,
     gap: 28
   });
