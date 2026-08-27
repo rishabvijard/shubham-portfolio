@@ -10,18 +10,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=35.0" />
+  <link rel="stylesheet" href="css/style.css?v=38.0" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
 </head>
 <body>
   <div class="custom-cursor-follower" id="cursor-follower"></div>
   <div class="custom-cursor-dot" id="cursor-dot"></div>
 
-  <!-- Dynamic Golden Perspective Tunnel & Particle Canvas -->
+  <!-- Dynamic Golden Perspective Tunnel & Stardust Canvas -->
   <canvas id="bg-canvas" class="bg-canvas"></canvas>
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
-  <div class="ambient-glow glow-3"></div>
+  <div class="tunnel-center-aura"></div>
   <div class="grid-overlay"></div>
 
   <div id="toast-container" class="toast-container" aria-live="polite"></div>
@@ -71,7 +69,7 @@
   </header>
 
   <main>
-    <!-- 1. HERO FRONT PAGE WITH 3.5s STAGGERED BROKEN TV SCANLINE EFFECT ON "SHUBHAM" -->
+    <!-- 1. HERO FRONT PAGE WITH 4.5s BROKEN TV GLITCH (INTACT TEXT - NO CUTTING) -->
     <section id="hero" class="hero-front-section">
       <div class="container hero-container-flex">
         <div class="hero-top-wrap">
@@ -81,11 +79,7 @@
           </div>
           <h1 class="hero-main-title" id="sparkle-title">
             Hi, i&apos;m 
-            <span class="tv-screen-glitch-wrap">
-              <span class="tv-base-text">shubham</span>
-              <span class="tv-layer-top">shubham</span>
-              <span class="tv-layer-bottom">shubham</span>
-            </span>
+            <span class="broken-tv-name" data-text="shubham">shubham</span>
           </h1>
         </div>
 
@@ -862,7 +856,7 @@
     </div>
   </footer>
 
-  <script src="js/projects-data.js?v=35.0"></script>
-  <script src="js/main.js?v=35.0"></script>
+  <script src="js/projects-data.js?v=38.0"></script>
+  <script src="js/main.js?v=38.0"></script>
 </body>
 </html>

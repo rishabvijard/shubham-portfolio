@@ -16,17 +16,16 @@
       mouseX = e.clientX;
       mouseY = e.clientY;
 
-      // Spawn mouse stardust sparks
       for (let i = 0; i < 2; i++) {
         cursorSparks.push({
-          x: mouseX + (Math.random() - 0.5) * 8,
-          y: mouseY + (Math.random() - 0.5) * 8,
-          vx: (Math.random() - 0.5) * 1.5,
-          vy: (Math.random() - 0.5) * 1.5 - 0.5,
-          size: Math.random() * 2.8 + 1.2,
+          x: mouseX + (Math.random() - 0.5) * 6,
+          y: mouseY + (Math.random() - 0.5) * 6,
+          vx: (Math.random() - 0.5) * 1.6,
+          vy: (Math.random() - 0.5) * 1.6 - 0.4,
+          size: Math.random() * 3 + 1.2,
           alpha: 1,
-          decay: Math.random() * 0.035 + 0.02,
-          color: Math.random() > 0.5 ? "rgba(229, 192, 123, " : "rgba(194, 164, 255, "
+          decay: Math.random() * 0.03 + 0.02,
+          color: Math.random() > 0.4 ? "rgba(229, 192, 123, " : "rgba(251, 141, 255, "
         });
       }
     });
@@ -53,7 +52,7 @@
     }
   }
 
-  // 🌟 2. INTERACTIVE GOLDEN OCTAGONAL PERSPECTIVE TUNNEL & SCROLL LOOP (FROM IMAGE REF) 🌟
+  // 🌟 2. VIBRANT GOLDEN OCTAGONAL PERSPECTIVE SCROLL TUNNEL (FROM USER SCREENSHOT) 🌟
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d");
@@ -66,7 +65,7 @@
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
       centerX = width / 2;
-      centerY = height * 0.45;
+      centerY = height * 0.46;
     }
     resize();
     window.addEventListener("resize", resize);
@@ -75,12 +74,12 @@
       targetScrollY = window.pageYOffset;
     });
 
-    // Draw a single regular octagon
-    function drawOctagon(cx, cy, radius, rotation = 0) {
+    // Draw regular octagon in perspective
+    function drawOctagon(cx, cy, radius) {
       ctx.beginPath();
       for (let i = 0; i < 8; i++) {
-        const angle = rotation + (i * Math.PI) / 4;
-        const x = cx + Math.cos(angle) * radius * 1.55; // widescreen perspective stretch
+        const angle = (i * Math.PI) / 4 + Math.PI / 8;
+        const x = cx + Math.cos(angle) * radius * 1.58;
         const y = cy + Math.sin(angle) * radius;
         if (i === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
@@ -88,57 +87,56 @@
       ctx.closePath();
     }
 
-    // Ambient floating stardust particles inside the tunnel
+    // Ambient floating stardust inside the tunnel
     const tunnelStars = [];
-    const starCount = window.innerWidth < 768 ? 35 : 70;
+    const starCount = window.innerWidth < 768 ? 40 : 80;
     for (let i = 0; i < starCount; i++) {
       tunnelStars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        z: Math.random() * 1000 + 50,
-        size: Math.random() * 1.5 + 0.5,
-        alpha: Math.random() * 0.7 + 0.3
+        z: Math.random() * 1000 + 40,
+        size: Math.random() * 1.6 + 0.6,
+        alpha: Math.random() * 0.8 + 0.2
       });
     }
 
     function animateTunnel() {
       ctx.clearRect(0, 0, width, height);
 
-      // Smooth scroll lerp for camera travel
+      // Smooth scroll lerp for camera forward motion
       scrollY += (targetScrollY - scrollY) * 0.08;
-      tunnelOffset += 0.45 + (targetScrollY - scrollY) * 0.05;
+      tunnelOffset += 0.5 + (targetScrollY - scrollY) * 0.04;
 
-      const numRings = 14;
-      const baseSpacing = 85;
+      const numRings = 15;
+      const baseSpacing = 80;
 
       for (let i = 0; i < numRings; i++) {
-        // Continuous looping depth calculation
         let ringDist = ((i * baseSpacing + tunnelOffset) % (numRings * baseSpacing));
         let scale = Math.pow(ringDist / (numRings * baseSpacing), 2.2);
-        let radius = scale * (Math.max(width, height) * 0.9);
+        let radius = scale * (Math.max(width, height) * 0.95);
 
-        if (radius > 8) {
-          let alpha = Math.min(1, Math.sin((ringDist / (numRings * baseSpacing)) * Math.PI));
-          alpha = alpha * 0.35; // graceful glowing wireframe opacity
+        if (radius > 6) {
+          let alpha = Math.sin((ringDist / (numRings * baseSpacing)) * Math.PI);
+          alpha = Math.max(0.08, alpha * 0.42);
 
           ctx.save();
           ctx.strokeStyle = `rgba(229, 192, 123, ${alpha})`;
-          ctx.lineWidth = Math.max(0.8, scale * 2.2);
-          ctx.shadowBlur = 12;
-          ctx.shadowColor = "rgba(229, 192, 123, 0.4)";
+          ctx.lineWidth = Math.max(1, scale * 2.5);
+          ctx.shadowBlur = 14;
+          ctx.shadowColor = "rgba(229, 192, 123, 0.45)";
 
-          drawOctagon(centerX, centerY, radius, 0);
+          drawOctagon(centerX, centerY, radius);
           ctx.stroke();
 
-          // Connective perspective wireframe lines on major diagonals
-          if (i === 0 || i === 4 || i === 8) {
-            ctx.strokeStyle = `rgba(229, 192, 123, ${alpha * 0.4})`;
-            ctx.lineWidth = 0.5;
+          // Connective perspective diagonal wireframe lines
+          if (i === 0 || i === 5 || i === 10) {
+            ctx.strokeStyle = `rgba(229, 192, 123, ${alpha * 0.35})`;
+            ctx.lineWidth = 0.6;
             for (let a = 0; a < 8; a++) {
-              const angle = (a * Math.PI) / 4;
+              const angle = (a * Math.PI) / 4 + Math.PI / 8;
               ctx.beginPath();
-              ctx.moveTo(centerX + Math.cos(angle) * 30 * 1.55, centerY + Math.sin(angle) * 30);
-              ctx.lineTo(centerX + Math.cos(angle) * radius * 1.55, centerY + Math.sin(angle) * radius);
+              ctx.moveTo(centerX + Math.cos(angle) * 20 * 1.58, centerY + Math.sin(angle) * 20);
+              ctx.lineTo(centerX + Math.cos(angle) * radius * 1.58, centerY + Math.sin(angle) * radius);
               ctx.stroke();
             }
           }
@@ -148,20 +146,20 @@
 
       // Draw floating cosmic stars
       tunnelStars.forEach((star) => {
-        star.z -= 0.6 + (targetScrollY - scrollY) * 0.04;
+        star.z -= 0.65 + (targetScrollY - scrollY) * 0.035;
         if (star.z <= 10) {
           star.z = 1000;
           star.x = Math.random() * width;
           star.y = Math.random() * height;
         }
-        const k = 400 / star.z;
+        const k = 420 / star.z;
         const px = (star.x - centerX) * k + centerX;
         const py = (star.y - centerY) * k + centerY;
 
         if (px >= 0 && px <= width && py >= 0 && py <= height) {
           ctx.beginPath();
           ctx.arc(px, py, star.size * k * 0.4, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(229, 192, 123, ${star.alpha * Math.min(1, k * 0.6)})`;
+          ctx.fillStyle = `rgba(229, 192, 123, ${star.alpha * Math.min(1, k * 0.7)})`;
           ctx.fill();
         }
       });
