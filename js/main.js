@@ -271,13 +271,13 @@
     return ((n % m) + m) % m;
   }
 
-  // 🌟 6 & 7. DRAMATIC 3D AMPHITHEATER PERSPECTIVE ENGINE (EXACT REFERENCE MATCH) 🌟
-  function initDramaticAmphitheater({
+  // 🌟 6 & 7. CLEAN NON-OVERLAPPING 3D AMPHITHEATER PERSPECTIVE ENGINE 🌟
+  function initCleanAmphitheater({
     viewportId,
     trackId,
     cardSelector,
-    defaultCardWidth = 270,
-    gap = 28
+    defaultCardWidth = 260,
+    gap = 55
   }) {
     const viewport = document.getElementById(viewportId);
     const track = document.getElementById(trackId);
@@ -305,28 +305,25 @@
 
     function renderFrame() {
       const viewportCenter = window.innerWidth / 2;
-      const centerFactor = Math.max(260, window.innerWidth * 0.34);
+      const centerFactor = Math.max(280, window.innerWidth * 0.36);
       const halfOrbit = totalOrbitWidth / 2;
 
       for (let i = 0; i < totalCards; i++) {
         const card = cards[i];
-        // Exact seamless modular math
         const pos = mod(i * stride + currentOffset, totalOrbitWidth);
         const distFromCenter = pos - halfOrbit;
 
         const screenX = viewportCenter + distFromCenter - (cardWidth / 2);
         const normDist = distFromCenter / centerFactor;
-        const clampedNorm = Math.max(-1.8, Math.min(1.8, normDist));
+        const clampedNorm = Math.max(-1.7, Math.min(1.7, normDist));
         const absNorm = Math.abs(clampedNorm);
 
-        // 🌟 DRAMATIC AMPHITHEATER SCALING: 0.65 (Center) -> 1.42 (Outer Edges) 🌟
-        const scale = 0.65 + Math.pow(absNorm, 1.25) * 0.62;
-        const translateZ = -170 + (absNorm * 210); // -170px deep center -> +150px forward edge
-        const rotateY = clampedNorm * -28; // Bold 3D inward tilt
-        const zIndex = Math.round(absNorm * 100); // Outer cards overlap in front of center cards!
-        const opacity = Math.min(1.0, 0.7 + absNorm * 0.25);
+        // 🌟 CLEAN BALANCED SCALE: 0.78 (Center) -> 1.18 (Edges) with ZERO OVERLAP 🌟
+        const scale = 0.78 + (absNorm * 0.32);
+        const translateZ = -90 + (absNorm * 125);
+        const rotateY = clampedNorm * -22;
+        const opacity = Math.min(1.0, 0.75 + absNorm * 0.2);
 
-        card.style.zIndex = zIndex;
         card.style.transform = `translate3d(${screenX}px, 0, 0) perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
         card.style.opacity = opacity;
       }
@@ -419,22 +416,22 @@
     renderFrame();
   }
 
-  // Initialize Skills Amphitheater (Center small, edge large)
-  initDramaticAmphitheater({
+  // Initialize Skills (Clean spacing, zero overlap)
+  initCleanAmphitheater({
     viewportId: "skills-coverflow-viewport",
     trackId: "skills-coverflow-track",
     cardSelector: ".skill-coverflow-card",
     defaultCardWidth: 260,
-    gap: 28
+    gap: 55
   });
 
-  // Initialize Projects Amphitheater (Center small, edge large)
-  initDramaticAmphitheater({
+  // Initialize Projects (Clean spacing, zero overlap)
+  initCleanAmphitheater({
     viewportId: "coverflow-viewport",
     trackId: "coverflow-track",
     cardSelector: ".coverflow-card-item",
     defaultCardWidth: 280,
-    gap: 28
+    gap: 55
   });
 
   // 8. Toast Notification
