@@ -58,7 +58,7 @@ body {
   font-family: var(--font-main);
 }
 
-/* 🌌 HIGH-VISIBILITY GOLDEN OCTAGONAL SCROLL TUNNEL CANVAS 🌌 */
+/* 🌌 GOLDEN OCTAGONAL PERSPECTIVE TUNNEL CANVAS (SCROLL-ONLY ENGINE) 🌌 */
 .bg-canvas {
   position: fixed;
   top: 0;
@@ -72,12 +72,12 @@ body {
 
 .tunnel-center-aura {
   position: fixed;
-  top: 45%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 550px;
   height: 550px;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.18) 0%, rgba(229, 192, 123, 0.08) 45%, transparent 75%);
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.16) 0%, rgba(229, 192, 123, 0.06) 45%, transparent 75%);
   filter: blur(60px);
   z-index: 0;
   pointer-events: none;
@@ -86,13 +86,12 @@ body {
 .grid-overlay {
   position: fixed;
   inset: 0;
-  background-image: linear-gradient(rgba(229, 192, 123, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(229, 192, 123, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(229, 192, 123, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(229, 192, 123, 0.025) 1px, transparent 1px);
   background-size: 60px 60px;
   z-index: 0;
   pointer-events: none;
 }
 
-/* All page elements sit on top of the background */
 header, main, footer {
   position: relative;
   z-index: 2;
@@ -314,7 +313,7 @@ header, main, footer {
 .btn-outline:hover { border-color: var(--accent-gold); background: rgba(255, 215, 0, 0.12); transform: translateY(-2px); }
 .btn-full { width: 100%; justify-content: center; }
 
-/* 🌟 2. HERO FRONT PAGE WITH PREVIOUS HALF-AND-HALF BROKEN TV GLITCH (3.5s TOP / 3.5s BOTTOM) 🌟 */
+/* 🌟 2. HERO FRONT PAGE WITH HALF-AND-HALF BROKEN TV GLITCH (3.5s TOP / 3.5s BOTTOM) 🌟 */
 .hero-front-section {
   min-height: 100vh;
   padding-top: 5.5rem;
@@ -403,7 +402,6 @@ header, main, footer {
 }
 
 @keyframes brokenTvTop {
-  /* 0s - 3.5s: Top Half is actively glitching with CRT scanline jitter */
   0%, 47% {
     transform: translate(-3px, 0);
     text-shadow: 2px 0 #00f0ff, -2px 0 #aa42ff, 0 0 12px rgba(255, 255, 255, 0.9);
@@ -423,7 +421,6 @@ header, main, footer {
   38% {
     transform: translate(-3px, 0);
   }
-  /* 3.5s - 7s: Top Half is steady */
   50%, 100% {
     transform: translate(0, 0);
     text-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
@@ -432,13 +429,11 @@ header, main, footer {
 }
 
 @keyframes brokenTvBottom {
-  /* 0s - 3.5s: Bottom Half is steady */
   0%, 48% {
     transform: translate(0, 0);
     text-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
     filter: none;
   }
-  /* 3.5s - 7s: Bottom Half is actively glitching with CRT scanline jitter */
   50%, 97% {
     transform: translate(3px, 0);
     text-shadow: -2px 0 #fb8dff, 2px 0 #00f0ff, 0 0 12px rgba(255, 255, 255, 0.9);

@@ -52,34 +52,28 @@
     }
   }
 
-  // 🌟 2. VIBRANT GOLDEN OCTAGONAL SCROLL TUNNEL (IMAGE REFERENCE MATCH) 🌟
+  // 🌟 2. GOLDEN PERSPECTIVE TUNNEL (MATCHING IMAGE & MOVES ONLY ON MOUSE SCROLL) 🌟
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d");
     let width, height, centerX, centerY;
-    let scrollY = window.pageYOffset;
-    let targetScrollY = scrollY;
-    let tunnelOffset = 0;
+    let smoothScrollY = window.pageYOffset;
 
     function resize() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
       centerX = width / 2;
-      centerY = height * 0.46;
+      centerY = height * 0.48;
     }
     resize();
     window.addEventListener("resize", resize);
 
-    window.addEventListener("scroll", () => {
-      targetScrollY = window.pageYOffset;
-    });
-
-    function drawOctagon(cx, cy, radius) {
+    function drawOctagon(cx, cy, rx, ry) {
       ctx.beginPath();
       for (let i = 0; i < 8; i++) {
         const angle = (i * Math.PI) / 4 + Math.PI / 8;
-        const x = cx + Math.cos(angle) * radius * 1.58;
-        const y = cy + Math.sin(angle) * radius;
+        const x = cx + Math.cos(angle) * rx;
+        const y = cy + Math.sin(angle) * ry;
         if (i === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
@@ -87,69 +81,89 @@
     }
 
     const tunnelStars = [];
-    const starCount = window.innerWidth < 768 ? 40 : 85;
+    const starCount = window.innerWidth < 768 ? 40 : 80;
     for (let i = 0; i < starCount; i++) {
       tunnelStars.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        z: Math.random() * 1000 + 40,
+        x: (Math.random() - 0.5) * 2200,
+        y: (Math.random() - 0.5) * 2200,
+        baseZ: Math.random() * 1200 + 40,
         size: Math.random() * 1.8 + 0.6,
-        alpha: Math.random() * 0.85 + 0.2
+        alpha: Math.random() * 0.8 + 0.2
       });
     }
 
-    function animateTunnel() {
+    function renderTunnel() {
+      // Smoothly follow page scroll ONLY (No autonomous motion when idle)
+      const targetScrollY = window.pageYOffset;
+      smoothScrollY += (targetScrollY - smoothScrollY) * 0.12;
+
       ctx.clearRect(0, 0, width, height);
 
-      scrollY += (targetScrollY - scrollY) * 0.08;
-      tunnelOffset += 0.55 + (targetScrollY - scrollY) * 0.045;
+      // Central Golden Depth Glow (matching reference image)
+      const gradient = ctx.createRadialGradient(centerX, centerY, 10, centerX, centerY, Math.max(width, height) * 0.55);
+      gradient.addColorStop(0, "rgba(255, 215, 0, 0.2)");
+      gradient.addColorStop(0.25, "rgba(229, 192, 123, 0.08)");
+      gradient.addColorStop(0.65, "rgba(18, 14, 22, 0.0)");
+      gradient.addColorStop(1, "transparent");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
 
-      const numRings = 16;
-      const baseSpacing = 75;
+      // 8 Corner Perspective Diagonal Ray Lines
+      const maxRadius = Math.max(width, height) * 1.25;
+      ctx.save();
+      ctx.strokeStyle = "rgba(229, 192, 123, 0.32)";
+      ctx.lineWidth = 1;
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = "rgba(255, 215, 0, 0.4)";
+      for (let a = 0; a < 8; a++) {
+        const angle = (a * Math.PI) / 4 + Math.PI / 8;
+        ctx.beginPath();
+        ctx.moveTo(centerX + Math.cos(angle) * 12 * 1.58, centerY + Math.sin(angle) * 12);
+        ctx.lineTo(centerX + Math.cos(angle) * maxRadius * 1.58, centerY + Math.sin(angle) * maxRadius);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // Concentric Golden Wireframe Octagons (Depth tied strictly to scroll)
+      const numRings = 14;
+      const ringSpacing = 75;
+      const totalDepth = numRings * ringSpacing;
+      // scrollOffset moves strictly when smoothScrollY changes!
+      const scrollOffset = (smoothScrollY * 0.55) % totalDepth;
 
       for (let i = 0; i < numRings; i++) {
-        let ringDist = ((i * baseSpacing + tunnelOffset) % (numRings * baseSpacing));
-        let scale = Math.pow(ringDist / (numRings * baseSpacing), 2.2);
-        let radius = scale * (Math.max(width, height) * 0.96);
+        let ringDist = (i * ringSpacing + scrollOffset) % totalDepth;
+        if (ringDist < 0) ringDist += totalDepth;
 
-        if (radius > 5) {
-          let alpha = Math.sin((ringDist / (numRings * baseSpacing)) * Math.PI);
-          alpha = Math.max(0.1, alpha * 0.55);
+        let progress = ringDist / totalDepth;
+        let scale = Math.pow(progress, 2.3);
+        let rx = scale * (width * 0.95);
+        let ry = scale * (height * 0.88);
+
+        if (rx > 6 && ry > 4) {
+          let alpha = Math.sin(progress * Math.PI);
+          alpha = Math.max(0.1, alpha * 0.65);
 
           ctx.save();
           ctx.strokeStyle = `rgba(255, 215, 0, ${alpha})`;
-          ctx.lineWidth = Math.max(1, scale * 2.8);
-          ctx.shadowBlur = 16;
+          ctx.lineWidth = Math.max(1, scale * 3.2);
+          ctx.shadowBlur = 14;
           ctx.shadowColor = "rgba(255, 215, 0, 0.5)";
 
-          drawOctagon(centerX, centerY, radius);
+          drawOctagon(centerX, centerY, rx, ry);
           ctx.stroke();
-
-          if (i === 0 || i === 4 || i === 8 || i === 12) {
-            ctx.strokeStyle = `rgba(255, 215, 0, ${alpha * 0.4})`;
-            ctx.lineWidth = 0.7;
-            for (let a = 0; a < 8; a++) {
-              const angle = (a * Math.PI) / 4 + Math.PI / 8;
-              ctx.beginPath();
-              ctx.moveTo(centerX + Math.cos(angle) * 15 * 1.58, centerY + Math.sin(angle) * 15);
-              ctx.lineTo(centerX + Math.cos(angle) * radius * 1.58, centerY + Math.sin(angle) * radius);
-              ctx.stroke();
-            }
-          }
           ctx.restore();
         }
       }
 
+      // Floating Stardust Particles (Z position tied strictly to scroll)
       tunnelStars.forEach((star) => {
-        star.z -= 0.7 + (targetScrollY - scrollY) * 0.04;
-        if (star.z <= 10) {
-          star.z = 1000;
-          star.x = Math.random() * width;
-          star.y = Math.random() * height;
-        }
-        const k = 420 / star.z;
-        const px = (star.x - centerX) * k + centerX;
-        const py = (star.y - centerY) * k + centerY;
+        let z = (star.baseZ - (smoothScrollY * 0.5)) % 1200;
+        if (z < 10) z += 1200;
+
+        const k = 450 / z;
+        const px = star.x * k + centerX;
+        const py = star.y * k + centerY;
 
         if (px >= 0 && px <= width && py >= 0 && py <= height) {
           ctx.beginPath();
@@ -159,6 +173,7 @@
         }
       });
 
+      // Cursor sparks
       for (let i = cursorSparks.length - 1; i >= 0; i--) {
         const s = cursorSparks[i];
         s.x += s.vx;
@@ -178,9 +193,9 @@
         }
       }
 
-      requestAnimationFrame(animateTunnel);
+      requestAnimationFrame(renderTunnel);
     }
-    animateTunnel();
+    renderTunnel();
   }
 
   // 3. 3D Magnetic Portrait Face Tilt
