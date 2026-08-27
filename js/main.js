@@ -1,40 +1,5 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  // 🌟 0. REACTIVE TOP SCROLL PROGRESS INDICATOR 🌟
-  const progressBar = document.createElement("div");
-  progressBar.className = "scroll-progress-indicator";
-  document.body.appendChild(progressBar);
-
-  window.addEventListener("scroll", () => {
-    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    progressBar.style.width = `${scrolled}%`;
-  }, { passive: true });
-
-  // 🌟 1. REACTIVE NAVBAR SCROLLSPY 🌟
-  const sections = document.querySelectorAll("section[id]");
-  const navLinks = document.querySelectorAll(".nav-link");
-
-  function highlightNavOnScroll() {
-    const scrollY = window.pageYOffset + 200;
-    sections.forEach((current) => {
-      const sectionHeight = current.offsetHeight;
-      const sectionTop = current.offsetTop;
-      const sectionId = current.getAttribute("id");
-
-      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
-          if (link.getAttribute("href") === `#${sectionId}`) {
-            link.classList.add("active");
-          }
-        });
-      }
-    });
-  }
-  window.addEventListener("scroll", highlightNavOnScroll, { passive: true });
-
-  // 🎯 2. HIGH PERFORMANCE CUSTOM CURSOR & SPARKS 🎯
+  // 🎯 1. CUSTOM CURSOR & SPARKS 🎯
   const follower = document.getElementById("cursor-follower");
   const dot = document.getElementById("cursor-dot");
   const cursorSparks = [];
@@ -99,7 +64,7 @@
     });
   }
 
-  // 🌟 3. FAST CANVAS (SCROLL-REACTIVE TUNNEL) 🌟
+  // 🌟 2. FAST CANVAS (SCROLL-REACTIVE TUNNEL) 🌟
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d", { alpha: true });
@@ -247,7 +212,7 @@
     requestCanvasFrame();
   }
 
-  // 4. 3D Magnetic Portrait Face Tilt
+  // 3. 3D Magnetic Portrait Face Tilt
   const portrait = document.getElementById("portrait-wrapper");
   const title = document.getElementById("sparkle-title");
 
@@ -266,7 +231,7 @@
     }, { passive: true });
   }
 
-  // 5. Mobile Hamburger Toggle
+  // 4. Mobile Hamburger Toggle
   const hamburger = document.getElementById("nav-hamburger");
   const drawer = document.getElementById("mobile-nav-drawer");
   const drawerLinks = document.querySelectorAll(".mobile-nav-link");
@@ -287,7 +252,7 @@
     });
   }
 
-  // 6. Spotlight Hover Tracker
+  // 5. Spotlight Hover Tracker
   document.querySelectorAll(".spotlight-card").forEach((card) => {
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
@@ -301,7 +266,7 @@
     return ((n % m) + m) % m;
   }
 
-  // 🌟 7. SKILLS: REVERSE-PERSPECTIVE AMPHITHEATER 🌟
+  // 🌟 6. SKILLS: REVERSE-PERSPECTIVE AMPHITHEATER 🌟
   function initSkillsAmphitheater() {
     const viewport = document.getElementById("skills-coverflow-viewport");
     const track = document.getElementById("skills-coverflow-track");
@@ -337,6 +302,7 @@
         const clampedNorm = Math.max(-1.7, Math.min(1.7, normDist));
         const absNorm = Math.abs(clampedNorm);
 
+        // Amphitheater scaling
         const scale = 0.78 + (absNorm * 0.32);
         const translateZ = -90 + (absNorm * 125);
         const rotateY = clampedNorm * -22;
@@ -426,7 +392,7 @@
     renderFrame();
   }
 
-  // 🌟 8. PROJECTS: UNIFORM CRISP PROFESSIONAL CARDS 🌟
+  // 🌟 7. PROJECTS: UNIFORM CRISP ORIGINAL SIZE (SCALE 1.0 FOR ALL CARDS) 🌟
   function initProjectsUniformCards() {
     const viewport = document.getElementById("coverflow-viewport");
     const track = document.getElementById("coverflow-track");
@@ -546,7 +512,7 @@
   initSkillsAmphitheater();
   initProjectsUniformCards();
 
-  // 9. Toast Notification
+  // 8. Toast Notification
   function showToast(message) {
     const container = document.getElementById("toast-container");
     if (!container) return;
@@ -557,7 +523,7 @@
     setTimeout(() => { toast.remove(); }, 3000);
   }
 
-  // 10. Copy to Clipboard
+  // 9. Copy to Clipboard
   document.querySelectorAll(".copy-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const text = btn.getAttribute("data-copy");
@@ -567,7 +533,7 @@
     });
   });
 
-  // 11. Modal Dialog
+  // 10. Modal Dialog
   const modal = document.getElementById("project-modal");
   const modalBackdrop = document.getElementById("modal-backdrop");
   const modalCloseBtn = document.getElementById("modal-close-btn");
@@ -608,7 +574,7 @@
   if (modalCloseAction) modalCloseAction.addEventListener("click", closeModal);
   window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-  // 12. Contact Form AJAX Submission
+  // 11. Contact Form AJAX Submission
   const form = document.getElementById("contact-form");
   if (form) {
     form.addEventListener("submit", async (e) => {
@@ -645,7 +611,7 @@
     });
   }
 
-  // 13. Back to Top
+  // 12. Back to Top
   const backToTop = document.getElementById("back-to-top");
   if (backToTop) {
     backToTop.addEventListener("click", () => {
