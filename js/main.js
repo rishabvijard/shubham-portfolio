@@ -199,7 +199,6 @@
         }
       }
 
-      // Keep running if scroll is animating or sparks are active
       if (Math.abs(scrollDiff) > 0.1 || cursorSparks.length > 0) {
         requestAnimationFrame(renderTunnel);
       } else {
@@ -267,59 +266,83 @@
     }, { passive: true });
   });
 
-  // 🌟 6. ZERO-REFLOW HIGH-SPEED SKILLS COVERFLOW 🌟
-  const skillsViewport = document.getElementById("skills-coverflow-viewport");
-  const skillsTrack = document.getElementById("skills-coverflow-track");
-  if (skillsViewport && skillsTrack) {
-    const skillCards = Array.from(skillsTrack.querySelectorAll(".skill-coverflow-card"));
-    let isDraggingSkills = false;
+  // 🌟 6 & 7. BULLETPROOF MODULAR ORBITAL 3D COVERFLOW ENGINE (NEVER CUTS OFF) 🌟
+  function initOrbitalCoverflow({
+    viewportId,
+    trackId,
+    cardSelector,
+    defaultCardWidth = 270,
+    gap = 28
+  }) {
+    const viewport = document.getElementById(viewportId);
+    const track = document.getElementById(trackId);
+    if (!viewport || !track) return;
+
+    const cards = Array.from(track.querySelectorAll(cardSelector));
+    const totalCards = cards.length;
+    if (!totalCards) return;
+
+    let isDragging = false;
     let startX = 0;
-    let currentOffset = -400;
     let velocity = 0;
+    let currentOffset = 0;
     let isLoopRunning = false;
 
-    const cardWidth = 260;
-    const stride = cardWidth + 28;
-    const cycleWidth = stride * 8;
+    let cardWidth = cards[0].offsetWidth || defaultCardWidth;
+    let stride = cardWidth + gap;
+    let totalOrbitWidth = totalCards * stride;
 
-    function applyTransforms() {
+    function updateCardMetrics() {
+      cardWidth = cards[0].offsetWidth || defaultCardWidth;
+      stride = cardWidth + gap;
+      totalOrbitWidth = totalCards * stride;
+    }
+
+    function renderOrbitalPositions() {
       const viewportCenter = window.innerWidth / 2;
-      const centerFactor = window.innerWidth * 0.36;
+      const centerFactor = Math.max(260, window.innerWidth * 0.35);
+      const halfOrbit = totalOrbitWidth / 2;
 
-      for (let i = 0; i < skillCards.length; i++) {
-        const card = skillCards[i];
-        const cardCenterX = currentOffset + 64 + i * stride + cardWidth / 2;
-        const distFromCenter = (cardCenterX - viewportCenter) / centerFactor;
-        const clampedDist = Math.max(-1.6, Math.min(1.6, distFromCenter));
-        const absDist = Math.abs(clampedDist);
+      for (let i = 0; i < totalCards; i++) {
+        const card = cards[i];
+        // Calculate raw position on the continuous track
+        const rawX = i * stride + currentOffset;
 
-        const scale = 0.86 + (absDist * 0.16);
-        const translateZ = (absDist * 40) - 35;
-        const rotateY = clampedDist * -20;
-        const opacity = Math.max(0.65, 1 - absDist * 0.15);
+        // Modulo distance from screen center wrapped within [-halfOrbit, +halfOrbit]
+        let distFromCenter = ((rawX) % totalOrbitWidth);
+        if (distFromCenter < -halfOrbit) distFromCenter += totalOrbitWidth;
+        if (distFromCenter > halfOrbit) distFromCenter -= totalOrbitWidth;
 
-        card.style.transform = `perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
+        // Place card precisely at its 3D screen position
+        const screenX = viewportCenter + distFromCenter - (cardWidth / 2);
+        const normDist = distFromCenter / centerFactor;
+        const clampedNorm = Math.max(-1.7, Math.min(1.7, normDist));
+        const absNorm = Math.abs(clampedNorm);
+
+        // 3D Perspective Curved Cylinder parameters
+        const rotateY = clampedNorm * -18;
+        const translateZ = (absNorm * 35) - 25;
+        const scale = Math.max(0.85, 1 - absNorm * 0.07);
+        const opacity = Math.max(0.45, 1 - absNorm * 0.18);
+
+        card.style.transform = `translate3d(${screenX}px, 0, 0) perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
         card.style.opacity = opacity;
       }
     }
 
     function step() {
-      if (!isDraggingSkills) {
+      if (!isDragging) {
         if (Math.abs(velocity) > 0.02) {
           currentOffset += velocity;
           velocity *= 0.92;
         } else {
           velocity = 0;
         }
-
-        while (currentOffset < -cycleWidth * 1.5) currentOffset += cycleWidth;
-        while (currentOffset > -cycleWidth * 0.5) currentOffset -= cycleWidth;
       }
 
-      skillsTrack.style.transform = `translateX(${currentOffset}px)`;
-      applyTransforms();
+      renderOrbitalPositions();
 
-      if (isDraggingSkills || Math.abs(velocity) > 0.02) {
+      if (isDragging || Math.abs(velocity) > 0.02) {
         requestAnimationFrame(step);
       } else {
         isLoopRunning = false;
@@ -333,42 +356,51 @@
       }
     }
 
-    skillsViewport.addEventListener("mousedown", (e) => {
-      isDraggingSkills = true;
+    // Resize listener
+    window.addEventListener("resize", () => {
+      updateCardMetrics();
+      renderOrbitalPositions();
+    }, { passive: true });
+
+    // Mouse drag
+    viewport.addEventListener("mousedown", (e) => {
+      isDragging = true;
       startX = e.pageX;
       velocity = 0;
       wakeLoop();
     });
-    window.addEventListener("mouseup", () => { isDraggingSkills = false; });
-    skillsViewport.addEventListener("mouseleave", () => { isDraggingSkills = false; });
+    window.addEventListener("mouseup", () => { isDragging = false; });
+    viewport.addEventListener("mouseleave", () => { isDragging = false; });
     window.addEventListener("mousemove", (e) => {
-      if (!isDraggingSkills) return;
+      if (!isDragging) return;
       const x = e.pageX;
-      const delta = (x - startX) * 1.3;
+      const delta = (x - startX) * 1.25;
       currentOffset += delta;
-      velocity = delta * 0.5;
+      velocity = delta * 0.45;
       startX = x;
       wakeLoop();
     });
 
-    skillsViewport.addEventListener("touchstart", (e) => {
-      isDraggingSkills = true;
+    // Touch drag (Mobile/Tablet)
+    viewport.addEventListener("touchstart", (e) => {
+      isDragging = true;
       startX = e.touches[0].pageX;
       velocity = 0;
       wakeLoop();
     }, { passive: true });
-    window.addEventListener("touchend", () => { isDraggingSkills = false; });
-    skillsViewport.addEventListener("touchmove", (e) => {
-      if (!isDraggingSkills) return;
+    window.addEventListener("touchend", () => { isDragging = false; });
+    viewport.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
       const x = e.touches[0].pageX;
-      const delta = (x - startX) * 1.3;
+      const delta = (x - startX) * 1.25;
       currentOffset += delta;
-      velocity = delta * 0.5;
+      velocity = delta * 0.45;
       startX = x;
       wakeLoop();
     }, { passive: true });
 
-    skillsViewport.addEventListener("wheel", (e) => {
+    // Mouse wheel scrolling
+    viewport.addEventListener("wheel", (e) => {
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       if (Math.abs(delta) > 2) {
         velocity -= delta * 0.22;
@@ -378,124 +410,27 @@
       }
     }, { passive: true });
 
-    skillsTrack.style.transform = `translateX(${currentOffset}px)`;
-    applyTransforms();
+    updateCardMetrics();
+    renderOrbitalPositions();
   }
 
-  // 🌟 7. ZERO-REFLOW HIGH-SPEED PROJECTS COVERFLOW 🌟
-  const projViewport = document.getElementById("coverflow-viewport");
-  const projTrack = document.getElementById("coverflow-track");
-  if (projViewport && projTrack) {
-    const projCards = Array.from(projTrack.querySelectorAll(".coverflow-card-item"));
-    let isDraggingProj = false;
-    let startX = 0;
-    let currentOffset = -600;
-    let velocity = 0;
-    let isProjLoopRunning = false;
+  // Initialize Skills Orbital 3D Coverflow (16 cards total)
+  initOrbitalCoverflow({
+    viewportId: "skills-coverflow-viewport",
+    trackId: "skills-coverflow-track",
+    cardSelector: ".skill-coverflow-card",
+    defaultCardWidth: 260,
+    gap: 28
+  });
 
-    const cardWidth = 280;
-    const stride = cardWidth + 28;
-    const cycleWidth = stride * 3;
-
-    function applyProjTransforms() {
-      const viewportCenter = window.innerWidth / 2;
-      const centerFactor = window.innerWidth * 0.38;
-
-      for (let i = 0; i < projCards.length; i++) {
-        const card = projCards[i];
-        const cardCenterX = currentOffset + 64 + i * stride + cardWidth / 2;
-        const distFromCenter = (cardCenterX - viewportCenter) / centerFactor;
-        const clampedDist = Math.max(-1.6, Math.min(1.6, distFromCenter));
-        const absDist = Math.abs(clampedDist);
-
-        const rotateY = clampedDist * -20;
-        const translateZ = -absDist * 50;
-        const scale = Math.max(0.85, 1 - absDist * 0.08);
-        const opacity = Math.max(0.55, 1 - absDist * 0.2);
-
-        card.style.transform = `perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
-        card.style.opacity = opacity;
-      }
-    }
-
-    function projStep() {
-      if (!isDraggingProj) {
-        if (Math.abs(velocity) > 0.02) {
-          currentOffset += velocity;
-          velocity *= 0.92;
-        } else {
-          velocity = 0;
-        }
-
-        while (currentOffset < -cycleWidth * 2) currentOffset += cycleWidth;
-        while (currentOffset > -cycleWidth) currentOffset -= cycleWidth;
-      }
-
-      projTrack.style.transform = `translateX(${currentOffset}px)`;
-      applyProjTransforms();
-
-      if (isDraggingProj || Math.abs(velocity) > 0.02) {
-        requestAnimationFrame(projStep);
-      } else {
-        isProjLoopRunning = false;
-      }
-    }
-
-    function wakeProjLoop() {
-      if (!isProjLoopRunning) {
-        isProjLoopRunning = true;
-        requestAnimationFrame(projStep);
-      }
-    }
-
-    projViewport.addEventListener("mousedown", (e) => {
-      isDraggingProj = true;
-      startX = e.pageX;
-      velocity = 0;
-      wakeProjLoop();
-    });
-    window.addEventListener("mouseup", () => { isDraggingProj = false; });
-    projViewport.addEventListener("mouseleave", () => { isDraggingProj = false; });
-    window.addEventListener("mousemove", (e) => {
-      if (!isDraggingProj) return;
-      const x = e.pageX;
-      const delta = (x - startX) * 1.3;
-      currentOffset += delta;
-      velocity = delta * 0.5;
-      startX = x;
-      wakeProjLoop();
-    });
-
-    projViewport.addEventListener("touchstart", (e) => {
-      isDraggingProj = true;
-      startX = e.touches[0].pageX;
-      velocity = 0;
-      wakeProjLoop();
-    }, { passive: true });
-    window.addEventListener("touchend", () => { isDraggingProj = false; });
-    projViewport.addEventListener("touchmove", (e) => {
-      if (!isDraggingProj) return;
-      const x = e.touches[0].pageX;
-      const delta = (x - startX) * 1.3;
-      currentOffset += delta;
-      velocity = delta * 0.5;
-      startX = x;
-      wakeProjLoop();
-    }, { passive: true });
-
-    projViewport.addEventListener("wheel", (e) => {
-      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      if (Math.abs(delta) > 2) {
-        velocity -= delta * 0.22;
-        if (velocity > 30) velocity = 30;
-        if (velocity < -30) velocity = -30;
-        wakeProjLoop();
-      }
-    }, { passive: true });
-
-    projTrack.style.transform = `translateX(${currentOffset}px)`;
-    applyProjTransforms();
-  }
+  // Initialize Projects Orbital 3D Coverflow (18 cards total)
+  initOrbitalCoverflow({
+    viewportId: "coverflow-viewport",
+    trackId: "coverflow-track",
+    cardSelector: ".coverflow-card-item",
+    defaultCardWidth: 280,
+    gap: 28
+  });
 
   // 8. Toast Notification
   function showToast(message) {
