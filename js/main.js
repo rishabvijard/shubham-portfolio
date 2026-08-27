@@ -60,14 +60,14 @@
     });
   });
 
-  // 🌟 5. TRUE FREE-SPINNING INERTIA WHEEL ON CORE TECHNOLOGIES 🌟
+  // 🌟 5. CORE TECHNOLOGIES FREE INERTIA SPINNER 🌟
   const techWrapper = document.getElementById("tech-spinner-wrapper");
   const techTrack = document.getElementById("tech-spinner-track");
   if (techWrapper && techTrack) {
     let isDown = false;
     let startX = 0;
     let currentX = 0;
-    let velocity = -1.2; // default auto-drift speed
+    let velocity = -1.2;
 
     techWrapper.addEventListener("mousedown", (e) => {
       isDown = true;
@@ -90,7 +90,6 @@
       techTrack.style.transform = `translateX(${currentX}px)`;
     });
 
-    // Touch support for mobile
     techWrapper.addEventListener("touchstart", (e) => {
       isDown = true;
       startX = e.touches[0].pageX;
@@ -111,15 +110,13 @@
       techTrack.style.transform = `translateX(${currentX}px)`;
     });
 
-    // Inertia physics loop
     function animateTechSpinner() {
       if (!isDown) {
         currentX += velocity;
-        velocity *= 0.96; // friction
+        velocity *= 0.96;
         if (Math.abs(velocity) < 0.6) {
-          velocity = -0.8; // smooth endless auto drift
+          velocity = -0.8;
         }
-        // Infinite wrap-around bounds
         const halfWidth = techTrack.scrollWidth / 2;
         if (currentX < -halfWidth) currentX += halfWidth;
         if (currentX > 0) currentX -= halfWidth;
@@ -131,7 +128,7 @@
     animateTechSpinner();
   }
 
-  // 🌟 6. 3D CYLINDRICAL FREE-SPIN CAROUSEL FOR PROJECTS 🌟
+  // 🌟 6. 3D CYLINDRICAL TURNTABLE SPINNER FOR PROJECTS 🌟
   const turntable = document.getElementById("project-3d-turntable");
   const stage = document.getElementById("project-3d-stage");
   if (turntable && stage) {
@@ -159,7 +156,6 @@
       turntable.style.transform = `rotateY(${currentRotationY}deg)`;
     });
 
-    // Touch support for phone
     stage.addEventListener("touchstart", (e) => {
       isDragging3D = true;
       startMouseX = e.touches[0].clientX;
@@ -179,11 +175,10 @@
       turntable.style.transform = `rotateY(${currentRotationY}deg)`;
     });
 
-    // Inertia physics loop for 3D turntable
     function animate3DTurntable() {
       if (!isDragging3D) {
         currentRotationY += spinVelocity;
-        spinVelocity *= 0.94; // friction
+        spinVelocity *= 0.94;
         if (Math.abs(spinVelocity) < 0.05) {
           spinVelocity = 0;
         }
