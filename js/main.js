@@ -60,7 +60,125 @@
     });
   });
 
-  // 5. Particle Canvas Background
+  // 🌟 5. INTERACTIVE MOUSE DRAG & SPIN ON CORE TECHNOLOGIES MARQUEE 🌟
+  const marqueeWrapper = document.getElementById("tech-marquee-wrapper");
+  const marqueeTrack = document.getElementById("tech-marquee-track");
+  if (marqueeWrapper && marqueeTrack) {
+    let isDown = false;
+    let startX = 0;
+    let currentX = 0;
+
+    marqueeWrapper.addEventListener("mousedown", (e) => {
+      isDown = true;
+      startX = e.pageX;
+      marqueeTrack.style.animationPlayState = "paused";
+    });
+
+    window.addEventListener("mouseup", () => {
+      if (isDown) {
+        isDown = false;
+        marqueeTrack.style.animationPlayState = "running";
+      }
+    });
+
+    marqueeWrapper.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX;
+      const walk = (x - startX) * 1.5;
+      currentX += walk;
+      startX = x;
+      marqueeTrack.style.transform = `translateX(${currentX}px)`;
+    });
+
+    // Touch support
+    marqueeWrapper.addEventListener("touchstart", (e) => {
+      isDown = true;
+      startX = e.touches[0].pageX;
+      marqueeTrack.style.animationPlayState = "paused";
+    });
+
+    window.addEventListener("touchend", () => {
+      if (isDown) {
+        isDown = false;
+        marqueeTrack.style.animationPlayState = "running";
+      }
+    });
+
+    marqueeWrapper.addEventListener("touchmove", (e) => {
+      if (!isDown) return;
+      const x = e.touches[0].pageX;
+      const walk = (x - startX) * 1.5;
+      currentX += walk;
+      startX = x;
+      marqueeTrack.style.transform = `translateX(${currentX}px)`;
+    });
+  }
+
+  // 🌟 6. CIRCULAR LOOP PROJECT CAROUSEL / SLIDER (1 CARD AT A TIME) 🌟
+  const projectSlides = document.querySelectorAll(".project-slide-item");
+  const prevBtn = document.getElementById("project-prev-btn");
+  const nextBtn = document.getElementById("project-next-btn");
+  const counterEl = document.getElementById("project-counter");
+  const dots = document.querySelectorAll(".proj-dot");
+  const totalSlides = projectSlides.length;
+  let currentIndex = 0;
+
+  function showSlide(index) {
+    currentIndex = (index + totalSlides) % totalSlides;
+
+    projectSlides.forEach((slide, i) => {
+      slide.classList.remove("active", "prev-slide", "next-slide");
+      if (i === currentIndex) {
+        slide.classList.add("active");
+      } else if (i < currentIndex) {
+        slide.classList.add("prev-slide");
+      } else {
+        slide.classList.add("next-slide");
+      }
+    });
+
+    if (counterEl) counterEl.textContent = `0${currentIndex + 1} / 0${totalSlides}`;
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === currentIndex);
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      showSlide(currentIndex - 1);
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      showSlide(currentIndex + 1);
+    });
+  }
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      showSlide(parseInt(dot.getAttribute("data-slide"), 10));
+    });
+  });
+
+  // Swipe / Drag on Project Viewport
+  const projectViewport = document.getElementById("project-viewport");
+  if (projectViewport) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    projectViewport.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    projectViewport.addEventListener("touchend", (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) showSlide(currentIndex + 1);
+      if (touchEndX - touchStartX > 50) showSlide(currentIndex - 1);
+    });
+  }
+
+  // 7. Particle Canvas Background
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d");
@@ -102,7 +220,7 @@
     animate();
   }
 
-  // 6. Skills Filter
+  // 8. Skills Filter
   const filterBtns = document.querySelectorAll(".skill-filter-btn");
   const skillCards = document.querySelectorAll(".skill-card");
   filterBtns.forEach((btn) => {
@@ -120,7 +238,7 @@
     });
   });
 
-  // 7. Toast Notification
+  // 9. Toast Notification
   function showToast(message) {
     const container = document.getElementById("toast-container");
     if (!container) return;
@@ -131,7 +249,7 @@
     setTimeout(() => { toast.remove(); }, 3000);
   }
 
-  // 8. Copy to Clipboard
+  // 10. Copy to Clipboard
   document.querySelectorAll(".copy-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const text = btn.getAttribute("data-copy");
@@ -141,7 +259,7 @@
     });
   });
 
-  // 9. Modal Dialog
+  // 11. Modal Dialog
   const modal = document.getElementById("project-modal");
   const modalBackdrop = document.getElementById("modal-backdrop");
   const modalCloseBtn = document.getElementById("modal-close-btn");
@@ -181,7 +299,7 @@
   if (modalCloseAction) modalCloseAction.addEventListener("click", closeModal);
   window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-  // 10. Contact Form AJAX Submission
+  // 12. Contact Form AJAX Submission
   const form = document.getElementById("contact-form");
   if (form) {
     form.addEventListener("submit", async (e) => {
@@ -218,7 +336,7 @@
     });
   }
 
-  // 11. Back to Top
+  // 13. Back to Top
   const backToTop = document.getElementById("back-to-top");
   if (backToTop) {
     backToTop.addEventListener("click", () => {
