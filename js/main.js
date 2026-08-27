@@ -31,7 +31,7 @@
     renderCursor();
 
     // Hover magnetic expansion
-    const interactiveElements = document.querySelectorAll("a, button, .coverflow-card-item, .card");
+    const interactiveElements = document.querySelectorAll("a, button, .skill-coverflow-card, .coverflow-card-item, .card");
     interactiveElements.forEach((el) => {
       el.addEventListener("mouseenter", () => follower.classList.add("is-hovering"));
       el.addEventListener("mouseleave", () => follower.classList.remove("is-hovering"));
@@ -87,27 +87,25 @@
     });
   });
 
-  // 🌟 REUSABLE 3D CURVED COVERFLOW ENGINE 🌟
-  function init3DCoverflow(viewportId, trackId) {
-    const viewport = document.getElementById(viewportId);
-    const track = document.getElementById(trackId);
-    if (!viewport || !track) return;
-
-    const cards = track.querySelectorAll(".coverflow-card-item");
-    let isDragging = false;
+  // 🌟 5. SKILLS 3D IMAX PANORAMIC COVERFLOW (LEFT & RIGHT CARDS INCREASE IN SIZE) 🌟
+  const skillsViewport = document.getElementById("skills-coverflow-viewport");
+  const skillsTrack = document.getElementById("skills-coverflow-track");
+  if (skillsViewport && skillsTrack) {
+    const skillCards = skillsTrack.querySelectorAll(".skill-coverflow-card");
+    let isDraggingSkills = false;
     let startX = 0;
     let currentOffset = -150;
     let velocity = -0.65;
 
-    viewport.addEventListener("mousedown", (e) => {
-      isDragging = true;
+    skillsViewport.addEventListener("mousedown", (e) => {
+      isDraggingSkills = true;
       startX = e.pageX;
       velocity = 0;
     });
-    window.addEventListener("mouseup", () => { if (isDragging) isDragging = false; });
-    viewport.addEventListener("mouseleave", () => { if (isDragging) isDragging = false; });
+    window.addEventListener("mouseup", () => { if (isDraggingSkills) isDraggingSkills = false; });
+    skillsViewport.addEventListener("mouseleave", () => { if (isDraggingSkills) isDraggingSkills = false; });
     window.addEventListener("mousemove", (e) => {
-      if (!isDragging) return;
+      if (!isDraggingSkills) return;
       e.preventDefault();
       const x = e.pageX;
       const delta = (x - startX) * 1.5;
@@ -117,14 +115,14 @@
     });
 
     // Touch support
-    viewport.addEventListener("touchstart", (e) => {
-      isDragging = true;
+    skillsViewport.addEventListener("touchstart", (e) => {
+      isDraggingSkills = true;
       startX = e.touches[0].pageX;
       velocity = 0;
     });
-    window.addEventListener("touchend", () => { if (isDragging) isDragging = false; });
-    viewport.addEventListener("touchmove", (e) => {
-      if (!isDragging) return;
+    window.addEventListener("touchend", () => { if (isDraggingSkills) isDraggingSkills = false; });
+    skillsViewport.addEventListener("touchmove", (e) => {
+      if (!isDraggingSkills) return;
       const x = e.touches[0].pageX;
       const delta = (x - startX) * 1.5;
       currentOffset += delta;
@@ -132,22 +130,101 @@
       startX = x;
     });
 
-    function updateCoverflow() {
-      if (!isDragging) {
+    function updateSkillsCoverflow() {
+      if (!isDraggingSkills) {
         currentOffset += velocity;
         velocity *= 0.95;
         if (Math.abs(velocity) < 0.3) {
-          velocity = -0.6; // subtle constant drift
+          velocity = -0.6; // gentle drift
         }
-        const halfWidth = track.scrollWidth / 2;
+        const halfWidth = skillsTrack.scrollWidth / 2;
         if (currentOffset < -halfWidth) currentOffset += halfWidth;
         if (currentOffset > 0) currentOffset -= halfWidth;
       }
 
-      track.style.transform = `translateX(${currentOffset}px)`;
+      skillsTrack.style.transform = `translateX(${currentOffset}px)`;
 
       const viewportCenter = window.innerWidth / 2;
-      cards.forEach((card) => {
+      skillCards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const distFromCenter = (cardCenter - viewportCenter) / (window.innerWidth * 0.42);
+        const clampedDist = Math.max(-1.7, Math.min(1.7, distFromCenter));
+        const absDist = Math.abs(clampedDist);
+
+        // 🌟 KEY FEATURE: SIDE CARDS INCREASE IN SIZE (SCALE UP ON LEFT & RIGHT) 🌟
+        const scale = 0.90 + Math.pow(absDist, 1.2) * 0.26; // Center is 0.90, outer edges scale up to 1.26+!
+        const translateZ = (absDist * 80) - 20; // Side cards come forward closer to the user
+        const rotateY = clampedDist * -26; // Inward 3D curve
+        const opacity = Math.max(0.65, 1 - absDist * 0.12);
+
+        card.style.transform = `perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
+        card.style.opacity = opacity;
+      });
+
+      requestAnimationFrame(updateSkillsCoverflow);
+    }
+    updateSkillsCoverflow();
+  }
+
+  // 🌟 6. PROJECTS 3D COVERFLOW ENGINE 🌟
+  const projViewport = document.getElementById("coverflow-viewport");
+  const projTrack = document.getElementById("coverflow-track");
+  if (projViewport && projTrack) {
+    const projCards = projTrack.querySelectorAll(".coverflow-card-item");
+    let isDraggingProj = false;
+    let startX = 0;
+    let currentOffset = -150;
+    let velocity = -0.65;
+
+    projViewport.addEventListener("mousedown", (e) => {
+      isDraggingProj = true;
+      startX = e.pageX;
+      velocity = 0;
+    });
+    window.addEventListener("mouseup", () => { if (isDraggingProj) isDraggingProj = false; });
+    projViewport.addEventListener("mouseleave", () => { if (isDraggingProj) isDraggingProj = false; });
+    window.addEventListener("mousemove", (e) => {
+      if (!isDraggingProj) return;
+      e.preventDefault();
+      const x = e.pageX;
+      const delta = (x - startX) * 1.5;
+      currentOffset += delta;
+      velocity = delta * 0.7;
+      startX = x;
+    });
+
+    projViewport.addEventListener("touchstart", (e) => {
+      isDraggingProj = true;
+      startX = e.touches[0].pageX;
+      velocity = 0;
+    });
+    window.addEventListener("touchend", () => { if (isDraggingProj) isDraggingProj = false; });
+    projViewport.addEventListener("touchmove", (e) => {
+      if (!isDraggingProj) return;
+      const x = e.touches[0].pageX;
+      const delta = (x - startX) * 1.5;
+      currentOffset += delta;
+      velocity = delta * 0.7;
+      startX = x;
+    });
+
+    function updateProjCoverflow() {
+      if (!isDraggingProj) {
+        currentOffset += velocity;
+        velocity *= 0.95;
+        if (Math.abs(velocity) < 0.3) {
+          velocity = -0.6;
+        }
+        const halfWidth = projTrack.scrollWidth / 2;
+        if (currentOffset < -halfWidth) currentOffset += halfWidth;
+        if (currentOffset > 0) currentOffset -= halfWidth;
+      }
+
+      projTrack.style.transform = `translateX(${currentOffset}px)`;
+
+      const viewportCenter = window.innerWidth / 2;
+      projCards.forEach((card) => {
         const rect = card.getBoundingClientRect();
         const cardCenter = rect.left + rect.width / 2;
         const distFromCenter = (cardCenter - viewportCenter) / (window.innerWidth * 0.45);
@@ -162,16 +239,12 @@
         card.style.opacity = opacity;
       });
 
-      requestAnimationFrame(updateCoverflow);
+      requestAnimationFrame(updateProjCoverflow);
     }
-    updateCoverflow();
+    updateProjCoverflow();
   }
 
-  // Initialize both Skills and Projects Coverflow Ribbons!
-  init3DCoverflow("skills-coverflow-viewport", "skills-coverflow-track");
-  init3DCoverflow("coverflow-viewport", "coverflow-track");
-
-  // 6. Canvas Background Particles
+  // 7. Canvas Background Particles
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d");
@@ -213,7 +286,7 @@
     animate();
   }
 
-  // 7. Toast Notification
+  // 8. Toast Notification
   function showToast(message) {
     const container = document.getElementById("toast-container");
     if (!container) return;
@@ -224,7 +297,7 @@
     setTimeout(() => { toast.remove(); }, 3000);
   }
 
-  // 8. Copy to Clipboard
+  // 9. Copy to Clipboard
   document.querySelectorAll(".copy-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const text = btn.getAttribute("data-copy");
@@ -234,7 +307,7 @@
     });
   });
 
-  // 9. Modal Dialog
+  // 10. Modal Dialog
   const modal = document.getElementById("project-modal");
   const modalBackdrop = document.getElementById("modal-backdrop");
   const modalCloseBtn = document.getElementById("modal-close-btn");
@@ -275,7 +348,7 @@
   if (modalCloseAction) modalCloseAction.addEventListener("click", closeModal);
   window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-  // 10. Contact Form AJAX Submission
+  // 11. Contact Form AJAX Submission
   const form = document.getElementById("contact-form");
   if (form) {
     form.addEventListener("submit", async (e) => {
@@ -312,7 +385,7 @@
     });
   }
 
-  // 11. Back to Top
+  // 12. Back to Top
   const backToTop = document.getElementById("back-to-top");
   if (backToTop) {
     backToTop.addEventListener("click", () => {
