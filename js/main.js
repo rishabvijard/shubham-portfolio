@@ -1,8 +1,9 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  // 🎯 1. CUSTOM CURSOR & SPARKLING PARTICLE TRAIL 🎯
+  // 🎯 1. HIGH PERFORMANCE CUSTOM CURSOR & SPARKS 🎯
   const follower = document.getElementById("cursor-follower");
   const dot = document.getElementById("cursor-dot");
   const cursorSparks = [];
+  let isCursorActive = false;
 
   let mouseX = window.innerWidth / 2;
   let mouseY = window.innerHeight / 2;
@@ -10,63 +11,76 @@
   let followerY = mouseY;
   let dotX = mouseX;
   let dotY = mouseY;
+  let lastSparkTime = 0;
 
   if (window.matchMedia("(hover: hover)").matches) {
     window.addEventListener("mousemove", (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
 
-      for (let i = 0; i < 2; i++) {
+      if (!isCursorActive) {
+        isCursorActive = true;
+        requestAnimationFrame(renderCursor);
+      }
+
+      const now = performance.now();
+      if (now - lastSparkTime > 25 && cursorSparks.length < 18) {
+        lastSparkTime = now;
         cursorSparks.push({
-          x: mouseX + (Math.random() - 0.5) * 6,
-          y: mouseY + (Math.random() - 0.5) * 6,
-          vx: (Math.random() - 0.5) * 1.4,
-          vy: (Math.random() - 0.5) * 1.4 - 0.3,
-          size: Math.random() * 2.2 + 1,
+          x: mouseX + (Math.random() - 0.5) * 4,
+          y: mouseY + (Math.random() - 0.5) * 4,
+          vx: (Math.random() - 0.5) * 1.2,
+          vy: (Math.random() - 0.5) * 1.2 - 0.3,
+          size: Math.random() * 2 + 1,
           alpha: 0.75,
-          decay: Math.random() * 0.035 + 0.02,
+          decay: Math.random() * 0.04 + 0.025,
           color: Math.random() > 0.4 ? "rgba(229, 192, 123, " : "rgba(251, 141, 255, "
         });
       }
-    });
+    }, { passive: true });
 
-    if (follower && dot) {
-      function renderCursor() {
-        followerX += (mouseX - followerX) * 0.18;
-        followerY += (mouseY - followerY) * 0.18;
-        dotX += (mouseX - dotX) * 0.75;
-        dotY += (mouseY - dotY) * 0.75;
+    function renderCursor() {
+      const distF = Math.abs(mouseX - followerX) + Math.abs(mouseY - followerY);
+      const distD = Math.abs(mouseX - dotX) + Math.abs(mouseY - dotY);
+
+      if (distF > 0.1 || distD > 0.1) {
+        followerX += (mouseX - followerX) * 0.22;
+        followerY += (mouseY - followerY) * 0.22;
+        dotX += (mouseX - dotX) * 0.85;
+        dotY += (mouseY - dotY) * 0.85;
 
         follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
         dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
-
         requestAnimationFrame(renderCursor);
+      } else {
+        isCursorActive = false;
       }
-      renderCursor();
-
-      const interactiveElements = document.querySelectorAll("a, button, .skill-coverflow-card, .coverflow-card-item, .card");
-      interactiveElements.forEach((el) => {
-        el.addEventListener("mouseenter", () => follower.classList.add("is-hovering"));
-        el.addEventListener("mouseleave", () => follower.classList.remove("is-hovering"));
-      });
     }
+
+    const interactiveElements = document.querySelectorAll("a, button, .skill-coverflow-card, .coverflow-card-item, .card");
+    interactiveElements.forEach((el) => {
+      el.addEventListener("mouseenter", () => follower.classList.add("is-hovering"), { passive: true });
+      el.addEventListener("mouseleave", () => follower.classList.remove("is-hovering"), { passive: true });
+    });
   }
 
-  // 🌟 2. ULTRA-DENSE (50 RINGS) + SUBTLE LINE LUMINANCE (MOVES ONLY ON SCROLL) 🌟
+  // 🌟 2. FAST CANVAS WITH ON-DEMAND DIRTY RENDERING (0% CPU WHEN IDLE) 🌟
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     let width, height, centerX, centerY;
     let smoothScrollY = window.pageYOffset;
+    let isCanvasRunning = false;
 
     function resize() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
       centerX = width / 2;
       centerY = height * 0.48;
+      requestCanvasFrame();
     }
     resize();
-    window.addEventListener("resize", resize);
+    window.addEventListener("resize", resize, { passive: true });
 
     function drawOctagon(cx, cy, rx, ry) {
       ctx.beginPath();
@@ -81,21 +95,21 @@
     }
 
     const tunnelStars = [];
-    const starCount = window.innerWidth < 768 ? 30 : 60;
+    const starCount = window.innerWidth < 768 ? 25 : 45;
     for (let i = 0; i < starCount; i++) {
       tunnelStars.push({
         x: (Math.random() - 0.5) * 2200,
         y: (Math.random() - 0.5) * 2200,
         baseZ: Math.random() * 1200 + 40,
-        size: Math.random() * 1.4 + 0.4,
+        size: Math.random() * 1.3 + 0.4,
         alpha: Math.random() * 0.5 + 0.1
       });
     }
 
     function renderTunnel() {
-      // Moves strictly with scroll
       const targetScrollY = window.pageYOffset;
-      smoothScrollY += (targetScrollY - smoothScrollY) * 0.12;
+      const scrollDiff = targetScrollY - smoothScrollY;
+      smoothScrollY += scrollDiff * 0.14;
 
       ctx.clearRect(0, 0, width, height);
 
@@ -121,36 +135,37 @@
       }
       ctx.restore();
 
-      // 🌟 ULTRA-DENSE 50 CONCENTRIC RINGS (GENTLE 0.03 - 0.15 ALPHA) 🌟
+      // 50 Concentric Rings
       const numRings = 50;
       const ringSpacing = 24;
       const totalDepth = numRings * ringSpacing;
       const scrollOffset = (smoothScrollY * 0.4) % totalDepth;
 
+      ctx.save();
+      ctx.lineWidth = 0.6;
       for (let i = 0; i < numRings; i++) {
         let ringDist = (i * ringSpacing + scrollOffset) % totalDepth;
         if (ringDist < 0) ringDist += totalDepth;
 
         let progress = ringDist / totalDepth;
-        let scale = Math.pow(progress, 2.0);
+        let scale = progress * progress;
         let rx = scale * (width * 0.98);
         let ry = scale * (height * 0.92);
 
         if (rx > 3 && ry > 2) {
-          let alpha = Math.sin(progress * Math.PI);
-          alpha = Math.max(0.03, alpha * 0.15);
-
-          ctx.save();
-          ctx.strokeStyle = `rgba(229, 192, 123, ${alpha})`;
-          ctx.lineWidth = 0.6;
-          drawOctagon(centerX, centerY, rx, ry);
-          ctx.stroke();
-          ctx.restore();
+          let alpha = Math.sin(progress * Math.PI) * 0.15;
+          if (alpha > 0.02) {
+            ctx.strokeStyle = `rgba(229, 192, 123, ${alpha})`;
+            drawOctagon(centerX, centerY, rx, ry);
+            ctx.stroke();
+          }
         }
       }
+      ctx.restore();
 
-      // Subtle Stardust
-      tunnelStars.forEach((star) => {
+      // Stardust
+      for (let i = 0; i < tunnelStars.length; i++) {
+        const star = tunnelStars[i];
         let z = (star.baseZ - (smoothScrollY * 0.35)) % 1200;
         if (z < 10) z += 1200;
 
@@ -164,7 +179,7 @@
           ctx.fillStyle = `rgba(229, 192, 123, ${star.alpha * Math.min(0.5, k * 0.4)})`;
           ctx.fill();
         }
-      });
+      }
 
       // Cursor sparks
       for (let i = cursorSparks.length - 1; i >= 0; i--) {
@@ -180,15 +195,27 @@
           ctx.beginPath();
           ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
           ctx.fillStyle = `${s.color}${s.alpha})`;
-          ctx.shadowBlur = 4;
-          ctx.shadowColor = s.color + "0.4)";
           ctx.fill();
         }
       }
 
-      requestAnimationFrame(renderTunnel);
+      // Keep running if scroll is animating or sparks are active
+      if (Math.abs(scrollDiff) > 0.1 || cursorSparks.length > 0) {
+        requestAnimationFrame(renderTunnel);
+      } else {
+        isCanvasRunning = false;
+      }
     }
-    renderTunnel();
+
+    function requestCanvasFrame() {
+      if (!isCanvasRunning) {
+        isCanvasRunning = true;
+        requestAnimationFrame(renderTunnel);
+      }
+    }
+
+    window.addEventListener("scroll", requestCanvasFrame, { passive: true });
+    requestCanvasFrame();
   }
 
   // 3. 3D Magnetic Portrait Face Tilt
@@ -202,12 +229,12 @@
       const y = (e.clientY - innerHeight / 2) / (innerHeight / 2);
 
       if (portrait && window.innerWidth > 768) {
-        portrait.style.transform = `translateX(calc(-50% + ${x * 20}px)) translateY(${y * 14}px) rotate(${x * 3}deg)`;
+        portrait.style.transform = `translateX(calc(-50% + ${x * 16}px)) translateY(${y * 10}px) rotate(${x * 2.5}deg)`;
       }
       if (title) {
-        title.style.transform = `translateX(${x * 8}px) translateY(${y * 4}px)`;
+        title.style.transform = `translateX(${x * 6}px) translateY(${y * 3}px)`;
       }
-    });
+    }, { passive: true });
   }
 
   // 4. Mobile Hamburger Toggle
@@ -231,88 +258,39 @@
     });
   }
 
-  // 5. Spotlight Hover Gradient Tracker
+  // 5. Spotlight Hover Tracker
   document.querySelectorAll(".spotlight-card").forEach((card) => {
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
       card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
       card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
-    });
+    }, { passive: true });
   });
 
-  // 🌟 6. SKILLS 3D COVERFLOW (MANUAL MOUSE WHEEL & DRAG ONLY - NO AUTO MOVEMENT) 🌟
+  // 🌟 6. ZERO-REFLOW HIGH-SPEED SKILLS COVERFLOW 🌟
   const skillsViewport = document.getElementById("skills-coverflow-viewport");
   const skillsTrack = document.getElementById("skills-coverflow-track");
   if (skillsViewport && skillsTrack) {
-    const skillCards = skillsTrack.querySelectorAll(".skill-coverflow-card");
+    const skillCards = Array.from(skillsTrack.querySelectorAll(".skill-coverflow-card"));
     let isDraggingSkills = false;
     let startX = 0;
-    let currentOffset = -60;
-    let velocity = 0; // ZERO auto velocity (completely still when idle)
+    let currentOffset = -400;
+    let velocity = 0;
+    let isLoopRunning = false;
 
-    skillsViewport.addEventListener("mousedown", (e) => {
-      isDraggingSkills = true;
-      startX = e.pageX;
-      velocity = 0;
-    });
-    window.addEventListener("mouseup", () => { isDraggingSkills = false; });
-    skillsViewport.addEventListener("mouseleave", () => { isDraggingSkills = false; });
-    window.addEventListener("mousemove", (e) => {
-      if (!isDraggingSkills) return;
-      e.preventDefault();
-      const x = e.pageX;
-      const delta = (x - startX) * 1.3;
-      currentOffset += delta;
-      velocity = delta * 0.6;
-      startX = x;
-    });
+    const cardWidth = 260;
+    const stride = cardWidth + 28;
+    const cycleWidth = stride * 8;
 
-    skillsViewport.addEventListener("touchstart", (e) => {
-      isDraggingSkills = true;
-      startX = e.touches[0].pageX;
-      velocity = 0;
-    }, { passive: true });
-    window.addEventListener("touchend", () => { isDraggingSkills = false; });
-    skillsViewport.addEventListener("touchmove", (e) => {
-      if (!isDraggingSkills) return;
-      const x = e.touches[0].pageX;
-      const delta = (x - startX) * 1.3;
-      currentOffset += delta;
-      velocity = delta * 0.6;
-      startX = x;
-    }, { passive: true });
-
-    // Move only with mouse wheel scroll over cards
-    skillsViewport.addEventListener("wheel", (e) => {
-      const delta = e.deltaX !== 0 ? e.deltaX : e.deltaY;
-      if (Math.abs(delta) > 4) {
-        currentOffset -= delta * 0.75;
-        velocity = -delta * 0.15;
-      }
-    }, { passive: true });
-
-    function updateSkillsCoverflow() {
-      if (!isDraggingSkills) {
-        if (Math.abs(velocity) > 0.05) {
-          currentOffset += velocity;
-          velocity *= 0.90; // smooth deceleration to 0
-        } else {
-          velocity = 0; // fully stationary
-        }
-
-        const halfWidth = skillsTrack.scrollWidth / 2;
-        if (currentOffset < -halfWidth) currentOffset += halfWidth;
-        if (currentOffset > 0) currentOffset -= halfWidth;
-      }
-
-      skillsTrack.style.transform = `translateX(${currentOffset}px)`;
-
+    function applyTransforms() {
       const viewportCenter = window.innerWidth / 2;
-      skillCards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.left + rect.width / 2;
-        const distFromCenter = (cardCenter - viewportCenter) / (window.innerWidth * 0.36);
-        const clampedDist = Math.max(-1.5, Math.min(1.5, distFromCenter));
+      const centerFactor = window.innerWidth * 0.36;
+
+      for (let i = 0; i < skillCards.length; i++) {
+        const card = skillCards[i];
+        const cardCenterX = currentOffset + 64 + i * stride + cardWidth / 2;
+        const distFromCenter = (cardCenterX - viewportCenter) / centerFactor;
+        const clampedDist = Math.max(-1.6, Math.min(1.6, distFromCenter));
         const absDist = Math.abs(clampedDist);
 
         const scale = 0.86 + (absDist * 0.16);
@@ -322,86 +300,112 @@
 
         card.style.transform = `perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
         card.style.opacity = opacity;
-      });
-
-      requestAnimationFrame(updateSkillsCoverflow);
+      }
     }
-    updateSkillsCoverflow();
-  }
 
-  // 🌟 7. PROJECTS 3D COVERFLOW (MANUAL MOUSE WHEEL & DRAG ONLY - NO AUTO MOVEMENT) 🌟
-  const projViewport = document.getElementById("coverflow-viewport");
-  const projTrack = document.getElementById("coverflow-track");
-  if (projViewport && projTrack) {
-    const projCards = projTrack.querySelectorAll(".coverflow-card-item");
-    let isDraggingProj = false;
-    let startX = 0;
-    let currentOffset = -60;
-    let velocity = 0; // ZERO auto velocity (completely still when idle)
+    function step() {
+      if (!isDraggingSkills) {
+        if (Math.abs(velocity) > 0.02) {
+          currentOffset += velocity;
+          velocity *= 0.92;
+        } else {
+          velocity = 0;
+        }
 
-    projViewport.addEventListener("mousedown", (e) => {
-      isDraggingProj = true;
+        while (currentOffset < -cycleWidth * 1.5) currentOffset += cycleWidth;
+        while (currentOffset > -cycleWidth * 0.5) currentOffset -= cycleWidth;
+      }
+
+      skillsTrack.style.transform = `translateX(${currentOffset}px)`;
+      applyTransforms();
+
+      if (isDraggingSkills || Math.abs(velocity) > 0.02) {
+        requestAnimationFrame(step);
+      } else {
+        isLoopRunning = false;
+      }
+    }
+
+    function wakeLoop() {
+      if (!isLoopRunning) {
+        isLoopRunning = true;
+        requestAnimationFrame(step);
+      }
+    }
+
+    skillsViewport.addEventListener("mousedown", (e) => {
+      isDraggingSkills = true;
       startX = e.pageX;
       velocity = 0;
+      wakeLoop();
     });
-    window.addEventListener("mouseup", () => { isDraggingProj = false; });
-    projViewport.addEventListener("mouseleave", () => { isDraggingProj = false; });
+    window.addEventListener("mouseup", () => { isDraggingSkills = false; });
+    skillsViewport.addEventListener("mouseleave", () => { isDraggingSkills = false; });
     window.addEventListener("mousemove", (e) => {
-      if (!isDraggingProj) return;
-      e.preventDefault();
+      if (!isDraggingSkills) return;
       const x = e.pageX;
       const delta = (x - startX) * 1.3;
       currentOffset += delta;
-      velocity = delta * 0.6;
+      velocity = delta * 0.5;
       startX = x;
+      wakeLoop();
     });
 
-    projViewport.addEventListener("touchstart", (e) => {
-      isDraggingProj = true;
+    skillsViewport.addEventListener("touchstart", (e) => {
+      isDraggingSkills = true;
       startX = e.touches[0].pageX;
       velocity = 0;
+      wakeLoop();
     }, { passive: true });
-    window.addEventListener("touchend", () => { isDraggingProj = false; });
-    projViewport.addEventListener("touchmove", (e) => {
-      if (!isDraggingProj) return;
+    window.addEventListener("touchend", () => { isDraggingSkills = false; });
+    skillsViewport.addEventListener("touchmove", (e) => {
+      if (!isDraggingSkills) return;
       const x = e.touches[0].pageX;
       const delta = (x - startX) * 1.3;
       currentOffset += delta;
-      velocity = delta * 0.6;
+      velocity = delta * 0.5;
       startX = x;
+      wakeLoop();
     }, { passive: true });
 
-    // Move only with mouse wheel scroll over cards
-    projViewport.addEventListener("wheel", (e) => {
-      const delta = e.deltaX !== 0 ? e.deltaX : e.deltaY;
-      if (Math.abs(delta) > 4) {
-        currentOffset -= delta * 0.75;
-        velocity = -delta * 0.15;
+    skillsViewport.addEventListener("wheel", (e) => {
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) > 2) {
+        velocity -= delta * 0.22;
+        if (velocity > 30) velocity = 30;
+        if (velocity < -30) velocity = -30;
+        wakeLoop();
       }
     }, { passive: true });
 
-    function updateProjCoverflow() {
-      if (!isDraggingProj) {
-        if (Math.abs(velocity) > 0.05) {
-          currentOffset += velocity;
-          velocity *= 0.90; // smooth deceleration to 0
-        } else {
-          velocity = 0; // fully stationary
-        }
+    skillsTrack.style.transform = `translateX(${currentOffset}px)`;
+    applyTransforms();
+  }
 
-        const halfWidth = projTrack.scrollWidth / 2;
-        if (currentOffset < -halfWidth) currentOffset += halfWidth;
-        if (currentOffset > 0) currentOffset -= halfWidth;
-      }
+  // 🌟 7. ZERO-REFLOW HIGH-SPEED PROJECTS COVERFLOW 🌟
+  const projViewport = document.getElementById("coverflow-viewport");
+  const projTrack = document.getElementById("coverflow-track");
+  if (projViewport && projTrack) {
+    const projCards = Array.from(projTrack.querySelectorAll(".coverflow-card-item"));
+    let isDraggingProj = false;
+    let startX = 0;
+    let currentOffset = -600;
+    let velocity = 0;
+    let isProjLoopRunning = false;
 
-      projTrack.style.transform = `translateX(${currentOffset}px)`;
+    const cardWidth = 280;
+    const stride = cardWidth + 28;
+    const cycleWidth = stride * 3;
 
+    function applyProjTransforms() {
       const viewportCenter = window.innerWidth / 2;
-      projCards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.left + rect.width / 2;
-        const distFromCenter = (cardCenter - viewportCenter) / (window.innerWidth * 0.38);
-        const clampedDist = Math.max(-1.5, Math.min(1.5, distFromCenter));
+      const centerFactor = window.innerWidth * 0.38;
+
+      for (let i = 0; i < projCards.length; i++) {
+        const card = projCards[i];
+        const cardCenterX = currentOffset + 64 + i * stride + cardWidth / 2;
+        const distFromCenter = (cardCenterX - viewportCenter) / centerFactor;
+        const clampedDist = Math.max(-1.6, Math.min(1.6, distFromCenter));
         const absDist = Math.abs(clampedDist);
 
         const rotateY = clampedDist * -20;
@@ -411,11 +415,86 @@
 
         card.style.transform = `perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
         card.style.opacity = opacity;
-      });
-
-      requestAnimationFrame(updateProjCoverflow);
+      }
     }
-    updateProjCoverflow();
+
+    function projStep() {
+      if (!isDraggingProj) {
+        if (Math.abs(velocity) > 0.02) {
+          currentOffset += velocity;
+          velocity *= 0.92;
+        } else {
+          velocity = 0;
+        }
+
+        while (currentOffset < -cycleWidth * 2) currentOffset += cycleWidth;
+        while (currentOffset > -cycleWidth) currentOffset -= cycleWidth;
+      }
+
+      projTrack.style.transform = `translateX(${currentOffset}px)`;
+      applyProjTransforms();
+
+      if (isDraggingProj || Math.abs(velocity) > 0.02) {
+        requestAnimationFrame(projStep);
+      } else {
+        isProjLoopRunning = false;
+      }
+    }
+
+    function wakeProjLoop() {
+      if (!isProjLoopRunning) {
+        isProjLoopRunning = true;
+        requestAnimationFrame(projStep);
+      }
+    }
+
+    projViewport.addEventListener("mousedown", (e) => {
+      isDraggingProj = true;
+      startX = e.pageX;
+      velocity = 0;
+      wakeProjLoop();
+    });
+    window.addEventListener("mouseup", () => { isDraggingProj = false; });
+    projViewport.addEventListener("mouseleave", () => { isDraggingProj = false; });
+    window.addEventListener("mousemove", (e) => {
+      if (!isDraggingProj) return;
+      const x = e.pageX;
+      const delta = (x - startX) * 1.3;
+      currentOffset += delta;
+      velocity = delta * 0.5;
+      startX = x;
+      wakeProjLoop();
+    });
+
+    projViewport.addEventListener("touchstart", (e) => {
+      isDraggingProj = true;
+      startX = e.touches[0].pageX;
+      velocity = 0;
+      wakeProjLoop();
+    }, { passive: true });
+    window.addEventListener("touchend", () => { isDraggingProj = false; });
+    projViewport.addEventListener("touchmove", (e) => {
+      if (!isDraggingProj) return;
+      const x = e.touches[0].pageX;
+      const delta = (x - startX) * 1.3;
+      currentOffset += delta;
+      velocity = delta * 0.5;
+      startX = x;
+      wakeProjLoop();
+    }, { passive: true });
+
+    projViewport.addEventListener("wheel", (e) => {
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) > 2) {
+        velocity -= delta * 0.22;
+        if (velocity > 30) velocity = 30;
+        if (velocity < -30) velocity = -30;
+        wakeProjLoop();
+      }
+    }, { passive: true });
+
+    projTrack.style.transform = `translateX(${currentOffset}px)`;
+    applyProjTransforms();
   }
 
   // 8. Toast Notification
