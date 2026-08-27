@@ -271,8 +271,8 @@
     return ((n % m) + m) % m;
   }
 
-  // 🌟 6 & 7. REVERSE-PERSPECTIVE AMPHITHEATER 3D COVERFLOW (EXACT IMAGE MATCH) 🌟
-  function initAmphitheaterCoverflow({
+  // 🌟 6 & 7. DRAMATIC 3D AMPHITHEATER PERSPECTIVE ENGINE (EXACT REFERENCE MATCH) 🌟
+  function initDramaticAmphitheater({
     viewportId,
     trackId,
     cardSelector,
@@ -305,12 +305,12 @@
 
     function renderFrame() {
       const viewportCenter = window.innerWidth / 2;
-      const centerFactor = Math.max(260, window.innerWidth * 0.35);
+      const centerFactor = Math.max(260, window.innerWidth * 0.34);
       const halfOrbit = totalOrbitWidth / 2;
 
       for (let i = 0; i < totalCards; i++) {
         const card = cards[i];
-        // Seamless modular calculation
+        // Exact seamless modular math
         const pos = mod(i * stride + currentOffset, totalOrbitWidth);
         const distFromCenter = pos - halfOrbit;
 
@@ -319,12 +319,14 @@
         const clampedNorm = Math.max(-1.8, Math.min(1.8, normDist));
         const absNorm = Math.abs(clampedNorm);
 
-        // 🌟 EXACT IMAGE MATCH: CENTER CARDS ARE SMALL (0.74) -> SIDES GROW BIG (1.28) 🌟
-        const scale = 0.74 + (absNorm * 0.42); // small in center, huge on sides!
-        const translateZ = -100 + (absNorm * 165); // deep in center, pops forward on sides!
-        const rotateY = clampedNorm * -24; // angles inward towards center
-        const opacity = Math.min(1.0, 0.65 + absNorm * 0.25); // bright and crystal clear
+        // 🌟 DRAMATIC AMPHITHEATER SCALING: 0.65 (Center) -> 1.42 (Outer Edges) 🌟
+        const scale = 0.65 + Math.pow(absNorm, 1.25) * 0.62;
+        const translateZ = -170 + (absNorm * 210); // -170px deep center -> +150px forward edge
+        const rotateY = clampedNorm * -28; // Bold 3D inward tilt
+        const zIndex = Math.round(absNorm * 100); // Outer cards overlap in front of center cards!
+        const opacity = Math.min(1.0, 0.7 + absNorm * 0.25);
 
+        card.style.zIndex = zIndex;
         card.style.transform = `translate3d(${screenX}px, 0, 0) perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
         card.style.opacity = opacity;
       }
@@ -339,7 +341,7 @@
           velocity = 0;
           isLoopRunning = false;
           renderFrame();
-          return; // 🛑 Strict Freeze when idle
+          return; // 🛑 100% Still when idle
         }
       }
 
@@ -417,8 +419,8 @@
     renderFrame();
   }
 
-  // Initialize Skills (Center cards small, sides grow large)
-  initAmphitheaterCoverflow({
+  // Initialize Skills Amphitheater (Center small, edge large)
+  initDramaticAmphitheater({
     viewportId: "skills-coverflow-viewport",
     trackId: "skills-coverflow-track",
     cardSelector: ".skill-coverflow-card",
@@ -426,8 +428,8 @@
     gap: 28
   });
 
-  // Initialize Projects (Center cards small, sides grow large)
-  initAmphitheaterCoverflow({
+  // Initialize Projects Amphitheater (Center small, edge large)
+  initDramaticAmphitheater({
     viewportId: "coverflow-viewport",
     trackId: "coverflow-track",
     cardSelector: ".coverflow-card-item",
