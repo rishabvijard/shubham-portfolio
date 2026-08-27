@@ -52,7 +52,7 @@
     }
   }
 
-  // 🌟 2. ULTRA-DENSE (50 RINGS) + SUBTLE LINE LUMINANCE 🌟
+  // 🌟 2. ULTRA-DENSE (50 RINGS) + SUBTLE LINE LUMINANCE (MOVES ONLY ON SCROLL) 🌟
   const canvas = document.getElementById("bg-canvas");
   if (canvas) {
     const ctx = canvas.getContext("2d");
@@ -121,7 +121,7 @@
       }
       ctx.restore();
 
-      // 🌟 ULTRA-DENSE 50 CONCENTRIC RINGS (GENTLE 0.03 - 0.16 ALPHA) 🌟
+      // 🌟 ULTRA-DENSE 50 CONCENTRIC RINGS (GENTLE 0.03 - 0.15 ALPHA) 🌟
       const numRings = 50;
       const ringSpacing = 24;
       const totalDepth = numRings * ringSpacing;
@@ -138,7 +138,6 @@
 
         if (rx > 3 && ry > 2) {
           let alpha = Math.sin(progress * Math.PI);
-          // Delicate alpha from 0.03 to 0.15 max
           alpha = Math.max(0.03, alpha * 0.15);
 
           ctx.save();
@@ -241,30 +240,30 @@
     });
   });
 
-  // 🌟 6. SKILLS 3D COVERFLOW 🌟
+  // 🌟 6. SKILLS 3D COVERFLOW (MANUAL MOUSE WHEEL & DRAG ONLY - NO AUTO MOVEMENT) 🌟
   const skillsViewport = document.getElementById("skills-coverflow-viewport");
   const skillsTrack = document.getElementById("skills-coverflow-track");
   if (skillsViewport && skillsTrack) {
     const skillCards = skillsTrack.querySelectorAll(".skill-coverflow-card");
     let isDraggingSkills = false;
     let startX = 0;
-    let currentOffset = -100;
-    let velocity = -0.6;
+    let currentOffset = -60;
+    let velocity = 0; // ZERO auto velocity (completely still when idle)
 
     skillsViewport.addEventListener("mousedown", (e) => {
       isDraggingSkills = true;
       startX = e.pageX;
       velocity = 0;
     });
-    window.addEventListener("mouseup", () => { if (isDraggingSkills) isDraggingSkills = false; });
-    skillsViewport.addEventListener("mouseleave", () => { if (isDraggingSkills) isDraggingSkills = false; });
+    window.addEventListener("mouseup", () => { isDraggingSkills = false; });
+    skillsViewport.addEventListener("mouseleave", () => { isDraggingSkills = false; });
     window.addEventListener("mousemove", (e) => {
       if (!isDraggingSkills) return;
       e.preventDefault();
       const x = e.pageX;
-      const delta = (x - startX) * 1.4;
+      const delta = (x - startX) * 1.3;
       currentOffset += delta;
-      velocity = delta * 0.65;
+      velocity = delta * 0.6;
       startX = x;
     });
 
@@ -272,24 +271,35 @@
       isDraggingSkills = true;
       startX = e.touches[0].pageX;
       velocity = 0;
-    });
-    window.addEventListener("touchend", () => { if (isDraggingSkills) isDraggingSkills = false; });
+    }, { passive: true });
+    window.addEventListener("touchend", () => { isDraggingSkills = false; });
     skillsViewport.addEventListener("touchmove", (e) => {
       if (!isDraggingSkills) return;
       const x = e.touches[0].pageX;
-      const delta = (x - startX) * 1.4;
+      const delta = (x - startX) * 1.3;
       currentOffset += delta;
-      velocity = delta * 0.65;
+      velocity = delta * 0.6;
       startX = x;
-    });
+    }, { passive: true });
+
+    // Move only with mouse wheel scroll over cards
+    skillsViewport.addEventListener("wheel", (e) => {
+      const delta = e.deltaX !== 0 ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) > 4) {
+        currentOffset -= delta * 0.75;
+        velocity = -delta * 0.15;
+      }
+    }, { passive: true });
 
     function updateSkillsCoverflow() {
       if (!isDraggingSkills) {
-        currentOffset += velocity;
-        velocity *= 0.95;
-        if (Math.abs(velocity) < 0.3) {
-          velocity = -0.55;
+        if (Math.abs(velocity) > 0.05) {
+          currentOffset += velocity;
+          velocity *= 0.90; // smooth deceleration to 0
+        } else {
+          velocity = 0; // fully stationary
         }
+
         const halfWidth = skillsTrack.scrollWidth / 2;
         if (currentOffset < -halfWidth) currentOffset += halfWidth;
         if (currentOffset > 0) currentOffset -= halfWidth;
@@ -308,7 +318,7 @@
         const scale = 0.86 + (absDist * 0.16);
         const translateZ = (absDist * 40) - 35;
         const rotateY = clampedDist * -20;
-        const opacity = Math.max(0.6, 1 - absDist * 0.15);
+        const opacity = Math.max(0.65, 1 - absDist * 0.15);
 
         card.style.transform = `perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
         card.style.opacity = opacity;
@@ -319,30 +329,30 @@
     updateSkillsCoverflow();
   }
 
-  // 🌟 7. PROJECTS 3D COVERFLOW ENGINE 🌟
+  // 🌟 7. PROJECTS 3D COVERFLOW (MANUAL MOUSE WHEEL & DRAG ONLY - NO AUTO MOVEMENT) 🌟
   const projViewport = document.getElementById("coverflow-viewport");
   const projTrack = document.getElementById("coverflow-track");
   if (projViewport && projTrack) {
     const projCards = projTrack.querySelectorAll(".coverflow-card-item");
     let isDraggingProj = false;
     let startX = 0;
-    let currentOffset = -100;
-    let velocity = -0.6;
+    let currentOffset = -60;
+    let velocity = 0; // ZERO auto velocity (completely still when idle)
 
     projViewport.addEventListener("mousedown", (e) => {
       isDraggingProj = true;
       startX = e.pageX;
       velocity = 0;
     });
-    window.addEventListener("mouseup", () => { if (isDraggingProj) isDraggingProj = false; });
-    projViewport.addEventListener("mouseleave", () => { if (isDraggingProj) isDraggingProj = false; });
+    window.addEventListener("mouseup", () => { isDraggingProj = false; });
+    projViewport.addEventListener("mouseleave", () => { isDraggingProj = false; });
     window.addEventListener("mousemove", (e) => {
       if (!isDraggingProj) return;
       e.preventDefault();
       const x = e.pageX;
-      const delta = (x - startX) * 1.4;
+      const delta = (x - startX) * 1.3;
       currentOffset += delta;
-      velocity = delta * 0.65;
+      velocity = delta * 0.6;
       startX = x;
     });
 
@@ -350,24 +360,35 @@
       isDraggingProj = true;
       startX = e.touches[0].pageX;
       velocity = 0;
-    });
-    window.addEventListener("touchend", () => { if (isDraggingProj) isDraggingProj = false; });
+    }, { passive: true });
+    window.addEventListener("touchend", () => { isDraggingProj = false; });
     projViewport.addEventListener("touchmove", (e) => {
       if (!isDraggingProj) return;
       const x = e.touches[0].pageX;
-      const delta = (x - startX) * 1.4;
+      const delta = (x - startX) * 1.3;
       currentOffset += delta;
-      velocity = delta * 0.65;
+      velocity = delta * 0.6;
       startX = x;
-    });
+    }, { passive: true });
+
+    // Move only with mouse wheel scroll over cards
+    projViewport.addEventListener("wheel", (e) => {
+      const delta = e.deltaX !== 0 ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) > 4) {
+        currentOffset -= delta * 0.75;
+        velocity = -delta * 0.15;
+      }
+    }, { passive: true });
 
     function updateProjCoverflow() {
       if (!isDraggingProj) {
-        currentOffset += velocity;
-        velocity *= 0.95;
-        if (Math.abs(velocity) < 0.3) {
-          velocity = -0.55;
+        if (Math.abs(velocity) > 0.05) {
+          currentOffset += velocity;
+          velocity *= 0.90; // smooth deceleration to 0
+        } else {
+          velocity = 0; // fully stationary
         }
+
         const halfWidth = projTrack.scrollWidth / 2;
         if (currentOffset < -halfWidth) currentOffset += halfWidth;
         if (currentOffset > 0) currentOffset -= halfWidth;
@@ -386,7 +407,7 @@
         const rotateY = clampedDist * -20;
         const translateZ = -absDist * 50;
         const scale = Math.max(0.85, 1 - absDist * 0.08);
-        const opacity = Math.max(0.5, 1 - absDist * 0.22);
+        const opacity = Math.max(0.55, 1 - absDist * 0.2);
 
         card.style.transform = `perspective(1400px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
         card.style.opacity = opacity;
