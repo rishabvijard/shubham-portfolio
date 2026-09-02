@@ -302,7 +302,7 @@
         const clampedNorm = Math.max(-1.7, Math.min(1.7, normDist));
         const absNorm = Math.abs(clampedNorm);
 
-        // 🌟 SKILLS ONLY: MID SMALL (0.78) -> SIDES BIG (1.18) 🌟
+        // 🌟 SKILLS: CENTER SMALL (0.78) -> SIDES LARGE (1.18) 🌟
         const scale = 0.78 + (absNorm * 0.32);
         const translateZ = -90 + (absNorm * 125);
         const rotateY = clampedNorm * -22;
@@ -392,8 +392,8 @@
     renderFrame();
   }
 
-  // 🌟 7. PROJECTS ONLY: UNIFORM IDENTICAL SIZE (SCALE 1.0 FOR ALL CARDS) 🌟
-  function initProjectsUniformCards() {
+  // 🎡 7. PROJECTS: TRUE 3D CYLINDRICAL SLIDER 🎡
+  function initProjectsCylindricalSlider() {
     const viewport = document.getElementById("coverflow-viewport");
     const track = document.getElementById("coverflow-track");
     if (!viewport || !track) return;
@@ -409,24 +409,32 @@
     let isLoopRunning = false;
 
     const cardWidth = 280;
-    const gap = 32;
+    const gap = 38;
     const stride = cardWidth + gap;
     const totalOrbitWidth = totalCards * stride;
 
     function renderFrame() {
       const viewportCenter = window.innerWidth / 2;
       const halfOrbit = totalOrbitWidth / 2;
+      const radius = Math.max(520, window.innerWidth * 0.48);
 
       for (let i = 0; i < totalCards; i++) {
         const card = cards[i];
         const pos = mod(i * stride + currentOffset, totalOrbitWidth);
         const distFromCenter = pos - halfOrbit;
 
-        const screenX = viewportCenter + distFromCenter - (cardWidth / 2);
+        // 🎡 TRUE 3D CYLINDER COORDINATES 🎡
+        const angle = distFromCenter / radius;
+        const clampedAngle = Math.max(-1.45, Math.min(1.45, angle));
 
-        // 🌟 EXACT SAME UNIFORM SIZE (SCALE 1.0) FOR ALL PROJECT CARDS 🌟
-        card.style.transform = `translate3d(${screenX}px, 0, 0)`;
-        card.style.opacity = "1";
+        const screenX = viewportCenter + (Math.sin(clampedAngle) * radius) - (cardWidth / 2);
+        const translateZ = (Math.cos(clampedAngle) - 1) * 180; // Curves gracefully into depth
+        const rotateY = -clampedAngle * (180 / Math.PI) * 0.52; // Cylinder tangent
+        const scale = Math.max(0.84, Math.cos(clampedAngle));
+        const opacity = Math.max(0.55, Math.cos(clampedAngle));
+
+        card.style.transform = `translate3d(${screenX}px, 0, 0) perspective(1200px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
+        card.style.opacity = opacity;
       }
     }
 
@@ -461,6 +469,7 @@
 
     window.addEventListener("resize", () => renderFrame(), { passive: true });
 
+    // ⚡ FAST OPPOSITE MOUSE DRAG
     viewport.addEventListener("mousedown", (e) => {
       isDragging = true;
       startX = e.pageX;
@@ -479,6 +488,7 @@
       wakeLoop();
     });
 
+    // ⚡ FAST OPPOSITE TOUCH DRAG
     viewport.addEventListener("touchstart", (e) => {
       isDragging = true;
       startX = e.touches[0].pageX;
@@ -496,6 +506,7 @@
       wakeLoop();
     }, { passive: true });
 
+    // ⚡ FAST OPPOSITE WHEEL SCROLL
     viewport.addEventListener("wheel", (e) => {
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       if (Math.abs(delta) > 2) {
@@ -511,7 +522,7 @@
 
   // Initialize
   initSkillsAmphitheater();
-  initProjectsUniformCards();
+  initProjectsCylindricalSlider();
 
   // 8. Toast Notification
   function showToast(message) {
